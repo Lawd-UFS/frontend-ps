@@ -52,4 +52,6 @@ O padrão de commits deve ser o de [Commits Semânticos](https://www.notion.so/C
 
 No contexto do projeto, as branches principais são as branches main(para produção) e develop(para desenvolvimento) e cada funcionalidade nova será uma branch feature, criada a partir da branch develop.
 
-**Não devem ser feitos commits nas branches principais!** Cada funcionalidade nova ou correção de código devem ser feitas em branches próprias e integradas à branch de desenvolvimento a partir de Pull Requests, que serão revisados por no mínimo 2 pessoas.
+Cada funcionalidade nova ou correção de código devem ser feitas em branches próprias, seguindo também uma nomenclatura parecida com a dos commits semânticos, adotando o tipo da branch seguindo do nome da branch, por exemplo: `feature/login-de-usuario` ou `hotfix/botao-logout`.
+
+**Não devem ser feitos commits nas branches principais!** Os commits serão feitos nas branches secundárias e integradas às branches principais a partir de Pull Requests, que serão revisados por no mínimo 2 pessoas.
