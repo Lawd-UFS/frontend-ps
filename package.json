@@ -2,7 +2,9 @@
   "name": "frontend-ps",
   "version": "1.0.0",
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "build": "webpack",
+    "dev": "webpack serve"
   },
   "author": "",
   "license": "ISC",
