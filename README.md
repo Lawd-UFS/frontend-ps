@@ -31,12 +31,12 @@ Para instalar todas as dependências do projeto, basta rodar o comando `npm inst
 
 O projeto está estruturado da seguinte forma:
 
-- dist/ - arquivos de distribuição do projeto
-- src/ - código-fonte do projeto
-  - assets/ - pasta de assets como fotos, svg, gifs, etc.
-  - components/ - contém todos os componentes utilizados na aplicação: botões, navbars, etc.
-  - models/ - contém os modelos de dados da aplicação: candidato, avaliador, entrevista, etc.
-  - pages/ - contém arquivos de estrutura, estilo e lógica da página
+- `/dist`: Contém arquivos de distribuição do projeto
+- `/src`: Código-fonte do projeto
+  - `/assets`: Pasta de assets como fotos, svg, gifs, etc.
+  - `/components`: Contém todos os componentes utilizados na aplicação: botões, navbars, etc.
+  - `/models`: Contém os modelos de dados da aplicação: candidato, avaliador, entrevista, etc.
+  - `/pages`: Contém arquivos de estrutura, estilo e lógica da página
 
 ## Desenvolvimento
 
