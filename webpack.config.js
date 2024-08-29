@@ -20,12 +20,12 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(pagesPath, 'home', 'home.html'),
-            filename: 'home.html',
+            filename: 'home/index.html',
             chunks: ['home']
         }),
         new HtmlWebpackPlugin({
             template: path.join(pagesPath, 'about', 'about.html'),
-            filename: 'about.html',
+            filename: 'about/index.html',
             chunks: ['about']
         }),
         new MiniCssExtractPlugin({
