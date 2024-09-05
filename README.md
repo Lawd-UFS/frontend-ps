@@ -20,7 +20,7 @@ A aplicação frontend utilizará as seguintes tecnologias:
 - JavaScript
 - Webpack
 - Babel
-  
+
 Para contextualizar, o Webpack será utilizado para otimizar e empacotar o código-fonte do projeto para facilitar o desenvolvimento e também o deploy da aplicação. Em conjunto com ele, o Babel irá atuar para garantir que o código gerado seja compatível com grande parte dos navegadores web.
 
 ## Instalação
