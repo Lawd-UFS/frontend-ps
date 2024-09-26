@@ -19,8 +19,8 @@
     <!--ICONE DA ABA-->
     <!--<link rel="icon" type="image/png" href="../imagens/logo.png">-->
 
-    <!--SCRIPT GLOBAL-->
-    <script src="../index.js" defer></script>
+    <!--SCRIPT LOCAL-->
+    <script src="register.js" defer></script>
 </head>
 <body>
     <header>
@@ -43,9 +43,9 @@
                 <div class="section-type">
                     <p>Dados básicos</p>
                     <div class="section">
-                        <img src="../images/section-on.png" id="section1" class="icon-section">
-                        <img src="../images/section-off.png" id="section2" class="icon-section">
-                        <img src="../images/section-off.png" id="section3" class="icon-section">
+                        <img src="../images/section-on.png" id="section1-icon" class="icon-section">
+                        <img src="../images/section-off.png" id="section2-icon" class="icon-section">
+                        <img src="../images/section-off.png" id="section3-icon" class="icon-section">
                     </div>
                 </div>
             </div>
@@ -82,9 +82,15 @@
                     </label>
                 </form>
             </div>
+            <div class="section-inputs" id="section2">
+                <h1>PARTE 2</h1>
+            </div>
+            <div class="section-inputs" id="section3">
+                <h1>PARTE 3</h1>
+            </div>
         </div>
         <div class="continue">
-            <button class="registerButton">Continuar</button>
+            <button class="registerButton" onclick="changeSection()">Continuar</button>
         </div>
     </main>
     <footer>

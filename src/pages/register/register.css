@@ -63,6 +63,7 @@ select{
     justify-content: flex-end;
     align-items: flex-start;
     gap: 15px;
+    
 }
 .icon-section{
     width: 1.5em;
@@ -70,6 +71,12 @@ select{
     cursor: pointer;
 }
 
+#section2{
+    display: none;
+}
+#section3{
+    display: none;
+}
 .section-inputs{
     padding: 1em;
 }
