@@ -10,15 +10,23 @@ label{
 }
 input[type="text"]{
     width: 18em !important;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 input[type="date"]{
     width: 8em !important;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
 }
 input[type="number"]{
     width: 2em !important;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
 }
 select{
     width: 13em !important;
+    padding-top: 0.3em !important;
+    padding-bottom: 0.3em !important;
 }
 
 .navbar{
@@ -78,7 +86,8 @@ select{
     display: none;
 }
 .section-inputs{
-    padding: 1em;
+    padding: 1em 1em 3em 1em;
+    
 }
 .continue{
     display: flex;
@@ -109,15 +118,18 @@ select{
         justify-content: flex-end !important;
         margin-bottom: 1.5em;
     }
-    .enrollment h1{
-        padding-bottom: 0.3em;
+    .registerScreen{
+        width: 646px;
     }
     .enrollment{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 2em;
         gap: 1em;
+        padding: 2em 3em 0em 3em;
+    }
+    .enrollment h1{
+        padding-bottom: 0.5em;
     }
     .section-type{
         width: 100%;
@@ -130,8 +142,8 @@ select{
         width: 2em;
 
     }
-    .registerScreen{
-        width: 646px;
+    .section-inputs{
+        padding: 0em 3em 4em 3em;
     }
     .section-inputs label, .section-inputs input, .section-inputs select{
         width: 300px;
@@ -144,6 +156,9 @@ select{
     .continue{
         width: 646px;
     }
+    .registerButton{
+        font-size: 1em;
+    }
 }
 @media (min-width: 1024px){
     .back{
@@ -153,8 +168,18 @@ select{
     }
 }
 @media (min-width: 1440px){
+    .back{
+        right: 30em;
+    }
+    .registerScreen, .continue{
+        width: 746px;
+    }
+    .registerButton{
+        font-size: 1.2em;
+    }
+
 
 }
 @media (min-width: 2560px){
-
+ 
 }
