@@ -189,6 +189,12 @@ footer{
         padding: 0.5em 1.1em;
         font-size: 0.9em;
     }
+    .navbar{
+        width: 746px;
+    }
+    .navbar p{
+        font-size: 0.7em;
+    }
 }
 @media (min-width: 2560px){
     header{
@@ -200,5 +206,8 @@ footer{
     }
     main h1{
         font-size: 4em;
+    }
+    .navbar{
+        width: 1046px;
     }
 }
