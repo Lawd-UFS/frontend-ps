@@ -9,12 +9,16 @@ const changeSection = () => {
     const section2 = document.getElementById('section2');
     const section3 = document.getElementById('section3');
 
+    const sectionName = document.getElementById('section-name')
+
     if(icon === 1){
         section1Icon.src = "../images/section-off.png";
         section2Icon.src = "../images/section-on.png";
 
         section1.style.display = "none";
         section2.style.display = "block";
+
+        sectionName.innerText = "parte2";
 
         icon++;
     }
@@ -25,6 +29,8 @@ const changeSection = () => {
         section2.style.display = "none";
         section3.style.display = "block";
 
+        sectionName.innerText = "parte3";
+
         icon++;
     }
     else{
@@ -33,6 +39,8 @@ const changeSection = () => {
 
         section3.style.display = "none";
         section1.style.display = "block";
+
+        sectionName.innerText = "Dados básicos";
 
         icon = 1;
     }
