@@ -1,0 +1,153 @@
+header{
+    flex-direction: column;
+    justify-content: center !important;
+    gap: 1em;
+}
+
+label{
+    display: flex;
+    flex-direction: column;
+}
+input[type="text"]{
+    width: 18em !important;
+}
+input[type="date"]{
+    width: 8em !important;
+}
+input[type="number"]{
+    width: 2em !important;
+}
+select{
+    width: 13em !important;
+}
+
+.navbar{
+    width: 300px;
+}
+.navbar .img-lawd{
+    width: 3em;
+    height: auto;
+}
+.navbar .img-icon{
+    width: 1.5em;
+    height: auto;
+}
+.registerScreen{
+    background-color: #fff;
+    border-radius: 20px;
+    width: 300px;
+    box-sizing: border-box;
+}
+.enrollment{
+    border-bottom: solid var(--purple-white) 2px;
+    padding: 1em;
+}
+.registerScreen h1{
+    color: var(--purple);
+    font-weight: bold;
+}
+.section-type{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+
+}
+.section-type p{
+    margin: 0;
+    color: var(--purple);
+}
+.section{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 15px;
+}
+.icon-section{
+    width: 1.5em;
+    height: auto;
+    cursor: pointer;
+}
+
+.section-inputs{
+    padding: 1em;
+}
+.continue{
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;
+    margin-top: 1em;
+}
+.registerButton{
+    background-color: var(--purple-white);
+    font-weight: bold;
+}
+
+@media (min-width: 320px){
+
+}
+
+@media (min-width: 425px){
+    .registerScreen{
+        width: 350px;
+    }
+    .continue{
+        width: 350px;
+    }
+}
+
+@media (min-width: 768px){
+    header{
+        justify-content: flex-end !important;
+        margin-bottom: 1.5em;
+    }
+    .enrollment h1{
+        padding-bottom: 0.3em;
+    }
+    .enrollment{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2em;
+        gap: 1em;
+    }
+    .section-type{
+        width: 100%;
+        align-items: center;
+    }
+    .section{
+        gap: 3em;
+    }
+    .icon-section{
+        width: 2em;
+
+    }
+    .registerScreen{
+        width: 646px;
+    }
+    .section-inputs label, .section-inputs input, .section-inputs select{
+        width: 300px;
+    }
+    form{
+        display: grid !important; 
+         grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+        gap: 1em; /* Espaço entre as linhas e colunas */   
+    }
+    .continue{
+        width: 646px;
+    }
+}
+@media (min-width: 1024px){
+    .back{
+        position: relative;
+        right: 35em;
+        top: 3.5em;
+    }
+}
+@media (min-width: 1440px){
+
+}
+@media (min-width: 2560px){
+
+}
