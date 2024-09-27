@@ -10,18 +10,18 @@ label{
 }
 input[type="text"]{
     width: 18em !important;
-    padding-top: 0.4em;
-    padding-bottom: 0.4em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
 }
 input[type="date"]{
     width: 8em !important;
-    padding-top: 0.3em;
-    padding-bottom: 0.3em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
 }
 input[type="number"]{
     width: 2em !important;
-    padding-top: 0.3em;
-    padding-bottom: 0.3em;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
 }
 select{
     width: 13em !important;
@@ -157,29 +157,39 @@ select{
         width: 646px;
     }
     .registerButton{
-        font-size: 1em;
+        font-size: 0.9em;
     }
 }
 @media (min-width: 1024px){
-    .back{
-        position: relative;
-        right: 35em;
-        top: 3.5em;
-    }
+
 }
 @media (min-width: 1440px){
-    .back{
-        right: 30em;
-    }
+
     .registerScreen, .continue{
         width: 746px;
     }
     .registerButton{
-        font-size: 1.2em;
+        font-size: 1em;
     }
 
 
 }
 @media (min-width: 2560px){
- 
+    .registerScreen, .continue{
+        width: 1046px;
+        font-size: 1.1em;
+    }
+    .registerScreen label, .registerScreen p {
+        font-size: 1.3em;
+    }
+
+    .registerScreen input, .registerScreen select{
+        font-size: 1em;
+    }
+    .icon-section{
+        font-size: 1.4em;
+    }
+    .registerButton{
+        font-size: 1.5em;
+    }
 }
