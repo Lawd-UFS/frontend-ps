@@ -176,6 +176,11 @@ footer{
     header{
         padding: 0em 4.5em;
     }
+    .back{
+        position: relative;
+        right: 35em;
+        top: 3.5em;
+    }
 }
 @media (min-width: 1440px){
     header{
@@ -192,14 +197,18 @@ footer{
     .navbar{
         width: 746px;
     }
-    .navbar p{
+    .navbar {
         font-size: 0.7em;
+    }
+    .back{
+        right: 30em;
+        font-size: 0.7em !important;
     }
 }
 @media (min-width: 2560px){
     header{
         padding: 0em 7em;
-        font-size: 2.5em;
+        font-size: 2em;
     }
     button{
         font-size: 0.7em;
@@ -209,5 +218,10 @@ footer{
     }
     .navbar{
         width: 1046px;
+        font-size: 0.8em;
+    }
+    .back{
+        font-size: 0.8em !important;
+        right: 35em;
     }
 }
