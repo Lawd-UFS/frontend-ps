@@ -1,14 +1,29 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pagesPath = path.join(__dirname, 'src', 'pages');
 
-const config = {
-  entry: {
-    home: path.join(pagesPath, 'home', 'home.js'),
-    about: path.join(pagesPath, 'about', 'about.js'),
+const pages = fs.readdirSync(pagesPath).reduce(
+  (acc, page) => {
+    acc['htmlPlugins'].push(
+      new HtmlWebpackPlugin({
+        template: path.join(pagesPath, page, 'index.html'),
+        filename: `${page}/index.html`,
+        chunks: [page],
+      }),
+    );
+
+    acc['entries'][page] = path.join(pagesPath, page, 'index.js');
+
+    return acc;
   },
+  { htmlPlugins: [], entries: {} },
+);
+
+const config = {
+  entry: pages.entries,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[contenthash].js',
@@ -18,16 +33,7 @@ const config = {
     host: 'localhost',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(pagesPath, 'home', 'home.html'),
-      filename: 'home/index.html',
-      chunks: ['home'],
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(pagesPath, 'about', 'about.html'),
-      filename: 'about/index.html',
-      chunks: ['about'],
-    }),
+    ...pages.htmlPlugins,
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
