@@ -37,6 +37,10 @@ O projeto está estruturado da seguinte forma:
   - `/components`: Contém todos os componentes utilizados na aplicação: botões, navbars, etc.
   - `/models`: Contém os modelos de dados da aplicação: candidato, avaliador, entrevista, etc.
   - `/pages`: Contém arquivos de estrutura, estilo e lógica da página
+    - `/nome-da-pagina`: Contém arquivos referentes à página especificada
+      - `index.html`: Arquivo que se refere à estrutura da página especificada
+      - `index.js`: Arquivo principal de lógica da página
+      - `index.css`: Arquivo principal de estilo da página
 
 ## Desenvolvimento
 
