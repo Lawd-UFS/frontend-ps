@@ -1,3 +1,5 @@
+import { HttpMethod } from '../infra/http/httpClient';
+
 export class ScheduleService {
   constructor(httpClient) {
     if (!httpClient) {
@@ -7,5 +9,14 @@ export class ScheduleService {
     }
 
     this._httpClient = httpClient;
+  }
+
+  async getEvaluatorSchedules(evaluatorId) {
+    const schedules = await this._httpClient.sendRequest({
+      endpoint: `/horarios/${evaluatorId}`,
+      method: HttpMethod.GET,
+    });
+
+    return schedules;
   }
 }
