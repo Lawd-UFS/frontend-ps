@@ -19,4 +19,14 @@ export class ScheduleService {
 
     return schedules;
   }
+
+  async createSchedule(newSchedule) {
+    const response = await this._httpClient.sendRequest({
+      endpoint: '/horarios',
+      method: HttpMethod.POST,
+      body: newSchedule,
+    });
+
+    return response;
+  }
 }
