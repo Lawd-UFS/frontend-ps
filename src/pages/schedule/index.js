@@ -17,3 +17,19 @@ document.getElementById('get-all').addEventListener('click', async () => {
     `);
   }
 });
+
+document.getElementById('create').addEventListener('click', async () => {
+  try {
+    const newSchedule = await scheduleService.createSchedule({
+      dateTime: new Date('2025-10-10T17:00:00'),
+      evaluatorId: 'f1cae52d22fafe9bdf0d9001',
+    });
+
+    alert(JSON.stringify(newSchedule));
+  } catch (error) {
+    alert(`
+        Ocorreu um erro!
+        ${error.toString()}
+    `);
+  }
+});
