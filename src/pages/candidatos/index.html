@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidatos</title>
+  </head>
+
+  <body>
+    <h1>Candidatos</h1>
+    <form id="form">
+      <label for="name">Nome:</label><br>
+      <input name="nome" type="text" id="name"><br>
+
+      <label for="birthDate">Data de Nascimento:</label><br>
+      <input name="dataNascimento" type="text" id="birthdate"><br>
+
+      <label for="course">Curso:</label><br>
+      <input name="curso" type="text" id="course"><br>
+
+      <label for="period">Período:</label><br>
+      <input name="periodo" type="number" id="period"><br>
+
+      <label for="pronoun">Pronome:</label><br>
+      <input name="pronome" type="text" id="pronoun"><br>
+
+      <label for="gender">Sexo:</label><br>
+      <input name="sexo" type="text" id="gender"><br>
+
+      <label for="motivation">Motivação:</label><br>
+      <input name="motivacao" type="text" id="motivation"><br>
+
+      <label for="knowledgeLevel">Nível de Conhecimento:</label><br>
+      <input name="nivelConhecimento" type="text" id="knowledgeLevel"><br>
+
+      <label for="interestIDs">IDs de Interesse:</label><br>
+      <input name="idsInteresse" type="text" id="interestIDs"><br>
+
+      <label for="email">E-Mail:</label><br>
+      <input name="enderecoEmail" type="text" id="email"><br>
+
+      <label for="password">Senha:</label><br>
+      <input name="senha" type="text" id="password"><br>
+      
+      <button type="submit">Enviar</button>
+    </form>
+  </body>
+
+  <script>
+    const form = document.getElementById('form');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const payload = new FormData(form);
+
+      console.log(payload);
+
+      fetch('http://httpbin.org/post', {
+        method: "POST",
+        body: payload
+      })
+        .then(resposta => resposta.json())
+        .then(dados => console.log(dados))
+        .catch(erro => console.log(erro));
+    })
+  </script>
+
+</html>
