@@ -4,6 +4,8 @@
     --purple-medium: #7046E9;
     --purple-light: #BBA6F8;
     --purple-white: #D7C9FF;
+    --purple-menu: #4A387B;
+    --purple-profile: #5b4a8c;
     /*tons de input:*/
     --gray: #656565;
     --background-input: #eff2ff73;
@@ -29,6 +31,7 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 0em 1em;
+    border: solid red 5px;
 }
 button{
     font-family: Space Grotesk;
@@ -94,7 +97,45 @@ p{
 footer{
     height: 20%;
 }
+
+.menu{
+    background: var(--purple-menu);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: clamp(50em, 100%, 100em);
+    box-sizing: border-box;
+    padding: 0.7em 0.5em;
+    border-radius: 30px;
+}
+
 .navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: clamp(15em, 80%, 35em);
+    padding: 0.5em 0em;
+    margin: 0;
+}
+
+.navbar li{
+    list-style-type: none;
+    padding: 0.1em 0.5em;
+    color: #fff;
+    font-size: 0.8em;
+}
+
+
+.profile{
+    border: solid #fff 1px;
+    background: var(--purple-profile);
+    width: 150px;
+    border-radius: 30px;
+}
+
+
+
+.ps{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -104,7 +145,7 @@ footer{
     box-sizing: border-box;
     border-radius: 25px;
 }
-.navbar p{
+.ps p{
     font-size: 0.8em;
     color: #fff;
 }
@@ -163,12 +204,12 @@ footer{
 @media (min-width: 320px){   
 }
 @media (min-width: 425px){
-    .navbar{
+    .ps{
         width: 350px;
     }
 }
 @media (min-width: 768px){
-    .navbar{
+    .ps{
         width: 646px;
     }
 }
@@ -194,10 +235,10 @@ footer{
         padding: 0.5em 1.1em;
         font-size: 0.9em;
     }
-    .navbar{
+    .ps{
         width: 746px;
     }
-    .navbar {
+    .ps {
         font-size: 0.7em;
     }
     .back{
@@ -216,7 +257,7 @@ footer{
     main h1{
         font-size: 4em;
     }
-    .navbar{
+    .ps{
         width: 1046px;
         font-size: 0.8em;
     }
