@@ -1,0 +1,268 @@
+:root{
+    /*tons de roxos:*/
+    --purple: #4623A7;
+    --purple-medium: #7046E9;
+    --purple-light: #BBA6F8;
+    --purple-white: #D7C9FF;
+    --purple-menu: #4A387B;
+    --purple-profile: #5b4a8c;
+    /*tons de input:*/
+    --gray: #656565;
+    --background-input: #eff2ff73;
+
+    /*outros:*/
+    --gray-light: #CDCDCD;
+
+}
+body{
+    background-image: url(images/background.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: Space Grotesk;
+}
+header{
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0em 1em;
+    border: solid red 5px;
+}
+button{
+    font-family: Space Grotesk;
+    padding: 0.5em 1em;
+    background-color: var(--purple-light);
+    border: var(--purple-medium) solid 2px;
+    border-radius: 5em;
+    font-weight: 500;
+    color: var(--purple);
+    transition: background-color 0.8s, transform 0.7s;  
+}
+button:hover{
+    background-color: var(--purple);
+    color: var(--purple-white);
+}
+button:active{
+    transform: scale(0.95);
+    background-color: var(--purple-white);
+    color: var(--purple);
+    border: var(--purple) solid 1px;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+main h1{
+    color: #fff;
+    font-weight: 400;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+form label {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    color: var(--purple);
+    grid-column: span 1;
+}
+form input, form select {
+    border: solid var(--purple-white) 2px;
+    background-color: var(--background-input);
+    color: var(--gray);
+    padding: 0.2em 1em;
+    border-radius: 10px;
+    font-family: Space Grotesk;
+    grid-column: span 1;
+}
+form input:focus, .password-container:focus-within, form select:focus {
+    border-color: var(--purple);
+    outline: none;
+}
+
+p{
+    color: var(--gray);
+    font-weight: 300;
+    width: 100%;
+}
+footer{
+    height: 20%;
+}
+
+.menu{
+    background: var(--purple-menu);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: clamp(50em, 100%, 100em);
+    box-sizing: border-box;
+    padding: 0.7em 0.5em;
+    border-radius: 30px;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: clamp(15em, 80%, 35em);
+    padding: 0.5em 0em;
+    margin: 0;
+}
+
+.navbar li{
+    list-style-type: none;
+    padding: 0.1em 0.5em;
+    color: #fff;
+    font-size: 0.8em;
+}
+
+
+.profile{
+    border: solid #fff 1px;
+    background: var(--purple-profile);
+    width: 150px;
+    border-radius: 30px;
+}
+
+
+
+.ps{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: solid #fff 1px;
+    padding: 0 1em;
+    box-sizing: border-box;
+    border-radius: 25px;
+}
+.ps p{
+    font-size: 0.8em;
+    color: #fff;
+}
+.back{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.8em;
+    gap: 3px;
+}
+.img-arrow{
+    width: 1.5em;
+    height: auto;
+}
+
+
+.icons{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+.img-lawd{
+    width: 4.5em;
+    height: auto;
+}
+.img-icon{
+    width: 2.5em;
+    height: auto;
+}
+.password{
+    font-size: 0.7em;
+    text-align: right;
+    font-weight: 400;
+    text-decoration: underline;
+    color: var(--purple);
+}
+.password-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-input);
+    border: solid var(--purple-white) 2px;
+    border-radius: 10px;
+}
+.password-container input{
+    width: 100%;
+    border: none;
+}
+.password-visibility{
+    width: 20px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+@media (min-width: 320px){   
+}
+@media (min-width: 425px){
+    .ps{
+        width: 350px;
+    }
+}
+@media (min-width: 768px){
+    .ps{
+        width: 646px;
+    }
+}
+@media (min-width: 1024px){
+    header{
+        padding: 0em 4.5em;
+    }
+    .back{
+        position: relative;
+        right: 35em;
+        top: 3.5em;
+    }
+}
+@media (min-width: 1440px){
+    header{
+        padding: 0em 7em;
+        font-size: 1.5em;
+    }
+    button{
+        font-size: 0.7em;
+    }
+    form input{
+        padding: 0.5em 1.1em;
+        font-size: 0.9em;
+    }
+    .ps{
+        width: 746px;
+    }
+    .ps {
+        font-size: 0.7em;
+    }
+    .back{
+        right: 30em;
+        font-size: 0.7em !important;
+    }
+}
+@media (min-width: 2560px){
+    header{
+        padding: 0em 7em;
+        font-size: 2em;
+    }
+    button{
+        font-size: 0.7em;
+    }
+    main h1{
+        font-size: 4em;
+    }
+    .ps{
+        width: 1046px;
+        font-size: 0.8em;
+    }
+    .back{
+        font-size: 0.8em !important;
+        right: 35em;
+    }
+}
