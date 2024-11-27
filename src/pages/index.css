@@ -6,12 +6,16 @@
     --purple-white: #D7C9FF;
     --purple-menu: #4A387B;
     --purple-profile: #5b4a8c;
+    --purple-p: #8170B4;
+
     /*tons de input:*/
     --gray: #656565;
     --background-input: #eff2ff73;
 
     /*outros:*/
     --gray-light: #CDCDCD;
+    --background-screens: #F9F8FF;
+    --gray-background: #EEEBF8;
 
 }
 body{
@@ -31,7 +35,6 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 0em 1em;
-    border: solid red 5px;
 }
 button{
     font-family: Space Grotesk;
@@ -113,7 +116,7 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: clamp(15em, 80%, 35em);
+    width: clamp(15em, 60%, 35em);
     padding: 0.5em 0em;
     margin: 0;
 }
@@ -131,9 +134,28 @@ footer{
     background: var(--purple-profile);
     width: 150px;
     border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    justify-content: center;
+    align-items: center;
 }
 
+.icon-user{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
 
+.name-user{
+    font-size: 0.8em;
+    display: inline-block;   
+    max-width: 6em;
+    white-space: nowrap; 
+    overflow: hidden;  
+    text-overflow: ellipsis;
+    color: #fff;
+}
 
 .ps{
     display: flex;
