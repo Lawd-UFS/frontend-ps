@@ -2,28 +2,34 @@ body{
     background-image: none;
     background-color: var(--background-screens);
 }
+
+header{
+    justify-content: center !important;
+}
 main{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0em 4.4em;
+    border: solid red 1px;
 }
 
 .content{
     border: solid red 1px;
     display: flex;
     flex-direction: row;
+    width: clamp(47em, 95%, 80em);
     justify-content: space-between;
-    width: clamp(47em, 100%, 100em);
-    box-sizing: border-box;
-    padding: 0.7em 0.5em;
+    gap: clamp(1em, 2em, 5em);
 }
 
 .obs, .steps{
-    width: clamp(8em, 15%, 100em);
     border-radius: 10px;
-    padding: 1em;
+    padding: 2em;
     margin-top: 3em;
+    width: clamp(10em, 120em, 15em);
+}
+
+.obs p, .steps p{
+    margin-bottom: 2em;
 }
 
 .obs{
@@ -33,29 +39,30 @@ main{
 
 .steps{
     font-size: 0.7em;
+    background-color: blueviolet;
 }
 
 .obs h1, .obs h3, .steps h1, .steps h3{
     color: var(--purple-menu);
+    font-weight: bold;
 }
 
 .obs p{
     color: var(--purple-p);
+    font-weight: 500;
 }
 
 .interview{
     border: solid green 3px;
-    width: clamp(10em, 60%, 100em);
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: clamp(20em, 60%, 45em);
 }
 .menu-interview{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: clamp(10em, 80%, 100em);
     padding-bottom: 0.2em;
     margin: 0;
     border-bottom: solid var(--purple-light) 2px;
@@ -77,4 +84,17 @@ main{
 .interview-select{
     border-bottom: solid var(--purple-menu) 2px;
     color: var(--purple-menu);
+}
+
+.quest{
+    border: solid red 5px;
+}
+
+@media (min-width: 1440px){
+    .obs, .steps{
+        font-size: 0.8em;
+    }
+    .menu-interview{
+        font-size: 1.2em;
+    }
 }

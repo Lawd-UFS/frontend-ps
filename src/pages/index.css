@@ -106,11 +106,12 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: clamp(50em, 100%, 100em);
+    width: clamp(50em, 100%, 80em);
     box-sizing: border-box;
-    padding: 0.7em 0.5em;
+    padding: 0.3em 0.7em;
     border-radius: 30px;
 }
+
 
 .navbar{
     display: flex;
@@ -192,11 +193,11 @@ footer{
     gap: 0.5em;
 }
 .img-lawd{
-    width: 4.5em;
+    width: 4em;
     height: auto;
 }
 .img-icon{
-    width: 2.5em;
+    width: 2em;
     height: auto;
 }
 .password{
@@ -223,68 +224,9 @@ footer{
     padding-right: 10px;
     cursor: pointer;
 }
-@media (min-width: 320px){   
-}
-@media (min-width: 425px){
-    .ps{
-        width: 350px;
-    }
-}
-@media (min-width: 768px){
-    .ps{
-        width: 646px;
-    }
-}
-@media (min-width: 1024px){
-    header{
-        padding: 0em 4.5em;
-    }
-    .back{
-        position: relative;
-        right: 35em;
-        top: 3.5em;
-    }
-}
+
 @media (min-width: 1440px){
-    header{
-        padding: 0em 7em;
-        font-size: 1.5em;
-    }
-    button{
-        font-size: 0.7em;
-    }
-    form input{
-        padding: 0.5em 1.1em;
-        font-size: 0.9em;
-    }
-    .ps{
-        width: 746px;
-    }
-    .ps {
-        font-size: 0.7em;
-    }
-    .back{
-        right: 30em;
-        font-size: 0.7em !important;
-    }
-}
-@media (min-width: 2560px){
-    header{
-        padding: 0em 7em;
-        font-size: 2em;
-    }
-    button{
-        font-size: 0.7em;
-    }
-    main h1{
-        font-size: 4em;
-    }
-    .ps{
-        width: 1046px;
-        font-size: 0.8em;
-    }
-    .back{
-        font-size: 0.8em !important;
-        right: 35em;
+    .menu{
+        padding: 0.7em 1em;
     }
 }
