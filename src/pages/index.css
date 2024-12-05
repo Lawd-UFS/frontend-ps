@@ -35,6 +35,8 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 0em 1em;
+    border: solid red 1px;
+    padding: 0;
 }
 button{
     font-family: Space Grotesk;
@@ -106,7 +108,7 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: clamp(50em, 100%, 80em);
+    width: clamp(47em, 95%, 80em);
     box-sizing: border-box;
     padding: 0.3em 0.7em;
     border-radius: 30px;
