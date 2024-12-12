@@ -193,6 +193,7 @@ main{
 
 .container-textarea{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -207,22 +208,11 @@ main{
     border-radius: 20px;
     width: 100%;
     height: 7em;
-    position: relative;
-    right: 7.5px;
     padding: 1em;
     box-sizing: border-box;
     z-index: 1;
     overflow: hidden;
-}
-
-.textarea::placeholder{
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    color: var(--purple-dark);
+    resize: none;
 }
 
 .textarea:focus{
@@ -231,21 +221,15 @@ main{
     border: solid var(--purple-dark) 2px;
 }
 
-.textarea:focus::placeholder {
-    color: transparent; /* O placeholder fica invisível quando a textarea entra em foco */
-}
-
-.textarea:not(:placeholder-shown) {
-    z-index: 3;
-}
-
-.textarea_icon{
-    width: 15px;
-    height: 15px;
+.textarea_placeholder{
+    width: 11em;
     position: relative;
-    left: 4em;
-    top: 0.1em;
+    bottom: 3.2em;
     z-index: 2;
+}
+
+.textarea:not(:focus):empty{
+    z-index: 1;
 }
 
 
@@ -434,12 +418,6 @@ visualização manual dos elementos
 
 */
 
-.content-about{
-    display: none;
-}
-.content-result{
-    display: none;
-}
 
 
 
