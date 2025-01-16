@@ -10,15 +10,21 @@ const pagesPath = path.join(__dirname, 'src', 'pages');
 
 const pages = fs.readdirSync(pagesPath).reduce(
   (acc, page) => {
-    acc['htmlPlugins'].push(
+    const [pageName, pageExtension] = page.split('.');
+
+    if (pageExtension) {
+      return acc;
+    }
+
+    acc.htmlPlugins.push(
       new HtmlWebpackPlugin({
-        template: path.join(pagesPath, page, 'index.html'),
-        filename: `${page}/index.html`,
-        chunks: [page],
+        template: path.join(pagesPath, pageName, 'index.html'),
+        filename: `${pageName}/index.html`,
+        chunks: [pageName],
       }),
     );
 
-    acc['entries'][page] = path.join(pagesPath, page, 'index.js');
+    acc.entries[pageName] = path.join(pagesPath, pageName, 'index.js');
 
     return acc;
   },
@@ -26,7 +32,10 @@ const pages = fs.readdirSync(pagesPath).reduce(
 );
 
 const config = {
-  entry: pages.entries,
+  entry: {
+    index: path.join(pagesPath, 'index.js'),
+    ...pages.entries,
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[contenthash].js',
@@ -36,6 +45,11 @@ const config = {
     host: 'localhost',
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(pagesPath, 'index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+    }),
     ...pages.htmlPlugins,
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
