@@ -4,7 +4,7 @@
 }
 
 body{
-    background: url("./images/background.svg") no-repeat left fixed;
+    background: url("../assets/images/background.svg") no-repeat left fixed;
     background-size: cover;
     z-index: -1;
 }
