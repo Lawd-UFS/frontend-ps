@@ -7,6 +7,8 @@ body{
     background: url("../assets/images/background.svg") no-repeat left fixed;
     background-size: cover;
     z-index: -1;
+    font-family: "Space Mono" , serif;
+    font-weight: 400;
 }
 
 section{
@@ -18,29 +20,64 @@ section{
 .top{
     color: white;
     display: flex;
+    align-items: center;
     margin-top: 5%;
     width: 100%;
 
 
     .back-link{
+        display: flex;
+        align-items: center;
         padding: 10px;
         margin-left: 10%;
         cursor: pointer;
+
+        img{
+            width: 30px;
+        }
+
+        label{
+            cursor: pointer;
+        }
     }
 
     .ps{
-        margin-left: 10%;
-        padding: 10px;
+        margin-left: 9%;
         display: flex;
         justify-content: space-between;
         border: solid white 1px;
         border-radius: 30px;
         width: 50vw;
+        height: 6vh;
+
+        .ps-right-side{
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .logo-lawd{
+            width: 30px;
+            height: 25px;
+            padding: 10px;
+        }
+
+        .lawd{
+            width: 70px;
+            height: 15px;
+        }
+
+        p{
+            height: 20px;
+            padding: 10px;
+            padding-left: 15px;
+        }
     }
 }
 
 .main-title{
-    font-size: 60px;
+    font-size: 70px;
+    line-height: 2  00px;
 }
 
 .label-main-title{
@@ -55,6 +92,7 @@ section{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-bottom: 5%;
 
     .points{
         p{
@@ -69,3 +107,63 @@ section{
     width: 200px;
     text-align: start;
 }
+
+.safeguard-warning-2 , .safeguard-warning-3 {
+    display: flex;
+    width: 200px;
+    text-align:start ;
+}
+
+.year{
+    font-size: 40px;
+    width: 150px;
+    border-radius: 15px;
+    background-color: #9F54DB;
+
+    p{
+        padding: 10px;
+    }
+}
+
+.subscribe{
+
+    display: flex;
+    align-items: center;
+
+    button{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 200px;
+        margin: 10px;
+        color: #6741D2;
+        height: 70px;
+        padding: 10px;
+        font-size: 20px;
+        font-weight: 700;
+        border-radius: 30px;
+        border: none;
+    }
+
+    button:hover{
+        background-color: #9F54DB;
+        color: white;
+        transition: 0.5s;
+
+        svg{
+            animation: moveArrow 2s infinite ease-in-out;
+        }
+    }
+}
+
+@keyframes moveArrow {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(10px); 
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
