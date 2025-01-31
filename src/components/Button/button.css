@@ -1,0 +1,29 @@
+button {
+  cursor: pointer;
+
+  padding-inline: 2.5rem;
+  padding-block: 1rem;
+  border-radius: 1.8rem;
+
+  transition:
+    background-color 0.8s,
+    transform 0.7s;
+
+  border: 0.3rem solid;
+}
+
+button:active {
+  transform: scale(0.85);
+}
+
+.primary {
+  background-color: var(--purple-300);
+  color: white;
+  border-color: var(--purple-200);
+}
+
+.secondary {
+  background-color: var(--purple-100);
+  color: var(--purple-400);
+  border-color: var(--purple-200);
+}
