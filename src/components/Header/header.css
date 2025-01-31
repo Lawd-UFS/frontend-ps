@@ -1,0 +1,56 @@
+header {
+  background: var(--purple-400);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 3rem;
+  padding: 1rem;
+
+  min-width: fit-content;
+}
+
+header .icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+header .icons img:nth-child(1) {
+  width: 4em;
+}
+
+header .icons img:nth-child(2) {
+  width: 8em;
+}
+
+header .profile {
+  border: 1px solid white;
+  background: var(--purple-300);
+  width: fit-content;
+  padding: 0.8rem;
+  border-radius: 2.4rem;
+
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+header .profile img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+header .name-user {
+  font-size: 1.6rem;
+  display: inline-block;
+
+  overflow: hidden;
+
+  max-width: 15rem;
+
+  color: #fff;
+}
