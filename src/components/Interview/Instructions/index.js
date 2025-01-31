@@ -1,27 +1,8 @@
 import './styles.css';
 
-export const InterviewInstructions = () => {
-  const instructions = [
-    {
-      title: 'Excelente',
-      text: 'Esse é lawd na veia',
-    },
-    {
-      title: 'Bom',
-      text: 'Alecrim dourado',
-    },
-    {
-      title: 'Razoável',
-      text: 'ta ok',
-    },
-    {
-      title: 'Insuficiente',
-      text: 'Ruim demais, cê é loko',
-    },
-  ];
-
-  const section = document.createElement('section');
-  section.setAttribute('class', 'interview-instructions');
+export const InterviewInstructions = (instructions = []) => {
+  const div = document.createElement('div');
+  div.setAttribute('class', 'interview-instructions');
 
   const header = document.createElement('header');
 
@@ -43,8 +24,8 @@ export const InterviewInstructions = () => {
     descriptionList.appendChild(descriptionText);
   });
 
-  section.appendChild(header);
-  section.appendChild(descriptionList);
+  div.appendChild(header);
+  div.appendChild(descriptionList);
 
-  return section;
+  return div;
 };
