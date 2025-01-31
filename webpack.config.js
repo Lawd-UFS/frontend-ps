@@ -72,12 +72,16 @@ const config = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(svg||png|jpg|gif)$/i,
+        test: /\.(png|jpg|gif)$/i,
         type: 'asset/resource',
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/i,
+        type: 'asset/source',
       },
     ],
   },
