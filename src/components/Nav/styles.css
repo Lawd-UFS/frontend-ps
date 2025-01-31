@@ -1,4 +1,4 @@
-nav {
+.nav {
   display: flex;
 
   align-items: center;
@@ -6,7 +6,7 @@ nav {
   font-size: 1.6rem;
 }
 
-nav ul {
+.nav ul {
   display: flex;
   flex-direction: row;
 
@@ -16,6 +16,6 @@ nav ul {
   gap: 1.8rem;
 }
 
-nav ul li a {
+.nav ul li a {
   color: white;
 }

@@ -2,6 +2,7 @@ import './styles.css';
 
 export const Nav = (navLinks = []) => {
   const nav = document.createElement('nav');
+  nav.className = 'nav';
 
   const ul = document.createElement('ul');
 
