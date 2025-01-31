@@ -19,6 +19,7 @@ const pages = fs.readdirSync(pagesPath).reduce(
     acc.htmlPlugins.push(
       new HtmlWebpackPlugin({
         template: path.join(pagesPath, pageName, `${pageName}.html`),
+        favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
         filename: `${pageName}/index.html`,
         chunks: [pageName],
       }),
@@ -47,6 +48,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(pagesPath, 'index.html'),
+      favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
       filename: 'index.html',
       chunks: ['index'],
     }),
