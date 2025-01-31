@@ -18,13 +18,13 @@ const pages = fs.readdirSync(pagesPath).reduce(
 
     acc.htmlPlugins.push(
       new HtmlWebpackPlugin({
-        template: path.join(pagesPath, pageName, 'index.html'),
+        template: path.join(pagesPath, pageName, `${pageName}.html`),
         filename: `${pageName}/index.html`,
         chunks: [pageName],
       }),
     );
 
-    acc.entries[pageName] = path.join(pagesPath, pageName, 'index.js');
+    acc.entries[pageName] = path.join(pagesPath, pageName, `${pageName}.js`);
 
     return acc;
   },
