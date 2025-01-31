@@ -21,7 +21,7 @@ const pages = fs.readdirSync(pagesPath).reduce(
         template: path.join(pagesPath, pageName, `${pageName}.html`),
         favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
         filename: `${pageName}/index.html`,
-        chunks: [pageName],
+        chunks: [pageName, 'global'],
       }),
     );
 
@@ -35,6 +35,7 @@ const pages = fs.readdirSync(pagesPath).reduce(
 const config = {
   entry: {
     index: path.join(pagesPath, 'index.js'),
+    global: path.join(pagesPath, 'global.js'),
     ...pages.entries,
   },
   output: {
@@ -50,7 +51,7 @@ const config = {
       template: path.join(pagesPath, 'index.html'),
       favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
       filename: 'index.html',
-      chunks: ['index'],
+      chunks: ['index', 'global'],
     }),
     ...pages.htmlPlugins,
     new MiniCssExtractPlugin({
