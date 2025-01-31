@@ -1,4 +1,4 @@
-button {
+.button {
   cursor: pointer;
 
   padding-inline: 2.5rem;
@@ -12,7 +12,7 @@ button {
   border: 0.3rem solid;
 }
 
-button:active {
+.button:active {
   transform: scale(0.85);
 }
 

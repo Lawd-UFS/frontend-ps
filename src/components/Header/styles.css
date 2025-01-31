@@ -1,30 +1,30 @@
-header {
+.header {
   background: var(--purple-400);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-radius: 3rem;
+  border-radius: 9999px;
   padding: 1rem;
 
   min-width: fit-content;
 }
 
-header .icons {
+.header .icons {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   width: fit-content;
 }
 
-header .icons img:nth-child(1) {
+.header .icons img:nth-child(1) {
   width: 4em;
 }
 
-header .icons img:nth-child(2) {
+.header .icons img:nth-child(2) {
   width: 8em;
 }
 
-header .profile {
+.header .profile {
   border: 1px solid white;
   background: var(--purple-300);
   width: fit-content;
@@ -38,13 +38,13 @@ header .profile {
   cursor: pointer;
 }
 
-header .profile img {
+.header .profile img {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
 }
 
-header .name-user {
+.header .name-user {
   font-size: 1.6rem;
   display: inline-block;
 

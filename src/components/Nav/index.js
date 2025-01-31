@@ -1,4 +1,4 @@
-import './nav.css';
+import './styles.css';
 
 export const Nav = (navLinks = []) => {
   const nav = document.createElement('nav');

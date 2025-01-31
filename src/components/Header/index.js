@@ -3,10 +3,11 @@ import lawdImg from '../../assets/images/lawd.png';
 import userImg from '../../assets/images/icon-user.png';
 
 import { Nav } from '../Nav';
-import './header.css';
+import './styles.css';
 
 export const Header = () => {
   const header = document.createElement('header');
+  header.setAttribute('class', 'header');
 
   header.innerHTML = `
         <div class="icons">
