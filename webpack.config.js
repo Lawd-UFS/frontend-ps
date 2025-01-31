@@ -87,8 +87,12 @@ const config = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: 'asset',
+        test: /\.(svg||png|jpg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.html$/i,
