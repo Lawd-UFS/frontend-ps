@@ -8,22 +8,56 @@ const env = dotenv.config().parsed;
 
 const pagesPath = path.join(__dirname, 'src', 'pages');
 
-const pages = fs.readdirSync(pagesPath).reduce(
-  (acc, page) => {
-    acc['htmlPlugins'].push(
-      new HtmlWebpackPlugin({
-        template: path.join(pagesPath, page, 'index.html'),
-        filename: `${page}/index.html`,
-        chunks: [page],
-      }),
-    );
+const generatePages = (root = '', dir = pagesPath) => {
+  const entries = {};
+  const htmlPlugins = [];
 
-    acc['entries'][page] = path.join(pagesPath, page, 'index.js');
+  const readDir = path.join(dir, root);
 
-    return acc;
-  },
-  { htmlPlugins: [], entries: {} },
-);
+  fs.readdirSync(readDir).forEach((file) => {
+    const fileName = file.split('.')[0];
+
+    if (fileName === 'index' || fileName === 'global') return;
+
+    const fullPath = path.join(dir, root, file);
+    const relativePath = path.join(root, file);
+    const fileStat = fs.statSync(fullPath);
+
+    if (fileStat.isDirectory()) {
+      const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
+        generatePages(relativePath);
+      htmlPlugins.push(...subHtmlPlugins);
+      Object.assign(entries, subEntries);
+
+      return;
+    }
+
+    if (file.endsWith('.html')) {
+      const pageName = relativePath.split('/').slice(0, -1).join('/');
+      htmlPlugins.push(
+        new HtmlWebpackPlugin({
+          template: fullPath,
+          favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
+          filename: `${pageName}/index.html`,
+          chunks: [pageName, 'global'],
+        }),
+      );
+
+      return;
+    }
+
+    if (file.endsWith('.js')) {
+      const pageName = relativePath.split('/').slice(0, -1).join('/');
+      entries[pageName] = fullPath;
+
+      return;
+    }
+  });
+
+  return { entries, htmlPlugins };
+};
+
+const pages = generatePages();
 
 const config = {
   entry: pages.entries,
