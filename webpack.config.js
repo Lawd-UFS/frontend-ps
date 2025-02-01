@@ -15,13 +15,11 @@ const generatePages = (root = '', dir = pagesPath) => {
   const readDir = path.join(dir, root);
 
   fs.readdirSync(readDir).forEach((file) => {
-    const fileName = file.split('.')[0];
-
-    if (fileName === 'index' || fileName === 'global') return;
-
     const fullPath = path.join(dir, root, file);
     const relativePath = path.join(root, file);
     const fileStat = fs.statSync(fullPath);
+
+    if (readDir === dir && !fileStat.isDirectory()) return;
 
     if (fileStat.isDirectory()) {
       const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
@@ -32,7 +30,7 @@ const generatePages = (root = '', dir = pagesPath) => {
       return;
     }
 
-    if (file.endsWith('.html')) {
+    if (file == 'index.html') {
       const pageName = relativePath.split('/').slice(0, -1).join('/');
       htmlPlugins.push(
         new HtmlWebpackPlugin({
@@ -46,7 +44,7 @@ const generatePages = (root = '', dir = pagesPath) => {
       return;
     }
 
-    if (file.endsWith('.js')) {
+    if (file == 'index.js') {
       const pageName = relativePath.split('/').slice(0, -1).join('/');
       entries[pageName] = fullPath;
 
