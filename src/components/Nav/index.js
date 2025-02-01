@@ -1,8 +1,9 @@
-import './styles.css';
-
-export const Nav = (navLinks = []) => {
+export const Nav = (navLinks = [], className) => {
   const nav = document.createElement('nav');
-  nav.className = 'nav';
+
+  if (className) {
+    nav.className = className;
+  }
 
   const ul = document.createElement('ul');
 
