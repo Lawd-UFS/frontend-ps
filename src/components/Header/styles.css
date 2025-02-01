@@ -54,3 +54,25 @@
 
   color: #fff;
 }
+
+.header nav {
+  display: flex;
+
+  align-items: center;
+
+  font-size: 1.6rem;
+}
+
+.header nav ul {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 1.8rem;
+}
+
+.header nav ul li a {
+  color: white;
+}
