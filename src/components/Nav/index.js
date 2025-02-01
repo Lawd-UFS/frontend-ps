@@ -10,7 +10,11 @@ export const Nav = (navLinks = [], className) => {
   navLinks.forEach((link) => {
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = link.href;
+
+    if (link.href) {
+      a.href = link.href;
+    }
+
     a.textContent = link.name;
 
     li.appendChild(a);
