@@ -42,7 +42,7 @@ section{
     }
 
     .ps{
-        margin-left: 9%;
+        margin-left: 7%;
         display: flex;
         justify-content: space-between;
         border: solid white 1px;
@@ -77,7 +77,6 @@ section{
 
 .main-title{
     font-size: 70px;
-    line-height: 2  00px;
 }
 
 .label-main-title{
@@ -88,6 +87,7 @@ section{
 }
 
 .footer{
+    margin: 10%;
     color: white;
     display: flex;
     align-items: center;
@@ -165,5 +165,353 @@ section{
     }
     100% {
       transform: translateX(0);
+    }
+  }
+
+  @media (max-width:2561px) {
+    
+    .top{
+        font-size: 40px;
+
+        .back-link{
+            img{
+                width: 60px;
+            }
+        }
+        .ps{
+            width: 59vw;
+            height: 2em;
+
+            .ps-right-side{
+                .logo-lawd{
+                    width: 2em;
+                    height: 1.3em;
+                }
+
+                .lawd{
+                    width: 3em;
+                    height: 0.8em;
+                }
+            }
+        }
+    }
+
+  }
+
+  @media (max-width:1025px) and (max-height:1400px) {
+
+    .top{
+        display: grid;
+
+        .ps{
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+            width: 70%;
+            height: 2.8em;
+
+            .ps-right-side{
+                padding: 10px;
+            }
+        }
+
+        .back-link{
+            margin-left: 2%;
+        }
+    }
+
+    .safeguard-warning{
+        width: 135px;
+        font-size: 20px;
+    }
+   
+
+    .main-title{
+        width: 80vw;
+        margin: auto;
+        font-size: 80px;
+        text-align: center;
+    }
+
+    .label-main-title{
+        align-items: center;
+        gap: 30px;
+        justify-content: space-between;
+        width: 80vw;
+
+        .safeguard-warning-2{
+            width: 135px;
+            font-size: 20px;
+        }
+        
+    
+    }
+    .year{
+        font-size: 50px;
+    }
+
+    .footer{
+        margin-top: 30%;
+        
+        .points{
+            width: 100vw;
+        }
+
+        .safeguard-warning-3{
+            font-size: 20px;
+        }
+    }
+
+    
+
+  }
+
+  @media (max-width:769px) and (max-height:1279px) {
+
+    body{
+        height: 100%;
+    }
+
+    .top{
+        display: grid;
+
+        .ps{
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+            width: 90%;
+            height: 2.8em;
+
+            .ps-right-side{
+                padding: 10px;
+            }
+        }
+
+        .back-link{
+            margin-left: 0;
+        }
+    }
+
+    .safeguard-warning{
+        width: 300px;
+        display: none;
+        justify-content: end;
+        
+        p{
+            width: 150px;
+        }
+    }
+
+    .main-title{
+        width: 80vw;
+        margin: auto;
+        margin-top: 30%;
+        text-align: center;
+        font-size: 57px;
+    }
+
+    .label-main-title{
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+        justify-content: center;
+        width: 80vw;
+        font-size: 40px;
+
+        .safeguard-warning-2{
+            display: none;
+        }
+
+       
+    }
+
+    .footer{
+        margin-top: 40%;
+
+        .points{
+            font-size: 10px;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
+
+        .safeguard-warning-3{
+            font-size: 15px;
+        }
+    }
+  }
+
+  @media (min-width:426px) and (max-width:500px) {
+
+    .main-title{
+        font-size: 47px;
+    }
+
+  }
+
+  @media (max-width:426px) and (max-height:1013px) {
+
+    .top{
+        display: grid;
+
+        .ps{
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+            width: 90%;
+            height: 2.8em;
+
+            .ps-right-side{
+                padding: 10px;
+            }
+        }
+
+        .back-link{
+            margin-left: 0;
+        }
+    }
+
+    .safeguard-warning{
+        width: 300px;
+        display: none;
+        justify-content: end;
+        
+        p{
+            width: 150px;
+        }
+    }
+
+    .main-title{
+        width: 80vw;
+        margin: auto;
+        margin-top: 30%;
+        text-align: center;
+        font-size: 47px;
+    }
+
+    .label-main-title{
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+        justify-content: center;
+        width: 80vw;
+
+        .safeguard-warning-2{
+            display: none;
+        }
+        
+    }
+
+    .footer{
+        margin-top: 40%;
+
+        .points{
+            font-size: 10px;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
+
+        .safeguard-warning-3{
+            font-size: 12px;
+        }
+    }
+
+    @media (min-width:376px) and (max-width:420px) {
+
+        .main-title{
+            font-size: 43px;
+        }
+    
+      }
+
+  }
+
+
+
+  @media (max-width:376px) {
+
+    .top{
+        display: grid;
+
+        .ps{
+            margin: auto;
+            margin-top: 20px;
+            text-align: center;
+            width: 90%;
+            height: fit-content;
+        }
+
+        .back-link{
+            margin-left: 0;
+        }
+
+    }
+
+    .safeguard-warning{
+        width: 300px;
+        display: none;
+        justify-content: end;
+        
+        p{
+            width: 150px;
+        }
+    }
+
+    .main-title{
+        width: 80vw;
+        margin: auto;
+        margin-top: 30%;
+        text-align: center;
+        font-size: 2.3em;
+    
+    }
+
+    .label-main-title{
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 30px;
+        justify-content: center;
+        width: 80vw;
+
+        .safeguard-warning-2{
+            display: none;
+        }
+
+        .year{
+            font-size: 30px;
+            width: fit-content;
+        }
+
+        .subscribe-arrow{
+            font-size: 20px;
+            width: 8em;
+            height: 3em;
+        }
+        
+    }
+
+    .footer{
+        margin-top: 40%;
+
+        .points{
+            font-size: 8px;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
+
+        .safeguard-warning-3{
+            font-size: 12px;
+        }
+    }
+
+    @media (min-width:370px) and (max-width:376px) {
+        
+        .ps{
+            .ps-right-side{
+                height: 20px;
+            }
+        }
     }
   }
