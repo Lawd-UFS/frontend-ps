@@ -29,6 +29,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser, // Define as variáveis globais específicas do navegador
+        process: 'readonly', // Define a variável 'process' como somente leitura
       },
       ecmaVersion: 12,
       sourceType: 'module',
