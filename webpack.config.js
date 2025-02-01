@@ -8,29 +8,56 @@ const env = dotenv.config().parsed;
 
 const pagesPath = path.join(__dirname, 'src', 'pages');
 
-const pages = fs.readdirSync(pagesPath).reduce(
-  (acc, page) => {
-    const [pageName, pageExtension] = page.split('.');
+const generatePages = (root = '', dir = pagesPath) => {
+  const entries = {};
+  const htmlPlugins = [];
 
-    if (pageExtension) {
-      return acc;
+  const readDir = path.join(dir, root);
+
+  fs.readdirSync(readDir).forEach((file) => {
+    const fileName = file.split('.')[0];
+
+    if (fileName === 'index' || fileName === 'global') return;
+
+    const fullPath = path.join(dir, root, file);
+    const relativePath = path.join(root, file);
+    const fileStat = fs.statSync(fullPath);
+
+    if (fileStat.isDirectory()) {
+      const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
+        generatePages(relativePath);
+      htmlPlugins.push(...subHtmlPlugins);
+      Object.assign(entries, subEntries);
+
+      return;
     }
 
-    acc.htmlPlugins.push(
-      new HtmlWebpackPlugin({
-        template: path.join(pagesPath, pageName, `${pageName}.html`),
-        favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
-        filename: `${pageName}/index.html`,
-        chunks: [pageName, 'global'],
-      }),
-    );
+    if (file.endsWith('.html')) {
+      const pageName = relativePath.split('/').slice(0, -1).join('/');
+      htmlPlugins.push(
+        new HtmlWebpackPlugin({
+          template: fullPath,
+          favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
+          filename: `${pageName}/index.html`,
+          chunks: [pageName, 'global'],
+        }),
+      );
 
-    acc.entries[pageName] = path.join(pagesPath, pageName, `${pageName}.js`);
+      return;
+    }
 
-    return acc;
-  },
-  { htmlPlugins: [], entries: {} },
-);
+    if (file.endsWith('.js')) {
+      const pageName = relativePath.split('/').slice(0, -1).join('/');
+      entries[pageName] = fullPath;
+
+      return;
+    }
+  });
+
+  return { entries, htmlPlugins };
+};
+
+const pages = generatePages();
 
 const config = {
   entry: {
