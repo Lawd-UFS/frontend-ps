@@ -1,7 +1,11 @@
 import { InterviewInstructions } from './Instructions';
+import { InterviewQuestions } from './Questions';
 import { InterviewStages } from './Stages';
 
-export const Interview = {
+const Interview = {
   Instructions: InterviewInstructions,
+  Questions: InterviewQuestions,
   Stages: InterviewStages,
 };
+
+export default Interview;
