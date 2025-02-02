@@ -1,3 +1,7 @@
+.stages {
+  width: 20rem;
+}
+
 .stages h2 {
   color: var(--indigo-700);
 
