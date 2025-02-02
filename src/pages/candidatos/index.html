@@ -8,62 +8,47 @@
 
   <body>
     <h1>Candidatos</h1>
-    <form id="form">
+    <form class="form">
       <label for="name">Nome:</label><br>
-      <input name="nome" type="text" id="name"><br>
+      <input name="name" type="text" id="name"><br>
 
       <label for="birthDate">Data de Nascimento:</label><br>
-      <input name="dataNascimento" type="text" id="birthdate"><br>
+      <input name="birthDate" type="text" id="birthdate"><br>
 
       <label for="course">Curso:</label><br>
-      <input name="curso" type="text" id="course"><br>
+      <input name="course" type="text" id="course"><br>
 
       <label for="period">Período:</label><br>
-      <input name="periodo" type="number" id="period"><br>
+      <input name="period" type="number" id="period"><br>
 
       <label for="pronoun">Pronome:</label><br>
-      <input name="pronome" type="text" id="pronoun"><br>
+      <select name="pronoum" id="pronoun">
+        <option value="">--Selecione uma opção--</option>
+        <option value="Ele/dele">Ele/dele</option>
+        <option value="Ela/dela">Ela/dela</option>
+        <option value="Elu/delu">Elu/delu</option>
+      </select><br>
 
       <label for="gender">Sexo:</label><br>
-      <input name="sexo" type="text" id="gender"><br>
+      <input name="gender" type="text" id="gender"><br>
 
       <label for="motivation">Motivação:</label><br>
-      <input name="motivacao" type="text" id="motivation"><br>
+      <input name="motivation" type="text" id="motivation"><br>
 
       <label for="knowledgeLevel">Nível de Conhecimento:</label><br>
-      <input name="nivelConhecimento" type="text" id="knowledgeLevel"><br>
+      <input name="knowledgeLevel" type="text" id="knowledgeLevel"><br>
 
       <label for="interestIDs">IDs de Interesse:</label><br>
-      <input name="idsInteresse" type="text" id="interestIDs"><br>
+      <input name="interestIds" type="text" id="interestIds"><br>
 
       <label for="email">E-Mail:</label><br>
-      <input name="enderecoEmail" type="text" id="email"><br>
+      <input name="email" type="text" id="email"><br>
 
       <label for="password">Senha:</label><br>
-      <input name="senha" type="text" id="password"><br>
+      <input name="password" type="text" id="password"><br>
       
       <button type="submit">Enviar</button>
     </form>
   </body>
-
-  <script>
-    const form = document.getElementById('form');
-
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      const payload = new FormData(form);
-
-      console.log(payload);
-
-      fetch('http://localhost:8989/api/candidatos', {
-        method: "POST",
-        body: payload
-      })
-        .then(resposta => resposta.json())
-        .then(dados => console.log(dados))
-        .catch(erro => console.log(erro));
-    })
-  </script>
 
 </html>
