@@ -1,68 +1,134 @@
-//mudança de sessão durante o cadastro:
-let icon = 1;
+let currentStep = 0;
+const nextButton = document.querySelector(".registerButton");
+const submitDialog = document.getElementById("submitDialog");
+const emailDialog = document.getElementById("emailDialog");
+const closeModalButton = document.getElementById("closeModal");
+const confirmSubmitButton = document.getElementById("confirmSubmit");
+const stepsContainer = document.querySelector(".section");
+const titleSection = document.querySelector("h1");
+const enrollment = document.querySelector(".enrollment");
+const section1 = document.getElementById("section1");
+const section2 = document.getElementById("section2");
+const section3 = document.getElementById("section3");
+const section4 = document.getElementById("section4");
 
-const section1Icon = document.getElementById('section1-icon');
-const section2Icon = document.getElementById('section2-icon');
-const section3Icon = document.getElementById('section3-icon');
+// Função para abrir um modal
+const openModal = (modal) => {
+  modal.classList.remove("closing");
+  modal.classList.add("opening");
+  modal.showModal();
+};
 
-const section1 = document.getElementById('section1');
-const section2 = document.getElementById('section2');
-const section3 = document.getElementById('section3');
+// Função para fechar um modal
+const closeModal = (modal) => {
+  modal.classList.add("closing");
+  modal.addEventListener(
+    "animationend",
+    (event) => {
+      if (event.animationName === "closing") {
+        modal.close();
+      }
+    },
+    { once: true }
+  );
+};
 
-const sectionName = document.getElementById('section-name')
+// TODO Colocar lógica do reenvio do email & recebimento de confirmação
+// Abrir emailDialog e, após 3s, abrir a última seção (apenas pra visualização de todo o fluxo)
+const handleEmailDialog = () => {
+  closeModal(submitDialog);
+  openModal(emailDialog);
 
-const changeSection = () => {
-    if(icon === 1){
-        section1Icon.src = "../images/section-off.png";
-        section2Icon.src = "../images/section-on.png";
-        section3Icon.src = "../images/section-off.png";
+  setTimeout(() => {
+    closeModal(emailDialog);
+    openFinalSection();
+  }, 3000);
+};
 
-        section1.style.display = "none";
-        section2.style.display = "block";
-        section3.style.display = "none";
+// Abrir a última seção
+const openFinalSection = () => {
+  section3.style.display = "none";
+  section4.style.display = "flex";
+  section4.classList.add("active");
+  document.querySelector(".section-type").style.display = "none";
+  document.querySelector(".enrollment").style.border = "none";
 
-        sectionName.innerText = "parte2";
+  enrollment.style.justifyContent = "center";
+  titleSection.innerText = "Sua inscrição foi enviada";
+  titleSection.style.marginBottom = "0";
+  nextButton.style.display = "none";
+};
 
-        icon++;
-    }
-    else if(icon === 2){
-        section1Icon.src = "../images/section-off.png";
-        section2Icon.src = "../images/section-off.png";
-        section3Icon.src = "../images/section-on.png";
+closeModalButton.addEventListener("click", () => closeModal(submitDialog));
+confirmSubmitButton.addEventListener("click", handleEmailDialog);
 
-        section1.style.display = "none";
-        section2.style.display = "none";
-        section3.style.display = "block";
+const sections = [
+  {
+    icon: document.getElementById("section1-icon"),
+    section: section1,
+    name: "Dados iniciais",
+  },
+  {
+    icon: document.getElementById("section2-icon"),
+    section: section2,
+    name: "Sobre você",
+  },
+  {
+    icon: document.getElementById("section3-icon"),
+    section: section3,
+    name: "Finalização",
+  },
+];
 
-        sectionName.innerText = "parte3";
+const sectionName = document.getElementById("section-name");
 
-        icon++;
-    }
-    else{
-        section1Icon.src = "../images/section-on.png";
-        section2Icon.src = "../images/section-off.png";
-        section3Icon.src = "../images/section-off.png";
+const updateStep = (step) => {
+  currentStep = step;
+  nextButton.innerText = currentStep === 2 ? "Enviar Formulário" : "Continue";
 
-        section1.style.display = "block";
-        section2.style.display = "none";
-        section3.style.display = "none";
+  sections.forEach((item, index) => {
+    item.icon.classList.toggle("active", index === step);
+    item.section.style.display = index === step ? "block" : "none";
+  });
 
-        sectionName.innerText = "Dados básicos";
+  sectionName.innerText = sections[step].name;
+};
 
-        icon = 1;
-    }
-}
+const nextStep = () => {
+  if (currentStep < sections.length - 1) {
+    updateStep(currentStep + 1);
+  } else {
+    openModal(submitDialog);
+  }
+};
 
-//mudança de sessão direta (ao clicar no icon):
-section1Icon.addEventListener('click', () => {
-    icon = 3; 
-    changeSection();
+sections.forEach((item, index) => {
+  item.icon.addEventListener("click", () => updateStep(index));
 });
-section2Icon.addEventListener('click', () => {
-    icon = 1; 
-    changeSection();
+
+document.addEventListener("DOMContentLoaded", () => updateStep(0));
+
+// Estilização de inputs
+document.querySelectorAll('input[type="file"]').forEach((input) => {
+  input.addEventListener("change", function () {
+    const fileName =
+      this.files.length > 0 ? this.files[0].name : "Nenhum arquivo selecionado";
+    const fileLabel = this.nextElementSibling;
+    if (fileLabel && fileLabel.tagName === "SPAN") {
+      fileLabel.textContent = fileName;
+      fileLabel.classList.add("filled");
+    }
+  });
 });
-section3Icon.addEventListener('click', () => {
-    icon = 2; 
-    changeSection();
+
+document.querySelectorAll("input, select, textarea").forEach((field) => {
+  const updateFieldState = () =>
+    field.classList.toggle("filled", field.value.trim() !== "");
+
+  field.addEventListener("input", updateFieldState);
+  field.addEventListener("change", updateFieldState);
+
+  updateFieldState();
 });
+
+// TODO validar os campos required antes de dar continuidade no forms
