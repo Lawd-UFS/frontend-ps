@@ -2,7 +2,7 @@ import './styles.css';
 
 export const InterviewInstructions = (instructions = []) => {
   const div = document.createElement('div');
-  div.setAttribute('class', 'interview-instructions');
+  div.setAttribute('id', 'interview-instructions');
 
   const header = document.createElement('header');
 

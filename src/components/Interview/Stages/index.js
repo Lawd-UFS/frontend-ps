@@ -4,7 +4,7 @@ import circleSVG from '../../../assets/images/circle.svg';
 
 export const InterviewStages = (stages = []) => {
   const div = document.createElement('div');
-  div.className = 'stages';
+  div.setAttribute('id', 'stages');
 
   div.innerHTML = `
       <h2>Etapas</h2>
