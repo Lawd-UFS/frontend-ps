@@ -15,6 +15,10 @@ export const Nav = (navLinks = [], className) => {
       a.href = link.href;
     }
 
+    if (link.id) {
+      li.setAttribute('id', link.id);
+    }
+
     a.textContent = link.name;
 
     li.appendChild(a);
