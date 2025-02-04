@@ -1,0 +1,9 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged || {
+  echo "❌ O commit foi cancelado devido a erros no código."
+  echo "💡 Dica: Verifique os erros de linting, através do comando 'npm run lint', ou formatação, este que pode ser corrigido através do comando 'npm run format'. Corrija antes de tentar novamente."
+  echo "💡 Lembrete: É importante lembrar de adicionar os arquivos ao commit após executar o comando de formatação."
+  exit 1
+}
