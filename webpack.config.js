@@ -19,6 +19,8 @@ const generatePages = (root = '', dir = pagesPath) => {
     const relativePath = path.join(root, file);
     const fileStat = fs.statSync(fullPath);
 
+    if (readDir === dir && !fileStat.isDirectory()) return;
+
     if (fileStat.isDirectory()) {
       const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
         generatePages(relativePath);
@@ -29,12 +31,12 @@ const generatePages = (root = '', dir = pagesPath) => {
     }
 
     if (file == 'index.html') {
-      const pageName = relativePath.split('/').slice(0, -1).join('/');
+      const pageName = path.dirname(relativePath);
       htmlPlugins.push(
         new HtmlWebpackPlugin({
           template: fullPath,
           favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
-          filename: pageName ? `${pageName}/index.html` : 'index.html',
+          filename: `${pageName}/index.html`,
           chunks: [pageName, 'global'],
         }),
       );
@@ -43,7 +45,7 @@ const generatePages = (root = '', dir = pagesPath) => {
     }
 
     if (file == 'index.js') {
-      const pageName = relativePath.split('/').slice(0, -1).join('/');
+      const pageName = path.dirname(relativePath);
       entries[pageName] = fullPath;
 
       return;
@@ -98,6 +100,10 @@ const config = {
       {
         test: /\.svg$/i,
         type: 'asset/source',
+      },
+      {
+        test: /\.html$/i,
+        use: 'html-loader',
       },
     ],
   },
