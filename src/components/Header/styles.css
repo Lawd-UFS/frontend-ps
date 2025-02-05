@@ -27,31 +27,12 @@
 .header .profile {
   border: 1px solid white;
   background: var(--purple-300);
-  width: fit-content;
+
   padding: 0.8rem;
   border-radius: 2.4rem;
-
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 }
 
-.header .profile img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
-
-.header .name-user {
-  font-size: 1.6rem;
-  display: inline-block;
-
-  overflow: hidden;
-
-  max-width: 15rem;
-
+.header .profile .name-user {
   color: #fff;
 }
 

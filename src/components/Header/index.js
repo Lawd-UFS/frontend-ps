@@ -3,6 +3,7 @@ import lawdImg from '../../assets/images/lawd.png';
 import userImg from '../../assets/images/icon-user.png';
 
 import { Nav } from '../Nav';
+import { Profile } from '../Profile';
 import './styles.css';
 
 export const Header = () => {
@@ -11,9 +12,6 @@ export const Header = () => {
 
   header.innerHTML = `
         <div class="icons">
-        </div>
-        <div class="profile">
-          <span class="name-user">Nome Sobrenome</span>
         </div>
     `;
 
@@ -28,11 +26,7 @@ export const Header = () => {
   header.querySelector('.icons').appendChild(imgLogo);
   header.querySelector('.icons').appendChild(imgLawd);
 
-  const imgUser = document.createElement('img');
-  imgUser.src = userImg;
-  imgUser.setAttribute('class', 'img-user');
-
-  header.querySelector('.profile').prepend(imgUser);
+  header.appendChild(Profile({ name: 'Nome Sobrenome', imgSrc: userImg }));
 
   const links = [
     { name: 'CANDIDATOS', href: '/candidates' },
