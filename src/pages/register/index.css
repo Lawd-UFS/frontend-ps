@@ -24,7 +24,7 @@
 }
 
 body {
-    background-image: url(../images/background.svg);
+    background-image: url(../../assets/images/background.svg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
