@@ -107,6 +107,7 @@ sections.forEach((item, index) => {
   item.icon.addEventListener('click', () => updateStep(index));
 });
 
+nextButton.addEventListener('click', nextStep);
 document.addEventListener('DOMContentLoaded', () => updateStep(0));
 
 // Estilização de inputs
