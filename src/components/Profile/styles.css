@@ -1,0 +1,25 @@
+.profile {
+  width: fit-content;
+
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.profile img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.profile .name-user {
+  font-size: 1.6rem;
+  display: inline-block;
+
+  overflow: hidden;
+
+  max-width: 15rem;
+}
