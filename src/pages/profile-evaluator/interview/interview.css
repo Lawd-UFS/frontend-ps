@@ -1,17 +1,18 @@
-body{
+body {
     background-image: none;
     background-color: var(--background-screens);
 }
 
-header{
+header {
     justify-content: center !important;
 }
-main{
+
+main {
     display: flex;
     align-items: center;
 }
 
-.content-application{
+.content-application {
     display: flex;
     flex-direction: row;
     width: clamp(47em, 95%, 80em);
@@ -19,7 +20,8 @@ main{
     gap: clamp(1em, 2em, 5em);
 }
 
-.obs, .steps{
+.obs,
+.steps {
     border-radius: 10px;
     padding: 3em;
     width: clamp(17em, 120em, 25em);
@@ -29,54 +31,60 @@ main{
     bottom: 5em;
 }
 
-.obs p, .steps p{
+.obs p,
+.steps p {
     margin-bottom: 2em;
 }
 
-.obs{
+.obs {
     background-color: var(--gray-background);
     font-size: 0.6em;
 }
 
-.steps{
+.steps {
     font-size: 0.6em;
 }
 
-.obs h1, .obs h3, .steps h1, .steps h3{
+.obs h1,
+.obs h3,
+.steps h1,
+.steps h3 {
     color: var(--purple-menu);
     font-weight: bold;
 }
 
-.obs p, .steps p{
+.obs p,
+.steps p {
     color: var(--purple-p);
     font-weight: 500;
 }
 
-.step{
+.step {
     display: flex;
     flex-direction: row;
-    align-items:flex-start;
+    align-items: flex-start;
     gap: 0.5em;
 }
 
-.step-click{
+.step-click {
     width: 15px;
     height: 40px;
     margin-top: 0.5em;
 }
 
-.steps p{
+.steps p {
     font-size: 0.8em;
     font-weight: bold;
 }
 
-.interview{
+.interview {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: clamp(20em, 60%, 45em);
 }
-.menu-interview{
+
+.menu-interview {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -86,7 +94,7 @@ main{
     margin-bottom: 3em;
 }
 
-.interview-option{
+.interview-option {
     list-style-type: none;
     padding: 0.1em 0.5em;
     text-align: center;
@@ -100,19 +108,19 @@ main{
     cursor: pointer;
 }
 
-.interview-select{
+.interview-select {
     border-bottom: solid var(--purple-menu) 2px;
     color: var(--purple-menu);
 }
 
-.quests{
+.quests {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3em;
 }
 
-.box{
+.box {
     border: solid var(--purple-light) 1px;
     border-radius: 30px;
     background-color: #fff;
@@ -124,7 +132,7 @@ main{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.questbox{
+.questbox {
     background: var(--background-screens);
     border: 1px solid var(--purple-light);
     border-radius: 25px;
@@ -136,18 +144,18 @@ main{
     width: 11em;
 }
 
-.box h2{
+.box h2 {
     font-size: 1.2em;
     margin-bottom: 1.5em;
     text-align: justify;
     height: 5em;
 }
 
-.candidate-name{
+.candidate-name {
     color: var(--purple);
 }
 
-.options{
+.options {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -163,7 +171,7 @@ main{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.options li{
+.options li {
     list-style-type: none;
     color: var(--purple-dark);
     font-size: 0.8em;
@@ -180,18 +188,17 @@ main{
     height: 3em;
 }
 
-.options li:hover, 
-.option-select-1, 
-.option-select-2, 
-.option-select-3, 
-.option-select-4
-{
+.options li:hover,
+.option-select-1,
+.option-select-2,
+.option-select-3,
+.option-select-4 {
     background: var(--option);
     border: 1px solid var(--purple-light)
 }
 
 
-.container-textarea{
+.container-textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -199,7 +206,7 @@ main{
     width: 100%;
 }
 
-.textarea{
+.textarea {
     border: solid var(--purple-light) 1px;
     display: flex;
     flex-direction: row;
@@ -215,20 +222,20 @@ main{
     resize: none;
 }
 
-.textarea:focus{
+.textarea:focus {
     z-index: 3;
     outline: none;
     border: solid var(--purple-dark) 2px;
 }
 
-.textarea_placeholder{
+.textarea_placeholder {
     width: 11em;
     position: relative;
     bottom: 3.2em;
     z-index: 2;
 }
 
-.textarea:not(:focus):empty{
+.textarea:not(:focus):empty {
     z-index: 1;
 }
 
@@ -236,11 +243,12 @@ main{
 
 /*Página About:*/
 
-.content-about > .box{
+.content-about>.box {
     width: 27em;
     padding: 2em;
 }
-.schedule{
+
+.schedule {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -251,36 +259,45 @@ main{
     box-sizing: border-box;
     background: var(--background-screens);
 }
-.schedule-box span, .date-box span{
+
+.schedule-box span,
+.date-box span {
     color: var(--purple-p);
     font-size: 0.9em;
     font-weight: 500;
 }
 
-.interviewed span, .interviewer span{
+.interviewed span,
+.interviewer span {
     font-weight: bold;
     color: var(--purple-p);
     font-size: 0.9em;
 }
 
-.calendar-box, .date-box{
+.calendar-box,
+.date-box {
     display: flex;
     flex-direction: row;
 }
-.date-box{
+
+.date-box {
     display: flex;
     flex-direction: column;
 }
-.calendar-box, .schedule-box{
+
+.calendar-box,
+.schedule-box {
     display: flex;
     align-items: center;
     gap: 0.5em;
 }
-.schedule-icon{
+
+.schedule-icon {
     width: 25px;
     height: 25px;
 }
-.about-box{
+
+.about-box {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -288,11 +305,12 @@ main{
     margin-top: 0.5em;
 }
 
-.interviewed, .interviewer{
+.interviewed,
+.interviewer {
     margin-top: 2em;
 }
 
-.interview-profile{
+.interview-profile {
     width: 20em;
     font-weight: bold;
     display: flex;
@@ -301,29 +319,29 @@ main{
     font-size: 0.8em;
 }
 
-.interview-profile span{
+.interview-profile span {
     color: var(--purple-dark);
 }
 
-.icon-user-candidate{
+.icon-user-candidate {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 5px solid var(--purple-dark);
 }
 
-.presence{
+.presence {
     display: flex;
     flex-direction: row;
     font-size: 0.8em;
     gap: 2em;
 }
 
-.presence p{
+.presence p {
     font-weight: 400;
 }
 
-.presence button{
+.presence button {
     padding: 0;
     border: none;
     background: none;
@@ -331,11 +349,14 @@ main{
     font-weight: 400;
     font-size: 1em;
 }
-.presence-button-active, .presence button:hover{
+
+.presence-button-active,
+.presence button:hover {
     color: var(--purple) !important;
     font-weight: bold !important;
 }
-.edit_icon{
+
+.edit_icon {
     width: 15px;
     height: 15px;
 }
@@ -345,59 +366,69 @@ main{
 
 /*Página Result:*/
 
-.content-result{
+.content-result {
     display: flex;
     width: clamp(47em, 95%, 80em);
     justify-content: space-between;
 }
-.content-result > .box{
+
+.content-result>.box {
     width: 27em;
     padding: 2em;
     background-color: var(--gray-background);
     border: none;
 }
-.box h4{
+
+.box h4 {
     font-size: 1.3em;
     color: var(--purple-dark);
 }
 
-.graphic{
+.graphic {
     border: solid black 1px !important;
     background-color: var(--background-screens) !important;
     box-shadow: none;
 }
-.result{
+
+.result {
     display: flex;
     flex-direction: row;
 }
-.result p{
-   font-size: 0.8em;
-   color: var(--purple-dark);
-   font-weight: 400;
+
+.result p {
+    font-size: 0.8em;
+    color: var(--purple-dark);
+    font-weight: 400;
 }
-.points-ball{
+
+.points-ball {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.2em;
 }
-.points-ball p{
+
+.points-ball p {
     margin-left: 0.5em;
 }
-.ball-icon{
+
+.ball-icon {
     width: 10px;
     height: 10px;
 }
-.row{
+
+.row {
     border-bottom: solid var(--purple-light) 1px;
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
 .rank h4 {
     color: var(--purple-result);
     margin-bottom: 0.5em;
 }
-.rank h3{
+
+.rank h3 {
     font-size: 2.5em;
     color: var(--purple-result);
     margin: 0;
@@ -421,54 +452,68 @@ visualização manual dos elementos
 
 
 
-@media (min-width: 1024px){
-    .menu-interview{
+@media (min-width: 1024px) {
+    .menu-interview {
         font-size: 1.1em;
         width: 25em;
     }
-    .box{
+
+    .box {
         font-size: 1.2em;
     }
-    .textarea{
+
+    .textarea {
         height: 9em;
     }
-    .textarea_icon{
+
+    .textarea_icon {
         left: 5em;
     }
-    .step-click{
+
+    .step-click {
         width: 25px;
         height: 60px;
         margin-top: 0.5em;
     }
-    .steps p, .obs p{
+
+    .steps p,
+    .obs p {
         font-size: 1em;
     }
-    .icon-user-candidate{
+
+    .icon-user-candidate {
         width: 50px;
         height: 50px;
     }
-    .edit_icon{
+
+    .edit_icon {
         width: 20px;
         height: 20px;
     }
-    
+
 }
 
-@media (min-width: 1440px){
-    .obs, .steps{
+@media (min-width: 1440px) {
+
+    .obs,
+    .steps {
         font-size: 0.9em;
         bottom: 4em;
     }
-    .menu-interview{
+
+    .menu-interview {
         font-size: 1.2em;
     }
-    .box{
+
+    .box {
         font-size: 1.3em;
     }
-    .textarea_icon{
+
+    .textarea_icon {
         left: 6em;
     }
-    .step-click{
+
+    .step-click {
         margin-top: 0.5em;
         width: 40px;
         height: 70px;
