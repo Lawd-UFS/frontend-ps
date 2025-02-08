@@ -1,6 +1,5 @@
-
-.loginScreen{
-    background-image: url(../images/background-LoginScreen.png);
+.loginScreen {
+    background-image: url(../../assets/images/background-LoginScreen.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -16,14 +15,16 @@
     justify-content: center;
     font-size: 0.9em;
 }
-.loginScreen-othersWays{
+
+.loginScreen-othersWays {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
     margin-bottom: 1.5em;
 }
-.loginLink{
+
+.loginLink {
     border: solid var(--gray-light) 1px;
     border-radius: 10px;
     display: flex;
@@ -33,58 +34,67 @@
     height: 2em;
     padding: 0em 1.3em;
 }
-.loginLink p{
+
+.loginLink p {
     color: #111111;
     font-weight: bold;
     font-size: 0.7em;
 }
-.icon-login{
+
+.icon-login {
     width: 1em;
-    height: 1em;  
+    height: 1em;
 }
-.loginButton{
+
+.loginButton {
     width: 100%;
     background-color: var(--purple-medium);
     color: #fff;
     border: solid 2px var(--purple-white);
 }
 
-@media (min-width: 320px){
-    .loginScreen{
+@media (min-width: 320px) {
+    .loginScreen {
         width: 289.5px;
         height: 314.17px;
     }
-    
+
 }
-@media (min-width: 425px){
-    .loginScreen{
+
+@media (min-width: 425px) {
+    .loginScreen {
         width: 329.5px;
         height: 354.17px;
     }
 }
-@media (min-width: 768px){
-    header{
+
+@media (min-width: 768px) {
+    header {
         padding: 0em 2em;
         font-size: 1.3em;
     }
 }
-@media (min-width: 1024px){
-}
-@media (min-width: 1440px){
-    .loginScreen{
+
+@media (min-width: 1024px) {}
+
+@media (min-width: 1440px) {
+    .loginScreen {
         width: 479.5px;
         height: 504.17px;
         font-size: 1.1em;
     }
-    .loginLink{
+
+    .loginLink {
         padding: 0.2em 2.5em;
     }
-    .loginButton{
+
+    .loginButton {
         font-size: 1em;
     }
 }
-@media (min-width: 2560px){
-    .loginScreen{
+
+@media (min-width: 2560px) {
+    .loginScreen {
         width: 779.5px;
         height: 804.17px;
         font-size: 1.9em;

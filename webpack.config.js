@@ -58,10 +58,7 @@ const generatePages = (root = '', dir = pagesPath) => {
 const pages = generatePages();
 
 const config = {
-  entry: {
-    index: path.join(pagesPath, 'index.js'),
-    ...pages.entries,
-  },
+  entry: pages.entries,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[contenthash].js',
@@ -71,11 +68,6 @@ const config = {
     host: 'localhost',
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(pagesPath, 'index.html'),
-      filename: 'index.html',
-      chunks: ['index'],
-    }),
     ...pages.htmlPlugins,
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
@@ -101,10 +93,6 @@ const config = {
       {
         test: /\.(eot|ttf|woff|woff2)$/i,
         type: 'asset/resource',
-      },
-      {
-        test: /\.html$/i,
-        use: 'html-loader',
       },
       {
         test: /\.html$/i,
