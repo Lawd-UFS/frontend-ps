@@ -8,28 +8,54 @@ const env = dotenv.config().parsed;
 
 const pagesPath = path.join(__dirname, 'src', 'pages');
 
-const pages = fs.readdirSync(pagesPath).reduce(
-  (acc, page) => {
-    const [pageName, pageExtension] = page.split('.');
+const generatePages = (root = '', dir = pagesPath) => {
+  const entries = {};
+  const htmlPlugins = [];
 
-    if (pageExtension) {
-      return acc;
+  const readDir = path.join(dir, root);
+
+  fs.readdirSync(readDir).forEach((file) => {
+    const fullPath = path.join(dir, root, file);
+    const relativePath = path.join(root, file);
+    const fileStat = fs.statSync(fullPath);
+
+    if (readDir === dir && !fileStat.isDirectory()) return;
+
+    if (fileStat.isDirectory()) {
+      const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
+        generatePages(relativePath);
+      htmlPlugins.push(...subHtmlPlugins);
+      Object.assign(entries, subEntries);
+
+      return;
     }
 
-    acc.htmlPlugins.push(
-      new HtmlWebpackPlugin({
-        template: path.join(pagesPath, pageName, 'index.html'),
-        filename: `${pageName}/index.html`,
-        chunks: [pageName],
-      }),
-    );
+    if (file == 'index.html') {
+      const pageName = path.dirname(relativePath);
+      htmlPlugins.push(
+        new HtmlWebpackPlugin({
+          template: fullPath,
+          favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
+          filename: `${pageName}/index.html`,
+          chunks: [pageName, 'global'],
+        }),
+      );
 
-    acc.entries[pageName] = path.join(pagesPath, pageName, 'index.js');
+      return;
+    }
 
-    return acc;
-  },
-  { htmlPlugins: [], entries: {} },
-);
+    if (file == 'index.js') {
+      const pageName = path.dirname(relativePath);
+      entries[pageName] = fullPath;
+
+      return;
+    }
+  });
+
+  return { entries, htmlPlugins };
+};
+
+const pages = generatePages();
 
 const config = {
   entry: {
@@ -69,8 +95,16 @@ const config = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: 'asset',
+        test: /\.(svg||png|jpg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.html$/i,
+        use: 'html-loader',
       },
       {
         test: /\.html$/i,

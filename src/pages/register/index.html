@@ -1,0 +1,249 @@
+<!DOCTYPE html <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS LAWD - Cadastro</title>
+
+    <!--GOOGLE FONTS = SPACE GROTESK LIGHT 300-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
+    <!--ICONE DA ABA-->
+    <!--<link rel="icon" type="image/png" href="../imagens/logo.png">-->
+
+</head>
+
+<body>
+    <header>
+        <!-- TODO Ajustar link de volta a pagina inicial -->
+        <!-- <a href='##' class="back">
+            <img src="../../assets/images/arrow_back.png" class="img-arrow">
+            Voltar
+        </a> -->
+        <div class="navbar">
+            <p>Processo Seletivo</p>
+            <div class="icons">
+                <img src="../../assets/images/logo-lawd.png" alt="Logo da LAWD" class="img-icon">
+                <img src="../../assets/images/lawd.png" alt="Logotipo da LAWD" class="img-lawd">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="registerScreen">
+            <div class="enrollment">
+                <h1>Inscrição</h1>
+                <div class="section-type">
+                    <p id="section-name">Dados básicos</p>
+                    <div class="section">
+                        <div id="section1-icon" class="icon-section">1</div>
+                        <hr />
+                        <div id="section2-icon" class="icon-section">2</div>
+                        <hr />
+                        <div id="section3-icon" class="icon-section">3</div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-inputs" id="section1">
+                <form>
+                    <div class="column">
+                        <label for="name">Nome completo:
+                            <input type="text" id="name" name="name" required placeholder="Seu Nome">
+                        </label>
+                        <label for="gender">Gênero:
+                            <select placeholder="Seu Nome" id="gender" name="gender" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="male">Homem cisgênero</option>
+                                <option value="female">Mulher cisgênero</option>
+                                <option value="male-t">Homem transgênero</option>
+                                <option value="female-t">Mulher transgênero</option>
+                                <option value="nb">Não-binário</option>
+                                <option value="other">Prefiro não declarar</option>
+
+                            </select>
+                        </label>
+                        <label for="course">Curso:
+                            <input type="text" id="course" name="course" required placeholder="ex: Design Gráfico">
+                        </label>
+                    </div>
+                    <div class="column">
+
+                        <label for="date-birth">Data de nascimento:
+                            <input type="date" id="date-birth" name="date-birth" required>
+                        </label>
+                        <label for="pronoun">Pronome:
+                            <select id="pronoun" name="pronoun" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="he/him">Ele/Dele</option>
+                                <option value="she/her">Ela/Dela</option>
+
+                            </select>
+                        </label>
+                        <label for="period">Período atual:
+                            <input type="number" id="period" min="1" name="period" required placeholder="1">
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="section-inputs" id="section2">
+                <form>
+                    <div class="column">
+                        <label for="name">Quais seus interesses?
+                            <textarea name="textarea" id="name" required
+                                placeholder="Ex: Hobbies, áreas de estudo, etc."></textarea>
+                        </label>
+                        <label for="course">Quais habilidades você possui?
+                            <textarea name="textarea" id="name" required placeholder="ex: Design Gráfico"></textarea>
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label for="name">
+                            <div>
+                                Link para Portifólio <span>
+                                    (Opcional)
+                                </span>
+                            </div>
+                            <input type="text" id="name" name="name" required placeholder="Github/ Behance/ etc...">
+                        </label>
+
+                        <label for="file-upload" class="file-upload">
+                            <div>
+                                Upload de Portifólio <span>
+                                    (Opcional)
+                                </span>
+                            </div>
+                            <input id="file-upload" type="file" />
+                            <span class="file-name">portifolio.pdf</span>
+                        </label>
+
+                        <label for="photo-upload" class="file-upload">
+                            <div>
+                                Foto de Perfil <span>
+                                    (Opcional)
+                                </span>
+                            </div>
+                            <input id="photo-upload" type="file" />
+                            <span class="file-name">suafoto.png</span>
+                        </label>
+
+                        <label for="name">
+                            Seu melhor email:
+                            <input type="email" id="email" name="email" required placeholder="exemplo@email.com">
+                        </label>
+
+                    </div>
+                </form>
+            </div>
+            <div class="section-inputs" id="section3">
+                <form>
+                    <div class="column">
+                        <label for="motivation">Qual sua motivação para entrar na LAWD?
+                            <textarea name="textarea" id="name" required
+                                placeholder="Indique aqui o porquê você quer fazer parte da liga"></textarea>
+                        </label>
+
+                    </div>
+                    <div class="column">
+
+                        <label for="name">
+                            Como você ficou sabendo do PS da LAWD?
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input" name="source" value="Instagram">
+                                    Divulgação no Instagram
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input" name="source" value="Whatsapp">
+                                    Repasses no Whatsapp
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input" name="source" value="Cartazes">
+                                    Cartazes na UFS
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input" name="source" value="LinkedIn">
+                                    LinkedIn
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input" name="source" value="Amigos">
+                                    Recomendação de amigos
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="checkbox-input" name="source" value="Outros">
+                                    Outros
+                                </label>
+                            </div>
+                        </label>
+
+                    </div>
+                </form>
+            </div>
+            <dialog id="submitDialog">
+                <div class="modal">
+
+                    <img width="87px;" src="../../assets/images/paper-plane.svg" alt="Ilustração de um avião de papel">
+                    Você confirma o envio desse formulário?
+                    <div>
+                        <button id="closeModal" class="second-button">Voltar</button>
+                        <button id="confirmSubmit">Confirmar envio</button>
+
+                    </div>
+                </div>
+            </dialog>
+            <dialog id="emailDialog">
+                <div class="modal">
+
+                    <img width="87px;" src="../../assets/images/email.svg"
+                        alt="Ilustração de uma mão segurando uma carta">
+                    <h2>
+                        Verifique seu email!
+                    </h2>
+                    <p>
+                        Enviamos um link de confirmação para sua conta.
+                    </p>
+                    <div>
+                        <!-- TODO Colocar click do botão de confirmação de email -->
+                        <button id="reSendEmailButton" class="second-button">Reenviar email</button>
+
+                    </div>
+                </div>
+            </dialog>
+            <div class="section-inputs" id="section4">
+
+                <div>
+                    <img id="loving-doodle" src="../../assets/images/loving-doodle.svg"
+                        alt="Ilustração de uma pessoa fazendo um coração roxo com as mãos">
+                    <div class="register-text-container">
+                        <div class="register-text">
+                            <img src="../../assets/images/celebration.svg" alt="ícone de celebração">
+
+                            Ficamos feliz por você querer fazer parte do nosso time :) Estamos torcendo por você!
+                        </div>
+                        <div class="register-text">
+                            <img src="../../assets/images/mystery.svg" alt="ícone de lupa">
+                            Fique de olho nas próximas etapas. Acesse o link para agendar sua entrevista.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons-container">
+                    <!-- TODO colocar o link do discord -->
+                    <button class="discord-button" onclick="location.href='https://t.me/LawdDcomp_bot';">
+                        <img src="../../assets/images/discord.svg" alt="ícone do aplicativo Discord">
+
+                        Discord do
+                        PS</button>
+                    <button class="chatbot-button" onclick="location.href='https://t.me/LawdDcomp_bot';">Agendamento de
+                        Entrevistas</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="continue">
+            <button class="registerButton">Continuar</button>
+        </div>
+    </main>
+</body>
+
+</html>
