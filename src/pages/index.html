@@ -1,86 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 </head>
+
 <body>
 
     <header>
         <div class="top">
-            <div class="back-link">
-                <img src="../assets/images/arrow_back.png" alt="">
-                <label for="img">Voltar</label>
+            <div class="container">
+                <div class="login-link">
+                    <img src="../assets/images/lock.svg" alt="cadeado">
+                    <label for="img">Login</label>
+                </div>
+
             </div>
 
             <div class="ps">
-
                 <p>Processo Seletivo</p>
-                
-                
                 <div class="ps-right-side">
                     <img src="../assets/images/logo-lawd.png" alt="LAWD-logo" class="logo-lawd">
                     <img src="../assets/images/lawd.png" alt="lawd" class="lawd">
                 </div>
-                
+
             </div>
+            <div class="container"></div>
         </div>
     </header>
 
     <section>
 
-        <div class="safeguard-warning">
-            <p>We're dedicated to safeguarding your digital assets</p>
+        <div class="quote">
+            <p class="support-text">"Participar da LAWD é uma experiencia única" <span>
+                    - Jessica C. Viana
+                </span>
+            </p>
         </div>
-    
+
         <div class="main-title">
-            <h1>Processo Seletivo</h1>
+            <h1 class="title">Processo Seletivo</h1>
         </div>
 
         <div class="label-main-title">
 
-            <div class="safeguard-warning-2">
-                <p>We're dedicated to safeguarding your digital assets</p>
+            <div class="quote-2">
+                <p class="support-text">"Uma oportunidade de aprender e fazer mais" <span>
+                        - Vínicius Morais
+                    </span>
+                </p>
+
             </div>
 
-            <div class="subscribe">
 
-                <div class="subscribe-button">
-                    <button class="subscribe-arrow" type="button">
-                        <p>Inscrição</p>
-                        <svg width="32" height="30" viewBox="0 0 32 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M31.9661 9.32433V20.5921L23.1209 29.381L18.5574 24.8175L24.0223 19.3526L27.9097 17.7752L27.5153 16.8174L24.0223 18.1695H0.190939V11.7469H24.0223L27.5153 13.099L27.9097 12.1413L24.0223 10.5638L18.5574 5.09892L23.1209 0.53547L31.9661 9.32433Z" fill="#6741D2"/>
-                        </svg>                         
+            <svg>
+                <defs>
+                    <filter id="gooey">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+                        <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -20"
+                            result="gooey" />
+                        <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+                    </filter>
+                </defs>
+                <div class="subscribe">
+                    <button>
+                        <p class="button-title">Inscrição</p>
+                        <p class="button-subtitle">Participe já</p>
+                    </button>
+
+                    <button class="subscribe-arrow">
+                        <svg width="28" viewBox="0 0 36 30" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd" id="arrow-subscribe"
+                                d="M32.2264 9.5877V9.54277L23.3812 0.753906L18.8178 5.31735L24.2826 10.7822L28.17 12.3597L27.7756 13.3175L24.2826 11.9653H0.451294V18.388H24.2826L27.7756 17.0358L28.17 17.9936L24.2826 19.5711L18.8178 25.036L23.3812 29.5994L32.2264 20.8105V20.7913C37.1607 16.1796 36.0879 12.8474 32.2264 9.5877Z"
+                                fill="#6741D2" />
+                        </svg>
+
                     </button>
                 </div>
-                
-                
-            </div>
-            
+            </svg>
+
             <div class="year">
                 <p>2025</p>
             </div>
-            
+
         </div>
     </section>
 
     <footer class="footer">
-        <div class="points">
-            <p>. . . . . . . . . . . . .</p>
-            <p>. . . . . . . . . . . . .</p>
-            <p>. . . . . . . . . . . . .</p>
-            <p>. . . . . . . . . . . . .</p>
-            <p>. . . . . . . . . . . . .</p>
-        </div>
+        <img src="../assets/images/points.svg" alt="pontilhados" height="70px">
 
-        <div class="safeguard-warning-3">
-            <p>We're dedicated to safeguarding your digital assets</p>
+        <div class="quote-3">
+            <p class="support-text">"Um ambiente acolhedor e cheio de conexões!" <span>
+                    - Guilherme Linard
+                </span>
+
+            </p>
         </div>
     </footer>
-    
+
 </body>
+
 </html>
