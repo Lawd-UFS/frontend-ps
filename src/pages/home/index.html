@@ -61,31 +61,34 @@
             </div>
 
 
-            <svg>
-                <defs>
-                    <filter id="gooey">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-                        <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -20"
-                            result="gooey" />
-                        <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
-                    </filter>
-                </defs>
-                <div class="subscribe">
-                    <button>
-                        <p class="button-title">Inscrição</p>
-                        <p class="button-subtitle">Participe já</p>
-                    </button>
+            <a style="text-decoration: none;" href="/register" data-link>
+                <svg>
+                    <defs>
+                        <filter id="gooey">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+                            <feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -20"
+                                result="gooey" />
+                            <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+                        </filter>
+                    </defs>
 
-                    <button class="subscribe-arrow">
-                        <svg width="28" viewBox="0 0 36 30" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd" id="arrow-subscribe"
-                                d="M32.2264 9.5877V9.54277L23.3812 0.753906L18.8178 5.31735L24.2826 10.7822L28.17 12.3597L27.7756 13.3175L24.2826 11.9653H0.451294V18.388H24.2826L27.7756 17.0358L28.17 17.9936L24.2826 19.5711L18.8178 25.036L23.3812 29.5994L32.2264 20.8105V20.7913C37.1607 16.1796 36.0879 12.8474 32.2264 9.5877Z"
-                                fill="#6741D2" />
-                        </svg>
+                    <div class="subscribe">
+                        <button>
+                            <p class="button-title">Inscrição</p>
+                            <p class="button-subtitle">Participe já</p>
+                        </button>
 
-                    </button>
-                </div>
-            </svg>
+                        <button class="subscribe-arrow">
+                            <svg width="28" viewBox="0 0 36 30" xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd" id="arrow-subscribe"
+                                    d="M32.2264 9.5877V9.54277L23.3812 0.753906L18.8178 5.31735L24.2826 10.7822L28.17 12.3597L27.7756 13.3175L24.2826 11.9653H0.451294V18.388H24.2826L27.7756 17.0358L28.17 17.9936L24.2826 19.5711L18.8178 25.036L23.3812 29.5994L32.2264 20.8105V20.7913C37.1607 16.1796 36.0879 12.8474 32.2264 9.5877Z"
+                                    fill="#6741D2" />
+                            </svg>
+
+                        </button>
+                    </div>
+                </svg>
+            </a>
 
             <div class="year">
                 <p>2025</p>
