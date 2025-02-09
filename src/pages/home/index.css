@@ -3,6 +3,15 @@
     margin: 0;
 }
 
+a {
+    all: unset;
+    text-decoration: none;
+    cursor: pointer;
+    /* Mantém o cursor de link */
+    color: inherit;
+    /* Mantém a cor do texto sem o azul padrão */
+}
+
 body {
     background: url("../../assets/images/background.svg") no-repeat left fixed;
     background-size: cover;
@@ -31,7 +40,7 @@ section {
     justify-content: center;
 
 
-    .login-link {
+    a {
         font-family: 'Space Grotesk';
         display: flex;
         align-items: center;
@@ -50,7 +59,7 @@ section {
         }
     }
 
-    .login-link:hover {
+    a:hover {
         filter: opacity(0.65);
     }
 
@@ -265,7 +274,7 @@ svg:hover {
     .top{
         font-size: 40px;
 
-        .login-link{
+        a{
             img{
                 width: 60px;
             }
@@ -307,7 +316,7 @@ svg:hover {
             }
         }
 
-        .login-link {
+        a {
             margin-left: 2%;
         }
     }
@@ -380,7 +389,7 @@ svg:hover {
             }
         }
 
-        .login-link {
+        a {
             margin-left: 0;
         }
     }
@@ -459,7 +468,7 @@ svg:hover {
             }
         }
 
-        .login-link {
+        a {
             margin-left: 0;
         }
     }
@@ -535,7 +544,7 @@ svg:hover {
             height: fit-content;
         }
 
-        .login-link {
+        a {
             margin-left: 0;
         }
 
