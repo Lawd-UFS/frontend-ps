@@ -1,4 +1,5 @@
 import './index.css';
+import '../../global.css';
 
 const password = document.getElementById('password');
 const visibility = document.getElementById('visibility');

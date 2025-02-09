@@ -26,3 +26,15 @@ a {
     cursor: var(--cursor-pointer);
 
 }
+
+
+body {
+    background-image: url(./assets/images/background.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
