@@ -1,4 +1,5 @@
 import './index.css';
+import '../../global.css';
 
 var textWrapper = document.querySelector('.title');
 textWrapper.innerHTML = textWrapper.textContent.replace(
@@ -42,5 +43,5 @@ document.querySelectorAll('.support-text').forEach((textWrapper, index) => {
         duration: 1100,
         delay: (el, i) => 100 + 30 * i,
       });
-  }, index * 1000); // Atraso diferente para cada bloco de texto
+  }, index * 1031); // Atraso diferente para cada bloco de texto
 });

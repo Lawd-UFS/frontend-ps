@@ -6,7 +6,6 @@
 a {
     all: unset;
     text-decoration: none;
-    cursor: pointer;
     /* Mantém o cursor de link */
     color: inherit;
     /* Mantém a cor do texto sem o azul padrão */
@@ -46,7 +45,6 @@ section {
         align-items: center;
         padding: 10px;
         margin-left: 14.25rem;
-        cursor: pointer;
         transition: color 600ms ease-in-out;
 
         img {
@@ -54,9 +52,6 @@ section {
             margin-right: 0.25rem;
         }
 
-        label {
-            cursor: pointer;
-        }
     }
 
     a:hover {
