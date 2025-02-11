@@ -57,6 +57,17 @@
   gap: 1.8rem;
 }
 
+.header nav ul li {
+  padding-block: 0.8rem;
+  padding-inline: 1.2rem;
+
+  border-radius: 9999px;
+}
+
+.header nav ul li[active] {
+  border: 2px solid var(--indigo-200);
+}
+
 .header nav ul li a {
   color: white;
 }

@@ -7,6 +7,8 @@ import { Profile } from '../Profile';
 import './styles.css';
 
 export const Header = () => {
+  const route = window.location.pathname;
+
   const header = document.createElement('header');
   header.setAttribute('class', 'header');
 
@@ -39,6 +41,9 @@ export const Header = () => {
   ];
 
   const nav = Nav(links);
+  nav
+    .querySelector('li > a[href="' + route + '"]')
+    .parentElement.setAttribute('active', '');
 
   header.querySelector('.icons').insertAdjacentElement('afterend', nav);
 
