@@ -11,66 +11,6 @@ main{
     align-items: center;
 }
 
-/*Página Result:*/
-
-.content-result{
-    display: flex;
-    width: clamp(47em, 95%, 80em);
-    justify-content: space-between;
-}
-.content-result > .box{
-    width: 27em;
-    padding: 2em;
-    background-color: var(--gray-background);
-    border: none;
-}
-.box h4{
-    font-size: 1.3em;
-    color: var(--purple-dark);
-}
-
-.graphic{
-    border: solid black 1px !important;
-    background-color: var(--background-screens) !important;
-    box-shadow: none;
-}
-.result{
-    display: flex;
-    flex-direction: row;
-}
-.result p{
-   font-size: 0.8em;
-   color: var(--purple-dark);
-   font-weight: 400;
-}
-.points-ball{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.2em;
-}
-.points-ball p{
-    margin-left: 0.5em;
-}
-.ball-icon{
-    width: 10px;
-    height: 10px;
-}
-.row{
-    border-bottom: solid var(--purple-light) 1px;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-.rank h4 {
-    color: var(--purple-result);
-    margin-bottom: 0.5em;
-}
-.rank h3{
-    font-size: 2.5em;
-    color: var(--purple-result);
-    margin: 0;
-}
-
 /*
 visualização manual dos elementos
 

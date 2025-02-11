@@ -1,0 +1,17 @@
+#result {
+  display: flex;
+  align-items: center;
+}
+
+#result #chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  height: 90%;
+}
+
+#result #summary {
+  transform: scale(0.8);
+}
