@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack').DefinePlugin;
 const dotenv = require('dotenv');
 
-const env = dotenv.config().parsed;
+dotenv.config();
 
 const pagesPath = path.join(__dirname, 'src', 'pages');
 
@@ -74,7 +74,7 @@ const config = {
       filename: 'css/[name].[contenthash].css',
     }),
     new DefinePlugin({
-      'process.env.API_URL': JSON.stringify(env.API_URL),
+      'process.env.API_URL': JSON.stringify(process.env.API_URL),
     }),
   ],
   module: {
