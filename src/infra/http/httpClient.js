@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+const API_URL = process.env.API_URL;
+
+if (!API_URL) {
+  throw new Error('Variável de url da api não informada');
+}
+
 export const HttpMethod = {
   GET: 'GET',
   POST: 'POST',
@@ -8,7 +14,7 @@ export const HttpMethod = {
 };
 
 export class HttpClient {
-  constructor(api = axios, baseUrl = process.env.API_URL) {
+  constructor(api = axios, baseUrl = API_URL) {
     this._api = api;
     this._baseUrl = baseUrl;
   }
