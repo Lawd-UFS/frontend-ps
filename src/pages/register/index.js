@@ -10,7 +10,7 @@ const closeModalButton = document.getElementById('closeModal');
 const confirmSubmitButton = document.getElementById('confirmSubmit');
 const titleSection = document.querySelector('h1');
 const enrollment = document.querySelector('.enrollment');
-const formList = document.querySelectorAll('form');
+const form = document.querySelector('form');
 const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
@@ -51,17 +51,12 @@ const handleEmailDialog = () => {
 
 // Função de submeter cadastro
 
-const checkRegister = async () => {
-  const data = {};
+const sendFormData = async () => {
+  const formData = new FormData(form);
 
-  for (const form of formList) {
-    const formData = new FormData(form);
-    Object.assign(data, Object.fromEntries(formData));
-  }
+  const result = await submitRegister(formData);
 
-  const result = await submitRegister(data);
-
-  if (result.sucess) {
+  if (result.success) {
     handleEmailDialog();
   } else {
     alert('Houve um problema na submissão. Por gentileza, tente novamente.');
@@ -83,7 +78,7 @@ const openFinalSection = () => {
 };
 
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
-confirmSubmitButton.addEventListener('click', checkRegister);
+confirmSubmitButton.addEventListener('click', sendFormData);
 
 const sections = [
   {
