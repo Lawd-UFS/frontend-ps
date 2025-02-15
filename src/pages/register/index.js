@@ -1,5 +1,6 @@
 import './index.css';
-import {submitRegister} from './register.js';
+import { submitRegister } from './register.js';
+import '../../global.css';
 
 let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
@@ -51,19 +52,19 @@ const handleEmailDialog = () => {
 // Função de submeter cadastro
 
 const checkRegister = async () => {
-  const data = {}
-  
+  const data = {};
+
   for (const form of formList) {
     const formData = new FormData(form);
     Object.assign(data, Object.fromEntries(formData));
   }
 
-  const result = await submitRegister(data)
+  const result = await submitRegister(data);
 
   if (result.sucess) {
-    handleEmailDialog()
+    handleEmailDialog();
   } else {
-    alert("Houve um problema na submissão. Por gentileza, tente novamente.")
+    alert('Houve um problema na submissão. Por gentileza, tente novamente.');
   }
 };
 

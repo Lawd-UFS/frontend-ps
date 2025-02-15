@@ -1,4 +1,4 @@
-:root{
+:root {
     /*tons de roxos:*/
     --purple: #4623A7;
     --purple-dark: #3E2A78;
@@ -21,7 +21,8 @@
     --option: #eeecf6;
 
 }
-body{
+
+body {
     background-image: url(images/background.svg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -32,7 +33,8 @@ body{
     height: 100vh;
     font-family: Space Grotesk;
 }
-header{
+
+header {
     height: 20%;
     display: flex;
     align-items: center;
@@ -40,7 +42,8 @@ header{
     padding: 0em 1em;
     padding: 0;
 }
-button{
+
+button {
     font-family: Space Grotesk;
     padding: 0.5em 1em;
     background-color: var(--purple-light);
@@ -48,33 +51,39 @@ button{
     border-radius: 5em;
     font-weight: 500;
     color: var(--purple);
-    transition: background-color 0.8s, transform 0.7s;  
+    transition: background-color 0.8s, transform 0.7s;
 }
-button:hover{
+
+button:hover {
     background-color: var(--purple);
     color: var(--purple-white);
 }
-button:active{
+
+button:active {
     transform: scale(0.95);
     background-color: var(--purple-white);
     color: var(--purple);
     border: var(--purple) solid 1px;
 }
-main{
+
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-main h1{
+
+main h1 {
     color: #fff;
     font-weight: 400;
 }
-form{
+
+form {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
 form label {
     margin-top: 1.5em;
     margin-bottom: 0.5em;
@@ -82,7 +91,9 @@ form label {
     color: var(--purple);
     grid-column: span 1;
 }
-form input, form select {
+
+form input,
+form select {
     border: solid var(--purple-white) 2px;
     background-color: var(--background-input);
     color: var(--gray);
@@ -91,29 +102,34 @@ form input, form select {
     font-family: Space Grotesk;
     grid-column: span 1;
 }
-form input:focus, .password-container:focus-within, form select:focus {
+
+form input:focus,
+.password-container:focus-within,
+form select:focus {
     border-color: var(--purple);
     outline: none;
 }
 
-p{
+p {
     color: var(--gray);
     font-weight: 300;
     width: 100%;
 }
-footer{
+
+footer {
     height: 20%;
 }
 
-.lawd-background{
+.lawd-background {
     position: fixed;
     bottom: 0;
     right: 0;
-    width: clamp(200px, 55vw, 550px); ;
+    width: clamp(200px, 55vw, 550px);
+    ;
     z-index: -1;
 }
 
-.menu{
+.menu {
     background: var(--purple-menu);
     display: flex;
     flex-direction: row;
@@ -123,7 +139,7 @@ footer{
     border-radius: 30px;
 }
 
-.navbar{
+.navbar {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -132,7 +148,7 @@ footer{
     margin: 0;
 }
 
-.navbar li{
+.navbar li {
     list-style-type: none;
     color: #fff;
     font-size: 0.7em;
@@ -144,19 +160,19 @@ footer{
     cursor: pointer;
 }
 
-.navbar li:not(.page):hover{
+.navbar li:not(.page):hover {
     outline: solid #fff 1px;
     border-radius: 10px;
     box-sizing: border-box;
 }
 
-.page{
+.page {
     border: solid #fff 1px;
     border-radius: 10px;
     box-sizing: border-box;
 }
 
-.profile{
+.profile {
     border: solid #fff 1px;
     background: var(--purple-profile);
     width: 8em;
@@ -170,23 +186,23 @@ footer{
     cursor: pointer;
 }
 
-.icon-user{
+.icon-user {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
 
-.name-user{
+.name-user {
     font-size: 0.8em;
-    display: inline-block;   
+    display: inline-block;
     max-width: 6em;
-    white-space: nowrap; 
-    overflow: hidden;  
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
     color: #fff;
 }
 
-.ps{
+.ps {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -196,11 +212,13 @@ footer{
     box-sizing: border-box;
     border-radius: 25px;
 }
-.ps p{
+
+.ps p {
     font-size: 0.8em;
     color: #fff;
 }
-.back{
+
+.back {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -209,34 +227,39 @@ footer{
     font-size: 0.8em;
     gap: 3px;
 }
-.img-arrow{
+
+.img-arrow {
     width: 1.5em;
     height: auto;
 }
 
 
-.icons{
+.icons {
     display: flex;
     align-items: center;
     gap: 0.5em;
     width: 8em;
 }
-.img-lawd{
+
+.img-lawd {
     width: 4em;
     height: auto;
 }
-.img-icon{
+
+.img-icon {
     width: 2em;
     height: auto;
 }
-.password{
+
+.password {
     font-size: 0.7em;
     text-align: right;
     font-weight: 400;
     text-decoration: underline;
     color: var(--purple);
 }
-.password-container{
+
+.password-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,35 +267,42 @@ footer{
     border: solid var(--purple-white) 2px;
     border-radius: 10px;
 }
-.password-container input{
+
+.password-container input {
     width: 100%;
     border: none;
 }
-.password-visibility{
+
+.password-visibility {
     width: 20px;
     padding-right: 10px;
     cursor: pointer;
 }
 
 
-@media (min-width: 1440px){
-    .menu{
+@media (min-width: 1440px) {
+    .menu {
         padding: 0.7em 1em;
     }
-    .navbar li{
+
+    .navbar li {
         border-radius: 40px;
         width: 8em;
         height: 2.4em;
         font-size: 0.8em;
         padding: 0;
     }
-    .navbar{
+
+    .navbar {
         padding: 0;
     }
-    .profile, .icons{
+
+    .profile,
+    .icons {
         width: 10em;
     }
-    .name-user{
+
+    .name-user {
         max-width: 8em;
     }
 }
