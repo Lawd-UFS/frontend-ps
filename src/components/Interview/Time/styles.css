@@ -1,0 +1,35 @@
+.time {
+  width: fit-content;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.time span {
+  display: block;
+
+  color: var(--indigo-600);
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+.time img {
+  width: 24px;
+  height: 24px;
+}
+
+.time[status='scheduled'] {
+}
+
+.time[status='available'] {
+}
+
+.time[status='passed'] {
+}

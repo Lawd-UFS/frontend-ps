@@ -1,0 +1,57 @@
+:root {
+  /*tons de roxos:*/
+  --purple-100: #eff2ff;
+  --purple-200: #bba6f8;
+  --purple-300: #7046e9;
+  --purple-400: #4623a7;
+
+  --indigo-100: #d9d9d9;
+  --indigo-200: #a6b5f6;
+  --indigo-600: #8170b4;
+  --indigo-700: #4a387b;
+
+  /*tons de input:*/
+  --gray: #656565;
+  --background-input: #eff2ff73;
+
+  /*outros:*/
+  --gray-light: #cdcdcd;
+  --background-screens: #f9f8ff;
+  --gray-background: #eeebf8;
+  --option: #eeecf6;
+
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/src/assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
+  font-size: normal;
+  font-weight: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Space Grotesk';
+  font-size: 1.6rem;
+
+  list-style: none;
+  text-decoration: none;
+
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+h2 {
+  font-size: 2.8rem;
+}
