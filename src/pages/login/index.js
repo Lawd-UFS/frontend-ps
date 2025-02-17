@@ -1,5 +1,7 @@
 import './index.css';
-import '../../global.css';
+
+import visibilityOn from '../../assets/images/visibility.png';
+import visibilityOff from '../../assets/images/visibility-off.png';
 
 const password = document.getElementById('password');
 const visibility = document.getElementById('visibility');
@@ -7,10 +9,10 @@ const visibility = document.getElementById('visibility');
 const visibilityPassword = () => {
   if (password.type == 'password') {
     password.type = 'text';
-    visibility.src = '../../assets/images/visibility.png';
+    visibility.src = visibilityOn;
   } else {
     password.type = 'password';
-    visibility.src = '../../assets/images/visibility-off.png';
+    visibility.src = visibilityOff;
   }
 };
 

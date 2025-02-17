@@ -49,15 +49,6 @@ nav.interview li[active] a {
   color: var(--indigo-700);
 }
 
-.menu-interview {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding-bottom: 0.2rem;
-  border-bottom: solid var(--purple-light) 0.2rem;
-  margin-bottom: 3rem;
-}
-
 #page-content {
   margin-inline: 4rem;
 

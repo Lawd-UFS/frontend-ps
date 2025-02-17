@@ -1,11 +1,19 @@
+body {
+  background-image: url(../../assets/images/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 button {
   font-family: Space Grotesk;
   padding: 0.5rem 1rem;
   background-color: var(--purple-white);
-  border: var(--purple-medium) solid 0.1563rem;
+  border: var(--purple-300) solid 0.1563rem;
   border-radius: 1.125rem;
   font-weight: 500;
-  color: var(--purple);
+  color: var(--purple-400);
   cursor: var(--cursor-pointer);
   transition:
     background-color 0.3s ease-in-out,
@@ -13,7 +21,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--purple-medium);
+  background-color: var(--purple-300);
   color: var(--purple-white);
   cursor: var(--cursor-pointer);
   border: 3px solid #9676f0;
@@ -23,9 +31,13 @@ button:hover {
 button:active {
   transform: scale(0.85);
   background-color: var(--purple-white);
-  color: var(--purple);
-  border: var(--purple) solid 1px;
+  color: var(--purple-400);
+  border: var(--purple-400) solid 1px;
   cursor: var(--cursor-pointer);
+}
+
+input {
+  cursor: var(--cursor-default);
 }
 
 main {
@@ -43,7 +55,7 @@ main h1 {
 
 h2 {
   font-size: larger;
-  color: var(--purple);
+  color: var(--purple-400);
   margin: 0;
 }
 
@@ -53,7 +65,7 @@ h2 {
 
 form label {
   font-weight: 500;
-  color: var(--purple);
+  color: var(--purple-400);
 }
 
 input[type='file'] {
@@ -78,7 +90,7 @@ textarea,
 form select {
   background-color: var(--background-input);
   color: var(--gray);
-  height: 1.875rem;
+  height: 3rem;
   font-family: Space Grotesk;
   margin-top: 0.75rem;
   border-radius: 0.8rem;
@@ -97,7 +109,7 @@ form select {
 textarea {
   display: flex;
   height: 100%;
-  min-height: 6.5625rem;
+  min-height: 8rem;
   padding: 0.5rem 1rem;
   box-sizing: content-box;
   border-radius: 1.125rem;
@@ -127,7 +139,7 @@ footer {
 }
 
 .menu {
-  background: var(--purple-menu);
+  background: var(--indigo-700);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -181,7 +193,7 @@ footer {
   text-align: right;
   font-weight: 400;
   text-decoration: underline;
-  color: var(--purple);
+  color: var(--purple-400);
 }
 
 .password-container {
@@ -215,7 +227,7 @@ header {
   border-radius: 3.125rem;
   border: 1px solid #fff;
   display: flex;
-  width: 40rem;
+  width: 68rem;
   padding: 0.625rem 1.5rem;
   justify-content: space-between;
   align-items: center;
@@ -245,9 +257,9 @@ header a {
 .registerScreen {
   background-color: #fff;
   overflow: hidden;
-  border-radius: 3.125rem;
+  border-radius: 4rem;
   width: 100%;
-  max-width: 46.625rem;
+  max-width: 75rem;
   animation: opening 450ms ease-in-out backwards;
 }
 
@@ -287,27 +299,21 @@ header a {
   }
 }
 
-.enrollment {
-  border-bottom: solid var(--purple-white) 0.0625rem;
-  padding: 1em;
-  transition: border-bottom 0.4s ease-in-out;
-}
-
 .registerScreen h1 {
-  color: var(--purple);
+  color: var(--purple-400);
   font-weight: bold;
 }
 
 .section-type {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  margin-bottom: 0.5em;
+  align-items: center;
+  width: 100%;
 }
 
 .section-type p {
   margin: 0;
-  color: var(--purple);
+  color: var(--purple-400);
   animation: move 500ms;
 }
 
@@ -327,15 +333,15 @@ hr {
 }
 
 .icon-section {
-  height: 1.8rem;
-  width: 1.8rem;
+  height: 3.3rem;
+  width: 3.3rem;
   cursor: var(--cursor-pointer);
   border-radius: 50%;
   /* display: flex; */
-  background-color: var(--purple-light);
-  color: var(--purple);
+  background-color: var(--purple-200);
+  color: var(--purple-400);
   font-weight: bolder;
-  border: var(--purple-medium) solid 2.5008px;
+  border: var(--purple-300) solid 2.5008px;
   font-size: small;
   justify-content: center;
   display: flex;
@@ -350,12 +356,12 @@ hr {
 }
 
 .icon-section.active {
-  background-color: var(--purple);
+  background-color: var(--purple-400);
   color: var(--purple-white);
 }
 
 .section-inputs {
-  padding: 2.625rem 3.25rem;
+  padding: 4.2rem 5.2rem;
 }
 
 label {
@@ -363,6 +369,15 @@ label {
   flex-direction: column;
   cursor: var(--cursor-default);
   animation: move 500ms ease-in-out;
+
+  height: 100%;
+}
+
+input,
+select,
+textarea {
+  font-weight: 300;
+  font-size: 1.4rem;
 }
 
 @keyframes move {
@@ -395,17 +410,13 @@ span {
   font-size: smaller;
 }
 
-#section1 input[type='text'] {
-  max-width: 19rem;
-}
-
-#section1 input[type='date'] {
-  width: 10rem;
-  cursor: var(--cursor-default);
+#section1 input[type='text'],
+input[type='date'] {
+  max-width: 80%;
 }
 
 #section1 input[type='number'] {
-  width: 3rem;
+  width: 4rem;
 }
 
 #section4,
@@ -414,7 +425,7 @@ span {
 }
 
 #pronoun {
-  width: 8rem;
+  width: 80%;
 }
 
 select {
@@ -427,32 +438,30 @@ select {
   border: 0.1875rem solid #bba6f8;
   padding: 0 1.5rem;
   font-weight: bold;
-  font-size: 16px;
   animation: opening 400ms ease-in-out 200ms backwards;
-  height: 3rem;
+  height: 4rem;
 }
 
 .enrollment {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 1em;
-  padding: 1.3rem 3rem 0;
+  align-items: center;
+
+  gap: 1rem;
+  padding: 3rem 4.8rem;
+
+  border-bottom: solid var(--purple-white) 0.0625rem;
+  transition: border-bottom 0.4s ease-in-out;
 }
 
 .enrollment h1 {
   transition:
     opacity 0.4s ease-in-out,
     transform 0.4s ease-in-out;
-  padding-bottom: 8px;
 }
 
-.section-type {
-  width: 100%;
-  align-items: center;
-}
-
-.form-container {
+form {
   display: flex;
   justify-content: space-between;
   gap: 3rem;
@@ -460,7 +469,7 @@ select {
   width: 100%;
 }
 
-.form-container .column {
+form .column {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -481,16 +490,18 @@ select {
   align-items: center;
   flex-direction: row;
   gap: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 1.4rem;
   cursor: var(--cursor-pointer);
   align-items: center;
   color: var(--gray);
+
+  height: fit-content;
 }
 
 .checkbox-input {
   height: 38px;
   cursor: var(--cursor-pointer);
-  accent-color: var(--purple);
+  accent-color: var(--purple-400);
   margin: auto 0;
 }
 
@@ -500,6 +511,8 @@ dialog {
   border-radius: 38px;
   box-shadow: 0 4px 6px rgba(96, 0, 172, 0.14);
   backdrop-filter: blur(7px);
+
+  margin: auto;
 }
 
 dialog::backdrop {
@@ -507,8 +520,8 @@ dialog::backdrop {
 }
 
 .modal {
-  height: 13.75rem;
-  width: 15.625rem;
+  height: 30rem;
+  width: 40rem;
   padding: 1.875rem 1.25rem;
   border: none;
   border-radius: 2.375rem;
@@ -527,6 +540,10 @@ dialog::backdrop {
   gap: 10px;
 }
 
+.modal img {
+  width: 87px;
+}
+
 .second-button {
   background-color: var(--background-input);
   border-color: var(--purple-light);
@@ -534,7 +551,7 @@ dialog::backdrop {
 
 .second-button:hover {
   background-color: var(--background-input-filled);
-  color: var(--purple);
+  color: var(--purple-400);
   border: 3px solid var(--purple-white);
   transform: scale(0.9);
 }
@@ -547,11 +564,10 @@ dialog::backdrop {
 
 #section4 div {
   display: flex;
-  width: 100%;
 }
 
 #loving-doodle {
-  max-width: 24.1875rem;
+  max-width: 38rem;
   animation: opening 350ms ease-in-out backwards;
 }
 
@@ -566,8 +582,7 @@ dialog::backdrop {
 }
 
 .register-text {
-  color: var(--purple);
-  font-size: 0.98rem;
+  color: var(--purple-400);
   display: flex;
   width: auto;
   flex-direction: column;
@@ -588,13 +603,16 @@ dialog::backdrop {
   animation-delay: 600ms;
 }
 
+.register-text img {
+  width: 32px;
+}
+
 .continue {
   display: flex;
   justify-content: end;
-  padding-right: 0px;
-  margin: 1rem;
+  margin: 2rem;
   width: 100%;
-  max-width: 46.625rem;
+  max-width: 75rem;
 }
 
 .buttons-container {
@@ -602,7 +620,9 @@ dialog::backdrop {
   justify-content: center;
   /* flex-direction: column; */
   gap: 3.3125rem;
-  margin: 33px 0 20px 0;
+  margin: 5rem 0 2rem 0;
+
+  height: 4.8rem;
 }
 
 .buttons-container button {
@@ -619,16 +639,20 @@ dialog::backdrop {
   animation-delay: 800ms;
 }
 
+.buttons-container img {
+  width: auto;
+}
+
 .chatbot-button {
   width: 100%;
-  max-width: 24.5rem;
+  max-width: 39rem;
   border: 0.1875rem solid #bba6f8;
   background: #e8e0ff;
 }
 
 .discord-button {
   width: 100%;
-  max-width: 17.5625rem;
+  max-width: 28rem;
   gap: 12px;
   border: 3px solid var(--purple-light);
   background: var(
@@ -650,10 +674,6 @@ dialog::backdrop {
     flex-wrap: wrap;
   }
 
-  .enrollment h1 {
-    margin-bottom: 0;
-  }
-
   .enrollment,
   .section-type {
     flex-direction: column;
@@ -670,7 +690,6 @@ dialog::backdrop {
   .section-type {
     gap: 1.5625rem;
     justify-content: space-between;
-    margin-bottom: 1.25rem;
   }
 
   #section4 div {
@@ -695,10 +714,6 @@ dialog::backdrop {
 @media only screen and (max-width: 375px) {
   main {
     padding: 1rem;
-  }
-
-  .section-inputs {
-    padding: 2.625rem 1.875rem;
   }
 
   .section-type p,
