@@ -1,6 +1,5 @@
 import './index.css';
 import { submitRegister } from './register.js';
-import '../../global.css';
 
 let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
