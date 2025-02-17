@@ -1,4 +1,6 @@
 import './index.css';
+import { submitRegister } from './register.js';
+import '../../global.css';
 
 let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
@@ -8,6 +10,7 @@ const closeModalButton = document.getElementById('closeModal');
 const confirmSubmitButton = document.getElementById('confirmSubmit');
 const titleSection = document.querySelector('h1');
 const enrollment = document.querySelector('.enrollment');
+const formList = document.querySelectorAll('form');
 const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
@@ -46,6 +49,25 @@ const handleEmailDialog = () => {
   }, 3000);
 };
 
+// Função de submeter cadastro
+
+const checkRegister = async () => {
+  const data = {};
+
+  for (const form of formList) {
+    const formData = new FormData(form);
+    Object.assign(data, Object.fromEntries(formData));
+  }
+
+  const result = await submitRegister(data);
+
+  if (result.sucess) {
+    handleEmailDialog();
+  } else {
+    alert('Houve um problema na submissão. Por gentileza, tente novamente.');
+  }
+};
+
 // Abrir a última seção
 const openFinalSection = () => {
   section3.style.display = 'none';
@@ -61,7 +83,7 @@ const openFinalSection = () => {
 };
 
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
-confirmSubmitButton.addEventListener('click', handleEmailDialog);
+confirmSubmitButton.addEventListener('click', checkRegister);
 
 const sections = [
   {

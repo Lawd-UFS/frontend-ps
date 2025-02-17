@@ -54,12 +54,13 @@
                         <label for="gender">Gênero:
                             <select placeholder="Seu Nome" id="gender" name="gender" required>
                                 <option value="" disabled selected>Selecione</option>
-                                <option value="male">Homem cisgênero</option>
-                                <option value="female">Mulher cisgênero</option>
-                                <option value="male-t">Homem transgênero</option>
-                                <option value="female-t">Mulher transgênero</option>
-                                <option value="nb">Não-binário</option>
-                                <option value="other">Prefiro não declarar</option>
+                                <option value="Masculino">Homem cisgênero</option>
+                                <option value="Feminino">Mulher cisgênero</option>
+                                <option value="Transgênero">Transgênero</option>
+                                <option value="Neutro">Neutro</option>
+                                <option value="Não-binário">Não-binário</option>
+                                <option value="Agênero">Agênero</option>
+                                <option value="Intersexo">Intersexo</option>
 
                             </select>
                         </label>
@@ -70,14 +71,14 @@
                     <div class="column">
 
                         <label for="date-birth">Data de nascimento:
-                            <input type="date" id="date-birth" name="date-birth" required>
+                            <input type="date" id="date-birth" name="birthDate" required>
                         </label>
                         <label for="pronoun">Pronome:
                             <select id="pronoun" name="pronoun" required>
                                 <option value="" disabled selected>Selecione</option>
-                                <option value="he/him">Ele/Dele</option>
-                                <option value="she/her">Ela/Dela</option>
-
+                                <option value="Ele/dele">Ele/Dele</option>
+                                <option value="Ela/dela">Ela/Dela</option>
+                                <option value="Elu/delu">Elu/Delu</option>
                             </select>
                         </label>
                         <label for="period">Período atual:
@@ -89,32 +90,41 @@
             <div class="section-inputs" id="section2">
                 <form>
                     <div class="column">
-                        <label for="name">Quais seus interesses?
-                            <textarea name="textarea" id="name" required
+                        <label for="interests">Quais seus interesses?
+                            <textarea name="interests" id="interests" required
                                 placeholder="Ex: Hobbies, áreas de estudo, etc."></textarea>
                         </label>
-                        <label for="course">Quais habilidades você possui?
-                            <textarea name="textarea" id="name" required placeholder="ex: Design Gráfico"></textarea>
+                        <label for="skills">Quais habilidades você possui?
+                            <textarea name="skills" id="skills" required placeholder="ex: Design Gráfico"></textarea>
+                        </label>
+                        <label for="knowledge-level">Conhecimento em desenvolvimento web:
+                            <select id="knowledge-level" name="knowledgeLevel" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="Nenhum">Nenhum</option>
+                                <option value="Iniciante">Iniciante</option>
+                                <option value="Intermediário">Intermediário</option>
+                                <option value="Avançado">Avançado</option>
+                            </select>
                         </label>
                     </div>
                     <div class="column">
-                        <label for="name">
+                        <label for="portfolio">
                             <div>
-                                Link para Portifólio <span>
+                                Link para Portfólio <span>
                                     (Opcional)
                                 </span>
                             </div>
-                            <input type="text" id="name" name="name" required placeholder="Github/ Behance/ etc...">
+                            <input type="text" id="portfolio" name="portfolio" required placeholder="Github/ Behance/ etc...">
                         </label>
 
                         <label for="file-upload" class="file-upload">
                             <div>
-                                Upload de Portifólio <span>
+                                Upload de Portfólio <span>
                                     (Opcional)
                                 </span>
                             </div>
                             <input id="file-upload" type="file" />
-                            <span class="file-name">portifolio.pdf</span>
+                            <span class="file-name">portfolio.pdf</span>
                         </label>
 
                         <label for="photo-upload" class="file-upload">
@@ -127,7 +137,7 @@
                             <span class="file-name">suafoto.png</span>
                         </label>
 
-                        <label for="name">
+                        <label for="email">
                             Seu melhor email:
                             <input type="email" id="email" name="email" required placeholder="exemplo@email.com">
                         </label>
@@ -139,14 +149,14 @@
                 <form>
                     <div class="column">
                         <label for="motivation">Qual sua motivação para entrar na LAWD?
-                            <textarea name="textarea" id="name" required
+                            <textarea name="motivation" id="motivation" required
                                 placeholder="Indique aqui o porquê você quer fazer parte da liga"></textarea>
                         </label>
 
                     </div>
                     <div class="column">
 
-                        <label for="name">
+                        <label for="source">
                             Como você ficou sabendo do PS da LAWD?
                             <div class="checkbox-group">
                                 <label class="checkbox-label">
