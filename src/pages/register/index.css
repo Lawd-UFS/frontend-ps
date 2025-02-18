@@ -106,6 +106,18 @@ form select {
   background-color: var(--background-input-filled);
 }
 
+label.error {
+  color: red;
+
+  animation: shake 0.5s;
+}
+
+label.error input,
+label.error select,
+label.error textarea {
+  border: 1px solid red;
+}
+
 textarea {
   display: flex;
   height: 100%;
@@ -274,6 +286,24 @@ header a {
     opacity: 100;
     transform: translateY(0);
     transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 
