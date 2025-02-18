@@ -5,6 +5,7 @@ import {
   setError,
   sendFormData,
 } from './formHandler.js';
+import { ErrorDialog } from '../../components/ErrorDialog/index.js';
 import { openModal, closeModal } from '../../lib/modal.js';
 
 let currentStep = 0;
@@ -21,6 +22,24 @@ const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
 const section4 = document.getElementById('section4');
 const requiredFields = document.querySelectorAll('[required]');
+
+const sections = [
+  {
+    icon: document.getElementById('section1-icon'),
+    section: section1,
+    name: 'Dados iniciais',
+  },
+  {
+    icon: document.getElementById('section2-icon'),
+    section: section2,
+    name: 'Sobre você',
+  },
+  {
+    icon: document.getElementById('section3-icon'),
+    section: section3,
+    name: 'Finalização',
+  },
+];
 
 requiredFields.forEach((field) => {
   field.addEventListener('input', () => clearFieldError(field));
@@ -88,7 +107,7 @@ const handleSubmitForm = async () => {
   if (result.success) {
     handleEmailDialog();
   } else {
-    alert('Houve um problema na submissão. Por gentileza, tente novamente.');
+    handleErrorDialog(result.errors);
   }
 };
 
@@ -108,24 +127,6 @@ const openFinalSection = () => {
 
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
 confirmSubmitButton.addEventListener('click', handleSubmitForm);
-
-const sections = [
-  {
-    icon: document.getElementById('section1-icon'),
-    section: section1,
-    name: 'Dados iniciais',
-  },
-  {
-    icon: document.getElementById('section2-icon'),
-    section: section2,
-    name: 'Sobre você',
-  },
-  {
-    icon: document.getElementById('section3-icon'),
-    section: section3,
-    name: 'Finalização',
-  },
-];
 
 const sectionName = document.getElementById('section-name');
 
