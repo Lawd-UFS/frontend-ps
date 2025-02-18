@@ -1,5 +1,6 @@
 import './index.css';
 import { sendFormData } from './formHandler.js';
+import { openModal, closeModal } from '../../lib/modal.js';
 
 let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
@@ -15,26 +16,6 @@ const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
 const section4 = document.getElementById('section4');
 
-// Função para abrir um modal
-const openModal = (modal) => {
-  modal.classList.remove('closing');
-  modal.classList.add('opening');
-  modal.showModal();
-};
-
-// Função para fechar um modal
-const closeModal = (modal) => {
-  modal.classList.add('closing');
-  modal.addEventListener(
-    'animationend',
-    (event) => {
-      if (event.animationName === 'closing') {
-        modal.close();
-      }
-    },
-    { once: true },
-  );
-};
 
 // TODO Colocar lógica do reenvio do email & recebimento de confirmação
 // Abrir emailDialog e, após 3s, abrir a última seção (apenas pra visualização de todo o fluxo)
