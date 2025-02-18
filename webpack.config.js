@@ -100,7 +100,15 @@ const config = {
       },
       {
         test: /\.svg$/i,
-        type: 'asset/source',
+        oneOf: [
+          {
+            issuer: /\.js$/i,
+            type: 'asset/source',
+          },
+          {
+            type: 'asset/resource',
+          },
+        ],
       },
       {
         test: /\.html$/i,
