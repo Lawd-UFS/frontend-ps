@@ -1,5 +1,5 @@
 import './index.css';
-import { submitRegister } from './register.js';
+import { sendFormData } from './formHandler.js';
 
 let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
@@ -50,15 +50,15 @@ const handleEmailDialog = () => {
 
 // Função de submeter cadastro
 
-const checkRegister = async () => {
   const data = {};
+const handleSubmitForm = async () => {
 
   for (const form of formList) {
     const formData = new FormData(form);
     Object.assign(data, Object.fromEntries(formData));
   }
 
-  const result = await submitRegister(data);
+  const result = await sendFormData(data);
 
   if (result.sucess) {
     handleEmailDialog();
@@ -82,7 +82,7 @@ const openFinalSection = () => {
 };
 
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
-confirmSubmitButton.addEventListener('click', checkRegister);
+confirmSubmitButton.addEventListener('click', handleSubmitForm);
 
 const sections = [
   {
