@@ -14,6 +14,10 @@ export async function sendFormData(data) {
     });
     return response;
   } catch (error) {
-    return { success: false, message: error.message };
+    return {
+      success: false,
+      message: error.message,
+      errors: error.errorData.errors,
+    };
   }
 }
