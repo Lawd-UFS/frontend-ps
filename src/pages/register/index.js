@@ -1,5 +1,10 @@
 import './index.css';
-import { sendFormData } from './formHandler.js';
+import {
+  checkRequiredFields,
+  clearFieldError,
+  handleFormErros,
+  sendFormData,
+} from './formHandler.js';
 import { openModal, closeModal } from '../../lib/modal.js';
 
 let currentStep = 0;
@@ -15,7 +20,11 @@ const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
 const section4 = document.getElementById('section4');
+const requiredFields = document.querySelectorAll('[required]');
 
+requiredFields.forEach((field) => {
+  field.addEventListener('input', () => clearFieldError(field));
+});
 
 // TODO Colocar lógica do reenvio do email & recebimento de confirmação
 // Abrir emailDialog e, após 3s, abrir a última seção (apenas pra visualização de todo o fluxo)
@@ -32,7 +41,12 @@ const handleEmailDialog = () => {
 // Função de submeter cadastro
 
 const handleSubmitForm = async () => {
+  const { isValid, invalidFields } = checkRequiredFields(formList[currentStep]);
 
+  if (!isValid) {
+    handleFormErros(invalidFields);
+    closeModal(submitDialog);
+    return;
   }
 
   const formData = new FormData();
@@ -91,6 +105,17 @@ const sections = [
 const sectionName = document.getElementById('section-name');
 
 const updateStep = (step) => {
+  if (step > currentStep) {
+    const { isValid, invalidFields } = checkRequiredFields(
+      formList[currentStep],
+    );
+
+    if (!isValid) {
+      handleFormErros(invalidFields);
+      return;
+    }
+  }
+
   currentStep = step;
   nextButton.innerText = currentStep === 2 ? 'Enviar Formulário' : 'Continue';
 
