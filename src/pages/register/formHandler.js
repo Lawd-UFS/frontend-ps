@@ -49,7 +49,7 @@ export function checkRequiredFields(form) {
   return { isValid: invalidFields.length === 0, invalidFields };
 }
 
-export function handleFormErros(invalidFields) {
+export function setError(invalidFields) {
   invalidFields.forEach((field) => {
     field.classList.add('error');
   });

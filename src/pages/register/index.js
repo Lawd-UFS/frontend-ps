@@ -2,7 +2,7 @@ import './index.css';
 import {
   checkRequiredFields,
   clearFieldError,
-  handleFormErros,
+  setError,
   sendFormData,
 } from './formHandler.js';
 import { openModal, closeModal } from '../../lib/modal.js';
@@ -38,13 +38,38 @@ const handleEmailDialog = () => {
   }, 3000);
 };
 
+const focusOnFirstError = (errors) => {
+  if (!Array.isArray(errors)) {
+    return;
+  }
+
+  const firstErrorName = errors[0].field;
+  const inputError = document.querySelector(`[name="${firstErrorName}"]`);
+  const labelError = inputError.closest('label');
+  const errorSection = inputError.closest('.section-inputs');
+
+  const step = sections.findIndex((section) => section.section == errorSection);
+
+  setError([labelError]);
+
+  updateStep(step);
+};
+
+const handleErrorDialog = (errors) => {
+  closeModal(submitDialog);
+
+  const errorDialog = ErrorDialog(errors, () => focusOnFirstError(errors));
+
+  openModal(errorDialog);
+};
+
 // Função de submeter cadastro
 
 const handleSubmitForm = async () => {
   const { isValid, invalidFields } = checkRequiredFields(formList[currentStep]);
 
   if (!isValid) {
-    handleFormErros(invalidFields);
+    setError(invalidFields);
     closeModal(submitDialog);
     return;
   }
@@ -111,7 +136,7 @@ const updateStep = (step) => {
     );
 
     if (!isValid) {
-      handleFormErros(invalidFields);
+      setError(invalidFields);
       return;
     }
   }
