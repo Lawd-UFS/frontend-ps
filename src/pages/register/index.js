@@ -50,17 +50,22 @@ const handleEmailDialog = () => {
 
 // Função de submeter cadastro
 
-  const data = {};
 const handleSubmitForm = async () => {
 
-  for (const form of formList) {
-    const formData = new FormData(form);
-    Object.assign(data, Object.fromEntries(formData));
   }
 
-  const result = await sendFormData(data);
+  const formData = new FormData();
 
-  if (result.sucess) {
+  formList.forEach((form) => {
+    const formFields = new FormData(form);
+    for (const [key, value] of formFields.entries()) {
+      formData.append(key, value);
+    }
+  });
+
+  const result = await sendFormData(formData);
+
+  if (result.success) {
     handleEmailDialog();
   } else {
     alert('Houve um problema na submissão. Por gentileza, tente novamente.');
