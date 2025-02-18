@@ -116,6 +116,14 @@ const updateStep = (step) => {
   sections.forEach((item, index) => {
     item.icon.classList.toggle('active', index === step);
     item.section.style.display = index === step ? 'block' : 'none';
+
+    item.section.querySelectorAll('label').forEach((label) => {
+      label.classList.add('show-animation');
+
+      setTimeout(() => {
+        label.classList.remove('show-animation');
+      }, 1000);
+    });
   });
 
   sectionName.innerText = sections[step].name;

@@ -368,9 +368,12 @@ label {
   display: flex;
   flex-direction: column;
   cursor: var(--cursor-default);
-  animation: move 500ms ease-in-out;
 
   height: 100%;
+}
+
+label.show-animation {
+  animation: move 500ms ease-in-out;
 }
 
 input,
