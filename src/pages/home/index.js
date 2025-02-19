@@ -1,5 +1,4 @@
 import './index.css';
-import '../../global.css';
 
 var textWrapper = document.querySelector('.title');
 textWrapper.innerHTML = textWrapper.textContent.replace(
