@@ -54,6 +54,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  min-width: 320px;
+}
+
 body {
   height: 100vh;
 }
