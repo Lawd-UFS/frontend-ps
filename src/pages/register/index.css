@@ -10,8 +10,8 @@ button {
   font-family: Space Grotesk;
   padding: 0.5rem 1rem;
   background-color: var(--purple-white);
-  border: var(--purple-300) solid 0.1563rem;
-  border-radius: 1.125rem;
+  border: var(--purple-300) solid 0.25rem;
+  border-radius: 1.8rem;
   font-weight: 500;
   color: var(--purple-400);
   cursor: var(--cursor-pointer);
@@ -45,7 +45,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 2.25rem;
+  padding: 0 3.6rem;
 }
 
 main h1 {
@@ -80,7 +80,7 @@ input[type='file'] {
 
 form input,
 form select {
-  padding: 0 1rem;
+  padding: 0 1.6rem;
   box-sizing: content-box;
 }
 
@@ -93,9 +93,9 @@ form select {
   height: 3rem;
   font-family: Space Grotesk;
   margin-top: 0.75rem;
-  border-radius: 0.8rem;
-  border: solid var(--purple-white) 0.125rem;
-  border: 0.125rem solid rgba(92, 0, 164, 0.11);
+  border-radius: 1.28rem;
+  border: solid var(--purple-white) 0.16rem;
+  border: 0.16rem solid rgba(92, 0, 164, 0.11);
   resize: none;
   text-overflow: ellipsis;
 }
@@ -236,14 +236,14 @@ header {
 }
 
 .navbar {
-  border-radius: 3.125rem;
+  border-radius: 5rem;
   border: 1px solid #fff;
   display: flex;
-  width: 68rem;
-  padding: 0.625rem 1.5rem;
+  width: 68.9rem;
+  padding: 1rem 2.4rem;
   justify-content: space-between;
   align-items: center;
-  margin: 0 2.8rem 2rem;
+  margin: 0 4.48rem 3.2rem;
 }
 
 header a {
@@ -269,7 +269,7 @@ header a {
 .registerScreen {
   background-color: #fff;
   overflow: hidden;
-  border-radius: 4rem;
+  border-radius: 5rem;
   width: 100%;
   max-width: 75rem;
   animation: opening 450ms ease-in-out backwards;
@@ -356,7 +356,7 @@ header a {
 
 hr {
   box-sizing: border-box;
-  width: 2rem;
+  width: 3.2rem;
   border-style: dashed;
   border-color: #c2bfbf;
   margin: auto 0;
@@ -468,7 +468,7 @@ select {
 
 .registerButton {
   background: #e8e0ff;
-  border: 0.1875rem solid #bba6f8;
+  border: 0.24rem solid #bba6f8;
   padding: 0 1.5rem;
   font-weight: bold;
   animation: opening 400ms ease-in-out 200ms backwards;
@@ -481,8 +481,8 @@ select {
   justify-content: space-between;
   align-items: center;
 
-  gap: 1rem;
-  padding: 3rem 4.8rem;
+  gap: 1.6rem;
+  padding: 4.1rem 4.8rem 2.9rem;
 
   border-bottom: solid var(--purple-white) 0.0625rem;
   transition: border-bottom 0.4s ease-in-out;
@@ -554,7 +554,7 @@ dialog::backdrop {
 
 .modal {
   height: 30rem;
-  width: 40rem;
+  width: 30rem;
   padding: 1.875rem 1.25rem;
   border: none;
   border-radius: 2.375rem;
@@ -721,7 +721,7 @@ dialog::backdrop {
   }
 
   .section-type {
-    gap: 1.5625rem;
+    gap: 2.5rem;
     justify-content: space-between;
   }
 
@@ -730,7 +730,7 @@ dialog::backdrop {
   }
 
   .buttons-container {
-    gap: 1.5rem;
+    gap: 2.4rem;
   }
 
   .register-text-container {
@@ -746,22 +746,22 @@ dialog::backdrop {
 
 @media only screen and (max-width: 375px) {
   main {
-    padding: 1rem;
+    padding: 1.6rem;
   }
 
   .section-type p,
   h2,
   form label {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 
   .navbar p {
     height: auto;
-    width: 4.625rem;
+    width: 7.4rem;
   }
 
   .enrollment h1 {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
   }
 
   .continue {
