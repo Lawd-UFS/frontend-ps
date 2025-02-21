@@ -1,6 +1,6 @@
 body {
   background-image: url(../assets/images/bg-countdown.jpg);
-  background-position: center 80%;
+  background-position: center 70%;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -29,18 +29,18 @@ body {
   color: transparent;
 
   text-align: center;
-
-  font-size: 4rem;
 }
 
+h1 {
+  font-size: 1.5em;
+}
+p {
+  font-size: 0.7em;
+}
 .cd-count {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.cd-count h1 {
-  font-size: 4.8rem;
 }
 
 .cd-count h1,
@@ -51,7 +51,7 @@ body {
 
 .count {
   display: flex;
-  gap: 3.8rem;
+  gap: 1em;
   margin-top: 1em;
 }
 
@@ -63,5 +63,23 @@ body {
 }
 
 .count-container > h1 {
-  font-size: 6.4rem;
+  font-size: 3em;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+  .count-container {
+    width: 5em;
+  }
+  .count {
+    gap: 1.5em;
+  }
+  .count-container > h1 {
+    font-size: 4em;
+  }
+  p {
+    font-size: 0.8em;
+  }
 }
