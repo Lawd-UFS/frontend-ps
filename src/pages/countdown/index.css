@@ -11,7 +11,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   color: #fff;
-  padding: 7em 0em;
+  padding: 10rem 0 7rem;
 }
 
 .cd-message {
@@ -54,14 +54,6 @@ p {
 @media (min-width: 768px) {
   h1 {
     font-size: 2em;
-  }
-  .cd-container{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: #fff;
-    padding: 7em 0em 5em 0em;
   }
   .count-container {
     width: 5em;
