@@ -11,7 +11,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   color: #fff;
-  padding: 10rem 0 7rem;
+  padding: 10rem 0;
 }
 
 .cd-message {
