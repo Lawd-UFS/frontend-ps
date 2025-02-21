@@ -1,5 +1,4 @@
 import './index.css';
-import '../../global.css';
 
 const inicioPS = new Date("2025-02-24T00:00:00");
 
