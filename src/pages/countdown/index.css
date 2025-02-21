@@ -20,6 +20,17 @@ body {
   align-items: center;
 }
 
+.cd-message h1 {
+  font-weight: 500;
+  background: linear-gradient(180deg, #aa99da 0, #aa99da 60%, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  text-align: center;
+}
+
 h1 {
   font-size: 1.5em;
 }
@@ -32,6 +43,10 @@ p {
   align-items: center;
 }
 
+.cd-count h1,
+.cd-count p {
+  color: var(--purple-200);
+  font-weight: 500;
 }
 
 .count {
