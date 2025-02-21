@@ -1,6 +1,8 @@
 body {
-    background-image: url(../../assets/images/bg-countdown.jpg) !important;
-    
+    background-image: url(../../assets/images/bg-countdown.jpg);
+    background-position: center 70%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .cd-container{
