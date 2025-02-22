@@ -5,6 +5,7 @@ let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
 const submitDialog = document.getElementById('submitDialog');
 const emailDialog = document.getElementById('emailDialog');
+const closeEmailDialogButton = document.getElementById('closeEmailDialog');
 const closeModalButton = document.getElementById('closeModal');
 const confirmSubmitButton = document.getElementById('confirmSubmit');
 const titleSection = document.querySelector('h1');
@@ -62,6 +63,7 @@ const checkRegister = async () => {
   }
 };
 
+closeEmailDialogButton.addEventListener('click', () => closeModal(emailDialog));
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
 confirmSubmitButton.addEventListener('click', checkRegister);
 
