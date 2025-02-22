@@ -41,11 +41,6 @@ const closeModal = (modal) => {
 const handleEmailDialog = () => {
   closeModal(submitDialog);
   openModal(emailDialog);
-
-  setTimeout(() => {
-    closeModal(emailDialog);
-    openFinalSection();
-  }, 3000);
 };
 
 // Função de submeter cadastro
@@ -65,20 +60,6 @@ const checkRegister = async () => {
   } else {
     alert('Houve um problema na submissão. Por gentileza, tente novamente.');
   }
-};
-
-// Abrir a última seção
-const openFinalSection = () => {
-  section3.style.display = 'none';
-  section4.style.display = 'flex';
-  section4.classList.add('active');
-  document.querySelector('.section-type').style.display = 'none';
-  document.querySelector('.enrollment').style.border = 'none';
-
-  enrollment.style.justifyContent = 'center';
-  titleSection.innerText = 'Sua inscrição foi enviada';
-  titleSection.style.marginBottom = '0';
-  nextButton.style.display = 'none';
 };
 
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
