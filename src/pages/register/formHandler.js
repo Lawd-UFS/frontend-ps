@@ -6,7 +6,7 @@ export async function sendFormData(data) {
   try {
     const response = await client.sendRequest({
       method: HttpMethod.POST,
-      endpoint: '/candidatos',
+      endpoint: '/api/candidatos',
       body: data,
       headers: {
         'Content-Type': 'multipart/form-data',
