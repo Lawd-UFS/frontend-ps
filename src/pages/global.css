@@ -36,9 +36,7 @@
 
 @font-face {
   font-family: 'Space Grotesk';
-  src: url('/src/assets/fonts/SpaceGrotesk-Medium.ttf') format('truetype');
-  font-size: normal;
-  font-weight: normal;
+  src: url('/src/assets/fonts/SpaceGrotesk.ttf') format('truetype');
 }
 
 * {
