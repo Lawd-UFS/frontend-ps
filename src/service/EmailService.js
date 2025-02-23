@@ -25,7 +25,7 @@ export class EmailService {
         method: HttpMethod.POST,
       });
 
-      return response.success;
+      return response;
     } catch (error) {
       return {
         success: false,
