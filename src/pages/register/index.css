@@ -486,11 +486,11 @@ option {
 
 .registerButton {
   background: #e8e0ff;
-  border: 0.26rem solid #bba6f8;
-  padding: 0 2rem;
+  border: 0.3rem solid #bba6f8;
+  padding: 0 2.4rem;
   font-weight: bold;
   animation: opening 400ms ease-in-out 200ms backwards;
-  height: 4.125rem;
+  height: 4.5rem;
 }
 
 .enrollment {
@@ -660,7 +660,7 @@ dialog::backdrop {
 .continue {
   display: flex;
   justify-content: end;
-  margin: 2rem;
+  margin: 1.6rem;
   width: 100%;
   max-width: 75rem;
 }
