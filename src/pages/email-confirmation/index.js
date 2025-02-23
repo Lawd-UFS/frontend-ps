@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     main.appendChild(
       EnrollmentSubmission.Error({
         hasToken: true,
-        resendEmail: emailService.resendEmail,
+        emailService: emailService,
         message:
           'Parece que a sua confirmação expirou. Deseja reenviar o email?',
       }),

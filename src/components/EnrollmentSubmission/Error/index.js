@@ -4,7 +4,7 @@ import { clearFieldError, setError } from '../../../pages/register/formHandler';
 import { ErrorDialog } from '../../ErrorDialog';
 import { openModal } from '../../../lib/modal';
 
-export const SubmissionError = ({ hasToken, resendEmail, message }) => {
+export const SubmissionError = ({ hasToken, emailService, message }) => {
   const container = document.createElement('div');
   container.id = 'error';
 
@@ -20,7 +20,7 @@ export const SubmissionError = ({ hasToken, resendEmail, message }) => {
     return container;
   }
 
-  if (!resendEmail) {
+  if (!emailService) {
     if (!message) {
       return container;
     }
@@ -54,7 +54,7 @@ export const SubmissionError = ({ hasToken, resendEmail, message }) => {
       return;
     }
 
-    const response = await resendEmail(emailValue);
+    const response = await emailService.resendEmail(emailValue);
 
     if (!response.success) {
       const errorDialog = ErrorDialog([{ message: response.message }]);
