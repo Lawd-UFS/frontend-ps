@@ -1,0 +1,85 @@
+body {
+  background-image: url(../assets/images/bg-countdown.jpg);
+  background-position: center 70%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.cd-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  padding: 10rem 0;
+}
+
+.cd-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cd-message h1 {
+  font-weight: 500;
+  background: linear-gradient(180deg, #aa99da 0, #aa99da 60%, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+p {
+  font-size: 0.7em;
+}
+.cd-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cd-count h1,
+.cd-count p {
+  color: var(--purple-200);
+  font-weight: 500;
+}
+
+.count {
+  display: flex;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.count-container {
+  width: 3.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.count-container > h1 {
+  font-size: 3em;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+  .count-container {
+    width: 5em;
+  }
+  .count {
+    gap: 1.5em;
+  }
+  .count-container > h1 {
+    font-size: 4em;
+  }
+  p {
+    font-size: 0.8em;
+  }
+}
