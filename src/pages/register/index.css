@@ -92,7 +92,7 @@ form select {
   color: var(--gray);
   height: 3rem;
   font-family: Space Grotesk;
-  margin-top: 0.75rem;
+  margin-top: 0.9rem;
   border-radius: 1.28rem;
   border: solid var(--purple-white) 0.16rem;
   border: 0.16rem solid rgba(92, 0, 164, 0.11);
@@ -107,15 +107,13 @@ form select {
 }
 
 label.error {
-  color: red;
-
   animation: shake 0.5s;
 }
 
 label.error input,
 label.error select,
 label.error textarea {
-  border: 1px solid red;
+  border: 1px solid #dd4545;
 }
 
 textarea {
@@ -293,15 +291,19 @@ header a {
   0% {
     transform: translateX(0);
   }
+
   25% {
     transform: translateX(-5px);
   }
+
   50% {
     transform: translateX(5px);
   }
+
   75% {
     transform: translateX(-5px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -468,11 +470,11 @@ select {
 
 .registerButton {
   background: #e8e0ff;
-  border: 0.24rem solid #bba6f8;
-  padding: 0 1.5rem;
+  border: 0.26rem solid #bba6f8;
+  padding: 0 2rem;
   font-weight: bold;
   animation: opening 400ms ease-in-out 200ms backwards;
-  height: 4rem;
+  height: 4.125rem;
 }
 
 .enrollment {
@@ -688,10 +690,8 @@ dialog::backdrop {
   max-width: 28rem;
   gap: 12px;
   border: 3px solid var(--purple-light);
-  background: var(
-    --stroke-4,
-    linear-gradient(353deg, #7046e9 -259.29%, #bba6f8 211.39%)
-  );
+  background: var(--stroke-4,
+      linear-gradient(353deg, #7046e9 -259.29%, #bba6f8 211.39%));
 
   color: #fff;
 }
