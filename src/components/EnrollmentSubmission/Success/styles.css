@@ -1,0 +1,211 @@
+button {
+  font-family: Space Grotesk;
+  padding: 0.5rem 1rem;
+  background-color: var(--purple-white);
+  border: var(--purple-300) solid 0.1563rem;
+  border-radius: 1.125rem;
+  font-weight: 500;
+  color: var(--purple-400);
+  cursor: var(--cursor-pointer);
+  transition:
+    background-color 0.3s ease-in-out,
+    transform 0.4s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--purple-300);
+  color: var(--purple-white);
+  cursor: var(--cursor-pointer);
+  border: 3px solid #9676f0;
+  transform: scale(0.95);
+}
+
+button:active {
+  transform: scale(0.85);
+  background-color: var(--purple-white);
+  color: var(--purple-400);
+  border: var(--purple-400) solid 1px;
+  cursor: var(--cursor-pointer);
+}
+
+#register-screen {
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 4rem;
+  width: 100%;
+  max-width: 75rem;
+  animation: opening 450ms ease-in-out backwards;
+}
+
+#register-screen header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3rem 4.8rem;
+}
+
+#register-screen header h1 {
+  color: var(--purple-400);
+  font-weight: bold;
+
+  text-align: center;
+}
+
+#register-screen section {
+  display: flex;
+  flex-direction: column;
+
+  padding: 4.2rem 4.2rem;
+  align-items: center;
+}
+
+#register-screen section .instructions-container {
+  display: flex;
+}
+
+.section-inputs {
+  padding: 4.2rem 5.2rem;
+}
+
+#loving-doodle {
+  max-width: 38rem;
+  animation: opening 350ms ease-in-out backwards;
+}
+
+.register-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 36px;
+  margin: auto;
+  margin-left: 2rem;
+}
+
+.register-text {
+  color: var(--purple-400);
+  display: flex;
+  width: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.register-text:nth-child(1) {
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 400ms;
+}
+
+.register-text:nth-child(2) {
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 600ms;
+}
+
+.register-text img {
+  width: 32px;
+}
+
+.opening {
+  animation: opening 400ms ease-in-out;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  gap: 3.3125rem;
+  margin: 5rem 0 2rem 0;
+
+  height: 4.8rem;
+}
+
+.buttons-container button {
+  display: flex;
+  font-size: 18px;
+  font-weight: 500;
+  min-height: 48px;
+  padding: 0.75rem 1.75rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0px 2px 4.6px 0px rgba(96, 0, 172, 0.14);
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 800ms;
+}
+
+.buttons-container img {
+  width: auto;
+}
+
+.chatbot-button {
+  width: 100%;
+  max-width: 39rem;
+  border: 0.1875rem solid #bba6f8;
+  background: #e8e0ff;
+}
+
+.discord-button {
+  width: 100%;
+  gap: 12px;
+  border: 3px solid var(--purple-light);
+  background: var(
+    --stroke-4,
+    linear-gradient(353deg, #7046e9 -259.29%, #bba6f8 211.39%)
+  );
+
+  color: #fff;
+}
+
+@media only screen and (max-width: 585px) {
+  #register-screen section div {
+    flex-direction: column;
+  }
+
+  .buttons-container {
+    gap: 1.5rem;
+  }
+
+  .register-text-container {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding-inline: 1rem;
+  }
+}
+
+@keyframes opening {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 100;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes divs-section4 {
+  from {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
