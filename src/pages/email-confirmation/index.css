@@ -6,6 +6,11 @@ body {
   background-attachment: fixed;
 }
 
+h1,
+h3 {
+  text-align: center;
+}
+
 p {
   color: var(--gray);
 
@@ -127,6 +132,10 @@ main > div {
 @media only screen and (max-width: 375px) {
   h1 {
     font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
   }
 
   main {
