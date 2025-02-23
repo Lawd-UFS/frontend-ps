@@ -5,14 +5,15 @@ import discord from '../../../assets/images/discord.svg';
 import mystery from '../../../assets/images/mystery.svg';
 
 export const SubmissionSuccess = () => {
-  const container = document.createElement('div');
-  container.id = 'register-screen';
+  const container = document.createDocumentFragment();
 
-  container.innerHTML = `
-  <header>
+  const header = document.createElement('header');
+  header.innerHTML = `
     <h1>Sua inscrição foi enviada!</h1>
-  </header>
-  <section>
+  `;
+
+  const section = document.createElement('section');
+  section.innerHTML = `
     <div class="instructions-container">
       <img
         id="loving-doodle"
@@ -55,8 +56,10 @@ export const SubmissionSuccess = () => {
         Agendamento de Entrevistas
       </button>
     </div>
-  </section>
   `;
+
+  container.appendChild(header);
+  container.appendChild(section);
 
   return container;
 };
