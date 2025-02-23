@@ -92,6 +92,7 @@ form select {
   color: var(--gray);
   height: 3rem;
   font-family: Space Grotesk;
+  font-weight: 400;
   margin-top: 0.9rem;
   border-radius: 1.28rem;
   border: solid var(--purple-white) 0.2rem;
@@ -101,7 +102,7 @@ form select {
 }
 
 .filled {
-  color: #3d3d3d;
+  color: #424141;
   font-weight: 550;
   background-color: var(--background-input-filled);
 }
