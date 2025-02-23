@@ -76,6 +76,10 @@ input[type='file'] {
   cursor: var(--cursor-pointer);
   align-content: center;
   padding: 0 1rem;
+  padding-left: 1.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 21rem;
 }
 
 form input,
@@ -92,6 +96,7 @@ form select {
   color: var(--gray);
   height: 3rem;
   font-family: Space Grotesk;
+  font-size: 1.4rem;
   font-weight: 400;
   margin-top: 0.9rem;
   border-radius: 1.28rem;
@@ -409,19 +414,6 @@ label.show-animation:not(.checkbox-label) {
   animation: move 500ms ease-in-out;
 }
 
-input,
-select,
-textarea {
-  font-weight: 300;
-  font-size: 1.4rem;
-}
-
-input,
-select,
-textarea {
-  font-weight: 300;
-  font-size: 1.4rem;
-}
 
 @keyframes move {
   from {
