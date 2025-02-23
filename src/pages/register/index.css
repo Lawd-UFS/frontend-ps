@@ -94,8 +94,8 @@ form select {
   font-family: Space Grotesk;
   margin-top: 0.9rem;
   border-radius: 1.28rem;
-  border: solid var(--purple-white) 0.16rem;
-  border: 0.16rem solid rgba(92, 0, 164, 0.11);
+  border: solid var(--purple-white) 0.19rem;
+  border: 0.19rem solid rgba(92, 0, 164, 0.11);
   resize: none;
   text-overflow: ellipsis;
 }
@@ -452,13 +452,18 @@ span {
   font-size: smaller;
 }
 
-#section1 input[type='text'],
-input[type='date'] {
+#section1 input[type='text'] {
   max-width: 80%;
 }
 
+
+input[type='date'] {
+  max-width: 65%;
+
+}
+
 #section1 input[type='number'] {
-  width: 4rem;
+  width: 5rem;
 }
 
 #section4,
@@ -467,12 +472,16 @@ input[type='date'] {
 }
 
 #pronoun {
-  width: 80%;
+  width: 50%;
 }
 
 select {
   width: 13em;
-  cursor: var(--cursor-default);
+}
+
+option {
+  font-size: 1.4rem;
+  cursor: var(--cursor-pointer);
 }
 
 .registerButton {
