@@ -5,7 +5,8 @@ import discord from '../../../assets/images/discord.svg';
 import mystery from '../../../assets/images/mystery.svg';
 
 export const SubmissionSuccess = () => {
-  const container = document.createDocumentFragment();
+  const container = document.createElement('div');
+  container.id = 'register-screen';
 
   const header = document.createElement('header');
   header.innerHTML = `

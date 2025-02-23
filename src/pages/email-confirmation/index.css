@@ -112,11 +112,12 @@ main {
   padding-bottom: 4rem;
 }
 
-#register-screen {
+main > div {
   background-color: #fff;
   overflow: hidden;
   border-radius: 4rem;
   width: 100%;
   max-width: 75rem;
   animation: opening 450ms ease-in-out backwards;
+
 }
