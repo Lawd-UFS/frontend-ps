@@ -37,9 +37,10 @@ export class HttpClient {
       return data;
     } catch (error) {
       const status = error.response?.status || 500;
-      const message = error.response?.data || error.message;
+      const message = error.response?.data?.message || error.message;
+      const errorData = error.response?.data || {};
 
-      throw new Error(`Requisição falhou com status ${status}: ${message}`);
+      throw { status, message, errorData };
     }
   }
 }
