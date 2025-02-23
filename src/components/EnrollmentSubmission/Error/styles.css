@@ -59,53 +59,6 @@ label.error input {
   border: 1px solid red;
 }
 
-dialog {
-  border: none;
-  padding: 0;
-  border-radius: 38px;
-  box-shadow: 0 4px 6px rgba(96, 0, 172, 0.14);
-  backdrop-filter: blur(7px);
-
-  margin: auto;
-}
-
-dialog::backdrop {
-  background-color: rgba(61, 18, 97, 0.4);
-}
-
-.modal {
-  height: 30rem;
-  width: 30rem;
-  padding: 1.875rem 1.25rem;
-  border: none;
-  border-radius: 2.375rem;
-  gap: 1.25rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.modal div {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  gap: 10px;
-}
-
-.modal img {
-  width: 87px;
-}
-
-.opening {
-  animation: opening 400ms ease-in-out;
-}
-
-.closing {
-  animation: closing 200ms ease-in-out;
-}
-
 @media only screen and (max-width: 426px) {
   #error {
     gap: 2.5rem;
@@ -139,33 +92,5 @@ dialog::backdrop {
   }
   100% {
     transform: translateX(0);
-  }
-}
-
-@keyframes opening {
-  from {
-    opacity: 0;
-    transform: translateY(10%);
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 100;
-    transform: translateY(0);
-    transform: scale(1);
-  }
-}
-
-@keyframes closing {
-  from {
-    opacity: 100;
-    transform: translateY(0);
-    transform: scale(1);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(10%);
-    transform: scale(0.9);
   }
 }
