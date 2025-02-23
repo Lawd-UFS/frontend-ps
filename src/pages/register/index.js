@@ -45,6 +45,20 @@ requiredFields.forEach((field) => {
   field.addEventListener('input', () => clearFieldError(field));
 });
 
+// Abrir a última seção
+const openFinalSection = () => {
+  section3.style.display = 'none';
+  section4.style.display = 'flex';
+  section4.classList.add('active');
+  document.querySelector('.section-type').style.display = 'none';
+  document.querySelector('.enrollment').style.border = 'none';
+
+  enrollment.style.justifyContent = 'center';
+  titleSection.innerText = 'Sua inscrição foi enviada';
+  titleSection.style.marginBottom = '0';
+  nextButton.style.display = 'none';
+};
+
 // TODO Colocar lógica do reenvio do email & recebimento de confirmação
 // Abrir emailDialog e, após 3s, abrir a última seção (apenas pra visualização de todo o fluxo)
 const handleEmailDialog = () => {
@@ -109,20 +123,6 @@ const handleSubmitForm = async () => {
   } else {
     handleErrorDialog(result.errors);
   }
-};
-
-// Abrir a última seção
-const openFinalSection = () => {
-  section3.style.display = 'none';
-  section4.style.display = 'flex';
-  section4.classList.add('active');
-  document.querySelector('.section-type').style.display = 'none';
-  document.querySelector('.enrollment').style.border = 'none';
-
-  enrollment.style.justifyContent = 'center';
-  titleSection.innerText = 'Sua inscrição foi enviada';
-  titleSection.style.marginBottom = '0';
-  nextButton.style.display = 'none';
 };
 
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
