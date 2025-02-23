@@ -1,0 +1,171 @@
+#error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 4.2rem;
+}
+
+#error img {
+  max-width: 38rem;
+}
+
+#error h3 {
+  max-width: 35rem;
+}
+
+h2 {
+  color: var(--purple-400);
+}
+
+label {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: var(--cursor-default);
+
+  height: 100%;
+
+  font-weight: 500;
+  color: var(--purple-400);
+}
+
+input {
+  font-weight: 300;
+  font-size: 1.4rem;
+  cursor: var(--cursor-default);
+
+  padding: 0 1.6rem;
+  box-sizing: content-box;
+
+  background-color: var(--background-input);
+  color: var(--gray);
+  height: 3rem;
+  margin-top: 0.75rem;
+  border-radius: 1.28rem;
+  border: solid var(--purple-white) 0.16rem;
+  resize: none;
+  text-overflow: ellipsis;
+}
+
+label.error {
+  color: red;
+
+  animation: shake 0.5s;
+}
+
+label.error input {
+  border: 1px solid red;
+}
+
+dialog {
+  border: none;
+  padding: 0;
+  border-radius: 38px;
+  box-shadow: 0 4px 6px rgba(96, 0, 172, 0.14);
+  backdrop-filter: blur(7px);
+
+  margin: auto;
+}
+
+dialog::backdrop {
+  background-color: rgba(61, 18, 97, 0.4);
+}
+
+.modal {
+  height: 30rem;
+  width: 30rem;
+  padding: 1.875rem 1.25rem;
+  border: none;
+  border-radius: 2.375rem;
+  gap: 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.modal div {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+}
+
+.modal img {
+  width: 87px;
+}
+
+.opening {
+  animation: opening 400ms ease-in-out;
+}
+
+.closing {
+  animation: closing 200ms ease-in-out;
+}
+
+@media only screen and (max-width: 426px) {
+  #error {
+    gap: 2.5rem;
+  }
+
+  #error img {
+    max-width: 25rem;
+  }
+
+  #error h1 {
+    font-size: 2.5rem;
+  }
+
+  #error h3 {
+    max-width: 25rem;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes opening {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 100;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes closing {
+  from {
+    opacity: 100;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(10%);
+    transform: scale(0.9);
+  }
+}
