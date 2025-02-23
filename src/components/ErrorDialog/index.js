@@ -8,7 +8,7 @@ export const ErrorDialog = (errors, onClose) => {
   errorDialog.classList.add('error-dialog', 'closing');
 
   const errorTitle = document.createElement('h2');
-  errorTitle.textContent = 'Erro ao enviar formulário';
+  errorTitle.textContent = 'Erro na submissão';
 
   const errorList = document.createElement('ul');
   errorList.classList.add('error-list');

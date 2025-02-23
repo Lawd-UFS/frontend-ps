@@ -13,6 +13,7 @@ const nextButton = document.querySelector('.registerButton');
 const submitDialog = document.getElementById('submitDialog');
 const emailDialog = document.getElementById('emailDialog');
 const closeModalButton = document.getElementById('closeModal');
+const closeEmailDialogButton = document.getElementById('closeEmailDialog');
 const confirmSubmitButton = document.getElementById('confirmSubmit');
 const titleSection = document.querySelector('h1');
 const enrollment = document.querySelector('.enrollment');
@@ -20,7 +21,6 @@ const formList = document.querySelectorAll('form');
 const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
-const section4 = document.getElementById('section4');
 const requiredFields = document.querySelectorAll('[required]');
 
 const sections = [
@@ -45,30 +45,10 @@ requiredFields.forEach((field) => {
   field.addEventListener('input', () => clearFieldError(field));
 });
 
-// Abrir a última seção
-const openFinalSection = () => {
-  section3.style.display = 'none';
-  section4.style.display = 'flex';
-  section4.classList.add('active');
-  document.querySelector('.section-type').style.display = 'none';
-  document.querySelector('.enrollment').style.border = 'none';
-
-  enrollment.style.justifyContent = 'center';
-  titleSection.innerText = 'Sua inscrição foi enviada';
-  titleSection.style.marginBottom = '0';
-  nextButton.style.display = 'none';
-};
-
 // TODO Colocar lógica do reenvio do email & recebimento de confirmação
-// Abrir emailDialog e, após 3s, abrir a última seção (apenas pra visualização de todo o fluxo)
 const handleEmailDialog = () => {
   closeModal(submitDialog);
   openModal(emailDialog);
-
-  setTimeout(() => {
-    closeModal(emailDialog);
-    openFinalSection();
-  }, 3000);
 };
 
 const focusOnFirstError = (errors) => {
@@ -125,6 +105,7 @@ const handleSubmitForm = async () => {
   }
 };
 
+closeEmailDialogButton.addEventListener('click', () => closeModal(emailDialog));
 closeModalButton.addEventListener('click', () => closeModal(submitDialog));
 confirmSubmitButton.addEventListener('click', handleSubmitForm);
 

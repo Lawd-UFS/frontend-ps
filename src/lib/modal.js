@@ -7,6 +7,7 @@ export const openModal = (modal) => {
 
 // Função para fechar um modal
 export const closeModal = (modal, callback) => {
+  modal.classList.remove('opening');
   modal.classList.add('closing');
   modal.addEventListener(
     'animationend',
