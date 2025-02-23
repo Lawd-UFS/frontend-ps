@@ -507,7 +507,7 @@ option {
 form {
   display: flex;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 4.8rem;
   min-height: 269px;
   width: 100%;
 }
