@@ -3,6 +3,7 @@ import personWithSmartPhone from '../../../assets/images/person-with-smartphone.
 import { clearFieldError, setError } from '../../../pages/register/formHandler';
 import { ErrorDialog } from '../../ErrorDialog';
 import { openModal } from '../../../lib/modal';
+import { EmailDialog } from '../../EmailDialog';
 
 export const SubmissionError = ({ hasToken, emailService, message }) => {
   const container = document.createElement('div');
@@ -59,7 +60,12 @@ export const SubmissionError = ({ hasToken, emailService, message }) => {
     if (!response.success) {
       const errorDialog = ErrorDialog([{ message: response.message }]);
       openModal(errorDialog);
+
+      return;
     }
+
+    const successDialog = EmailDialog();
+    openModal(successDialog);
   };
 
   button.addEventListener('click', handleResendEmail);
