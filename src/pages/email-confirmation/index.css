@@ -122,5 +122,14 @@ main > div {
   max-width: 75rem;
   animation: opening 450ms ease-in-out backwards;
   min-height: 58rem;
+}
 
+@media only screen and (max-width: 375px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding-inline: 1rem;
+  }
 }
