@@ -1,12 +1,19 @@
 import './index.css';
-import { submitRegister } from './register.js';
+import {
+  checkRequiredFields,
+  clearFieldError,
+  setError,
+  sendFormData,
+} from './formHandler.js';
+import { ErrorDialog } from '../../components/ErrorDialog/index.js';
+import { openModal, closeModal } from '../../lib/modal.js';
 
 let currentStep = 0;
 const nextButton = document.querySelector('.registerButton');
 const submitDialog = document.getElementById('submitDialog');
 const emailDialog = document.getElementById('emailDialog');
-const closeEmailDialogButton = document.getElementById('closeEmailDialog');
 const closeModalButton = document.getElementById('closeModal');
+const closeEmailDialogButton = document.getElementById('closeEmailDialog');
 const confirmSubmitButton = document.getElementById('confirmSubmit');
 const titleSection = document.querySelector('h1');
 const enrollment = document.querySelector('.enrollment');
@@ -14,58 +21,7 @@ const formList = document.querySelectorAll('form');
 const section1 = document.getElementById('section1');
 const section2 = document.getElementById('section2');
 const section3 = document.getElementById('section3');
-const section4 = document.getElementById('section4');
-
-// Função para abrir um modal
-const openModal = (modal) => {
-  modal.classList.remove('closing');
-  modal.classList.add('opening');
-  modal.showModal();
-};
-
-// Função para fechar um modal
-const closeModal = (modal) => {
-  modal.classList.add('closing');
-  modal.addEventListener(
-    'animationend',
-    (event) => {
-      if (event.animationName === 'closing') {
-        modal.close();
-      }
-    },
-    { once: true },
-  );
-};
-
-// TODO Colocar lógica do reenvio do email & recebimento de confirmação
-// Abrir emailDialog e, após 3s, abrir a última seção (apenas pra visualização de todo o fluxo)
-const handleEmailDialog = () => {
-  closeModal(submitDialog);
-  openModal(emailDialog);
-};
-
-// Função de submeter cadastro
-
-const checkRegister = async () => {
-  const data = {};
-
-  for (const form of formList) {
-    const formData = new FormData(form);
-    Object.assign(data, Object.fromEntries(formData));
-  }
-
-  const result = await submitRegister(data);
-
-  if (result.sucess) {
-    handleEmailDialog();
-  } else {
-    alert('Houve um problema na submissão. Por gentileza, tente novamente.');
-  }
-};
-
-closeEmailDialogButton.addEventListener('click', () => closeModal(emailDialog));
-closeModalButton.addEventListener('click', () => closeModal(submitDialog));
-confirmSubmitButton.addEventListener('click', checkRegister);
+const requiredFields = document.querySelectorAll('[required]');
 
 const sections = [
   {
@@ -85,15 +41,102 @@ const sections = [
   },
 ];
 
+requiredFields.forEach((field) => {
+  field.addEventListener('input', () => clearFieldError(field));
+});
+
+// TODO Colocar lógica do reenvio do email & recebimento de confirmação
+const handleEmailDialog = () => {
+  closeModal(submitDialog);
+  openModal(emailDialog);
+};
+
+const focusOnFirstError = (errors) => {
+  if (!Array.isArray(errors)) {
+    return;
+  }
+
+  const firstErrorName = errors[0].field;
+  const inputError = document.querySelector(`[name="${firstErrorName}"]`);
+  const labelError = inputError.closest('label');
+  const errorSection = inputError.closest('.section-inputs');
+
+  const step = sections.findIndex((section) => section.section == errorSection);
+
+  setError([labelError]);
+
+  updateStep(step);
+};
+
+const handleErrorDialog = (errors) => {
+  closeModal(submitDialog);
+
+  const errorDialog = ErrorDialog(errors, () => focusOnFirstError(errors));
+
+  openModal(errorDialog);
+};
+
+// Função de submeter cadastro
+
+const handleSubmitForm = async () => {
+  const { isValid, invalidFields } = checkRequiredFields(formList[currentStep]);
+
+  if (!isValid) {
+    setError(invalidFields);
+    closeModal(submitDialog);
+    return;
+  }
+
+  const formData = new FormData();
+
+  formList.forEach((form) => {
+    const formFields = new FormData(form);
+    for (const [key, value] of formFields.entries()) {
+      formData.append(key, value);
+    }
+  });
+
+  const result = await sendFormData(formData);
+
+  if (result.success) {
+    handleEmailDialog();
+  } else {
+    handleErrorDialog(result.errors);
+  }
+};
+
+closeEmailDialogButton.addEventListener('click', () => closeModal(emailDialog));
+closeModalButton.addEventListener('click', () => closeModal(submitDialog));
+confirmSubmitButton.addEventListener('click', handleSubmitForm);
+
 const sectionName = document.getElementById('section-name');
 
 const updateStep = (step) => {
+  if (step > currentStep) {
+    const { isValid, invalidFields } = checkRequiredFields(
+      formList[currentStep],
+    );
+
+    if (!isValid) {
+      setError(invalidFields);
+      return;
+    }
+  }
+
   currentStep = step;
   nextButton.innerText = currentStep === 2 ? 'Enviar Formulário' : 'Continue';
 
   sections.forEach((item, index) => {
     item.icon.classList.toggle('active', index === step);
     item.section.style.display = index === step ? 'block' : 'none';
+
+    item.section.querySelectorAll('label').forEach((label) => {
+      label.classList.add('show-animation');
+
+      setTimeout(() => {
+        label.classList.remove('show-animation');
+      }, 1000);
+    });
   });
 
   sectionName.innerText = sections[step].name;

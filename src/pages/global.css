@@ -21,7 +21,7 @@
   --indigo-700: #4a387b;
 
   /*tons de input:*/
-  --background-input: #eff2ff73;
+  --background-input: #fbfbfc73;
   --background-input-filled: #dde4ff73;
 
   /*outros:*/
@@ -50,6 +50,11 @@
   text-decoration: none;
 
   box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 320px;
 }
 
 body {
