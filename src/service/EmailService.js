@@ -33,4 +33,27 @@ export class EmailService {
       };
     }
   }
+
+  async resendEmail(email) {
+    if (!email) {
+      return {
+        success: false,
+        message: 'Email não informado',
+      };
+    }
+
+    try {
+      const response = await this._httpClient.sendRequest({
+        endpoint: `/confirmacao-email?email=${email}`,
+        method: HttpMethod.POST,
+      });
+
+      return response.success;
+    } catch (error) {
+      return {
+        success: false,
+        message: error.message,
+      };
+    }
+  }
 }
