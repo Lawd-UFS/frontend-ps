@@ -20,6 +20,8 @@ const generatePages = (root = '', dir = pagesPath) => {
     const relativePath = path.join(root, file);
     const fileStat = fs.statSync(fullPath);
 
+    if (readDir == dir && !fileStat.isDirectory()) return;
+
     if (fileStat.isDirectory()) {
       const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
         generatePages(relativePath);
@@ -54,10 +56,21 @@ const generatePages = (root = '', dir = pagesPath) => {
   return { entries, htmlPlugins };
 };
 
+const homePage = {
+  entry: path.join(pagesPath, 'index.js'),
+  htmlPlugin: new HtmlWebpackPlugin({
+    template: path.join(pagesPath, 'index.html'),
+    favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
+    filename: 'index.html',
+    chunks: ['index'],
+  }),
+};
+
 const pages = generatePages();
 
 const config = {
   entry: {
+    index: homePage.entry,
     global: path.join(pagesPath, 'global.js'),
     ...pages.entries,
   },
@@ -71,6 +84,7 @@ const config = {
   },
   plugins: [
     ...pages.htmlPlugins,
+    homePage.htmlPlugin,
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
     }),

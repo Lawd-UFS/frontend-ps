@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PS LAWD 2025 - Inscrição</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="navbar">
+        <p>Processo Seletivo</p>
+        <div class="icons">
+          <img
+            src="../../assets/images/logo-lawd.png"
+            alt="Logo da LAWD"
+            class="img-icon"
+          />
+          <img
+            src="../../assets/images/lawd.png"
+            alt="Logotipo da LAWD"
+            class="img-lawd"
+          />
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="registerScreen">
+        <div class="enrollment">
+          <h1>Inscrição</h1>
+          <div class="section-type">
+            <p id="section-name">Dados básicos</p>
+            <div class="section">
+              <div id="section1-icon" class="icon-section">1</div>
+              <hr />
+              <div id="section2-icon" class="icon-section">2</div>
+              <hr />
+              <div id="section3-icon" class="icon-section">3</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-inputs" id="section1">
+          <form>
+            <div class="column">
+              <label for="name"
+                >Nome completo:
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Seu nome"
+                />
+              </label>
+              <label for="gender"
+                >Gênero:
+                <select id="gender" name="gender" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="Homem cisgênero">Homem cisgênero</option>
+                  <option value="Mulher cisgênero">Mulher cisgênero</option>
+                  <option value="Homem transgênero">Homem transgênero</option>
+                  <option value="Mulher transgênero">Mulher transgênero</option>
+                  <option value="Não-binário">Não-binário</option>
+                  <option value="Não declarado">Prefiro não declarar</option>
+                </select>
+              </label>
+              <label for="course"
+                >Curso:
+                <input
+                  type="text"
+                  id="course"
+                  name="course"
+                  required
+                  placeholder="ex: Design Gráfico"
+                />
+              </label>
+            </div>
+            <div class="column">
+              <label for="date-birth"
+                >Data de nascimento:
+                <input type="date" id="date-birth" name="birthDate" required />
+              </label>
+              <label for="pronoun"
+                >Pronome:
+                <select id="pronoun" name="pronoun" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="Ele/dele">Ele/Dele</option>
+                  <option value="Ela/dela">Ela/Dela</option>
+                  <option value="Elu/delu">Elu/Delu</option>
+                </select>
+              </label>
+              <label for="period"
+                >Período atual:
+                <input
+                  type="number"
+                  id="period"
+                  min="1"
+                  name="period"
+                  required
+                  placeholder="1"
+                />
+              </label>
+            </div>
+          </form>
+        </div>
+        <div class="section-inputs" id="section2">
+          <form>
+            <div class="column">
+              <label for="interests"
+                >Quais seus interesses?
+                <textarea
+                  name="interests"
+                  id="interests"
+                  required
+                  placeholder="Ex: Hobbies, áreas de estudo, etc."
+                ></textarea>
+              </label>
+              <label for="skills"
+                >Quais habilidades você possui?
+                <textarea
+                  name="skills"
+                  id="skills"
+                  required
+                  placeholder="ex: Design Gráfico"
+                ></textarea>
+              </label>
+              <label for="knowledge-level"
+                >Conhecimento em desenvolvimento web:
+                <select id="knowledge-level" name="knowledgeLevel" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="Nenhum">Nenhum</option>
+                  <option value="Iniciante">Iniciante</option>
+                  <option value="Intermediário">Intermediário</option>
+                  <option value="Avançado">Avançado</option>
+                </select>
+              </label>
+            </div>
+            <div class="column">
+              <label for="portfolio">
+                <div>Link para Portfólio <span> (Opcional) </span></div>
+                <input
+                  type="text"
+                  id="portfolio"
+                  name="portfolioExternalLink"
+                  placeholder="Github/ Behance/ etc..."
+                />
+              </label>
+
+              <label for="file-upload" class="file-upload">
+                <div>Upload de Portfólio <span> (Opcional) </span></div>
+                <input id="file-upload" type="file" name="portfolioFile" />
+                <span class="file-name">portfolio.pdf</span>
+              </label>
+
+              <label for="photo-upload" class="file-upload">
+                <div>Foto de Perfil <span> (Opcional) </span></div>
+                <input id="photo-upload" type="file" name="profilePhoto" />
+                <span class="file-name">suafoto.png</span>
+              </label>
+
+              <label for="email">
+                Seu melhor email:
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="exemplo@email.com"
+                />
+              </label>
+            </div>
+          </form>
+        </div>
+        <div class="section-inputs" id="section3">
+          <form>
+            <div class="column">
+              <label for="motivation"
+                >Qual sua motivação para entrar na LAWD?
+                <textarea
+                  name="motivation"
+                  id="motivation"
+                  required
+                  placeholder="Indique aqui o porquê você quer fazer parte da liga"
+                ></textarea>
+              </label>
+            </div>
+            <div class="column">
+              <label for="source">
+                Como você ficou sabendo do PS da LAWD?
+                <div class="checkbox-group">
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-input"
+                      name="source"
+                      value="Instagram"
+                    />
+                    Divulgação no Instagram
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-input"
+                      name="source"
+                      value="Whatsapp"
+                    />
+                    Repasses no Whatsapp
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-input"
+                      name="source"
+                      value="Cartazes"
+                    />
+                    Cartazes na UFS
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-input"
+                      name="source"
+                      value="LinkedIn"
+                    />
+                    LinkedIn
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-input"
+                      name="source"
+                      value="Amigos"
+                    />
+                    Recomendação de amigos
+                  </label>
+                  <label class="checkbox-label">
+                    <input
+                      type="checkbox"
+                      class="checkbox-input"
+                      name="source"
+                      value="Outros"
+                    />
+                    Outros
+                  </label>
+                </div>
+              </label>
+            </div>
+          </form>
+        </div>
+        <dialog id="submitDialog">
+          <div class="modal">
+            <img
+              width="87px;"
+              src="../../assets/images/paper-plane.svg"
+              alt="Ilustração de um avião de papel"
+            />
+            Você confirma o envio desse formulário?
+            <div>
+              <button id="closeModal" class="second-button">Voltar</button>
+              <button id="confirmSubmit">Confirmar envio</button>
+            </div>
+          </div>
+        </dialog>
+        <dialog id="emailDialog">
+          <div class="modal">
+            <img
+              width="87px;"
+              src="../../assets/images/email.svg"
+              alt="Ilustração de uma mão segurando uma carta"
+            />
+            <h2>Verifique seu email!</h2>
+            <p>Enviamos um link de confirmação para sua conta.</p>
+            <div>
+              <button id="closeEmailDialog" class="second-button">
+                Fechar
+              </button>
+              <button id="reSendEmailButton" class="second-button">
+                Reenviar email
+              </button>
+            </div>
+          </div>
+        </dialog>
+      </div>
+      <div class="continue">
+        <button class="registerButton">Continuar</button>
+      </div>
+    </main>
+  </body>
+</html>

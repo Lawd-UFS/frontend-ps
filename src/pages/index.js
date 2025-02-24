@@ -1,25 +1,46 @@
 import './index.css';
 
-const inicioPS = new Date('2025-02-24T00:00:00');
+var textWrapper = document.querySelector('.title');
+textWrapper.innerHTML = textWrapper.textContent.replace(
+  /\S/g,
+  "<span class='letter'>$&</span>",
+);
 
-function count() {
-  const dataSystem = new Date();
-  const time = inicioPS - dataSystem;
+anime.timeline({ autoplay: true }).add({
+  targets: '.title .letter',
+  translateY: [100, 0],
+  translateZ: 0,
+  opacity: [0, 1],
+  easing: 'easeOutExpo',
+  duration: 1400,
+  delay: (el, i) => 300 + 30 * i,
+});
 
-  const daysT = Math.floor(time / (1000 * 60 * 60 * 24));
-  const hoursT = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutesT = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-  const secondsT = Math.floor((time % (1000 * 60)) / 1000);
+document.querySelectorAll('.support-text').forEach((textWrapper, index) => {
+  textWrapper.innerHTML = textWrapper.textContent.replace(
+    /\S/g,
+    "<span class='tagline'>$&</span>",
+  );
 
-  document.getElementById('day').textContent = daysT < 10 ? `0${daysT}` : daysT;
-  document.getElementById('hours').textContent =
-    hoursT < 10 ? `0${hoursT}` : hoursT;
-  document.getElementById('minutes').textContent =
-    minutesT < 10 ? `0${minutesT}` : minutesT;
-  document.getElementById('seconds').textContent =
-    secondsT < 10 ? `0${secondsT}` : secondsT;
-
-  if (time > 0) setTimeout(count, 1000);
-}
-
-count();
+  // Adiciona um atraso antes de iniciar a animação
+  setTimeout(() => {
+    anime
+      .timeline({ loop: true })
+      .add({
+        targets: textWrapper.querySelectorAll('.tagline'),
+        translateX: [40, 0],
+        opacity: [0, 1],
+        easing: 'easeOutExpo',
+        duration: 1200,
+        delay: (el, i) => 500 + 30 * i, // Delay por letra
+      })
+      .add({
+        targets: textWrapper.querySelectorAll('.tagline'),
+        translateX: [0, -30],
+        opacity: [1, 0],
+        easing: 'easeInExpo',
+        duration: 1100,
+        delay: (el, i) => 100 + 30 * i,
+      });
+  }, index * 1031); // Atraso diferente para cada bloco de texto
+});
