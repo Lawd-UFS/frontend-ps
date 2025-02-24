@@ -128,7 +128,7 @@ const config = {
       },
     ],
   },
-  mode: process.env.NODE_ENV || 'development',
+  mode: 'production',
 };
 
 module.exports = config;
