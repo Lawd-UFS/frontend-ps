@@ -1,6 +1,9 @@
 import './styles.css';
 import personWithSmartPhone from '../../../assets/images/person-with-smartphone.png';
-import { clearFieldError, setError } from '../../../pages/register/formHandler';
+import {
+  clearFieldError,
+  setError,
+} from '../../../pages/inscricao/formHandler';
 import { ErrorDialog } from '../../ErrorDialog';
 import { openModal } from '../../../lib/modal';
 import { EmailDialog } from '../../EmailDialog';
