@@ -3,12 +3,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-radius: 9999px;
-
-  padding-block: 1rem;
+  border-radius: 3.8rem;
+  width: 100%;
+  padding-block: 1.5rem;
   padding-inline: 1.5rem;
-
   min-width: fit-content;
+  max-width: 135rem;
+  margin-top: 2rem;
+  margin-bottom: 3.5rem;
+  margin-inline: auto;
 }
 
 .header .icons {
@@ -19,24 +22,33 @@
 }
 
 .header .icons img:nth-child(1) {
-  width: 3em;
+  width: 4rem;
 }
 
 .header .icons img:nth-child(2) {
-  width: 6em;
+  width: 8rem;
 }
 
 .header .profile {
-  border: 1px solid white;
-  background: var(--indigo-600);
-
   padding: 0.8rem;
-
-  border-radius: 9999px;
+  padding-inline: 1.6rem;
+  display: flex;
+  gap: 1.4rem;
+  border-radius: 2.4rem;
+  border: 1px solid #F9F8FF;
+  background: rgba(187, 166, 248, 0.15);
+  transition: background 200ms ease-in-out;
 }
 
 .header .profile .name-user {
   color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.header .profile:hover {
+  background: var(--indigo-600);
+  cursor: var(--cursor-pointer);
 }
 
 .header nav {
@@ -45,6 +57,7 @@
   align-items: center;
 
   font-size: 1.6rem;
+
 }
 
 .header nav ul {
@@ -59,13 +72,17 @@
 
 .header nav ul li {
   padding-block: 0.8rem;
-  padding-inline: 1.2rem;
+  padding-inline: 1.8rem;
+  border-radius: 2.8rem;
+  transition: all 200ms ease-in-out;
+  border: 2px solid var(--indigo-700);
+  cursor: var(--cursor-pointer);
 
-  border-radius: 9999px;
 }
 
-.header nav ul li[active] {
-  border: 2px solid var(--indigo-200);
+.header nav ul li[active],
+.header nav ul li:hover {
+  border: 2px solid var(--nav-hover);
 }
 
 .header nav ul li a {
