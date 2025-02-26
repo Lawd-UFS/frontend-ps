@@ -17,7 +17,7 @@ export class ScheduleService {
   }
 
   async getEvaluatorSchedules() {
-    const schedules = await this._httpClient.sendRequest({
+    const { data: schedules } = await this._httpClient.sendRequest({
       endpoint: '/horarios',
       method: HttpMethod.GET,
       headers: {
@@ -29,7 +29,7 @@ export class ScheduleService {
   }
 
   async createSchedule(newSchedule) {
-    const response = await this._httpClient.sendRequest({
+    const { data: response } = await this._httpClient.sendRequest({
       endpoint: '/horarios',
       method: HttpMethod.POST,
       body: newSchedule,
