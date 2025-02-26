@@ -2,8 +2,7 @@ import { HttpClient } from '../../infra/http/httpClient';
 import { ScheduleService } from '../../service/ScheduleService';
 import { addNewScheduleTime, getScheduleStatus } from './calendar';
 import { Profile } from '../../components/Profile';
-
-const token = localStorage.getItem('token');
+import { token } from '../../lib/authenticator';
 
 const scheduleService = new ScheduleService(HttpClient.create(), token);
 
