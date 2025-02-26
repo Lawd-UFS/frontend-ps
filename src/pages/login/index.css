@@ -107,18 +107,6 @@ form select:focus {
   outline: none;
 }
 
-.text-othersWays {
-  color: var(--gray);
-  width: 100%;
-  margin: 0;
-  font-size: 1.1rem;
-  font-style: normal;
-  font-weight: 400;
-  margin: 0.625rem;
-  text-align: center;
-  padding: 4px;
-}
-
 .img-arrow {
   width: 1.5em;
   height: auto;
@@ -198,41 +186,6 @@ header a {
   padding: 41px;
 
   gap: 1rem;
-}
-
-.loginScreen-othersWays {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 1rem;
-  justify-content: space-between;
-  margin-bottom: 1.5em;
-}
-
-.loginLink {
-  cursor: var(--cursor-pointer);
-  border: solid var(--gray-light) 1px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1.2rem;
-  width: 100%;
-}
-
-.loginLink p {
-  color: #111111;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin: 0;
-  width: fit-content;
-}
-
-.icon-login {
-  width: 1em;
-  height: 1em;
 }
 
 .loginButton {
