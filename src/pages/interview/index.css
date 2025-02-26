@@ -5,13 +5,6 @@ body {
   flex-direction: column;
 }
 
-.header {
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-
-  margin-inline: 4rem;
-}
-
 nav.interview {
   margin-inline: auto;
   width: fit-content;
@@ -56,7 +49,7 @@ nav.interview li[active] a {
   height: 100%;
 }
 
-#page-content > div {
+#page-content>div {
   position: absolute;
   top: 0;
   left: 0;
