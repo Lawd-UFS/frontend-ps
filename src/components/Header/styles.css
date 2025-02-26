@@ -5,7 +5,7 @@
   justify-content: space-between;
   border-radius: 9999px;
 
-  padding-block: 1rem;
+  padding-block: 0.7rem;
   padding-inline: 1.5rem;
 
   min-width: fit-content;
@@ -19,11 +19,11 @@
 }
 
 .header .icons img:nth-child(1) {
-  width: 3em;
+  width: 2em;
 }
 
 .header .icons img:nth-child(2) {
-  width: 6em;
+  width: 4em;
 }
 
 .header .profile {
@@ -58,7 +58,7 @@
 }
 
 .header nav ul li {
-  padding-block: 0.8rem;
+  padding-block: 0.3rem;
   padding-inline: 1.2rem;
 
   border-radius: 9999px;
@@ -69,5 +69,6 @@
 }
 
 .header nav ul li a {
+  font-size: 1.4rem;
   color: white;
 }
