@@ -1,4 +1,4 @@
-import calendarIcon from '/src/assets/images/calendar-icon.png';
+import calendarIcon from '/src/assets/images/calendar-icon.svg';
 import './styles.css';
 
 export const InterviewTime = (dateTime) => {
@@ -18,9 +18,6 @@ export const InterviewTime = (dateTime) => {
   const div = document.createElement('div');
   div.className = 'time';
 
-  const img = document.createElement('img');
-  img.src = calendarIcon;
-
   const timeElement = document.createElement('time');
   timeElement.setAttribute('dateTime', dateTime);
 
@@ -29,7 +26,7 @@ export const InterviewTime = (dateTime) => {
     <span>${dayOfWeek} - ${time}</span>
   `;
 
-  div.appendChild(img);
+  div.innerHTML += `${calendarIcon}`;
   div.appendChild(timeElement);
 
   return div;
