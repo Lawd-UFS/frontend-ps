@@ -75,14 +75,12 @@ form {
   width: 100%;
 }
 
-form input,
-form select {
+form input {
   padding: 0 1rem;
   box-sizing: content-box;
 }
 
-form input,
-form select {
+form input {
   background-color: var(--background-input);
   color: var(--gray);
   height: 3.7rem;
@@ -94,29 +92,14 @@ form select {
   text-overflow: ellipsis;
 }
 
-.filled {
-  color: #3d3d3d;
-  font-weight: 550;
-  background-color: var(--background-input-filled);
-}
-
 form input:focus,
-.password-container:focus-within,
-form select:focus {
+.password-container:focus-within {
   border-color: var(--purple-light);
   outline: none;
 }
 
-.text-othersWays {
-  color: var(--gray);
-  width: 100%;
-  margin: 0;
-  font-size: 1.1rem;
-  font-style: normal;
-  font-weight: 400;
-  margin: 0.625rem;
-  text-align: center;
-  padding: 4px;
+form input:not(:placeholder-shown) {
+  background-color: var(--background-input-filled);
 }
 
 .img-arrow {
@@ -195,44 +178,9 @@ header a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 41px;
+  padding: 51px;
 
   gap: 1rem;
-}
-
-.loginScreen-othersWays {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 1rem;
-  justify-content: space-between;
-  margin-bottom: 1.5em;
-}
-
-.loginLink {
-  cursor: var(--cursor-pointer);
-  border: solid var(--gray-light) 1px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1.2rem;
-  width: 100%;
-}
-
-.loginLink p {
-  color: #111111;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin: 0;
-  width: fit-content;
-}
-
-.icon-login {
-  width: 1em;
-  height: 1em;
 }
 
 .loginButton {
@@ -248,4 +196,38 @@ header a {
   background-color: var(--purple-300);
   color: #fff;
   border: solid 2px var(--purple-white);
+}
+
+label.error {
+  animation: shake 0.5s;
+}
+
+.error {
+  color: red;
+}
+
+input.error {
+  border: 0.2rem solid red;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

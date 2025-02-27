@@ -1,3 +1,9 @@
+import { authenticationService } from '../../service/AuthenticationService';
+
+if (!authenticationService.isAuthenticated()) {
+  window.location.href = '/login';
+}
+
 import './index.css';
 import { Header } from '../../components/Header';
 import { createCalendar, createSchedule } from './calendar';

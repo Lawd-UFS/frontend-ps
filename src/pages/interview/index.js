@@ -1,3 +1,9 @@
+import { authenticationService } from '../../service/AuthenticationService';
+
+if (!authenticationService.isAuthenticated()) {
+  window.location.href = '/login';
+}
+
 import { Nav } from '../../components/Nav';
 import { Header } from '../../components/Header';
 import { ApplyPage } from './apply';

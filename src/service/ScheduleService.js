@@ -2,14 +2,8 @@ import { HttpMethod } from '../infra/http/httpClient';
 
 export class ScheduleService {
   constructor(httpClient, token) {
-    if (!httpClient) {
-      throw new Error(
-        'É preciso passar uma instância da classe HttpClient no construtor',
-      );
-    }
-
-    if (!token) {
-      throw new Error('É preciso passar um token no construtor');
+    if (!httpClient || !token) {
+      return null;
     }
 
     this._httpClient = httpClient;
@@ -17,7 +11,7 @@ export class ScheduleService {
   }
 
   async getEvaluatorSchedules() {
-    const schedules = await this._httpClient.sendRequest({
+    const { data: schedules } = await this._httpClient.sendRequest({
       endpoint: '/horarios',
       method: HttpMethod.GET,
       headers: {
@@ -29,7 +23,7 @@ export class ScheduleService {
   }
 
   async createSchedule(newSchedule) {
-    const response = await this._httpClient.sendRequest({
+    const { data: response } = await this._httpClient.sendRequest({
       endpoint: '/horarios',
       method: HttpMethod.POST,
       body: newSchedule,

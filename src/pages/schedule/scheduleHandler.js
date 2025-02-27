@@ -2,10 +2,12 @@ import { HttpClient } from '../../infra/http/httpClient';
 import { ScheduleService } from '../../service/ScheduleService';
 import { addNewScheduleTime, getScheduleStatus } from './calendar';
 import { Profile } from '../../components/Profile';
+import { authenticationService } from '../../service/AuthenticationService';
 
-const token = localStorage.getItem('token');
-
-const scheduleService = new ScheduleService(HttpClient.create(), token);
+const scheduleService = new ScheduleService(
+  HttpClient.create(),
+  authenticationService.getToken(),
+);
 
 export const fetchSchedules = async () => {
   try {
