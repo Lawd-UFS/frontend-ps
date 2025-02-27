@@ -10,14 +10,14 @@ const scheduleService = new ScheduleService(
 );
 
 export const fetchSchedules = async () => {
-  try {
-    const response = await scheduleService.getEvaluatorSchedules();
+  const response = await scheduleService.getEvaluatorSchedules();
 
-    return response.data;
-  } catch (error) {
-    alert('Ocorreu um erro ao buscar os horários da entrevista');
+  if (!response.success) {
+    alert('Ocorreu um erro ao buscar os horários da agenda');
     return [];
   }
+
+  return response.data;
 };
 
 const updateDateOnCalendarClick = (dateInput, day) => {
@@ -108,20 +108,21 @@ const createNewSchedule = async (form, agendaContainer) => {
 
   const dateTime = new Date(year, month - 1, day, hours, minutes).toISOString();
 
-  try {
-    const response = await scheduleService.createSchedule({
-      dateTime,
-      interviewMode,
-    });
+  const response = await scheduleService.createSchedule({
+    dateTime,
+    interviewMode,
+  });
 
-    addNewScheduleTime(
-      response.data,
-      agendaContainer,
-      updateScheduleDetailsOnScheduleClick,
-    );
-  } catch (error) {
-    alert('Ocorreu um erro ao criar o horário da entrevista');
+  if (!response.success) {
+    alert('Ocorreu um erro ao criar o horário');
+    return;
   }
+
+  addNewScheduleTime(
+    response.data,
+    agendaContainer,
+    updateScheduleDetailsOnScheduleClick,
+  );
 };
 
 export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
