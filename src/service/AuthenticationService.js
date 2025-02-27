@@ -39,6 +39,7 @@ class AuthenticationService {
 
   logout() {
     localStorage.removeItem('token');
+    window.location.href = '/';
   }
 
   getToken() {
