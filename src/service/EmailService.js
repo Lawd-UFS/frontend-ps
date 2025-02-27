@@ -20,7 +20,7 @@ export class EmailService {
     }
 
     try {
-      const response = await this._httpClient.sendRequest({
+      const { data: response } = await this._httpClient.sendRequest({
         endpoint: `/verificar-email?token=${token}`,
         method: HttpMethod.POST,
       });

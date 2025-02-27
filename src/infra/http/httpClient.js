@@ -27,14 +27,14 @@ export class HttpClient {
     const { endpoint, method, body, headers } = request;
 
     try {
-      const { data } = await this._api.request({
+      const response = await this._api.request({
         url: `${this._baseUrl}${endpoint}`,
         method,
         data: body,
         headers,
       });
 
-      return data;
+      return response;
     } catch (error) {
       const status = error.response?.status || 500;
       const message = error.response?.data?.message || error.message;

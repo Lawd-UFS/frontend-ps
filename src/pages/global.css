@@ -6,7 +6,7 @@
   cursor: var(--cursor-default);
 
   /*tons de roxos:*/
-  --purple-white: #d7c9ff;
+  --purple-white: #f7f4ff;
   --purple-light: #bba6f8;
 
   --purple-100: #eff2ff;
@@ -16,6 +16,7 @@
 
   --indigo-100: #d9d9d9;
   --indigo-200: #a6b5f6;
+  --indigo-400: #bba6f826;
   --indigo-600: #8170b4;
   --indigo-700: #4a387b;
 
@@ -29,6 +30,7 @@
   --background-screens: #f9f8ff;
   --gray-background: #eeebf8;
   --option: #eeecf6;
+  --nav-hover: #C5B7EC;
 
   font-size: 62.5%;
   /* 1rem = 10px */
@@ -38,6 +40,12 @@
   font-family: 'Space Grotesk';
   src: url('/src/assets/fonts/SpaceGrotesk.woff2') format('woff2');
   font-weight: 100 900;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('/src/assets/fonts/SpaceMono-Regular.ttf') format('truetype');
   font-size: normal;
 }
 

@@ -4,7 +4,7 @@ const client = HttpClient.create();
 
 export async function sendFormData(data) {
   try {
-    const response = await client.sendRequest({
+    const { data: response } = await client.sendRequest({
       method: HttpMethod.POST,
       endpoint: '/candidatos',
       body: data,

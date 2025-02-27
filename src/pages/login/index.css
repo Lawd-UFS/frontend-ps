@@ -1,0 +1,233 @@
+body {
+  background-image: url(../../assets/images/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+button {
+  font-size: 1.4rem;
+  font-family: Space Grotesk;
+  padding: 1rem 1.5rem;
+  background-color: var(--purple-white);
+  border: var(--purple-300) solid 0.3rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  color: var(--purple-400);
+  cursor: var(--cursor-pointer);
+  transition:
+    background-color 0.3s ease-in-out,
+    transform 0.4s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--purple-300);
+  color: var(--purple-white);
+  cursor: var(--cursor-pointer);
+  border: 3px solid #9676f0;
+  transform: scale(0.95);
+}
+
+button:active {
+  transform: scale(0.85);
+  background-color: var(--purple-white);
+  color: var(--purple-400);
+  border: var(--purple-400) solid 1px;
+  cursor: var(--cursor-pointer);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2.25rem;
+}
+
+main h1 {
+  color: #fff;
+  font-weight: 400;
+
+  margin-block: 2rem;
+}
+
+h2 {
+  font-size: larger;
+  color: var(--purple-400);
+  margin: 0;
+}
+
+form label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--purple-400);
+}
+
+form {
+  margin: 27px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+form input {
+  padding: 0 1rem;
+  box-sizing: content-box;
+}
+
+form input {
+  background-color: var(--background-input);
+  color: var(--gray);
+  height: 3.7rem;
+  font-family: Space Grotesk;
+  border-radius: 0.8rem;
+  border: solid var(--purple-white) 0.125rem;
+  border: 0.125rem solid rgba(92, 0, 164, 0.11);
+  resize: none;
+  text-overflow: ellipsis;
+}
+
+form input:focus,
+.password-container:focus-within {
+  border-color: var(--purple-light);
+  outline: none;
+}
+
+form input:not(:placeholder-shown) {
+  background-color: var(--background-input-filled);
+}
+
+.img-arrow {
+  width: 1.5em;
+  height: auto;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.img-lawd {
+  width: 4.5em;
+  height: auto;
+}
+
+.img-icon {
+  width: 2.5em;
+  height: auto;
+}
+
+.password {
+  font-size: 1.1rem;
+  text-align: right;
+  font-weight: 400;
+  text-decoration: underline;
+  color: var(--purple-400);
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-input);
+  border: solid var(--purple-white) 2px;
+  border-radius: 10px;
+}
+
+.password-container input {
+  width: 100%;
+  border: none;
+}
+
+.password-visibility {
+  width: 30px;
+  padding-right: 10px;
+  cursor: var(--cursor-pointer);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 182px;
+  padding-top: 40px;
+  align-items: center;
+}
+
+header a {
+  position: absolute;
+  left: 10%;
+  top: 9%;
+}
+
+.loginScreen {
+  background-image: url(../../assets/images/background-LoginScreen.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5)); */
+  color: var(--purple-400);
+  font-weight: 500;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 51px;
+
+  gap: 1rem;
+}
+
+.loginButton {
+  display: flex;
+  padding: 1.2rem 2.2rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.39);
+  background: var(--main, #7046e9);
+  box-shadow: 0px 2px 4.6px 0px rgba(96, 0, 172, 0.14);
+  width: 100%;
+  background-color: var(--purple-300);
+  color: #fff;
+  border: solid 2px var(--purple-white);
+}
+
+label.error {
+  animation: shake 0.5s;
+}
+
+.error {
+  color: red;
+}
+
+input.error {
+  border: 0.2rem solid red;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

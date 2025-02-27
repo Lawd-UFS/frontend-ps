@@ -20,7 +20,7 @@ const generatePages = (root = '', dir = pagesPath) => {
     const relativePath = path.join(root, file);
     const fileStat = fs.statSync(fullPath);
 
-    if (readDir == dir && !fileStat.isDirectory()) return;
+    if (readDir === dir && !fileStat.isDirectory()) return;
 
     if (fileStat.isDirectory()) {
       const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
