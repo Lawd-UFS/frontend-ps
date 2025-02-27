@@ -84,7 +84,7 @@ export const updateScheduleDetailsOnScheduleClick = (
 
     const { candidate } = schedule;
 
-    if (!candidate.isEmpty()) {
+    if (candidate && !candidate.isEmpty()) {
       const profile = new Profile({
         name: candidate.name,
         imgSrc: candidate.profilePhotoUrl,
