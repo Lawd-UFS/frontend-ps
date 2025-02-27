@@ -50,7 +50,7 @@ export const updateScheduleDetailsOnScheduleClick = (
     getScheduleStatus(schedule),
   );
 
-  setTimeout(() => {
+  setTimeout(async () => {
     detailsContainer.innerHTML = '';
 
     const div = document.createElement('div');
@@ -85,7 +85,7 @@ export const updateScheduleDetailsOnScheduleClick = (
     const { candidate } = schedule;
 
     if (candidate && !candidate.isEmpty()) {
-      const profile = new Profile({
+      const profile = await Profile({
         name: candidate.name,
         imgSrc: candidate.profilePhotoUrl,
       });

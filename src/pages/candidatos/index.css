@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Space Grotesk';
+  background-color: rgba(249, 248, 255, 1);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+header {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  width: 80vw;
+}
+
+.table {
+  width: 100vw;
+  display: grid;
+  justify-self: center;
+  justify-content: center;
+  color: rgba(74, 56, 123, 1);
+  border-radius: 15px;
+}
+
+.table_header {
+  display: flex;
+  width: 70vw;
+  height: 15vh;
+  background-color: rgba(239, 242, 255, 1);
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.table_header_right_side {
+  display: flex;
+  align-items: center;
+}
+
+.table_header_right_side p {
+  padding-right: 1em;
+}
+
+.table_header_right_side button {
+  background: none;
+  display: flex;
+  color: rgba(74, 56, 123, 1);
+  justify-self: center;
+  align-items: center;
+  width: fit-content;
+  margin-right: 1em;
+  text-align: center;
+}
+
+.done_button,
+.scheduling_button {
+  border: 1.2px solid rgba(92, 0, 164, 0.11);
+  border-radius: 10px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  font-weight: 350;
+}
+
+.done_button:hover,
+.scheduling_button:hover {
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.done_button img,
+.scheduling_button img {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.5em;
+}
+
+.delete_button {
+  border: none;
+}
+
+.delete_button img {
+  width: 1em;
+  height: 1em;
+  border: none;
+}
+
+table {
+  width: 70vw;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 1);
+  border-collapse: collapse;
+  position: sticky;
+}
+
+td img {
+  width: 3em;
+  height: 3em;
+  margin-right: 1em;
+}
+
+.table_profile {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+td {
+  text-align: center;
+  padding: 1em;
+  align-items: center;
+}
+
+td:nth-child(5) {
+  background-color: rgba(239, 242, 255, 1);
+  width: 0.3em;
+}
+
+td:nth-child(1) {
+  border-radius: 55px 0px 0px 55px;
+}
+
+tbody tr:hover {
+  background-color: rgba(239, 242, 255, 1);
+}
+
+thead th {
+  padding: 2em;
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(92, 0, 164, 0.11);
+}
+
+.table_body {
+  overflow-y: scroll;
+  max-height: 70vh;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 320px) {
+  .table_header {
+    display: grid;
+  }
+}

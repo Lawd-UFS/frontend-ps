@@ -1,7 +1,7 @@
 import { authenticationService } from '../../service/AuthenticationService';
 
 if (!authenticationService.isAuthenticated()) {
-  window.location.href = '/login';
+window.location.href = '/login';
 }
 
 import './index.css';
@@ -12,18 +12,18 @@ import timeIcon from '../../assets/images/time.svg';
 import { applyCalendarEvents } from './scheduleHandler';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const agendaContainer = document.querySelector('.agenda');
-  const calendarContainer = document.querySelector('.calendar');
+const agendaContainer = document.querySelector('.agenda');
+const calendarContainer = document.querySelector('.calendar');
 
-  document
-    .querySelector('.input-date')
-    .insertAdjacentHTML('afterbegin', calendarIcon);
+document
+.querySelector('.input-date')
+.insertAdjacentHTML('afterbegin', calendarIcon);
 
-  document
-    .querySelector('.input-time')
-    .insertAdjacentHTML('afterbegin', timeIcon);
+document
+.querySelector('.input-time')
+.insertAdjacentHTML('afterbegin', timeIcon);
 
-  document.body.prepend(Header());
+  document.body.prepend(await Header());
 
   createCalendar(
     { periodStart: new Date('2025-03-06'), periodEnd: new Date('2025-03-12') },

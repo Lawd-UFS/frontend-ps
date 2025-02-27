@@ -1,26 +1,27 @@
 import './styles.css';
 import genericUserProfileImg from '../../assets/images/icon-user.png';
 
-export const Profile = ({ name, imgSrc }) => {
-  const profile = document.createElement('div');
+export const Profile = async ({ name, imgSrc }, elementType = 'div') => {
+  const profile = document.createElement(elementType);
   profile.setAttribute('class', 'profile');
 
-  const imgElement = new Image();
-  imgElement.src = imgSrc;
+  try {
+    const response = await fetch(imgSrc);
 
-  imgElement.onload = () => {
-    profile.innerHTML = `
-    <img src="${imgSrc}" alt="Foto de perfil" />
-    <span class="name-user">${name}</span>
-  `;
-  };
+    if (!response.ok) {
+      throw new Error('Imagem não encontrada');
+    }
 
-  imgElement.onerror = () => {
     profile.innerHTML = `
-    <img src="${genericUserProfileImg}" alt="Foto de perfil" />
-    <span class="name-user">${name}</span>
+      <img src="${imgSrc}" alt="Foto de perfil" />
+      <span class="name-user">${name}</span>
+    `;
+  } catch (error) {
+    profile.innerHTML = `
+      <img src="${genericUserProfileImg}" alt="Foto de perfil" />
+      <span class="name-user">${name}</span>
   `;
-  };
+  }
 
   return profile;
 };
