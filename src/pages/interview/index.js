@@ -1,6 +1,6 @@
-import { isAuthenticated } from '../../lib/authenticator';
+import { authenticationService } from '../../service/AuthenticationService';
 
-if (!isAuthenticated()) {
+if (!authenticationService.isAuthenticated()) {
   window.location.href = '/login';
 }
 

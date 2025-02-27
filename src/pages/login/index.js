@@ -1,6 +1,6 @@
-import { authenticate, isAuthenticated } from '../../lib/authenticator';
+import { authenticationService } from '../../service/AuthenticationService';
 
-if (isAuthenticated()) {
+if (authenticationService.isAuthenticated()) {
   window.location.href = '/schedule';
 }
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const formData = new FormData(form);
 
-    const result = await authenticate(
+    const result = await authenticationService.authenticate(
       formData.get('email'),
       formData.get('password'),
     );

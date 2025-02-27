@@ -2,14 +2,8 @@ import { HttpMethod } from '../infra/http/httpClient';
 
 export class ScheduleService {
   constructor(httpClient, token) {
-    if (!httpClient) {
-      throw new Error(
-        'É preciso passar uma instância da classe HttpClient no construtor',
-      );
-    }
-
-    if (!token) {
-      throw new Error('É preciso passar um token no construtor');
+    if (!httpClient || !token) {
+      return null;
     }
 
     this._httpClient = httpClient;

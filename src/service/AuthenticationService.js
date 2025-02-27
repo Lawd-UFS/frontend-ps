@@ -1,6 +1,6 @@
-import { HttpMethod } from '../infra/http/httpClient';
+import { HttpClient, HttpMethod } from '../infra/http/httpClient';
 
-export class AuthenticationService {
+class AuthenticationService {
   constructor(httpClient) {
     if (!httpClient) {
       throw new Error(
@@ -22,7 +22,7 @@ export class AuthenticationService {
         },
       });
 
-      response.token = headers.authorization;
+      localStorage.setItem('token', headers.authorization);
 
       return response;
     } catch (error) {
@@ -32,4 +32,20 @@ export class AuthenticationService {
       };
     }
   }
+
+  isAuthenticated() {
+    return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
+  }
 }
+
+export const authenticationService = new AuthenticationService(
+  HttpClient.create(),
+);
