@@ -1,7 +1,10 @@
-import calendarIcon from '/src/assets/images/calendar-icon.png';
+import calendarIcon from '/src/assets/images/calendar-icon.svg';
 import './styles.css';
 
-export const InterviewTime = (dateTime) => {
+export const InterviewTime = (
+  dateTime,
+  container = document.createElement('div'),
+) => {
   const dayOfWeek = dateTime
     .toLocaleString('pt-BR', { weekday: 'long' })
     .split('-')[0]
@@ -15,11 +18,7 @@ export const InterviewTime = (dateTime) => {
 
   const time = `${dateTime.getHours()}h${dateTime.getMinutes().toString().padStart(2, '0')}`;
 
-  const div = document.createElement('div');
-  div.className = 'time';
-
-  const img = document.createElement('img');
-  img.src = calendarIcon;
+  container.className = 'time';
 
   const timeElement = document.createElement('time');
   timeElement.setAttribute('dateTime', dateTime);
@@ -29,8 +28,8 @@ export const InterviewTime = (dateTime) => {
     <span>${dayOfWeek} - ${time}</span>
   `;
 
-  div.appendChild(img);
-  div.appendChild(timeElement);
+  container.innerHTML += `${calendarIcon}`;
+  container.appendChild(timeElement);
 
-  return div;
+  return container;
 };

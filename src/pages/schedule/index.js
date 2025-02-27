@@ -1,35 +1,35 @@
-import { ScheduleService } from '../../service/ScheduleService';
-import { HttpClient } from '../../infra/http/httpClient';
+import './index.css';
+import { Header } from '../../components/Header';
+import { createCalendar, createSchedule } from './calendar';
+import calendarIcon from '../../assets/images/calendar-icon.svg';
+import timeIcon from '../../assets/images/time.svg';
+import { applyCalendarEvents } from './scheduleHandler';
 
-const scheduleService = new ScheduleService(HttpClient.create());
+document.addEventListener('DOMContentLoaded', async () => {
+  const agendaContainer = document.querySelector('.agenda');
+  const calendarContainer = document.querySelector('.calendar');
 
-document.getElementById('get-all').addEventListener('click', async () => {
-  try {
-    const schedules = await scheduleService.getEvaluatorSchedules(
-      'f1cae52d22fafe9bdf0d9001',
-    );
+  document
+    .querySelector('.input-date')
+    .insertAdjacentHTML('afterbegin', calendarIcon);
 
-    alert(JSON.stringify(schedules));
-  } catch (error) {
-    alert(`
-        Ocorreu um erro!
-        ${error.toString()}
-    `);
-  }
-});
+  document
+    .querySelector('.input-time')
+    .insertAdjacentHTML('afterbegin', timeIcon);
 
-document.getElementById('create').addEventListener('click', async () => {
-  try {
-    const newSchedule = await scheduleService.createSchedule({
-      dateTime: new Date('2025-10-10T17:00:00'),
-      evaluatorId: 'f1cae52d22fafe9bdf0d9001',
-    });
+  document.body.prepend(Header());
 
-    alert(JSON.stringify(newSchedule));
-  } catch (error) {
-    alert(`
-        Ocorreu um erro!
-        ${error.toString()}
-    `);
-  }
+  createCalendar(
+    { periodStart: new Date('2025-03-06'), periodEnd: new Date('2025-03-12') },
+    calendarContainer,
+  );
+
+  document.querySelectorAll('label > div > svg').forEach((svg) => {
+    const input = svg.nextElementSibling;
+    svg.addEventListener('click', () => input.showPicker());
+  });
+
+  await createSchedule(agendaContainer);
+
+  applyCalendarEvents(calendarContainer, agendaContainer);
 });
