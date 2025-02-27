@@ -31,12 +31,12 @@ export const Header = () => {
   header.appendChild(Profile({ name: 'Nome Sobrenome', imgSrc: userImg }));
 
   const links = [
-    { name: 'CANDIDATOS', href: '/candidates' },
+    { name: 'CANDIDATOS', href: '/candidatos' },
     {
       name: 'AGENDAMENTO',
-      href: '/schedule',
+      href: '/agendamento',
     },
-    { name: 'ENTREVISTA', href: '/interview' },
+    { name: 'ENTREVISTA', href: '/entrevista' },
     { name: 'PERFIL', href: '/profile' },
   ];
 
