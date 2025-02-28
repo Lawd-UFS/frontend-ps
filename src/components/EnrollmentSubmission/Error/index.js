@@ -1,12 +1,19 @@
 import './styles.css';
 import personWithSmartPhone from '../../../assets/images/person-with-smartphone.png';
-import {
-  clearFieldError,
-  setError,
-} from '../../../pages/inscricao/formHandler';
 import { ErrorDialog } from '../../ErrorDialog';
 import { openModal } from '../../../lib/modal';
 import { EmailDialog } from '../../EmailDialog';
+
+function setError(invalidFields) {
+  invalidFields.forEach((field) => {
+    field.classList.add('error');
+  });
+}
+
+function clearFieldError(input) {
+  const label = input.parentElement;
+  label.classList.remove('error');
+}
 
 export const SubmissionError = ({ hasToken, emailService, message }) => {
   const container = document.createElement('div');

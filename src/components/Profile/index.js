@@ -13,14 +13,18 @@ export const Profile = async ({ name, imgSrc }, elementType = 'div') => {
     }
 
     profile.innerHTML = `
-      <img src="${imgSrc}" alt="Foto de perfil" />
+      <a href="${imgSrc}" target="_blank">
+        <img src="${imgSrc}" alt="Foto de perfil" />
+      </a>
       <span class="name-user">${name}</span>
     `;
   } catch (error) {
     profile.innerHTML = `
-      <img src="${genericUserProfileImg}" alt="Foto de perfil" />
+      <a href="${genericUserProfileImg}" target="_blank">
+        <img src="${genericUserProfileImg}" alt="Foto de perfil" />
+      </a>
       <span class="name-user">${name}</span>
-  `;
+    `;
   }
 
   return profile;

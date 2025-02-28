@@ -106,6 +106,7 @@ td img {
   width: 3em;
   height: 3em;
   margin-right: 1em;
+  border-radius: 50%;
 }
 
 .table_profile {
