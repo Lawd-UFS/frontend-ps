@@ -1,6 +1,6 @@
+import { authenticationService } from '../../service/AuthenticationService';
 import logoImg from '../../assets/images/logo-lawd.png';
 import lawdImg from '../../assets/images/lawd.png';
-import userImg from '../../assets/images/icon-user.png';
 
 import { Nav } from '../Nav';
 import { Profile } from '../Profile';
@@ -28,9 +28,9 @@ export const Header = async () => {
   header.querySelector('.icons').appendChild(imgLogo);
   header.querySelector('.icons').appendChild(imgLawd);
 
-  header.appendChild(
-    await Profile({ name: 'Nome Sobrenome', imgSrc: userImg }),
-  );
+  const user = authenticationService.getUserData();
+
+  header.appendChild(await Profile({ name: user.name, imgSrc: user.photo }));
 
   const links = [
     { name: 'CANDIDATOS', href: '/candidatos' },

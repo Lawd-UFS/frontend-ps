@@ -23,6 +23,7 @@ class AuthenticationService {
       });
 
       localStorage.setItem('token', headers.authorization);
+      localStorage.setItem('user', JSON.stringify(response.data));
 
       return response;
     } catch (error) {
@@ -44,6 +45,10 @@ class AuthenticationService {
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  getUserData() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
 
