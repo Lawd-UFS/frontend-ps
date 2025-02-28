@@ -46,6 +46,10 @@ class AuthenticationService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  getUserData() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
 }
 
 export const authenticationService = new AuthenticationService(
