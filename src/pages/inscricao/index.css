@@ -1,0 +1,170 @@
+body {
+  background-image: url(../../assets/images/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.img-arrow {
+  width: 1.5em;
+  height: auto;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.img-lawd {
+  width: 4.5em;
+  height: auto;
+}
+
+.img-icon {
+  width: 2.5em;
+  height: auto;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  align-items: center;
+}
+
+.navbar {
+  border-radius: 5rem;
+  border: 1px solid #fff;
+  display: flex;
+  width: 68.9rem;
+  padding: 1rem 2.4rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 4.48rem 3.2rem;
+}
+
+.navbar p {
+  color: #ffffff;
+}
+
+.navbar .img-lawd {
+  width: 3em;
+  height: auto;
+}
+
+.navbar .img-icon {
+  width: 1.5em;
+  height: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-inline: 2.25rem;
+  padding-bottom: 4rem;
+
+  color: var(--purple-400);
+}
+
+main > div {
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 4rem;
+  width: 100%;
+  max-width: 75rem;
+  animation: opening 450ms ease-in-out backwards;
+  min-height: 58rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2.5rem;
+
+  gap: 4.2rem;
+}
+
+main h1,
+main h3 {
+  text-align: center;
+}
+
+main img {
+  max-width: 38rem;
+}
+
+.registerScreen {
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 5rem;
+  width: 100%;
+  max-width: 75rem;
+  animation: opening 450ms ease-in-out backwards;
+}
+
+@keyframes opening {
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 100;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+}
+
+.opening {
+  animation: opening 400ms ease-in-out;
+}
+
+.closing {
+  animation: closing 200ms ease-in-out;
+}
+
+@keyframes closing {
+  from {
+    opacity: 100;
+    transform: translateY(0);
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(10%);
+    transform: scale(0.9);
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  main {
+    padding-inline: 1rem;
+  }
+
+  .navbar p {
+    height: auto;
+    width: 7.4rem;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  main img {
+    max-width: 25rem;
+  }
+
+  main h1 {
+    font-size: 2.5rem;
+  }
+
+  main h3 {
+    max-width: 25rem;
+  }
+}

@@ -6,7 +6,7 @@ import { Nav } from '../Nav';
 import { Profile } from '../Profile';
 import './styles.css';
 
-export const Header = () => {
+export const Header = async () => {
   const route = window.location.pathname;
 
   const header = document.createElement('header');
@@ -28,16 +28,18 @@ export const Header = () => {
   header.querySelector('.icons').appendChild(imgLogo);
   header.querySelector('.icons').appendChild(imgLawd);
 
-  header.appendChild(Profile({ name: 'Nome Sobrenome', imgSrc: userImg }));
+  header.appendChild(
+    await Profile({ name: 'Nome Sobrenome', imgSrc: userImg }),
+  );
 
   const links = [
-    { name: 'CANDIDATOS', href: '/candidates' },
+    { name: 'CANDIDATOS', href: '/candidatos' },
     {
       name: 'AGENDAMENTO',
-      href: '/schedule',
+      href: '/agendamento',
     },
-    { name: 'ENTREVISTA', href: '/interview' },
-    { name: 'PERFIL', href: '/profile' },
+    { name: 'ENTREVISTA', href: '/entrevista' },
+    { name: 'PERFIL', href: '#' },
   ];
 
   const nav = Nav(links);

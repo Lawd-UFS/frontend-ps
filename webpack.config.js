@@ -56,10 +56,21 @@ const generatePages = (root = '', dir = pagesPath) => {
   return { entries, htmlPlugins };
 };
 
+const homePage = {
+  entry: path.join(pagesPath, 'index.js'),
+  htmlPlugin: new HtmlWebpackPlugin({
+    template: path.join(pagesPath, 'index.html'),
+    favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
+    filename: 'index.html',
+    chunks: ['index'],
+  }),
+};
+
 const pages = generatePages();
 
 const config = {
   entry: {
+    index: homePage.entry,
     global: path.join(pagesPath, 'global.js'),
     ...pages.entries,
   },
@@ -73,6 +84,7 @@ const config = {
   },
   plugins: [
     ...pages.htmlPlugins,
+    homePage.htmlPlugin,
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
@@ -116,7 +128,7 @@ const config = {
       },
     ],
   },
-  mode: process.env.NODE_ENV || 'development',
+  mode: 'production',
 };
 
 module.exports = config;

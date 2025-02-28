@@ -41,7 +41,7 @@ export const SubmissionSuccess = () => {
     <div class="buttons-container">
       <button
         class="discord-button"
-        onclick="location.href='https://t.me/LawdDcomp_bot';"
+        onclick="location.href='https://discord.gg/JVSCNar6';"
       >
         <img
           src="data:image/svg+xml;utf8,${encodeURIComponent(discord)}"

@@ -43,8 +43,8 @@ export class EmailService {
     }
 
     try {
-      const response = await this._httpClient.sendRequest({
-        endpoint: `/confirmacao-email?email=${email}`,
+      const { data: response } = await this._httpClient.sendRequest({
+        endpoint: `/enviar-confirmacao-email?email=${email}`,
         method: HttpMethod.POST,
       });
 
