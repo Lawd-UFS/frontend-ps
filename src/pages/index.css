@@ -551,10 +551,6 @@ svg:hover {
     display: none;
   }
 
-  svg {
-    display: none;
-  }
-
   .subscribe-arrow {
     display: none;
   }
@@ -575,7 +571,7 @@ svg:hover {
     font-size: 2.5em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 40vw;
   }
 
@@ -611,7 +607,7 @@ svg:hover {
     margin-left: 10em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 40vw;
   }
 }
@@ -625,7 +621,7 @@ svg:hover {
     margin-left: 9em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 40vw;
   }
 }
@@ -639,7 +635,7 @@ svg:hover {
     margin-left: 8em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 50vw;
   }
 }
@@ -653,7 +649,7 @@ svg:hover {
     margin-left: 7em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 50vw;
   }
 }
@@ -667,7 +663,7 @@ svg:hover {
     margin-left: 6em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 50vw;
   }
 }
@@ -681,7 +677,7 @@ svg:hover {
     margin-left: 5em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 60vw;
   }
 }
@@ -739,10 +735,6 @@ svg:hover {
     }
   }
 
-  svg {
-    display: none;
-  }
-
   .year {
     width: fit-content;
     font-size: 1em;
@@ -753,7 +745,7 @@ svg:hover {
     display: none;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 60vw;
   }
 
@@ -784,7 +776,7 @@ svg:hover {
     font-size: 1.5em;
   }
 
-  .subscribe button {
+  .subscribe button:first-child {
     width: 60vw;
   }
 }
@@ -861,7 +853,7 @@ svg:hover {
     justify-content: center;
   }
 
-  .subscribe-container button {
+  .subscribe-container button:first-child {
     width: 70vw;
     height: 25vw;
   }
@@ -986,7 +978,7 @@ svg:hover {
     align-items: center;
   }
 
-  .subscribe-container button {
+  .subscribe-container button:first-child {
     width: 70vw;
     height: 25vw;
   }
