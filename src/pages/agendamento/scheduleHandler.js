@@ -20,6 +20,28 @@ export const fetchSchedules = async () => {
   return response.data;
 };
 
+export const fetchOverview = async () => {
+  const response = await scheduleService.getOverview();
+
+  if (!response.success) {
+    alert('Ocorreu um erro ao buscar a visão geral da agenda');
+    return {
+      total: {
+        times: 0,
+        scheduledTimes: 0,
+        availableTimes: 0,
+      },
+      evaluator: {
+        times: 0,
+        scheduledTimes: 0,
+        availableTimes: 0,
+      },
+    };
+  }
+
+  return response.data;
+};
+
 const updateDateOnCalendarClick = (dateInput, day) => {
   const date = new Date(day.getAttribute('data-date'));
 
