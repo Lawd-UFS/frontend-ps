@@ -24,7 +24,7 @@ main {
 
 #schedule-container {
   display: flex;
-  gap: 11rem;
+  gap: 5rem;
 
   border-radius: 2.4rem;
 
@@ -279,16 +279,45 @@ main {
   flex-direction: column;
   width: 100%;
 
+  padding-top: 2rem;
   gap: 5rem;
+}
 
-  margin-top: 5rem;
+.overview {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem;
+  background-color: var(--purple-white);
+  border-radius: 0.8rem;
+
+  height: fit-content;
+}
+
+.overview dl {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.overview dt {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--indigo-200);
+}
+
+.overview dd {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--indigo-600);
 }
 
 .agenda .schedules {
   width: 100%;
 }
 
-.agenda h2 {
+.agenda h2,
+.overview h2 {
   font-weight: 500;
   font-size: 1.8rem;
 

@@ -3,6 +3,7 @@ import computerSvg from '../../assets/images/computer.svg';
 import coffeeAndComputerSvg from '../../assets/images/coffee-and-computer.svg';
 import {
   fetchSchedules,
+  fetchOverview,
   updateScheduleDetailsOnScheduleClick,
 } from './scheduleHandler';
 import Interview from '../../components/Interview';
@@ -20,6 +21,18 @@ export const getScheduleStatus = (schedule) => {
   }
 
   return 'scheduled';
+};
+
+const getPendingStatsBadge = (stats) => {
+  const percentagePending = (stats.unscheduledTimes / stats.times) * 100;
+
+  if (percentagePending >= 70) {
+    return '<span>🔴</span>'; // Vermelho para muitas pendentes
+  } else if (percentagePending >= 30) {
+    return '<span>🟡</span>'; // Amarelo para quantidade moderada
+  } else {
+    return '<span>🟢</span>'; // Verde para poucas pendentes
+  }
 };
 
 /**
@@ -224,4 +237,55 @@ export const createSchedule = async (container) => {
       updateScheduleDetailsOnScheduleClick,
     );
   });
+};
+
+export const createOverview = async (container) => {
+  const [totalContainer, evaluatorContainer] =
+    container.querySelectorAll('.stats-container');
+
+  const overview = await fetchOverview();
+
+  const pendingStatsBadge = getPendingStatsBadge(overview.total);
+
+  const totalTimes = overview.total.times;
+  const scheduledTimes = overview.total.scheduledTimes;
+  const unscheduledTimes = overview.total.unscheduledTimes;
+
+  const totalStatsElements = totalContainer.querySelector('dl');
+
+  totalStatsElements.innerHTML = `
+    <div class="stats-item">
+      <dt>Total inscritos:</dt>
+      <dd>${totalTimes}</dd>
+    </div>
+    <div class="stats-item">
+      <dt>Agendamentos realizados:</dt>
+      <dd>${scheduledTimes}</dd>
+    </div>
+    <div class="stats-item">
+      <dt>Agendamentos pendentes:</dt>
+      <dd>${unscheduledTimes} ${pendingStatsBadge}</dd>
+    </div>
+  `;
+
+  const myTimes = overview.evaluator.times;
+  const myScheduledTimes = overview.evaluator.scheduledTimes;
+  const myUnscheduledTimes = overview.evaluator.unscheduledTimes;
+
+  const myStatsElements = evaluatorContainer.querySelector('dl');
+
+  myStatsElements.innerHTML = `
+    <div class="stats-item">
+      <dt>Total:</dt>
+      <dd>${myTimes}</dd>
+    </div>
+    <div class="stats-item">
+      <dt>Agendados:</dt>
+      <dd>${myScheduledTimes}</dd>
+    </div>
+    <div class="stats-item">
+      <dt>Disponíveis:</dt>
+      <dd>${myUnscheduledTimes}</dd>
+    </div>
+  `;
 };
