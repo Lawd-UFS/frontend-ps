@@ -58,30 +58,35 @@ const changeToApplyPage = changePage(ApplyPage);
 const changeToAboutPage = changePage(AboutPage);
 const changeToResultPage = changePage(ResultPage);
 
-const header = Header();
-const nav = Nav(
-  [
-    {
-      name: 'Aplicação',
-      id: 'apply-link',
-    },
-    {
-      name: 'Sobre',
-      id: 'about-link',
-    },
-    {
-      name: 'Resultado',
-      id: 'result-link',
-    },
-  ],
-  'interview',
-);
+document.addEventListener('DOMContentLoaded', async () => {
+  const header = await Header();
 
-nav.querySelector('#apply-link').addEventListener('click', changeToApplyPage);
-nav.querySelector('#about-link').addEventListener('click', changeToAboutPage);
-nav.querySelector('#result-link').addEventListener('click', changeToResultPage);
+  const nav = Nav(
+    [
+      {
+        name: 'Aplicação',
+        id: 'apply-link',
+      },
+      {
+        name: 'Sobre',
+        id: 'about-link',
+      },
+      {
+        name: 'Resultado',
+        id: 'result-link',
+      },
+    ],
+    'interview',
+  );
 
-document.body.prepend(nav);
-document.body.prepend(header);
+  nav.querySelector('#apply-link').addEventListener('click', changeToApplyPage);
+  nav.querySelector('#about-link').addEventListener('click', changeToAboutPage);
+  nav
+    .querySelector('#result-link')
+    .addEventListener('click', changeToResultPage);
 
-pageContent.appendChild(ApplyPage());
+  document.body.prepend(nav);
+  document.body.prepend(header);
+
+  pageContent.appendChild(ApplyPage());
+});
