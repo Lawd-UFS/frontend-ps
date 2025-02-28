@@ -48,6 +48,8 @@ class AuthenticationService {
   }
 
   getUserData() {
+    if (!localStorage.getItem('user')) this.logout();
+
     return JSON.parse(localStorage.getItem('user'));
   }
 }
