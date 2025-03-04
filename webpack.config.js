@@ -81,6 +81,14 @@ const config = {
   devServer: {
     open: true,
     host: 'localhost',
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /^\/entrevista\/.*/,
+          to: '/entrevista',
+        },
+      ],
+    },
   },
   plugins: [
     ...pages.htmlPlugins,

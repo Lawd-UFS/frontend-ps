@@ -14,9 +14,9 @@ const loadResultPage = () =>
   import('./result').then((module) => module.ResultPage);
 import './index.css';
 
-const pageContent = document.body.querySelector('#page-content');
-
 const changePage = (page) => async (event) => {
+  const pageContent = document.body.querySelector('#page-content');
+
   if (pageContent.children.length > 1) {
     return;
   }
@@ -95,5 +95,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.prepend(header);
 
   const ApplyPage = await loadApplyPage();
-  pageContent.appendChild(await ApplyPage());
+  document.body.querySelector('#page-content').appendChild(await ApplyPage());
 });
