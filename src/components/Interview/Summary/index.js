@@ -26,17 +26,21 @@ export const InterviewSummary = (
           const { value: totalScore, maxPossibleValue: maxScore } =
             questionsScores[area];
 
+          const allDots = Array.from({ length: MAX_DOTS }).map(() => circleSVG);
+
           const numberOfDots = Math.floor((totalScore / maxScore) * MAX_DOTS);
 
-          const dots = Array.from({ length: numberOfDots }).map(
-            () => circleSVG,
-          );
+          allDots.forEach((dot, index, array) => {
+            if (index < numberOfDots) {
+              array[index] = dot.replace('svg', 'svg class="marked"');
+            }
+          });
 
           return `
           <li>
             <h4>${area}</h4>
             <div class="total-score">
-              <span class="dots">${dots.join('')}</span>
+              <span class="dots">${allDots.reverse().join('')}</span>
               <span>${totalScore}</span> 
             </div>
           </li>
