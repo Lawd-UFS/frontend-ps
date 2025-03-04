@@ -1,13 +1,14 @@
 import { HttpMethod } from '../infra/http/httpClient';
 
 export class InterviewService {
-  constructor(httpClient, token) {
+  constructor(httpClient, token, stateService) {
     if (!httpClient || !token) {
       return null;
     }
 
     this._httpClient = httpClient;
     this._token = token;
+    this._stateService = stateService;
 
     this.questions = [
       {
@@ -72,6 +73,28 @@ export class InterviewService {
   }
 
   async getInterview(candidateId) {
+    const cachedData = this._stateService.getState('interview');
+
+    if (cachedData && cachedData.status === 'new') {
+      return {
+        success: true,
+        data: {
+          status: 'new',
+          candidate: cachedData.candidate,
+          evaluator: cachedData.evaluator,
+          questions: this.questions,
+          date: cachedData.date,
+        },
+      };
+    }
+
+    if (cachedData && cachedData.candidateId === candidateId) {
+      return {
+        success: true,
+        data: cachedData,
+      };
+    }
+
     try {
       const { data: response } = await this._httpClient.sendRequest({
         endpoint: `/entrevistas/candidato/${candidateId}`,
@@ -80,6 +103,8 @@ export class InterviewService {
           Authorization: this._token,
         },
       });
+
+      this._stateService.saveState('interview', response);
 
       return response;
     } catch (error) {
@@ -107,6 +132,8 @@ export class InterviewService {
           questions,
         },
       });
+
+      this._stateService.saveState('interview', response);
 
       return response;
     } catch (error) {
