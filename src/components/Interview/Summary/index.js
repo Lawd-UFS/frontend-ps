@@ -4,7 +4,10 @@ import './styles.css';
 import circleSVG from '../../../assets/images/circle.svg';
 import profileImage from '../../../assets/images/icon-user.png';
 
-export const InterviewSummary = (candidateName, questionsScores) => {
+export const InterviewSummary = (
+  { candidateName, candidatePhoto },
+  questionsScores,
+) => {
   const MAX_DOTS = 10;
 
   const areas = Object.keys(questionsScores);
@@ -15,7 +18,7 @@ export const InterviewSummary = (candidateName, questionsScores) => {
   div.innerHTML = `
     <header>
       <h3>Resumo de ${candidateName}</h3>
-      <img src="${profileImage}" alt="Foto de perfil" />
+      <img src="${candidatePhoto ?? profileImage}" alt="Foto de perfil" />
     </header>
     <ul id="question-scores">
       ${Array.from(areas)

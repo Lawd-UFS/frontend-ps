@@ -7,9 +7,6 @@ const Notes = (text) => {
   div.className = 'notes';
 
   const textarea = document.createElement('textarea');
-  if (text) {
-    textarea.textContent = text;
-  }
 
   const editElement = document.createElement('div');
   editElement.className = 'edit';
@@ -37,10 +34,21 @@ const Notes = (text) => {
   div.appendChild(textarea);
   div.appendChild(editElement);
 
+  if (text) {
+    textarea.textContent = text;
+    editElement.remove();
+  }
+
   return div;
 };
 
-const Question = ({ text, area, score: candidateScore, notes }) => {
+const Question = ({
+  text,
+  area,
+  score: candidateScore,
+  notes,
+  candidateName,
+}) => {
   const scores = ['Insuficiente', 'Razoável', 'Bom', 'Excelente'];
 
   const article = document.createElement('article');
@@ -48,7 +56,7 @@ const Question = ({ text, area, score: candidateScore, notes }) => {
 
   article.innerHTML = `
   <header>
-    <h2><span class="candidate-name">[Nome]</span>, ${text}</h2>
+    <h2><span class="candidate-name">${candidateName}</span>, ${text}</h2>
   </header>
   <ul class="scores">
   </ul>
@@ -81,11 +89,13 @@ const Question = ({ text, area, score: candidateScore, notes }) => {
   return article;
 };
 
-export const InterviewQuestions = (questions = []) => {
+export const InterviewQuestions = (questions = [], candidateName) => {
   const section = document.createElement('section');
   section.setAttribute('id', 'questions');
 
-  questions.forEach((question) => section.appendChild(Question(question)));
+  questions.forEach((question) =>
+    section.appendChild(Question({ ...question, candidateName })),
+  );
 
   return section;
 };
