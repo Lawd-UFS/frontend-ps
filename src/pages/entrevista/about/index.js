@@ -19,7 +19,7 @@ const togglePresence = (event) => {
   optionClicked.setAttribute('active', '');
 };
 
-export const AboutPage = () => {
+export const AboutPage = async () => {
   const div = document.createElement('div');
   div.setAttribute('id', 'about');
 
@@ -40,7 +40,8 @@ export const AboutPage = () => {
   </span>
   `;
 
-  scheduleHeader.appendChild(Interview.Time(interviewDateTime));
+  const time = Interview.Time(interviewDateTime);
+  scheduleHeader.appendChild(time);
 
   const scheduleParticipants = document.createElement('div');
   scheduleParticipants.setAttribute('id', 'participants');
@@ -66,13 +67,22 @@ export const AboutPage = () => {
   </section>
   `;
 
+  const candidateProfile = await Profile({
+    name: 'Nome Participante',
+    imgSrc: profileImage,
+  });
+  const interviewerProfile = await Profile({
+    name: 'Nome Entrevistador',
+    imgSrc: profileImage,
+  });
+
   scheduleParticipants
     .querySelector('#candidate .participant')
-    .prepend(Profile({ name: 'Nome Participante', imgSrc: profileImage }));
+    .prepend(candidateProfile);
 
   scheduleParticipants
     .querySelector('#interviewer .participant')
-    .appendChild(Profile({ name: 'Nome Entrevistador', imgSrc: profileImage }));
+    .appendChild(interviewerProfile);
 
   const presenceOptions = Array.from(
     scheduleParticipants.querySelectorAll('#presence label span'),

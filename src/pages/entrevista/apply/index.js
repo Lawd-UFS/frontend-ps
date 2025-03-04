@@ -1,7 +1,7 @@
 import Interview from '../../../components/Interview';
 import './styles.css';
 
-export const ApplyPage = () => {
+export const ApplyPage = async () => {
   const div = document.createElement('div');
   div.setAttribute('id', 'apply');
 

@@ -4,7 +4,7 @@ import * as Chart from '../../../components/Chart';
 
 import Interview from '../../../components/Interview';
 
-export const ResultPage = () => {
+export const ResultPage = async () => {
   const div = document.createElement('div');
   div.setAttribute('id', 'result');
 
@@ -59,8 +59,6 @@ export const ResultPage = () => {
 
     return acc;
   }, {});
-
-  console.log(scorePerArea);
 
   const chartContainer = document.createElement('div');
   const canvas = document.createElement('canvas');

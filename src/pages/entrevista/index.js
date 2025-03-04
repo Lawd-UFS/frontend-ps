@@ -6,14 +6,17 @@ if (!authenticationService.isAuthenticated()) {
 
 import { Nav } from '../../components/Nav';
 import { Header } from '../../components/Header';
-import { ApplyPage } from './apply';
-import { AboutPage } from './about';
-import { ResultPage } from './result';
+const loadApplyPage = () =>
+  import('./apply').then((module) => module.ApplyPage);
+const loadAboutPage = () =>
+  import('./about').then((module) => module.AboutPage);
+const loadResultPage = () =>
+  import('./result').then((module) => module.ResultPage);
 import './index.css';
 
 const pageContent = document.body.querySelector('#page-content');
 
-const changePage = (page) => (event) => {
+const changePage = (page) => async (event) => {
   if (pageContent.children.length > 1) {
     return;
   }
@@ -37,7 +40,7 @@ const changePage = (page) => (event) => {
       : 'left';
 
   const activePage = document.querySelector('main > div');
-  const nextPage = page();
+  const nextPage = await page();
 
   nextPage.classList.add(`slide-in-to-${animationDirection}`);
 
@@ -53,10 +56,6 @@ const changePage = (page) => (event) => {
     activePage.remove();
   }, 500);
 };
-
-const changeToApplyPage = changePage(ApplyPage);
-const changeToAboutPage = changePage(AboutPage);
-const changeToResultPage = changePage(ResultPage);
 
 document.addEventListener('DOMContentLoaded', async () => {
   const header = await Header();
@@ -79,14 +78,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     'interview',
   );
 
-  nav.querySelector('#apply-link').addEventListener('click', changeToApplyPage);
-  nav.querySelector('#about-link').addEventListener('click', changeToAboutPage);
-  nav
-    .querySelector('#result-link')
-    .addEventListener('click', changeToResultPage);
+  nav.querySelector('#apply-link').addEventListener('click', async (event) => {
+    const ApplyPage = await loadApplyPage();
+    await changePage(ApplyPage)(event);
+  });
+  nav.querySelector('#about-link').addEventListener('click', async (event) => {
+    const AboutPage = await loadAboutPage();
+    await changePage(AboutPage)(event);
+  });
+  nav.querySelector('#result-link').addEventListener('click', async (event) => {
+    const ResultPage = await loadResultPage();
+    await changePage(ResultPage)(event);
+  });
 
   document.body.prepend(nav);
   document.body.prepend(header);
 
-  pageContent.appendChild(ApplyPage());
+  const ApplyPage = await loadApplyPage();
+  pageContent.appendChild(await ApplyPage());
 });
