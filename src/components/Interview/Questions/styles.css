@@ -25,7 +25,7 @@
   background-color: #ffffff;
 
   width: 60rem;
-  height: 50rem;
+  height: fit-content;
 
   border: solid var(--purple-200) 1px;
   border-radius: 30px;
