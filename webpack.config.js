@@ -77,6 +77,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[contenthash].js',
+    publicPath: '/',
   },
   devServer: {
     open: true,
@@ -85,7 +86,7 @@ const config = {
       rewrites: [
         {
           from: /^\/entrevista\/.*/,
-          to: '/entrevista',
+          to: '/entrevista/index.html',
         },
       ],
     },
