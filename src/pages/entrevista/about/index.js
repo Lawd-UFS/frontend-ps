@@ -1,9 +1,13 @@
 import './styles.css';
 
-import profileImage from '../../../assets/images/icon-user.png';
 import arrow from '../../../assets/images/arrow-schedule.png';
 
 import Interview from '../../../components/Interview';
+import {
+  fetchInterviewCandidate,
+  fetchInterviewEvaluator,
+  fetchInterviewDate,
+} from '../interviewHandler';
 import { Profile } from '../../../components/Profile';
 
 const togglePresence = (event) => {
@@ -23,10 +27,10 @@ export const AboutPage = async () => {
   const div = document.createElement('div');
   div.setAttribute('id', 'about');
 
-  const interviewDateTime = new Date(2025, 0, 20, 15);
-
   const aboutPageLink = document.getElementById('about-link');
   aboutPageLink.setAttribute('active', '');
+
+  const interviewDate = await fetchInterviewDate();
 
   const card = document.createElement('div');
   card.setAttribute('id', 'about-content');
@@ -40,7 +44,7 @@ export const AboutPage = async () => {
   </span>
   `;
 
-  const time = Interview.Time(interviewDateTime);
+  const time = Interview.Time(interviewDate);
   scheduleHeader.appendChild(time);
 
   const scheduleParticipants = document.createElement('div');
@@ -67,13 +71,16 @@ export const AboutPage = async () => {
   </section>
   `;
 
+  const candidate = await fetchInterviewCandidate();
+  const evaluator = await fetchInterviewEvaluator();
+
   const candidateProfile = await Profile({
-    name: 'Nome Participante',
-    imgSrc: profileImage,
+    name: candidate.name,
+    imgSrc: candidate.profilePhotoUrl,
   });
   const interviewerProfile = await Profile({
-    name: 'Nome Entrevistador',
-    imgSrc: profileImage,
+    name: evaluator.name,
+    imgSrc: evaluator.photo,
   });
 
   scheduleParticipants

@@ -3,6 +3,7 @@ import './styles.css';
 import * as Chart from '../../../components/Chart';
 
 import Interview from '../../../components/Interview';
+import { fetchQuestions, fetchInterviewCandidate } from '../interviewHandler';
 
 export const ResultPage = async () => {
   const div = document.createElement('div');
@@ -18,43 +19,15 @@ export const ResultPage = async () => {
     Excelente: 3,
   };
 
-  const questions = [
-    {
-      area: 'Liderança',
-      score: 'Insuficiente',
-    },
-    {
-      area: 'Valores da liga',
-      score: 'Razoável',
-    },
-    {
-      area: 'Comunicação',
-      score: 'Bom',
-    },
-    {
-      area: 'Liderança',
-      score: 'Bom',
-    },
-    {
-      area: 'Conhecimento',
-      score: 'Excelente',
-    },
-    {
-      area: 'Conhecimento',
-      score: 'Bom',
-    },
-    {
-      area: 'Experiência',
-      score: 'Bom',
-    },
-  ];
+  const questions = await fetchQuestions();
+  const candidate = await fetchInterviewCandidate();
 
   const scorePerArea = questions.reduce((acc, { area, score }) => {
     if (!acc[area]) {
       acc[area] = { value: 0, maxPossibleValue: 0 };
     }
 
-    acc[area].value += scoreValues[score];
+    acc[area].value += score ? scoreValues[score] : 0;
     acc[area].maxPossibleValue += scoreValues.Excelente;
 
     return acc;
@@ -68,7 +41,15 @@ export const ResultPage = async () => {
   const chart = Chart.Radar(canvas, scorePerArea);
 
   div.appendChild(chartContainer);
-  div.appendChild(Interview.Summary('João', scorePerArea));
+  div.appendChild(
+    Interview.Summary(
+      {
+        candidateName: candidate.name,
+        candidatePhoto: candidate.profilePhotoUrl,
+      },
+      scorePerArea,
+    ),
+  );
 
   return div;
 };

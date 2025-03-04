@@ -1,4 +1,5 @@
 import Interview from '../../../components/Interview';
+import { fetchQuestions, fetchInterviewCandidate } from '../interviewHandler';
 import './styles.css';
 
 export const ApplyPage = async () => {
@@ -29,25 +30,10 @@ export const ApplyPage = async () => {
     ]),
   );
 
-  div.appendChild(
-    Interview.Questions([
-      {
-        text: 'por que você deseja fazer parte da LAWD?',
-        area: 'Valores da liga',
-        score: 'Bom',
-      },
-      {
-        text: 'por que você deseja fazer parte da LAWD?',
-        area: 'Valores da liga',
-        score: 'Bom',
-      },
-      {
-        text: 'por que você deseja fazer parte da LAWD?',
-        area: 'Valores da liga',
-        score: 'Bom',
-      },
-    ]),
-  );
+  const questions = await fetchQuestions();
+  const candidate = await fetchInterviewCandidate();
+
+  div.appendChild(Interview.Questions(questions, candidate.name));
 
   div.appendChild(
     Interview.Stages(['Seção 01', 'Seção 02', 'Seção 03', 'Seção 04']),
