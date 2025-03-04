@@ -2,7 +2,9 @@ import { HttpClient } from '../../infra/http/httpClient';
 import { ScheduleService } from '../../service/ScheduleService';
 import { addNewScheduleTime, getScheduleStatus } from './calendar';
 import { Profile } from '../../components/Profile';
+import { Button } from '../../components/Button';
 import { authenticationService } from '../../service/AuthenticationService';
+import { stateService } from '../../service/StateService';
 
 const scheduleService = new ScheduleService(
   HttpClient.create(),
@@ -112,6 +114,38 @@ export const updateScheduleDetailsOnScheduleClick = (
         imgSrc: candidate.profilePhotoUrl,
       });
       detailsContainer.appendChild(profile);
+    }
+
+    if (['past', 'scheduled'].includes(schedule.status)) {
+      const goToInterviewButton = Button('Ir para entrevista');
+      goToInterviewButton.addEventListener('click', () => {
+        if (schedule.status === 'past') {
+          stateService.saveState('interview', {
+            status: 'old',
+            candidate: schedule.candidate,
+            date: schedule.dateTime,
+          });
+
+          window.history.pushState(
+            {},
+            '',
+            `/entrevista/${schedule.candidate.id}`,
+          );
+          window.location.reload();
+          return;
+        }
+
+        stateService.saveState('interview', {
+          status: 'new',
+          candidate: schedule.candidate,
+          evaluator: schedule.evaluator ?? authenticationService.getUserData(),
+          date: schedule.dateTime,
+        });
+
+        window.location.href = '/entrevista';
+      });
+
+      detailsContainer.appendChild(goToInterviewButton);
     }
 
     detailsContainer.style.removeProperty('opacity');
