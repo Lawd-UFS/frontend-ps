@@ -58,6 +58,16 @@ const Question = ({ text, area, score: candidateScore, notes }) => {
     const li = document.createElement('li');
     li.textContent = score;
 
+    li.addEventListener('click', () => {
+      const activeScore = article.querySelector('[active]');
+
+      li.toggleAttribute('active');
+
+      if (activeScore) {
+        activeScore.removeAttribute('active');
+      }
+    });
+
     if (candidateScore == score) {
       li.setAttribute('active', '');
     }
