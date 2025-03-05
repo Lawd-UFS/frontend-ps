@@ -62,3 +62,31 @@ export const fetchInterviewStatus = async () => {
   return response.data.status;
 };
 
+export const getInterviewAnswers = (questionsContainer, questions) => {
+  const uiQuestions = Array.from(
+    questionsContainer.querySelectorAll('.question'),
+  );
+
+  const answers = questions.map((question, index) => {
+    const uiQuestion = uiQuestions.find(
+      (uiQuestion) => uiQuestion.dataset.id === index.toString(),
+    );
+
+    const score = uiQuestion.querySelector('.scores [active]');
+
+    if (!score) {
+      throw new Error(`Questão número ${index + 1} não possui nota`);
+    }
+
+    const notes = uiQuestion.querySelector('.notes textarea').value || null;
+
+    return {
+      ...question,
+      score: score.textContent,
+      notes,
+    };
+  });
+
+  return answers;
+};
+
