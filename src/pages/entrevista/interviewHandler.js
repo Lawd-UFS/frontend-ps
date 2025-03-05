@@ -90,3 +90,17 @@ export const getInterviewAnswers = (questionsContainer, questions) => {
   return answers;
 };
 
+export const saveInterview = async (answers) => {
+  const [candidate, date] = await Promise.all([
+    fetchInterviewCandidate(),
+    fetchInterviewDate(),
+  ]);
+
+  const response = await interviewService.saveInterview({
+    candidateId: candidate.id,
+    questions: answers,
+    date,
+  });
+
+  return response;
+};
