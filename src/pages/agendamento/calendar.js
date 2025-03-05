@@ -12,12 +12,12 @@ export const getScheduleStatus = (schedule) => {
   const now = new Date();
   const scheduleDateTime = new Date(schedule.dateTime);
 
-  if (scheduleDateTime < now) {
-    return 'past';
-  }
-
   if (schedule.isAvailable) {
     return 'available';
+  }
+
+  if (schedule.interviewStatus === 'Concluída' || scheduleDateTime < now) {
+    return 'past';
   }
 
   return 'scheduled';
