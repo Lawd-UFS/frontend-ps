@@ -51,3 +51,14 @@ export const fetchInterviewDate = async () => {
 
   return new Date(response.data.date);
 };
+
+export const fetchInterviewStatus = async () => {
+  const response = await interviewService.getInterview(candidateId);
+
+  if (!response.success) {
+    return null;
+  }
+
+  return response.data.status;
+};
+
