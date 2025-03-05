@@ -115,7 +115,7 @@ export class InterviewService {
     }
   }
 
-  async saveInterview({ candidateId, evaluatorId, questions, date }) {
+  async saveInterview({ candidateId, questions, date }) {
     try {
       const { data: response } = await this._httpClient.sendRequest({
         endpoint: '/entrevistas',
@@ -125,7 +125,6 @@ export class InterviewService {
         },
         body: {
           candidateId,
-          evaluatorId,
           date,
           questions,
         },
