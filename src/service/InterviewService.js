@@ -104,7 +104,10 @@ export class InterviewService {
         },
       });
 
-      this._stateService.saveState('interview', response);
+      this._stateService.saveState('interview', {
+        ...response.data,
+        status: 'old',
+      });
 
       return response;
     } catch (error) {
