@@ -43,6 +43,7 @@ const Notes = (text) => {
 };
 
 const Question = ({
+  id,
   text,
   area,
   score: candidateScore,
@@ -53,6 +54,7 @@ const Question = ({
 
   const article = document.createElement('article');
   article.className = 'question';
+  article.setAttribute('data-id', id);
 
   article.innerHTML = `
   <header>
@@ -93,8 +95,8 @@ export const InterviewQuestions = (questions = [], candidateName) => {
   const section = document.createElement('section');
   section.setAttribute('id', 'questions');
 
-  questions.forEach((question) =>
-    section.appendChild(Question({ ...question, candidateName })),
+  questions.forEach((question, index) =>
+    section.appendChild(Question({ ...question, candidateName, id: index })),
   );
 
   return section;
