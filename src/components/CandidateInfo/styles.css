@@ -1,0 +1,71 @@
+#candidate-details {
+  background-color: #ffffff;
+  width: 30rem;
+  padding: 4rem;
+  border-radius: 2.4rem;
+  max-height: fit-content;
+  overflow-y: auto;
+
+  margin-bottom: 3rem;
+}
+
+#candidate-details::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#candidate-details h2 {
+  color: var(--indigo-600);
+  font-size: 1.8rem;
+  margin-bottom: 2.4rem;
+}
+
+#candidate-info {
+  margin-top: 4rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--purple-300);
+}
+
+#candidate-info h2 {
+  color: var(--indigo-600);
+  font-size: 1.8rem;
+  margin-bottom: 2.4rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.info-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.info-item .label {
+  color: var(--indigo-600);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.info-item .value {
+  color: var(--indigo-700);
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.portfolio-link {
+  color: var(--purple-400);
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.portfolio-link:hover {
+  text-decoration: underline;
+}
