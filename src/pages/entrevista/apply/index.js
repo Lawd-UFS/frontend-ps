@@ -1,5 +1,6 @@
 import Interview from '../../../components/Interview';
 import { Button } from '../../../components/Button';
+import { CandidateInfo } from '../../../components/CandidateInfo';
 import {
   fetchQuestions,
   fetchInterviewCandidate,
@@ -45,9 +46,7 @@ export const ApplyPage = async () => {
 
   div.appendChild(interviewQuestions);
 
-  div.appendChild(
-    Interview.Stages(['Seção 01', 'Seção 02', 'Seção 03', 'Seção 04']),
-  );
+  div.appendChild(CandidateInfo(candidate));
 
   if (status === 'new') {
     const saveInterviewButton = Button('Salvar Entrevista');
