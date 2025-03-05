@@ -1,5 +1,12 @@
 import Interview from '../../../components/Interview';
-import { fetchQuestions, fetchInterviewCandidate } from '../interviewHandler';
+import { Button } from '../../../components/Button';
+import {
+  fetchQuestions,
+  fetchInterviewCandidate,
+  getInterviewAnswers,
+  fetchInterviewStatus,
+  saveInterview,
+} from '../interviewHandler';
 import './styles.css';
 
 export const ApplyPage = async () => {
@@ -32,12 +39,40 @@ export const ApplyPage = async () => {
 
   const questions = await fetchQuestions();
   const candidate = await fetchInterviewCandidate();
+  const status = await fetchInterviewStatus();
 
-  div.appendChild(Interview.Questions(questions, candidate.name));
+  const interviewQuestions = Interview.Questions(questions, candidate.name);
+
+  div.appendChild(interviewQuestions);
 
   div.appendChild(
     Interview.Stages(['Seção 01', 'Seção 02', 'Seção 03', 'Seção 04']),
   );
+
+  if (status === 'new') {
+    const saveInterviewButton = Button('Salvar Entrevista');
+    saveInterviewButton.addEventListener('click', async () => {
+      let answers;
+
+      try {
+        answers = getInterviewAnswers(interviewQuestions, questions);
+      } catch (error) {
+        alert(error.message);
+        return;
+      }
+
+      const result = await saveInterview(answers);
+
+      if (result.success) {
+        alert('Entrevista salva com sucesso');
+        window.location.href = '/agendamento';
+      } else {
+        alert(`Erro ao salvar entrevista: ${result.message}`);
+      }
+    });
+
+    interviewQuestions.appendChild(saveInterviewButton);
+  }
 
   return div;
 };
