@@ -81,6 +81,10 @@
 }
 
 #summary .dots svg circle {
+  fill: var(--purple-light);
+}
+
+#summary .dots svg.marked circle {
   fill: var(--indigo-700);
 }
 

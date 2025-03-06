@@ -6,6 +6,19 @@ import { Nav } from '../Nav';
 import { Profile } from '../Profile';
 import './styles.css';
 
+const setActiveLink = (nav, currentPath) => {
+  const links = Array.from(nav.querySelectorAll('li > a'));
+
+  const activeLink = links.find((link) => {
+    const href = link.getAttribute('href');
+    return currentPath.startsWith(href);
+  });
+
+  if (activeLink) {
+    activeLink.parentElement.setAttribute('active', '');
+  }
+};
+
 export const Header = async () => {
   const route = window.location.pathname;
 
@@ -43,9 +56,7 @@ export const Header = async () => {
   ];
 
   const nav = Nav(links);
-  nav
-    .querySelector('li > a[href="' + route + '"]')
-    .parentElement.setAttribute('active', '');
+  setActiveLink(nav, route);
 
   header.querySelector('.icons').insertAdjacentElement('afterend', nav);
 

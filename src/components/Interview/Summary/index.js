@@ -4,7 +4,10 @@ import './styles.css';
 import circleSVG from '../../../assets/images/circle.svg';
 import profileImage from '../../../assets/images/icon-user.png';
 
-export const InterviewSummary = (candidateName, questionsScores) => {
+export const InterviewSummary = (
+  { candidateName, candidatePhoto },
+  questionsScores,
+) => {
   const MAX_DOTS = 10;
 
   const areas = Object.keys(questionsScores);
@@ -15,7 +18,7 @@ export const InterviewSummary = (candidateName, questionsScores) => {
   div.innerHTML = `
     <header>
       <h3>Resumo de ${candidateName}</h3>
-      <img src="${profileImage}" alt="Foto de perfil" />
+      <img src="${candidatePhoto ?? profileImage}" alt="Foto de perfil" />
     </header>
     <ul id="question-scores">
       ${Array.from(areas)
@@ -23,17 +26,21 @@ export const InterviewSummary = (candidateName, questionsScores) => {
           const { value: totalScore, maxPossibleValue: maxScore } =
             questionsScores[area];
 
+          const allDots = Array.from({ length: MAX_DOTS }).map(() => circleSVG);
+
           const numberOfDots = Math.floor((totalScore / maxScore) * MAX_DOTS);
 
-          const dots = Array.from({ length: numberOfDots }).map(
-            () => circleSVG,
-          );
+          allDots.forEach((dot, index, array) => {
+            if (index < numberOfDots) {
+              array[index] = dot.replace('svg', 'svg class="marked"');
+            }
+          });
 
           return `
           <li>
             <h4>${area}</h4>
             <div class="total-score">
-              <span class="dots">${dots.join('')}</span>
+              <span class="dots">${allDots.reverse().join('')}</span>
               <span>${totalScore}</span> 
             </div>
           </li>

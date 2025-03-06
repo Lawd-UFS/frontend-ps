@@ -7,9 +7,6 @@ const Notes = (text) => {
   div.className = 'notes';
 
   const textarea = document.createElement('textarea');
-  if (text) {
-    textarea.textContent = text;
-  }
 
   const editElement = document.createElement('div');
   editElement.className = 'edit';
@@ -37,18 +34,31 @@ const Notes = (text) => {
   div.appendChild(textarea);
   div.appendChild(editElement);
 
+  if (text) {
+    textarea.textContent = text;
+    editElement.remove();
+  }
+
   return div;
 };
 
-const Question = ({ text, area, score: candidateScore, notes }) => {
+const Question = ({
+  id,
+  text,
+  area,
+  score: candidateScore,
+  notes,
+  candidateName,
+}) => {
   const scores = ['Insuficiente', 'Razoável', 'Bom', 'Excelente'];
 
   const article = document.createElement('article');
   article.className = 'question';
+  article.setAttribute('data-id', id);
 
   article.innerHTML = `
   <header>
-    <h2><span class="candidate-name">[Nome]</span>, ${text}</h2>
+    <h2><span class="candidate-name">${candidateName}</span>, ${text}</h2>
   </header>
   <ul class="scores">
   </ul>
@@ -57,6 +67,16 @@ const Question = ({ text, area, score: candidateScore, notes }) => {
   scores.forEach((score) => {
     const li = document.createElement('li');
     li.textContent = score;
+
+    li.addEventListener('click', () => {
+      const activeScore = article.querySelector('[active]');
+
+      li.toggleAttribute('active');
+
+      if (activeScore) {
+        activeScore.removeAttribute('active');
+      }
+    });
 
     if (candidateScore == score) {
       li.setAttribute('active', '');
@@ -71,11 +91,13 @@ const Question = ({ text, area, score: candidateScore, notes }) => {
   return article;
 };
 
-export const InterviewQuestions = (questions = []) => {
+export const InterviewQuestions = (questions = [], candidateName) => {
   const section = document.createElement('section');
   section.setAttribute('id', 'questions');
 
-  questions.forEach((question) => section.appendChild(Question(question)));
+  questions.forEach((question, index) =>
+    section.appendChild(Question({ ...question, candidateName, id: index })),
+  );
 
   return section;
 };

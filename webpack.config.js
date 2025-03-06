@@ -77,10 +77,19 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[contenthash].js',
+    publicPath: '/',
   },
   devServer: {
     open: true,
     host: 'localhost',
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /^\/entrevista\/.*/,
+          to: '/entrevista/index.html',
+        },
+      ],
+    },
   },
   plugins: [
     ...pages.htmlPlugins,
@@ -127,6 +136,18 @@ const config = {
         use: 'html-loader',
       },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   mode: 'production',
 };

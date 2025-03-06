@@ -52,7 +52,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   candidates.forEach(async (candidate) => {
     const tr = document.createElement('tr');
 
-    tr.innerHTML = '<td>-</td>';
+    if (candidate.status === 'eliminado') {
+      tr.style.color = 'red';
+    }
+
+    tr.innerHTML = `<td>${candidate.status.capitalize()}</td>`;
 
     const profile = await Profile(
       {
