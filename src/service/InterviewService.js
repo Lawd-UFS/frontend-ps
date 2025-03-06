@@ -76,6 +76,19 @@ export class InterviewService {
     const cachedData = this._stateService.getState('interview');
 
     if (cachedData && cachedData.status === 'new') {
+      const { data: response } = await this._httpClient.sendRequest({
+        endpoint: `/candidatos/${cachedData.candidate.id}`,
+        method: HttpMethod.GET,
+        headers: {
+          Authorization: this._token,
+        },
+      });
+
+      this._stateService.saveState('interview', {
+        ...cachedData,
+        candidate: response.data,
+      });
+
       return {
         success: true,
         data: {
