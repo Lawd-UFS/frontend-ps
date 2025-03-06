@@ -16,7 +16,7 @@ export const getScheduleStatus = (schedule) => {
     return 'available';
   }
 
-  if (schedule.interviewStatus === 'Concluída' || scheduleDateTime < now) {
+  if (schedule.interviewStatus === 'Concluída') {
     return 'past';
   }
 
