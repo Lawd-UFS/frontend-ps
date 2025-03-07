@@ -11,7 +11,18 @@ const scheduleService = new ScheduleService(
   authenticationService.getToken(),
 );
 
-export const fetchSchedules = async () => {
+export const fetchAllSchedules = async () => {
+  const response = await scheduleService.getAllSchedules();
+
+  if (!response.success) {
+    alert('Ocorreu um erro ao buscar os horários');
+    return [];
+  }
+
+  return response.data;
+};
+
+export const fetchEvaluatorSchedules = async () => {
   const response = await scheduleService.getEvaluatorSchedules();
 
   if (!response.success) {

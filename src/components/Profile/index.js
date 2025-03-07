@@ -5,6 +5,17 @@ export const Profile = async ({ name, imgSrc }, elementType = 'div') => {
   const profile = document.createElement(elementType);
   profile.setAttribute('class', 'profile');
 
+  if (!imgSrc) {
+    profile.innerHTML = `
+      <a href="${genericUserProfileImg}" target="_blank">
+        <img src="${genericUserProfileImg}" alt="Foto de perfil" />
+      </a>
+      <span class="name-user">${name}</span>
+    `;
+
+    return profile;
+  }
+
   try {
     const response = await fetch(imgSrc);
 

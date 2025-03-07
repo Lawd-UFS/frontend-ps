@@ -48,11 +48,11 @@ export const Header = async () => {
   const links = [
     { name: 'CANDIDATOS', href: '/candidatos' },
     {
-      name: 'AGENDAMENTO',
-      href: '/agendamento',
+      name: 'MINHA AGENDA',
+      href: '/minha-agenda',
     },
+    { name: 'AGENDAMENTO GERAL', href: '/agendamento-geral' },
     { name: 'ENTREVISTA', href: '/entrevista' },
-    { name: 'PERFIL', href: '#' },
   ];
 
   const nav = Nav(links);

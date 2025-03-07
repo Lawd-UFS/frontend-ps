@@ -2,16 +2,13 @@ import coffeeSvg from '../../assets/images/coffee.svg';
 import computerSvg from '../../assets/images/computer.svg';
 import coffeeAndComputerSvg from '../../assets/images/coffee-and-computer.svg';
 import {
-  fetchSchedules,
+  fetchEvaluatorSchedules,
   fetchOverview,
   updateScheduleDetailsOnScheduleClick,
 } from './scheduleHandler';
 import Interview from '../../components/Interview';
 
 export const getScheduleStatus = (schedule) => {
-  const now = new Date();
-  const scheduleDateTime = new Date(schedule.dateTime);
-
   if (schedule.isAvailable) {
     return 'available';
   }
@@ -228,7 +225,7 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
 };
 
 export const createSchedule = async (container) => {
-  const schedules = await fetchSchedules();
+  const schedules = await fetchEvaluatorSchedules();
 
   schedules.forEach((schedule) => {
     addNewScheduleTime(
