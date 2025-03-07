@@ -66,7 +66,14 @@ export const ApplyPage = async () => {
         alert('Entrevista salva com sucesso');
         window.location.href = '/agendamento';
       } else {
-        alert(`Erro ao salvar entrevista: ${result.message}`);
+        const errorMessage = result.errors
+          .map((error) => {
+            const question = error.field.split('.')[1];
+            const errorMessage = `Questão ${question + 1}: ${error.message}`;
+            return errorMessage;
+          })
+          .join('\n');
+        alert(`Erro ao salvar entrevista: ${result.message}\n${errorMessage}`);
       }
     });
 

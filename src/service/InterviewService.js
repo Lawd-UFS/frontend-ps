@@ -156,6 +156,7 @@ export class InterviewService {
       return {
         success: false,
         message: error.message,
+        errors: error.errorData.errors,
       };
     }
   }
