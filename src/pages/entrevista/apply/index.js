@@ -7,6 +7,7 @@ import {
   getInterviewAnswers,
   fetchInterviewStatus,
   saveInterview,
+  loadInterviewScript,
 } from '../interviewHandler';
 import './styles.css';
 
@@ -38,9 +39,18 @@ export const ApplyPage = async () => {
     ]),
   );
 
-  const questions = await fetchQuestions();
   const candidate = await fetchInterviewCandidate();
   const status = await fetchInterviewStatus();
+
+  const scriptIsLoaded = await loadInterviewScript();
+
+  let questions = [];
+
+  if (!scriptIsLoaded) {
+    alert('Erro ao carregar roteiro da entrevista');
+  } else {
+    questions = await fetchQuestions();
+  }
 
   const interviewQuestions = Interview.Questions(questions, candidate.name);
 
@@ -48,7 +58,7 @@ export const ApplyPage = async () => {
 
   div.appendChild(CandidateInfo(candidate));
 
-  if (status === 'new') {
+  if (scriptIsLoaded && status === 'new') {
     const saveInterviewButton = Button('Salvar Entrevista');
     saveInterviewButton.addEventListener('click', async () => {
       let answers;

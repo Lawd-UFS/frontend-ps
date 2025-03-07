@@ -12,6 +12,9 @@ const interviewService = new InterviewService(
 const url = window.location.pathname;
 const candidateId = url === '/entrevista' ? null : url.split('/').pop();
 
+export const loadInterviewScript = async () =>
+  await interviewService.loadScript();
+
 export const fetchQuestions = async () => {
   const response = await interviewService.getInterview(candidateId);
 
@@ -72,13 +75,21 @@ export const getInterviewAnswers = (questionsContainer, questions) => {
       (uiQuestion) => uiQuestion.dataset.id === index.toString(),
     );
 
+    const notes = uiQuestion.querySelector('.notes textarea').value || null;
+
+    if (!question.hasScore) {
+      return {
+        ...question,
+        score: null,
+        notes,
+      };
+    }
+
     const score = uiQuestion.querySelector('.scores [active]');
 
     if (!score) {
       throw new Error(`Questão número ${index + 1} não possui nota`);
     }
-
-    const notes = uiQuestion.querySelector('.notes textarea').value || null;
 
     return {
       ...question,

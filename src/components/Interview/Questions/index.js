@@ -46,6 +46,7 @@ const Question = ({
   id,
   text,
   area,
+  hasScore = true,
   score: candidateScore,
   notes,
   candidateName,
@@ -60,30 +61,38 @@ const Question = ({
   <header>
     <h2><span class="candidate-name">${candidateName}</span>, ${text}</h2>
   </header>
+  ${
+    hasScore
+      ? `
   <ul class="scores">
   </ul>
+  `
+      : ''
+  }
   `;
 
-  scores.forEach((score) => {
-    const li = document.createElement('li');
-    li.textContent = score;
+  if (hasScore) {
+    scores.forEach((score) => {
+      const li = document.createElement('li');
+      li.textContent = score;
 
-    li.addEventListener('click', () => {
-      const activeScore = article.querySelector('[active]');
+      li.addEventListener('click', () => {
+        const activeScore = article.querySelector('[active]');
 
-      li.toggleAttribute('active');
+        li.toggleAttribute('active');
 
-      if (activeScore) {
-        activeScore.removeAttribute('active');
+        if (activeScore) {
+          activeScore.removeAttribute('active');
+        }
+      });
+
+      if (candidateScore == score) {
+        li.setAttribute('active', '');
       }
+
+      article.querySelector('.scores').appendChild(li);
     });
-
-    if (candidateScore == score) {
-      li.setAttribute('active', '');
-    }
-
-    article.querySelector('.scores').appendChild(li);
-  });
+  }
 
   article.querySelector('header').prepend(Badge(area));
   article.appendChild(Notes(notes));

@@ -44,7 +44,7 @@
   gap: 1rem;
 }
 
-#about #about-content img {
+#about #about-content header img {
   width: 24px;
   height: 24px;
 }
@@ -68,7 +68,7 @@
   align-items: center;
 }
 
-#about #about-content .profile img {
+#about #about-content .profile a {
   border: 2px solid var(--indigo-700);
 
   width: 40px;

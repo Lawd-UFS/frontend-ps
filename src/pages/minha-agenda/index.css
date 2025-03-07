@@ -404,7 +404,7 @@ main {
     opacity: 0.5;
   }
 
-  .profile img {
+  .profile a {
     width: 4rem;
     height: 4rem;
     border: 2px solid var(--indigo-700);
