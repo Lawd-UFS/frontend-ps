@@ -64,7 +64,7 @@ export const ApplyPage = async () => {
 
       if (result.success) {
         alert('Entrevista salva com sucesso');
-        window.location.href = '/agendamento';
+        window.location.href = '/minha-agenda';
       } else {
         const errorMessage = result.errors
           .map((error) => {

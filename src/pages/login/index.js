@@ -1,7 +1,7 @@
 import { authenticationService } from '../../service/AuthenticationService';
 
 if (authenticationService.isAuthenticated()) {
-  window.location.href = '/agendamento';
+  window.location.href = '/minha-agenda';
 }
 
 import './index.css';
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (result.success) {
-      window.location.href = '/agendamento';
+      window.location.href = '/minha-agenda';
       return;
     }
 
