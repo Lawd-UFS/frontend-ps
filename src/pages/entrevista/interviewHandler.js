@@ -12,6 +12,26 @@ const interviewService = new InterviewService(
 const url = window.location.pathname;
 const candidateId = url === '/entrevista' ? null : url.split('/').pop();
 
+export const fetchInterviewRanking = async () => {
+  const response = await interviewService.getInterview(candidateId);
+
+  if (!response.success) {
+    return null;
+  }
+
+  return response.data.ranking;
+};
+
+export const fetchInterviewResult = async () => {
+  const response = await interviewService.getInterview(candidateId);
+
+  if (!response.success) {
+    return {};
+  }
+
+  return response.data.result;
+};
+
 export const loadInterviewScript = async () =>
   await interviewService.loadScript();
 

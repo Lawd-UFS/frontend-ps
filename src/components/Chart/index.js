@@ -96,9 +96,7 @@ export const Radar = (canvas, data) => {
     labels: Object.keys(data),
     datasets: [
       {
-        data: Object.values(data).map(
-          (area) => area.value / area.maxPossibleValue,
-        ),
+        data: Object.values(data),
         borderColor: '#8170b4',
         backgroundColor: 'rgba(74, 56, 123, 0.3)',
         pointRadius: 4,

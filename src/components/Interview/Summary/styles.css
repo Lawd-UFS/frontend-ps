@@ -67,6 +67,10 @@
   gap: 1rem;
 }
 
+#summary #question-scores li .total-score span {
+  min-width: 3.5rem;
+}
+
 #summary #question-scores .dots {
   height: 100%;
 }

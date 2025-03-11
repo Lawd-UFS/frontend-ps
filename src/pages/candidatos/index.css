@@ -121,7 +121,7 @@ td {
   align-items: center;
 }
 
-td:nth-child(5) {
+td:last-child {
   background-color: rgba(239, 242, 255, 1);
   width: 0.3em;
 }

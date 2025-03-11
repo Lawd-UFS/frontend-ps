@@ -66,6 +66,12 @@ export class InterviewService {
           evaluator: cachedData.evaluator,
           questions: this.questions,
           date: cachedData.date,
+          result: {
+            softskills: 0,
+            hardskills: 0,
+            disponibilidade: 0,
+          },
+          ranking: null,
         },
       };
     }
@@ -85,6 +91,8 @@ export class InterviewService {
           Authorization: this._token,
         },
       });
+
+      delete response.data.result._id;
 
       this._stateService.saveState('interview', {
         ...response.data,
