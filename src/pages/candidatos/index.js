@@ -59,7 +59,7 @@ const setRanking = (candidates) => {
     if (score === previousScore) {
       candidate.querySelector('.ranking').innerText = previousRanking;
     } else {
-      candidate.querySelector('.ranking').innerText = previousRanking + 1;
+      candidate.querySelector('.ranking').innerText = index + 1;
     }
   });
 };
