@@ -43,7 +43,7 @@ a {
 }
 
 body {
-  /* background: url("../../assets/images/background.svg") no-repeat left fixed; */
+  /* background: url("../../../../assets/images/background.svg") no-repeat left fixed; */
   background-size: cover;
   z-index: -1;
   font-weight: 400;
@@ -51,7 +51,7 @@ body {
 }
 
 body {
-  background-image: url(../assets/images/background.svg);
+  background-image: url(../../../../assets/images/background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
