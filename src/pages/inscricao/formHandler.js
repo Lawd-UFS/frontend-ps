@@ -33,6 +33,16 @@ export function checkRequiredFields(form) {
   const invalidFields = [];
 
   form.querySelectorAll('label').forEach((label) => {
+    if (label.getAttribute('for') === 'source') {
+      const checkedBoxes = label.querySelectorAll(
+        'input[type="checkbox"]:checked',
+      );
+      if (checkedBoxes.length === 0) {
+        invalidFields.push(label);
+      }
+      return;
+    }
+
     const requiredField = label.querySelector('[required]');
     if (!requiredField) {
       return;
@@ -40,6 +50,31 @@ export function checkRequiredFields(form) {
 
     if (!fieldIsFilled(requiredField)) {
       invalidFields.push(label);
+      return;
+    }
+
+    if (requiredField.type === 'email' || requiredField.name === 'email') {
+      const emailVal = requiredField.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailVal)) {
+        invalidFields.push(label);
+        return;
+      }
+    }
+
+    if (
+      requiredField.id === 'date-birth' ||
+      requiredField.name === 'birthDate'
+    ) {
+      const dateVal = requiredField.value;
+      if (dateVal) {
+        const dateObj = new Date(dateVal + 'T00:00:00');
+        const year = dateObj.getFullYear();
+        const currentYear = new Date().getFullYear();
+        if (isNaN(year) || year < 1900 || year > currentYear) {
+          invalidFields.push(label);
+        }
+      }
     }
   });
 

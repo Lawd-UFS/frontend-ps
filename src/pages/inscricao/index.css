@@ -1,489 +1,196 @@
+/* ==========================================================================
+   LAWD 2026 Processo Seletivo - Enrollment Form Modern Styling
+   ========================================================================== */
+
 body {
   background-image: url(../../assets/images/background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-button {
-  font-family: Space Grotesk;
-  padding: 0.8rem 1.6rem;
-  background-color: var(--purple-white);
-  border: var(--purple-300) solid 0.25rem;
-  border-radius: 1.8rem;
-  font-weight: 500;
-  color: var(--purple-400);
-  cursor: var(--cursor-pointer);
-  transition:
-    background-color 0.3s ease-in-out,
-    transform 0.4s ease-in-out;
-}
-
-button:hover {
-  background-color: var(--purple-300);
-  color: var(--purple-white);
-  cursor: var(--cursor-pointer);
-  border: 3px solid #9676f0;
-  transform: scale(0.95);
-}
-
-button:active {
-  transform: scale(0.85);
-  background-color: var(--purple-white);
-  color: var(--purple-400);
-  border: var(--purple-400) solid 1px;
-  cursor: var(--cursor-pointer);
-}
-
-input {
-  cursor: var(--cursor-default);
-}
+/* ==========================================================================
+   Typography & Global Element Overrides
+   ========================================================================== */
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 3.6rem;
+  padding: 2rem 3.6rem;
+  flex: 1;
 }
 
 main h1 {
-  color: #fff;
-  font-weight: 400;
-}
-
-h2 {
-  font-size: larger;
   color: var(--purple-400);
+  font-weight: 700;
+  font-size: 2.8rem;
+  letter-spacing: -0.5px;
   margin: 0;
 }
 
-.modal p {
-  font-size: medium;
-}
-
-form label {
-  font-weight: 500;
+h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--purple-400);
-}
-
-input[type='file'] {
-  display: none;
-}
-
-.file-name {
-  cursor: var(--cursor-pointer);
-  align-content: center;
-  padding: 0 1rem;
-  padding-left: 1.4rem;
-  overflow: hidden;
-  white-space: nowrap;
-  max-width: 21rem;
-}
-
-form input,
-form select {
-  padding: 0 1.6rem;
-  box-sizing: content-box;
-}
-
-form input,
-.file-name,
-textarea,
-form select {
-  background-color: var(--background-input);
-  color: var(--gray);
-  height: 3rem;
-  font-family: Space Grotesk;
-  font-size: 1.4rem;
-  font-weight: 400;
-  margin-top: 0.9rem;
-  border-radius: 1.28rem;
-  border: solid var(--purple-white) 0.2rem;
-  border: 0.2rem solid rgba(92, 0, 164, 0.11);
-  resize: none;
-  text-overflow: ellipsis;
-}
-
-.filled {
-  color: #424141;
-  font-weight: 550;
-  background-color: var(--background-input-filled);
-}
-
-label.error {
-  animation: shake 0.5s;
-}
-
-label.error input,
-label.error select,
-label.error textarea {
-  border: 0.2rem solid #f5b0b0;
-}
-
-textarea {
-  display: flex;
-  height: 100%;
-  min-height: 8rem;
-  padding: 0.8rem 1.6rem;
-  box-sizing: content-box;
-  border-radius: 1.8rem;
-}
-
-#section3 textarea {
-  min-height: 13.25rem;
-}
-
-textarea:focus,
-form input:focus,
-.password-container:focus-within,
-form select:focus {
-  border-color: var(--purple-light);
-  outline: none;
+  margin: 0;
 }
 
 p {
   color: var(--gray);
-  font-weight: 300;
-  width: 100%;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.5;
   margin: 0;
 }
 
-footer {
-  height: 20%;
-}
+/* ==========================================================================
+   Buttons (Tactile & Premium)
+   ========================================================================== */
 
-.menu {
-  background: var(--indigo-700);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: clamp(50em, 100%, 100em);
-  box-sizing: border-box;
-  padding: 0.7em 0.5em;
-  border-radius: 30px;
-}
-
-.profile {
-  border: solid #fff 1px;
-  background: var(--purple-profile);
-  width: 150px;
-  border-radius: 30px;
-}
-
-.back {
-  display: flex;
-  flex-direction: row;
+button {
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 1.2rem 2.4rem;
+  background: var(--purple-white);
+  border: 2px solid var(--purple-300);
+  border-radius: 1.4rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--purple-400);
+  cursor: var(--cursor-pointer);
+  box-shadow: 0 4px 10px rgba(70, 35, 167, 0.05);
+  display: inline-flex;
   align-items: center;
-  color: #fff;
-  text-decoration: none;
-  font-size: 0.8em;
-  gap: 3px;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.img-arrow {
-  width: 1.5em;
-  height: auto;
+button:hover {
+  background-color: var(--purple-300);
+  color: var(--purple-white);
+  border-color: var(--purple-300);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(112, 70, 233, 0.25);
 }
 
-.icons {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
+button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 5px rgba(112, 70, 233, 0.15);
 }
 
-.img-lawd {
-  width: 4.5em;
-  height: auto;
+.registerButton {
+  background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+  color: var(--purple-white);
+  padding: 1.2rem 3.6rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 15px rgba(70, 35, 167, 0.2);
+  height: 4.8rem;
+  border-radius: 1.4rem;
+  animation: opening 400ms ease-in-out 200ms backwards;
 }
 
-.img-icon {
-  width: 2.5em;
-  height: auto;
+.registerButton:hover {
+  background: linear-gradient(135deg, #8156fa 0%, #4f2cb8 100%);
+  color: var(--purple-white);
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(112, 70, 233, 0.35);
 }
 
-/* TODO fazer arquivo próprio para o css de login */
-.password {
-  font-size: 0.7em;
-  text-align: right;
-  font-weight: 400;
-  text-decoration: underline;
+.registerButton:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(112, 70, 233, 0.2);
+}
+
+.second-button {
+  background-color: var(--purple-white);
+  border: 2px solid rgba(112, 70, 233, 0.2);
   color: var(--purple-400);
 }
 
-.password-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--background-input);
-  border: solid var(--purple-white) 2px;
-  border-radius: 10px;
+.second-button:hover {
+  background-color: #ede8ff;
+  border-color: var(--purple-300);
+  color: var(--purple-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(112, 70, 233, 0.1);
 }
 
-.password-container input {
-  width: 100%;
-  border: none;
+.second-button:active {
+  transform: translateY(1px) scale(0.98);
 }
 
-.password-visibility {
-  width: 20px;
-  padding-right: 10px;
-  cursor: var(--cursor-pointer);
-}
+/* ==========================================================================
+   Header & Navbar Styling
+   ========================================================================== */
 
 header {
   display: flex;
   justify-content: center;
   padding-top: 40px;
   align-items: center;
+  width: 100%;
 }
 
 .navbar {
   border-radius: 5rem;
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
   display: flex;
-  width: 68.9rem;
-  padding: 1rem 2.4rem;
+  width: 100%;
+  max-width: 78rem;
+  padding: 1.2rem 2.8rem;
   justify-content: space-between;
   align-items: center;
-  margin: 0 4.48rem 3.2rem;
-}
-
-header a {
-  position: absolute;
-  left: 10%;
-  top: 9%;
+  margin: 0 2.4rem 3.2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 .navbar p {
   color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.navbar .icons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 .navbar .img-lawd {
-  width: 3em;
+  width: 3.2em;
   height: auto;
 }
 
 .navbar .img-icon {
-  width: 1.5em;
+  width: 1.8em;
   height: auto;
 }
 
+/* ==========================================================================
+   Main Form Card (`.registerScreen`)
+   ========================================================================== */
+
 .registerScreen {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 2.4rem;
+  border: 1px solid rgba(70, 35, 167, 0.06);
+  width: 100%;
+  max-width: 78rem;
   overflow: hidden;
-  border-radius: 5rem;
-  width: 100%;
-  max-width: 75rem;
-  animation: opening 450ms ease-in-out backwards;
-}
-
-@keyframes opening {
-  from {
-    opacity: 0;
-    transform: translateY(10%);
-    transform: scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    transform: scale(1);
-  }
-}
-
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-5px);
-  }
-
-  50% {
-    transform: translateX(5px);
-  }
-
-  75% {
-    transform: translateX(-5px);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.opening {
-  animation: opening 400ms ease-in-out;
-}
-
-.closing {
-  animation: closing 200ms ease-in-out;
-}
-
-@keyframes closing {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-    transform: scale(1);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(10%);
-    transform: scale(0.9);
-  }
-}
-
-.registerScreen h1 {
-  color: var(--purple-400);
-  font-weight: bold;
-}
-
-.section-type {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-}
-
-.section-type p {
-  margin: 0;
-  color: var(--purple-400);
-  animation: move 500ms;
-}
-
-.section {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-hr {
-  box-sizing: border-box;
-  width: 3.2rem;
-  border-style: dashed;
-  border-color: #c2bfbf;
-  margin: auto 0;
-}
-
-.icon-section {
-  height: 3.3rem;
-  width: 3.3rem;
-  cursor: var(--cursor-pointer);
-  border-radius: 50%;
-  /* display: flex; */
-  background-color: var(--purple-200);
-  color: var(--purple-400);
-  font-weight: bolder;
-  border: var(--purple-300) solid 2.5008px;
-  font-size: small;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
-  animation: opening 450ms ease-in-out 200ms backwards;
-}
-
-.icon-section:hover {
-  background-color: #ada1d1;
-  transform: scale(0.9);
-}
-
-.icon-section.active {
-  background-color: var(--purple-400);
-  color: var(--purple-white);
-}
-
-.section-inputs {
-  padding: 4.2rem 5.2rem;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  cursor: var(--cursor-default);
-
-  height: 100%;
-}
-
-label.show-animation:not(.checkbox-label) {
-  animation: move 500ms ease-in-out;
-}
-
-
-@keyframes move {
-  from {
-    opacity: 0;
-    transform: translateX(-35%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0%);
-  }
-}
-
-@keyframes divs-section4 {
-  from {
-    opacity: 0;
-    transform: translateY(15%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
-
-span {
-  color: var(--gray);
-  font-weight: 400;
-  font-size: smaller;
-}
-
-#section1 input[type='text'] {
-  max-width: 80%;
-}
-
-
-input[type='date'] {
-  max-width: 65%;
-
-}
-
-#section1 input[type='number'] {
-  width: 5rem;
-}
-
-#section4,
-#section4-icon {
-  display: none;
-}
-
-#pronoun {
-  width: 50%;
-}
-
-select {
-  width: 13em;
-}
-
-option {
-  font-size: 1.4rem;
-  cursor: var(--cursor-pointer);
-}
-
-.registerButton {
-  background: #e8e0ff;
-  border: 0.3rem solid #bba6f8;
-  padding: 0 2.4rem;
-  font-weight: bold;
-  animation: opening 400ms ease-in-out 200ms backwards;
-  height: 4.5rem;
+  box-shadow: 
+    0 10px 30px -10px rgba(70, 35, 167, 0.08),
+    0 20px 40px -5px rgba(70, 35, 167, 0.04);
+  animation: opening 450ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
 .enrollment {
@@ -491,17 +198,100 @@ option {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  gap: 1.6rem;
-  padding: 4.1rem 4.8rem 2.9rem;
-  border-bottom: solid var(--purple-white) 0.0625rem;
-  transition: border-bottom 0.4s ease-in-out;
+  gap: 2rem;
+  padding: 3.2rem 4.8rem 2.4rem;
+  border-bottom: 1px solid rgba(70, 35, 167, 0.08);
+  background: linear-gradient(180deg, rgba(247, 244, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
-.enrollment h1 {
-  transition:
-    opacity 0.4s ease-in-out,
-    transform 0.4s ease-in-out;
+.section-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.section-type p {
+  font-weight: 600;
+  color: var(--purple-400);
+  font-size: 1.6rem;
+  animation: move 500ms;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+hr {
+  width: 3.2rem;
+  border: none;
+  height: 2px;
+  background-color: rgba(70, 35, 167, 0.15);
+  margin: 0 0.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.icon-section {
+  height: 3.4rem;
+  width: 3.4rem;
+  border-radius: 50%;
+  background-color: var(--purple-white);
+  color: var(--purple-300);
+  font-weight: 700;
+  font-size: 1.3rem;
+  border: 2px solid rgba(70, 35, 167, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: opening 450ms ease-in-out 200ms backwards;
+}
+
+.icon-section.clickable {
+  cursor: var(--cursor-pointer);
+  border-color: var(--purple-300);
+  color: var(--purple-300);
+  background-color: #fff;
+}
+
+.icon-section.clickable:hover {
+  background-color: var(--purple-white);
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(112, 70, 233, 0.15);
+}
+
+.icon-section.active {
+  background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+  color: #fff;
+  border-color: var(--purple-400);
+  box-shadow: 0 0 0 4px rgba(112, 70, 233, 0.2);
+  transform: scale(1.05);
+}
+
+.icon-section.locked {
+  background-color: #f6f5fa;
+  color: #c2bfdf;
+  border-color: #e2dfed;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Form Fields Styling (Floating Look & Smooth Focus)
+   ========================================================================== */
+
+.section-inputs {
+  padding: 4rem 4.8rem;
+}
+
+#section2, #section3 {
+  padding: 2.2rem 4.8rem;
+}
+
+#section2 form .column, #section3 form .column {
+  gap: 1.5rem;
 }
 
 form {
@@ -515,107 +305,283 @@ form {
 form .column {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
+  justify-content: flex-start;
+  gap: 2.2rem;
   width: 100%;
 }
 
-.column:nth-child(2) {
-  /* margin-right: 2rem; */
-  width: 400px;
+form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--purple-400);
+  cursor: var(--cursor-default);
+  width: 100%;
+  transition: color 0.3s ease;
 }
 
+form input,
+.file-name,
+textarea,
+form select {
+  background-color: rgba(247, 244, 255, 0.45);
+  color: #2c2a38;
+  height: 4.6rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-top: 0.4rem;
+  border-radius: 1.2rem;
+  border: 2px solid rgba(70, 35, 167, 0.08);
+  padding: 0 1.6rem;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+input {
+  cursor: var(--cursor-default);
+}
+
+textarea {
+  display: flex;
+  height: auto;
+  min-height: 10rem;
+  padding: 1.2rem 1.6rem;
+  resize: none;
+  line-height: 1.5;
+}
+
+#section2 textarea {
+  min-height: 6.8rem;
+}
+
+#section3 textarea {
+  min-height: 9rem;
+}
+
+/* Customized Select Styling */
+form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234623a7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1.6rem center;
+  background-size: 1.5rem;
+  padding-right: 4rem;
+  cursor: var(--cursor-pointer);
+}
+
+option {
+  font-size: 1.5rem;
+  cursor: var(--cursor-pointer);
+  background-color: #fff;
+  color: #2c2a38;
+}
+
+/* File Input */
+input[type='file'] {
+  display: none;
+}
+
+.file-name {
+  cursor: var(--cursor-pointer);
+  align-content: center;
+  padding-left: 1.4rem;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 21rem;
+}
+
+/* Form States */
+.filled {
+  color: #1e1b29;
+  font-weight: 500;
+  background-color: rgba(235, 230, 255, 0.5);
+  border-color: rgba(70, 35, 167, 0.15);
+}
+
+textarea:focus,
+form input:focus,
+.password-container:focus-within,
+form select:focus {
+  border-color: var(--purple-300);
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(112, 70, 233, 0.12);
+}
+
+/* Error States */
+label.error {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+label.error,
+label.error span {
+  color: #df2c1f;
+}
+
+label.error input,
+label.error select,
+label.error textarea {
+  border-color: #ff4d4f;
+  background-color: #fff2f0;
+  box-shadow: 0 0 0 4px rgba(255, 77, 79, 0.12);
+}
+
+/* ==========================================================================
+   Checkbox Group Customization
+   ========================================================================== */
+
 .checkbox-group {
-  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+#section3 .checkbox-group {
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+#section3 .checkbox-label {
+  padding: 1rem 1.4rem;
 }
 
 .checkbox-label {
-  align-items: center;
-  flex-direction: row;
-  gap: 0.5rem;
+  background-color: rgba(247, 244, 255, 0.45);
+  border: 1.5px solid rgba(70, 35, 167, 0.08);
+  border-radius: 1.2rem;
+  padding: 1.2rem 1.6rem;
   font-size: 1.4rem;
-  cursor: var(--cursor-pointer);
-  align-items: center;
   color: var(--gray);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  cursor: var(--cursor-pointer);
+  user-select: none;
+  height: auto;
+}
 
-  height: fit-content;
+.checkbox-label:hover {
+  background-color: rgba(112, 70, 233, 0.05);
+  border-color: rgba(112, 70, 233, 0.2);
+  transform: translateY(-1px);
+}
+
+.checkbox-label:has(.checkbox-input:checked) {
+  background-color: rgba(112, 70, 233, 0.1);
+  border-color: var(--purple-300);
+  color: var(--purple-400);
+  font-weight: 600;
 }
 
 .checkbox-input {
-  height: 38px;
+  width: 1.8rem;
+  height: 1.8rem;
+  accent-color: var(--purple-300);
   cursor: var(--cursor-pointer);
-  accent-color: var(--purple-400);
-  margin: auto 0;
+  margin: 0;
 }
+
+/* ==========================================================================
+   Modal / Dialog Customization
+   ========================================================================== */
 
 dialog {
   border: none;
   padding: 0;
-  border-radius: 38px;
-  box-shadow: 0 4px 6px rgba(96, 0, 172, 0.14);
-  backdrop-filter: blur(7px);
-
+  border-radius: 2.4rem;
+  box-shadow: 0 25px 50px -12px rgba(70, 35, 167, 0.25);
   margin: auto;
+  background: #fff;
+  overflow: hidden;
+  max-width: 44rem;
+  width: 90%;
+  animation: modalOpening 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 dialog::backdrop {
-  background-color: rgba(61, 18, 97, 0.4);
+  background-color: rgba(19, 9, 43, 0.6);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
 .modal {
-  max-height: 30rem;
-  max-width: 29rem;
-  padding: 3.5rem 2rem;
-  border: none;
-  border-radius: 3.8rem;
-  gap: 2.2rem;
-  text-align: center;
+  padding: 4rem 3.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-}
-
-.modal div {
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  gap: 1rem;
+  gap: 2.2rem;
+  text-align: center;
 }
 
 .modal img {
-  width: 87px;
+  width: 80px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(112, 70, 233, 0.15));
+}
+
+.modal h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--purple-400);
+}
+
+.modal p {
+  font-size: 1.5rem;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+.modal div {
+  margin-top: 1.2rem;
+  width: 100%;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
 }
 
 .modal button {
+  flex: 1;
   font-size: 1.4rem;
-
+  padding: 1.2rem 2rem;
+  border-radius: 1.2rem;
 }
 
-.second-button {
-  background-color: var(--background-input);
-  border-color: var(--purple-light);
-}
-
-.second-button:hover {
-  background-color: var(--background-input-filled);
-  color: var(--purple-400);
-  border: 3px solid var(--purple-white);
-  transform: scale(0.9);
-}
+/* ==========================================================================
+   Success Section (#section4)
+   ========================================================================== */
 
 #section4 {
+  padding: 4rem 4.8rem;
+  display: none;
   flex-direction: column;
   align-items: center;
-  padding: 42px 42px;
 }
 
-#section4 div {
+#section4 > div {
   display: flex;
+  align-items: center;
+  gap: 4.8rem;
+  width: 100%;
 }
 
 #loving-doodle {
-  max-width: 38rem;
+  max-width: 34rem;
+  flex: 1;
   animation: opening 350ms ease-in-out backwards;
 }
 
@@ -623,22 +589,30 @@ dialog::backdrop {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  gap: 36px;
-  margin: auto;
-  margin-left: 2rem;
+  gap: 2.8rem;
+  flex: 1.2;
+  margin: 0;
 }
 
 .register-text {
   color: var(--purple-400);
   display: flex;
-  width: auto;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.625rem;
-  font-style: normal;
-  font-weight: 500;
+  gap: 0.8rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.register-text p {
+  color: var(--gray);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.register-text img {
+  width: 32px;
+  height: auto;
 }
 
 .register-text:nth-child(1) {
@@ -651,139 +625,212 @@ dialog::backdrop {
   animation-delay: 600ms;
 }
 
-.register-text img {
-  width: 32px;
-}
-
-.continue {
-  display: flex;
-  justify-content: end;
-  margin: 1.6rem;
-  width: 100%;
-  max-width: 75rem;
-}
-
 .buttons-container {
   display: flex;
+  gap: 2rem;
+  margin-top: 4rem;
+  width: 100%;
   justify-content: center;
-  /* flex-direction: column; */
-  gap: 3.3125rem;
-  margin: 5rem 0 2rem 0;
-
-  height: 4.8rem;
 }
 
 .buttons-container button {
-  display: flex;
-  font-size: 18px;
-  font-weight: 500;
-  min-height: 48px;
-  padding: 0.75rem 1.75rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0px 2px 4.6px 0px rgba(96, 0, 172, 0.14);
+  flex: 1;
+  max-width: 30rem;
+  height: 5.2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(70, 35, 167, 0.1);
   animation: divs-section4 350ms ease-in-out backwards;
   animation-delay: 800ms;
 }
 
-.buttons-container img {
-  width: auto;
-}
-
 .chatbot-button {
-  width: 100%;
-  max-width: 39rem;
-  border: 0.1875rem solid #bba6f8;
-  background: #e8e0ff;
+  background: var(--purple-white);
+  border: 2px solid var(--purple-300);
+  color: var(--purple-400);
 }
 
 .discord-button {
-  width: 100%;
-  max-width: 28rem;
-  gap: 12px;
-  border: 3px solid var(--purple-light);
-  background: var(--stroke-4,
-      linear-gradient(353deg, #7046e9 -259.29%, #bba6f8 211.39%));
-
+  background: linear-gradient(135deg, #7046e9 0%, #bba6f8 100%);
+  border: none;
   color: #fff;
 }
+
+.discord-button:hover {
+  background: linear-gradient(135deg, #5835c4 0%, #9b81ec 100%);
+  box-shadow: 0 8px 20px rgba(112, 70, 233, 0.25);
+}
+
+/* ==========================================================================
+   Footer & Other Layout Containers
+   ========================================================================== */
+
+.continue {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 78rem;
+}
+
+span {
+  color: var(--gray);
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes opening {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes closing {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+}
+
+@keyframes divs-section4 {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+@keyframes modalOpening {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+label.show-animation:not(.checkbox-label) {
+  animation: move 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes move {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Responsive Media Queries
+   ========================================================================== */
 
 @media only screen and (max-width: 768px) {
   form {
     flex-wrap: wrap;
+    gap: 2.4rem;
+  }
+  
+  #section4 > div {
+    flex-direction: column;
+    gap: 3.2rem;
+    text-align: center;
+  }
+
+  .register-text-container {
+    align-items: center;
+  }
+
+  #loving-doodle {
+    max-width: 28rem;
   }
 }
 
 @media only screen and (max-width: 585px) {
-  form {
-    flex-wrap: wrap;
-  }
-
-  .enrollment,
-  .section-type {
-    flex-direction: column;
-    text-align: center;
-    gap: 0;
-  }
-
-  .section-type,
-  .section {
-    align-items: center;
-    justify-content: center;
-  }
-
-  .section-type {
-    gap: 2.5rem;
-    justify-content: space-between;
-  }
-
-  #section4 div {
-    flex-direction: column;
-  }
-
-  .buttons-container {
-    gap: 2.4rem;
-  }
-
-  .register-text-container {
-    margin-left: 0;
-  }
-}
-
-@media only screen and (max-width: 425px) {
-  .section-inputs {
-    padding: 42px 24px;
-  }
-}
-
-@media only screen and (max-width: 375px) {
   main {
     padding: 1.6rem;
   }
 
-  .section-type p,
-  h2,
-  form label {
-    font-size: 1.6rem;
+  .enrollment {
+    flex-direction: column;
+    text-align: center;
+    padding: 3.2rem 2.4rem 2rem;
   }
 
-  .navbar p {
-    height: auto;
-    width: 7.4rem;
+  .section-type {
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 100%;
   }
 
-  .enrollment h1 {
+  .section-inputs {
+    padding: 3.2rem 2.4rem;
+  }
+
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .buttons-container button {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  main h1 {
     font-size: 2.4rem;
   }
-
-  .continue {
-    display: flex;
-    justify-content: center;
-    margin: 1em;
+  
+  .navbar p {
+    font-size: 1.4rem;
   }
 
-  .registerButton {
-    width: 100%;
+  .navbar {
+    padding: 1rem 2rem;
+  }
+  
+  .icon-section {
+    height: 3rem;
+    width: 3rem;
+    font-size: 1.2rem;
+  }
+  
+  hr {
+    width: 2.2rem;
   }
 }

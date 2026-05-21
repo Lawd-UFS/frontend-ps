@@ -9,8 +9,14 @@ import { ErrorDialog } from '../../components/ErrorDialog';
 import { openModal, closeModal } from '../../lib/modal.js';
 
 let currentStep = 0;
-let nextButton, submitDialog, emailDialog, closeModalButton, closeEmailDialogButton, reSendEmailButton;
-let confirmSubmitButton, titleSection, enrollment, formList;
+let maxStepReached = 0;
+let nextButton,
+  submitDialog,
+  emailDialog,
+  closeModalButton,
+  closeEmailDialogButton,
+  reSendEmailButton;
+let confirmSubmitButton, formList;
 let section1, section2, section3, requiredFields, sections, sectionName;
 
 const initializeElements = () => {
@@ -21,8 +27,6 @@ const initializeElements = () => {
   closeEmailDialogButton = document.getElementById('closeEmailDialog');
   reSendEmailButton = document.getElementById('reSendEmailButton');
   confirmSubmitButton = document.getElementById('confirmSubmit');
-  titleSection = document.querySelector('h1');
-  enrollment = document.querySelector('.enrollment');
   formList = document.querySelectorAll('form');
   section1 = document.getElementById('section1');
   section2 = document.getElementById('section2');
@@ -52,22 +56,45 @@ const initializeElements = () => {
     field.addEventListener('input', () => clearFieldError(field));
   });
 
-  closeEmailDialogButton.addEventListener('click', () => closeModal(emailDialog));
+  const checkboxes = document.querySelectorAll('input[name="source"]');
+  checkboxes.forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const sourceLabel = document.querySelector('label[for="source"]');
+      if (sourceLabel) {
+        sourceLabel.classList.remove('error');
+      }
+    });
+  });
+
+  const dateBirthInput = document.getElementById('date-birth');
+  if (dateBirthInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateBirthInput.setAttribute('max', today);
+  }
+
+  closeEmailDialogButton.addEventListener('click', () =>
+    closeModal(emailDialog),
+  );
   closeModalButton.addEventListener('click', () => closeModal(submitDialog));
   confirmSubmitButton.addEventListener('click', handleSubmitForm);
 
   // Lógica do reenvio do email
   reSendEmailButton.addEventListener('click', async () => {
     const emailInput = document.getElementById('email').value;
-    if (!emailInput) return;
+    if (!emailInput) {
+      return;
+    }
 
     try {
       reSendEmailButton.disabled = true;
       reSendEmailButton.innerText = 'Enviando...';
 
-      const response = await fetch(`${process.env.API_URL}/enviar-confirmacao-email?email=${encodeURIComponent(emailInput)}`, {
-        method: 'POST'
-      });
+      const response = await fetch(
+        `${process.env.API_URL}/enviar-confirmacao-email?email=${encodeURIComponent(emailInput)}`,
+        {
+          method: 'POST',
+        },
+      );
 
       if (response.ok) {
         alert('Email reenviado com sucesso!');
@@ -83,7 +110,11 @@ const initializeElements = () => {
   });
 
   sections.forEach((item, index) => {
-    item.icon.addEventListener('click', () => updateStep(index));
+    item.icon.addEventListener('click', () => {
+      if (index <= maxStepReached) {
+        updateStep(index);
+      }
+    });
   });
 
   nextButton.addEventListener('click', nextStep);
@@ -92,7 +123,9 @@ const initializeElements = () => {
   document.querySelectorAll('input[type="file"]').forEach((input) => {
     input.addEventListener('change', function () {
       const fileName =
-        this.files.length > 0 ? this.files[0].name : 'Nenhum arquivo selecionado';
+        this.files.length > 0
+          ? this.files[0].name
+          : 'Nenhum arquivo selecionado';
       const fileLabel = this.nextElementSibling;
       if (fileLabel && fileLabel.tagName === 'SPAN') {
         fileLabel.textContent = fileName;
@@ -179,8 +212,6 @@ const handleSubmitForm = async () => {
   }
 };
 
-
-
 const updateStep = (step) => {
   if (step > currentStep) {
     const { isValid, invalidFields } = checkRequiredFields(
@@ -194,10 +225,16 @@ const updateStep = (step) => {
   }
 
   currentStep = step;
+  maxStepReached = Math.max(maxStepReached, step);
   nextButton.innerText = currentStep === 2 ? 'Enviar Formulário' : 'Continue';
 
   sections.forEach((item, index) => {
     item.icon.classList.toggle('active', index === step);
+    item.icon.classList.toggle(
+      'clickable',
+      index !== step && index <= maxStepReached,
+    );
+    item.icon.classList.toggle('locked', index > maxStepReached);
     item.section.style.display = index === step ? 'block' : 'none';
 
     item.section.querySelectorAll('label').forEach((label) => {
