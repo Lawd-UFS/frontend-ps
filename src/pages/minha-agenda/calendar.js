@@ -41,7 +41,7 @@ const getPendingStatsBadge = (stats) => {
  * @property {Array<Array<number>>} weeks - Um array de semanas, onde cada semana é um array de dias.
  */
 const getCalendarData = (periodMonthStart, periodMonthEnd) => {
-  const date = new Date('2025-03-01T00:00:00');
+  const date = new Date('2026-03-01T00:00:00');
   const month = date.getMonth();
   const year = date.getFullYear();
 

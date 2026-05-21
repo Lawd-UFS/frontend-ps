@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.prepend(await Header());
 
   createCalendar(
-    { periodStart: new Date('2025-03-06'), periodEnd: new Date('2025-03-12') },
+    { periodStart: new Date('2026-03-06'), periodEnd: new Date('2026-03-12') },
     calendarContainer,
   );
 

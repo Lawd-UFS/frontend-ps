@@ -86,6 +86,12 @@ const config = {
   devServer: {
     open: true,
     host: 'localhost',
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
+    },
     historyApiFallback: {
       rewrites: [
         {
