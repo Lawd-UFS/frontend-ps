@@ -26,10 +26,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.body.prepend(await Header());
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const lastDay = new Date(currentYear, currentDate.getMonth() + 1, 0).getDate();
+
+  const startDateStr = `${currentYear}-${currentMonth}-22`;
+  const endDateStr = `${currentYear}-${currentMonth}-30`;
+
   createCalendar(
-    { periodStart: new Date('2026-03-06'), periodEnd: new Date('2026-03-12') },
+    {
+      periodStart: new Date(currentYear, currentDate.getMonth(), 22),
+      periodEnd: new Date(currentYear, currentDate.getMonth(), 30),
+    },
     calendarContainer,
   );
+
+  const dateInput = document.querySelector('input[type="date"]');
+  if (dateInput) {
+    dateInput.min = startDateStr;
+    dateInput.max = endDateStr;
+  }
 
   document.querySelectorAll('label > div > svg').forEach((svg) => {
     const input = svg.nextElementSibling;

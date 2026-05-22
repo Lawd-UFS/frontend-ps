@@ -1,111 +1,81 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PS LAWD 2026 - Minha Agenda</title>
-  </head>
-  <body>
-    <main>
-      <div id="schedule-container">
-        <aside class="calendar">
-          <h2 class="month"></h2>
-          <div class="days"></div>
-          <form>
-            <label class="form-date">
-              <span> Data: </span>
-              <div class="input-date">
-                <input
-                  type="date"
-                  min="2026-03-06"
-                  max="2026-03-12"
-                  required
-                  name="date"
-                />
-              </div>
-            </label>
-            <label class="form-time">
-              <span> Horário: </span>
-              <div class="input-time">
-                <input
-                  type="time"
-                  min="07:00"
-                  max="22:00"
-                  required
-                  name="time"
-                  step="1800"
-                />
-              </div>
-            </label>
-            <div class="form-format">
-              <span> Formato: </span>
-              <div class="toggle-group">
-                <input
-                  type="radio"
-                  id="presencial"
-                  name="interview-mode"
-                  value="Presencial"
-                  required
-                />
-                <label for="presencial">
-                  <span>Presencial</span>
-                </label>
-                <input
-                  type="radio"
-                  id="remoto"
-                  name="interview-mode"
-                  value="Remoto"
-                  required
-                />
-                <label for="remoto">
-                  <span>Remoto</span>
-                </label>
-                <input
-                  type="radio"
-                  id="ambos"
-                  name="interview-mode"
-                  value="Ambos"
-                  required
-                />
-                <label for="ambos">
-                  <span> Presencial / Remoto</span>
-                </label>
-              </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PS LAWD 2026 - Minha Agenda</title>
+</head>
+
+<body>
+  <main>
+    <div id="schedule-container">
+      <aside class="calendar">
+        <h2 class="month"></h2>
+        <div class="days"></div>
+        <form>
+          <label class="form-date">
+            <span> Data: </span>
+            <div class="input-date">
+              <input type="date" min="2026-01-05" max="2026-07-05" required name="date" />
             </div>
-            <button type="submit">
-              <img
-                src="../../assets/images/plus.svg"
-                alt="ícone de adicionar"
-              />
-              <span>Adicionar</span>
-            </button>
-          </form>
-        </aside>
-        <section class="agenda">
-          <div class="schedules">
-            <h2>Agendamentos</h2>
-            <ul></ul>
-          </div>
-          <div class="details">
-            <h2>Detalhes</h2>
-            <div>
-              <div class="content">
-                <span>Selecione um horário para visualização dos detalhes</span>
-              </div>
+          </label>
+          <label class="form-time">
+            <span> Horário: </span>
+            <div class="input-time">
+              <input type="time" min="07:00" max="22:00" required name="time" step="1800" />
+            </div>
+          </label>
+          <div class="form-format">
+            <span> Formato: </span>
+            <div class="toggle-group">
+              <input type="radio" id="presencial" name="interview-mode" value="Presencial" required />
+              <label for="presencial">
+                <span>Presencial</span>
+              </label>
+              <input type="radio" id="remoto" name="interview-mode" value="Remoto" required />
+              <label for="remoto">
+                <span>Remoto</span>
+              </label>
+              <input type="radio" id="ambos" name="interview-mode" value="Ambos" required />
+              <label for="ambos">
+                <span> Presencial / Remoto</span>
+              </label>
             </div>
           </div>
-        </section>
-        <aside class="overview">
-          <div class="stats-container">
-            <h2>Visão Geral</h2>
-            <dl></dl>
+          <span class="error-message"></span>
+          <button type="submit">
+            <img src="../../assets/images/plus.svg" alt="ícone de adicionar" />
+            <span>Adicionar</span>
+          </button>
+        </form>
+      </aside>
+      <section class="agenda">
+        <div class="schedules">
+          <h2>Agendamentos</h2>
+          <ul></ul>
+        </div>
+        <div class="details">
+          <h2>Detalhes</h2>
+          <div>
+            <div class="content">
+              <span>Selecione um horário para visualização dos detalhes</span>
+            </div>
           </div>
-          <div class="stats-container">
-            <h2>Meus Horários</h2>
-            <dl></dl>
-          </div>
-        </aside>
-      </div>
-    </main>
-  </body>
+        </div>
+      </section>
+      <aside class="overview">
+        <div class="stats-container">
+          <h2>Visão Geral</h2>
+          <dl></dl>
+        </div>
+        <div class="stats-container">
+          <h2>Meus Horários</h2>
+          <dl></dl>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+
 </html>

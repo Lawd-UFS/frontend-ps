@@ -164,6 +164,11 @@ export const updateScheduleDetailsOnScheduleClick = (
 };
 
 const createNewSchedule = async (form, agendaContainer) => {
+  const errorMessage = form.querySelector('.error-message');
+  if (errorMessage) {
+    errorMessage.style.display = 'none';
+  }
+
   const formData = new FormData(form);
 
   const date = formData.get('date');
@@ -181,7 +186,17 @@ const createNewSchedule = async (form, agendaContainer) => {
   });
 
   if (!response.success) {
-    alert('Ocorreu um erro ao criar o horário');
+    let errorMsg = response.message || 'Ocorreu um erro ao criar o horário';
+    if (response.errors && response.errors.length > 0) {
+      errorMsg = response.errors.map(err => err.message).join(' | ');
+    }
+
+    if (errorMessage) {
+      errorMessage.textContent = errorMsg;
+      errorMessage.style.display = 'block';
+    } else {
+      alert(errorMsg);
+    }
     return;
   }
 
