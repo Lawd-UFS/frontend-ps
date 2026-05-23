@@ -78,6 +78,35 @@ const initializeElements = () => {
   closeModalButton.addEventListener('click', () => closeModal(submitDialog));
   confirmSubmitButton.addEventListener('click', handleSubmitForm);
 
+  // Toast de feedback (dentro do dialog para aparecer acima do backdrop)
+  const showToast = (message, isError = false) => {
+    const toast = document.createElement('div');
+    toast.innerText = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '2rem';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.padding = '12px 24px';
+    toast.style.backgroundColor = isError ? '#df2c1f' : '#4CAF50';
+    toast.style.color = 'white';
+    toast.style.borderRadius = '1.2rem';
+    toast.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+    toast.style.zIndex = '10000';
+    toast.style.transition = 'opacity 0.3s ease';
+    toast.style.fontFamily = "'Space Grotesk', sans-serif";
+    toast.style.fontSize = '1.5rem';
+    toast.style.fontWeight = '500';
+
+    // Inserir dentro do dialog aberto para ficar no top-layer
+    const openDialog = emailDialog.open ? emailDialog : document.body;
+    openDialog.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  };
+
   // Lógica do reenvio do email
   reSendEmailButton.addEventListener('click', async () => {
     const emailInput = document.getElementById('email').value;
@@ -97,12 +126,12 @@ const initializeElements = () => {
       );
 
       if (response.ok) {
-        alert('Email reenviado com sucesso!');
+        showToast('Email reenviado com sucesso!');
       } else {
-        alert('Erro ao reenviar email.');
+        showToast('Erro ao reenviar email.', true);
       }
     } catch (error) {
-      alert('Erro de conexão ao reenviar email.');
+      showToast('Erro de conexão ao reenviar email.', true);
     } finally {
       reSendEmailButton.disabled = false;
       reSendEmailButton.innerText = 'Reenviar email';
