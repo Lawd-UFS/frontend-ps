@@ -62,6 +62,20 @@ export function checkRequiredFields(form) {
       }
     }
 
+    if (requiredField.type === 'number') {
+      const numVal = parseInt(requiredField.value, 10);
+      const min = parseInt(requiredField.getAttribute('min'), 10);
+      const max = parseInt(requiredField.getAttribute('max'), 10);
+      if (
+        isNaN(numVal) ||
+        (!isNaN(min) && numVal < min) ||
+        (!isNaN(max) && numVal > max)
+      ) {
+        invalidFields.push(label);
+        return;
+      }
+    }
+
     if (
       requiredField.id === 'date-birth' ||
       requiredField.name === 'birthDate'
