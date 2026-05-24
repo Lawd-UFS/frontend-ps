@@ -151,34 +151,41 @@ main {
   color: var(--purple-400);
 }
 
-.social-links {
-  margin-top: 0.8rem;
-}
-
-.social-icon {
+.instagram-button {
+  margin-top: 1.2rem;
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem 1.6rem;
-  border-radius: 1.2rem;
-  color: var(--purple-300);
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem 3.6rem;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-radius: 1.4rem;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: var(--cursor-pointer);
+  box-shadow: 0 4px 20px rgba(220, 39, 67, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 400ms;
 }
 
-.social-icon:hover {
-  background-color: rgba(112, 70, 233, 0.08);
-  color: var(--purple-400);
-  transform: translateY(-1px);
+.instagram-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(220, 39, 67, 0.45);
+  filter: brightness(1.05);
 }
 
-.social-icon svg {
-  width: 2rem;
-  height: 2rem;
+.instagram-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(220, 39, 67, 0.25);
+}
+
+.instagram-button svg {
+  width: 2.2rem;
+  height: 2.2rem;
   flex-shrink: 0;
 }
 

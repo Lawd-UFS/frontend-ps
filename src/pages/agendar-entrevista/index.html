@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PS LAWD - Agendar Entrevista</title>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <p>Agendamento de Entrevista</p>
+        <div class="icons">
+          <img
+            src="../../assets/images/logo-lawd.png"
+            alt="Logo da LAWD"
+            class="img-icon"
+          />
+          <img
+            src="../../assets/images/lawd.png"
+            alt="Logotipo da LAWD"
+            class="img-lawd"
+          />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="scheduling-container">
+        <!-- STEP 1: LINK DE ACESSO REQUERIDO -->
+        <div id="step-auth" class="step-card auth-waiting-card">
+          <img src="../../assets/images/email.svg" alt="Acesso por e-mail" class="auth-icon" />
+          <h2 class="auth-title">Acesso por Link Seguro</h2>
+          <p class="subtitle">
+            Para sua segurança e comodidade, o agendamento é feito exclusivamente através do link seguro enviado para o seu e-mail.
+          </p>
+          
+          <div class="info-box">
+            <p>
+              <span class="info-step-badge">1</span>
+              Acesse o e-mail cadastrado na inscrição.
+            </p>
+            <p>
+              <span class="info-step-badge">2</span>
+              Abra a mensagem "Agende sua Entrevista".
+            </p>
+            <p>
+              <span class="info-step-badge">3</span>
+              Clique no botão de agendamento automático.
+            </p>
+          </div>
+
+          <a href="/" class="home-button">Voltar ao Início</a>
+
+          <!-- Elementos ocultos para manter compatibilidade com o script JS original -->
+          <input type="hidden" id="access-code" />
+          <button id="btn-verify" style="display: none;"></button>
+          <div id="verify-spinner" style="display: none;"></div>
+          <span id="auth-error" style="display: none;"></span>
+        </div>
+
+        <!-- STEP 2: PAINEL DE AGENDAMENTO -->
+        <div id="step-panel" class="step-card" style="display: none;">
+          <div class="user-welcome">
+            <div>
+              <h3>Olá, <span id="candidate-name">Candidato</span>!</h3>
+              <p class="status-badge active-badge">Inscrição Ativa</p>
+            </div>
+            <button id="btn-logout" class="text-btn">Sair</button>
+          </div>
+
+          <!-- Agendamento Atual (se houver) -->
+          <div id="current-booking-card" class="booking-banner" style="display: none;">
+            <div class="banner-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle-2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>Seu horário agendado</span>
+            </div>
+            <div class="banner-body">
+              <p class="booking-date" id="current-booking-date">Carregando...</p>
+              <p class="booking-mode" id="current-booking-mode">Modo: --</p>
+              <p class="reschedule-tip">Deseja alterar? Basta escolher um novo horário abaixo e confirmar a remarcação.</p>
+            </div>
+          </div>
+
+          <div class="slots-header">
+            <h4>Horários Disponíveis</h4>
+            <p>Selecione um dos horários abaixo para agendar ou remarcar.</p>
+          </div>
+
+          <!-- Lista de Horários -->
+          <div class="slots-grid" id="slots-grid">
+          </div>
+
+          <div id="no-slots-message" class="no-slots" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-x"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="m14 14-4 4"/><path d="m10 14 4 4"/></svg>
+            <p>Não há horários disponíveis no momento. Por favor, tente novamente mais tarde ou entre em contato com a equipe.</p>
+          </div>
+
+          <!-- Seletor de Modalidade para quando o horário for 'Ambos' -->
+          <div id="mode-selector-container" style="display: none;">
+            <p class="mode-selector-title">Escolha a modalidade da entrevista:</p>
+            <div class="mode-options-group">
+              <label class="mode-option">
+                <input type="radio" name="selected-mode" value="Remoto" checked />
+                <div class="mode-details">
+                  <div class="mode-name">Remoto</div>
+                  <div class="mode-desc">Via Google Meet</div>
+                </div>
+              </label>
+              <label class="mode-option">
+                <input type="radio" name="selected-mode" value="Presencial" />
+                <div class="mode-details">
+                  <div class="mode-name">Presencial</div>
+                  <div class="mode-desc">No Lab LAWD</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="panel-actions">
+            <button id="btn-confirm-booking" class="action-btn" disabled>
+              <span>Confirmar Agendamento</span>
+              <div class="btn-spinner" id="booking-spinner" style="display: none;"></div>
+            </button>
+          </div>
+        </div>
+
+        <div id="step-success" class="step-card success-card" style="display: none;">
+          <img src="../../assets/images/celebration.svg" alt="Celebração" class="success-img" />
+          <h2>Agendamento Confirmado!</h2>
+          <p class="success-message">Sua entrevista foi agendada com sucesso. Anote as informações do seu horário abaixo:</p>
+
+          <div class="receipt-card">
+            <div class="receipt-row">
+              <span class="receipt-label">Data e Hora:</span>
+              <span class="receipt-value" id="receipt-date">--</span>
+            </div>
+            <div class="receipt-row">
+              <span class="receipt-label">Modalidade:</span>
+              <span class="receipt-value" id="receipt-mode">--</span>
+            </div>
+            <div class="receipt-row" id="receipt-location-row" style="display: none;">
+              <span class="receipt-label">Local:</span>
+              <span class="receipt-value">Laboratório LAWD (DCOMP/UFS)</span>
+            </div>
+          </div>
+
+          <p class="reminder-text">Enviamos um e-mail de confirmação com os detalhes e o link de acesso (se remoto). Compareça pontualmente!</p>
+
+          <div class="success-actions">
+            <button id="btn-back-panel" class="secondary-btn">Ver Meus Horários</button>
+            <a href="/" class="home-button">Voltar ao Início</a>
+          </div>
+
+          <div class="social-links">
+            <a href="https://www.instagram.com/lawd.ufs/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram da LAWD">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.088 4.088 0 0 1 1.518.988 4.088 4.088 0 0 1 .988 1.518c.163.46.35 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.088 4.088 0 0 1-.988 1.518 4.088 4.088 0 0 1-1.518.988c-.46.163-1.26.35-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.088 4.088 0 0 1-1.518-.988 4.088 4.088 0 0 1-.988-1.518c-.163-.46-.35-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.088 4.088 0 0 1 .988-1.518A4.088 4.088 0 0 1 5.142 2.636c.46-.163 1.26-.35 2.43-.403C8.838 2.175 9.218 2.163 12 2.163M12 0C8.741 0 8.333.014 7.053.072 5.775.131 4.903.333 4.14.63a6.21 6.21 0 0 0-2.247 1.463A6.21 6.21 0 0 0 .43 4.34C.133 5.103-.07 5.975.012 7.253.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.058 1.278.26 2.15.558 2.913a6.21 6.21 0 0 0 1.463 2.247 6.21 6.21 0 0 0 2.247 1.463c.763.297 1.635.5 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.278-.058 2.15-.26 2.913-.558a6.21 6.21 0 0 0 2.247-1.463 6.21 6.21 0 0 0 1.463-2.247c.297-.763.5-1.635.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.26-2.15-.558-2.913a6.21 6.21 0 0 0-1.463-2.247A6.21 6.21 0 0 0 19.86.63C19.097.333 18.225.131 16.947.072 15.667.014 15.259 0 12 0Z" fill="currentColor"/>
+                <path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z" fill="currentColor"/>
+                <circle cx="18.406" cy="5.594" r="1.44" fill="currentColor"/>
+              </svg>
+              <span>@lawd.ufs</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -152,7 +152,7 @@ h1 {
 
 .label-main-title {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin: 0 6.25rem;
 }
 
@@ -995,5 +995,277 @@ svg:hover {
   footer .support-text {
     font-size: 1em;
     padding: 1em;
+  }
+}
+
+.scheduling-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2.5rem auto;
+  padding: 2rem;
+  background: rgba(70, 35, 167, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(187, 166, 248, 0.25);
+  border-radius: 24px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 8px 32px 0 rgba(70, 35, 167, 0.2);
+  animation: bannerGlow 4s infinite alternate;
+}
+
+.scheduling-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  color: #d7c9ff;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.btn-agendar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: #ffffff;
+  color: #4623a7;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.75rem 2.25rem;
+  height: auto !important;
+  margin-top: 0 !important;
+  border-radius: 50px;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.45);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.btn-agendar::before {
+  display: none;
+}
+
+.btn-agendar:hover {
+  background: #ffffff;
+  color: #381b8c;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.65);
+  border-color: #ffffff;
+}
+
+.btn-agendar:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.btn-agendar span,
+.btn-agendar svg {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-agendar svg {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-agendar:hover svg {
+  transform: rotate(15deg) scale(1.15);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.email-form-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0.5rem auto 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+#scheduling-email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.email-prompt-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.88rem;
+  color: #c9bcfd;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.email-input {
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(187, 166, 248, 0.45);
+  border-radius: 50px;
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  padding: 0.85rem 1.5rem;
+  outline: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.email-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.email-input:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-confirm-email {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #4623a7;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.75rem;
+  height: auto !important;
+  margin-top: 0 !important;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.btn-confirm-email:hover {
+  background: #f3f0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.45);
+}
+
+.btn-confirm-email:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-feedback {
+  margin-top: 0rem;
+  margin-bottom: 1.25rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 440px;
+}
+
+.form-feedback.success {
+  background: rgba(46, 213, 115, 0.25);
+  border: 1.5px solid #2ed573;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.form-feedback.error {
+  background: rgba(255, 71, 87, 0.25);
+  border: 1.5px solid #ff4757;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Otimização de espaçamentos para evitar scroll vertical */
+body {
+  overflow-y: hidden;
+}
+
+.top {
+  margin-top: 1vh !important;
+}
+
+section {
+  margin-top: 1.5vh !important;
+}
+
+.scheduling-banner {
+  margin: 0.75rem auto !important;
+  padding: 1.25rem 1.75rem !important;
+}
+
+.footer {
+  margin: 1.5vh 0 !important;
+}
+
+.quote-2 {
+  margin-top: 5px !important;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(70, 35, 167, 0.2);
+  border-top: 2px solid #4623a7;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 8px;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bannerGlow {
+  0% {
+    border-color: rgba(187, 166, 248, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(70, 35, 167, 0.15);
+  }
+  100% {
+    border-color: rgba(187, 166, 248, 0.55);
+    box-shadow: 0 8px 32px 0 rgba(112, 70, 233, 0.35);
+  }
+}
+
+@media (max-width: 768px) {
+  .scheduling-banner {
+    margin: 2rem 1.5rem;
+    padding: 1.5rem;
+  }
+  .scheduling-text {
+    font-size: 1rem;
+  }
+  .btn-agendar {
+    font-size: 1.05rem;
+    padding: 0.85rem 1.75rem;
   }
 }
