@@ -1,0 +1,230 @@
+body {
+  background-image: url(../../assets/images/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar {
+  border-radius: 5rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  display: flex;
+  width: 100%;
+  max-width: 78rem;
+  padding: 1.2rem 2.8rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2.4rem 3.2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.navbar p {
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.navbar .icons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.navbar .img-lawd {
+  width: 3.2em;
+  height: auto;
+}
+
+.navbar .img-icon {
+  width: 1.8em;
+  height: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3.6rem;
+  flex: 1;
+}
+
+.confirmation-card {
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 2.4rem;
+  border: 1px solid rgba(70, 35, 167, 0.06);
+  width: 100%;
+  max-width: 52rem;
+  overflow: hidden;
+  box-shadow:
+    0 10px 30px -10px rgba(70, 35, 167, 0.08),
+    0 20px 40px -5px rgba(70, 35, 167, 0.04);
+  animation: opening 450ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.state {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.state img {
+  width: 100px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(112, 70, 233, 0.15));
+  animation: opening 350ms ease-in-out backwards;
+}
+
+.state h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--purple-400);
+  margin: 0;
+}
+
+.state p {
+  color: var(--gray);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 38rem;
+}
+
+.home-button {
+  margin-top: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 3.6rem;
+  background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-radius: 1.4rem;
+  text-decoration: none;
+  cursor: var(--cursor-pointer);
+  box-shadow: 0 4px 15px rgba(70, 35, 167, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 400ms;
+}
+
+.home-button:hover {
+  background: linear-gradient(135deg, #8156fa 0%, #4f2cb8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(112, 70, 233, 0.35);
+}
+
+.home-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(112, 70, 233, 0.2);
+}
+
+.home-button.second {
+  background: var(--purple-white);
+  border: 2px solid rgba(112, 70, 233, 0.2);
+  color: var(--purple-400);
+}
+
+.home-button.second:hover {
+  background-color: #ede8ff;
+  border-color: var(--purple-300);
+  color: var(--purple-400);
+}
+
+.social-links {
+  margin-top: 0.8rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 1.2rem;
+  color: var(--purple-300);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: var(--cursor-pointer);
+}
+
+.social-icon:hover {
+  background-color: rgba(112, 70, 233, 0.08);
+  color: var(--purple-400);
+  transform: translateY(-1px);
+}
+
+.social-icon svg {
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.spinner {
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 4px solid rgba(112, 70, 233, 0.15);
+  border-top-color: var(--purple-300);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes opening {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes divs-section4 {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 585px) {
+  main {
+    padding: 1.6rem;
+  }
+
+  .state {
+    padding: 4rem 2.4rem;
+  }
+}
