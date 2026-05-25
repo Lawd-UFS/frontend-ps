@@ -160,7 +160,7 @@ main {
   border: 1px solid rgba(70, 35, 167, 0.05);
   padding: 4rem;
   width: 100%;
-  max-width: 58rem;
+  max-width: 78rem;
   margin: 0 auto;
   box-shadow:
     0 10px 30px -10px rgba(70, 35, 167, 0.08),
@@ -182,18 +182,18 @@ main {
 }
 
 .auth-title {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   font-weight: 700;
   color: var(--purple-400);
   margin-bottom: 1rem;
 }
 
 .auth-subtitle {
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   line-height: 1.6;
   color: var(--gray);
   margin-bottom: 2.4rem;
-  max-width: 36rem;
+  max-width: 46rem;
 }
 
 .auth-error {
@@ -211,12 +211,12 @@ main {
   margin-bottom: 2.4rem;
   text-align: left;
   width: 100%;
-  max-width: 32rem;
+  max-width: 40rem;
 }
 
 .info-box p {
   color: var(--purple-400);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   margin: 0 0 1.2rem;
   font-weight: 600;
   display: flex;
@@ -347,14 +347,14 @@ main {
 .slots-top-bar {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
 .slots-info-label {
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 1.5px;
   color: var(--purple-300);
@@ -363,7 +363,7 @@ main {
 }
 
 .slots-info-count {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--purple-400);
 }
@@ -378,7 +378,7 @@ main {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   color: var(--gray);
 }
 
@@ -403,7 +403,7 @@ main {
 
 .slot-card {
   background: #ffffff;
-  border: 1.5px solid rgba(112, 70, 233, 0.10);
+  border: 2px solid rgba(112, 70, 233, 0.15);
   border-radius: 1.2rem;
   padding: 1.4rem;
   cursor: var(--cursor-pointer);
@@ -412,6 +412,7 @@ main {
   flex-direction: column;
   gap: 0.4rem;
   position: relative;
+  box-shadow: 0 4px 15px rgba(112, 70, 233, 0.08);
 }
 
 .slot-card:hover:not(.occupied) {
@@ -450,10 +451,13 @@ main {
 }
 
 .slot-mode-badge {
-  font-size: 0.85rem;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0 1.2rem 0 1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
@@ -479,25 +483,25 @@ main {
 }
 
 .slot-date {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--purple-400);
 }
 
 .slot-day {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--gray);
   font-weight: 500;
 }
 
 .slot-time {
-  font-size: 1rem;
+  font-size: 1.4rem;
   color: var(--purple-300);
   font-weight: 600;
 }
 
 .slot-occupied-label {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: var(--gray-light);
   font-weight: 600;
   text-transform: uppercase;
@@ -523,7 +527,7 @@ main {
 }
 
 .slots-footer-note {
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   color: var(--gray);
   line-height: 1.5;
   border-top: 1px solid rgba(112, 70, 233, 0.08);
@@ -542,7 +546,7 @@ main {
 }
 
 .confirm-title {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   font-weight: 300;
   color: var(--purple-400);
   margin-bottom: 0.6rem;
@@ -555,7 +559,7 @@ main {
 }
 
 .confirm-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--gray);
   margin-bottom: 2.4rem;
   line-height: 1.5;
@@ -590,7 +594,7 @@ main {
 }
 
 .confirm-detail-label {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--gray);
@@ -599,14 +603,14 @@ main {
 }
 
 .confirm-detail-date {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--purple-400);
   margin-bottom: 0.3rem;
 }
 
 .confirm-detail-meta {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: var(--gray);
   display: flex;
   align-items: center;
@@ -629,7 +633,7 @@ main {
 }
 
 .confirm-detail-value {
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--purple-300);
 }
@@ -645,7 +649,7 @@ main {
 
 .mode-selector-title {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--purple-400);
   margin-bottom: 1rem;
 }
@@ -682,12 +686,12 @@ main {
 
 .mode-name {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--purple-400);
 }
 
 .mode-desc {
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   color: var(--gray);
 }
 
@@ -719,7 +723,7 @@ main {
 }
 
 .success-title {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   font-weight: 300;
   color: var(--purple-400);
   margin-bottom: 0.8rem;
@@ -732,11 +736,11 @@ main {
 }
 
 .success-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--gray);
   margin-bottom: 2.4rem;
   line-height: 1.6;
-  max-width: 36rem;
+  max-width: 46rem;
 }
 
 .success-details-card {
@@ -770,7 +774,7 @@ main {
 }
 
 .success-detail-label {
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--gray);
@@ -779,14 +783,14 @@ main {
 }
 
 .success-detail-date {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--purple-400);
   margin-bottom: 0.2rem;
 }
 
 .success-detail-meta {
-  font-size: 1.05rem;
+  font-size: 1.4rem;
   color: var(--gray);
   display: flex;
   align-items: center;
@@ -831,7 +835,7 @@ main {
   color: #ffffff;
   border: none;
   font-family: var(--font-main);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 700;
   padding: 1rem 2rem;
   height: 3.8rem;
@@ -874,7 +878,7 @@ main {
   color: var(--purple-400);
   font-family: var(--font-main);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   border-radius: 1.2rem;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -903,7 +907,7 @@ main {
   color: #ffffff;
   font-family: var(--font-main);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   border-radius: 1.2rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(70, 35, 167, 0.25);
