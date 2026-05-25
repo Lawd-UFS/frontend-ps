@@ -164,11 +164,6 @@ export const updateScheduleDetailsOnScheduleClick = (
 };
 
 const createNewSchedule = async (form, agendaContainer) => {
-  const errorMessage = form.querySelector('.error-message');
-  if (errorMessage) {
-    errorMessage.style.display = 'none';
-  }
-
   const formData = new FormData(form);
 
   const date = formData.get('date');

@@ -256,11 +256,11 @@ export const createOverview = async (container) => {
       <dd>${totalTimes}</dd>
     </div>
     <div class="stats-item">
-      <dt>Agendamentos realizados:</dt>
+      <dt>Candidatos agendados:</dt>
       <dd>${scheduledTimes}</dd>
     </div>
     <div class="stats-item">
-      <dt>Agendamentos pendentes:</dt>
+      <dt>Aguardando agendamento:</dt>
       <dd>${unscheduledTimes} ${pendingStatsBadge}</dd>
     </div>
   `;

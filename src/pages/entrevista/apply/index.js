@@ -76,14 +76,18 @@ export const ApplyPage = async () => {
         alert('Entrevista salva com sucesso');
         window.location.href = '/minha-agenda';
       } else {
-        const errorMessage = result.errors
-          .map((error) => {
-            const question = error.field.split('.')[1];
-            const errorMessage = `Questão ${question + 1}: ${error.message}`;
-            return errorMessage;
-          })
-          .join('\n');
-        alert(`Erro ao salvar entrevista: ${result.message}\n${errorMessage}`);
+        const errorList = result.errors
+          ? result.errors
+              .map((error) => {
+                if (error.field && error.field.includes('.')) {
+                  const question = error.field.split('.')[1];
+                  return `Questão ${Number(question) + 1}: ${error.message}`;
+                }
+                return `${error.message}`;
+              })
+              .join('\n')
+          : '';
+        alert(`Erro ao salvar entrevista: ${result.message}${errorList ? '\n' + errorList : ''}`);
       }
     });
 
