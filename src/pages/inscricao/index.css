@@ -187,7 +187,7 @@ header {
   width: 100%;
   max-width: 78rem;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 10px 30px -10px rgba(70, 35, 167, 0.08),
     0 20px 40px -5px rgba(70, 35, 167, 0.04);
   animation: opening 450ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
@@ -286,11 +286,13 @@ hr {
   padding: 4rem 4.8rem;
 }
 
-#section2, #section3 {
+#section2,
+#section3 {
   padding: 2.2rem 4.8rem;
 }
 
-#section2 form .column, #section3 form .column {
+#section2 form .column,
+#section3 form .column {
   gap: 1.5rem;
 }
 
@@ -417,7 +419,7 @@ form select:focus {
 
 /* Error States */
 label.error {
-  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -577,7 +579,7 @@ dialog::backdrop {
   align-items: center;
 }
 
-#section4 > div {
+#section4>div {
   display: flex;
   align-items: center;
   gap: 4.8rem;
@@ -693,6 +695,7 @@ span {
     opacity: 0;
     transform: scale(0.96) translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -704,6 +707,7 @@ span {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+
   to {
     opacity: 0;
     transform: scale(0.96) translateY(20px);
@@ -715,6 +719,7 @@ span {
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -722,10 +727,27 @@ span {
 }
 
 @keyframes shake {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-  40%, 60% { transform: translate3d(4px, 0, 0); }
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 @keyframes modalOpening {
@@ -733,6 +755,7 @@ span {
     opacity: 0;
     transform: scale(0.9) translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -748,6 +771,7 @@ label.show-animation:not(.checkbox-label) {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -763,8 +787,8 @@ label.show-animation:not(.checkbox-label) {
     flex-wrap: wrap;
     gap: 2.4rem;
   }
-  
-  #section4 > div {
+
+  #section4>div {
     flex-direction: column;
     gap: 3.2rem;
     text-align: center;
@@ -820,7 +844,7 @@ label.show-animation:not(.checkbox-label) {
   main h1 {
     font-size: 2.4rem;
   }
-  
+
   .navbar p {
     font-size: 1.4rem;
   }
@@ -828,13 +852,13 @@ label.show-animation:not(.checkbox-label) {
   .navbar {
     padding: 1rem 2rem;
   }
-  
+
   .icon-section {
     height: 3rem;
     width: 3rem;
     font-size: 1.2rem;
   }
-  
+
   hr {
     width: 2.2rem;
   }

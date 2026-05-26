@@ -1,247 +1,331 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PS LAWD 2026 - Agendar Entrevista</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
-    <header>
-      <nav class="navbar">
-        <div class="nav-left">
-          <img src="../../assets/images/logo-lawd.png" alt="Logo LAWD" class="nav-logo-icon" />
-          <span class="nav-brand">L A W D</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PS LAWD 2026 - Agendar Entrevista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <!-- ═══════════════════════════ NAVBAR ═══════════════════════════ -->
+  <header>
+    <nav class="navbar">
+      <div class="nav-left">
+        <img src="../../assets/images/logo-lawd.png" alt="Logo LAWD" class="nav-logo-icon" />
+        <span class="nav-brand">L A W D</span>
+      </div>
+      <div class="nav-center">
+        <span class="nav-badge">Processo Seletivo · 2026</span>
+      </div>
+      <div class="nav-right">
+        <button id="btn-logout" class="nav-sair" style="display: none;">SAIR</button>
+        <img src="../../assets/images/logo-lawd.png" alt="LAWD" class="nav-logo-right" />
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ═════════════════ STEP AUTH — Sem código de acesso ═════════════════ -->
+    <section id="step-auth" class="page-section">
+      <div class="step-card auth-card">
+        <img src="../../assets/images/email.svg" alt="Acesso por e-mail" class="auth-icon" />
+        <h2 class="auth-title">Acesso por Link Seguro</h2>
+        <p class="auth-subtitle">
+          Para sua segurança e comodidade, o agendamento é feito exclusivamente
+          através do link seguro enviado para o seu e-mail.
+        </p>
+        <div class="info-box">
+          <p><span class="info-badge">1</span> Acesse o e-mail cadastrado na inscrição.</p>
+          <p><span class="info-badge">2</span> Abra a mensagem "Agende sua Entrevista".</p>
+          <p><span class="info-badge">3</span> Clique no botão de agendamento automático.</p>
         </div>
-        <div class="nav-center">
-          <span class="nav-badge">Processo Seletivo · 2026</span>
+        <a href="/" class="btn-secondary">Voltar ao Início</a>
+
+        <!-- Hidden elements for JS compatibility -->
+        <input type="hidden" id="access-code" />
+        <span id="auth-error" class="auth-error" style="display: none;"></span>
+      </div>
+    </section>
+
+    <!-- ═════════════════ STEP PANEL — Seleção de Horários ═════════════════ -->
+    <section id="step-panel" class="page-section" style="display: none;">
+      <!-- Header com etapa + título + filtros -->
+      <div class="panel-header">
+        <div class="panel-header-left">
+          <p class="step-label">ETAPA 02 / 03 — AGENDAMENTO</p>
+          <h1 class="panel-title">Escolha um horário <span class="accent">disponível</span></h1>
+          <p class="panel-logged-as">Logado como <strong id="candidate-email-display">candidato@lawd.com</strong></p>
         </div>
-        <div class="nav-right">
-          <button id="btn-logout" class="nav-sair" style="display: none;">SAIR</button>
-          <img src="../../assets/images/logo-lawd.png" alt="LAWD" class="nav-logo-right" />
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <!-- ═════════════════ STEP AUTH — Sem código de acesso ═════════════════ -->
-      <section id="step-auth" class="page-section">
-        <div class="step-card auth-card">
-          <img src="../../assets/images/email.svg" alt="Acesso por e-mail" class="auth-icon" />
-          <h2 class="auth-title">Acesso por Link Seguro</h2>
-          <p class="auth-subtitle">
-            Para sua segurança e comodidade, o agendamento é feito exclusivamente
-            através do link seguro enviado para o seu e-mail.
-          </p>
-          <div class="info-box">
-            <p><span class="info-badge">1</span> Acesse o e-mail cadastrado na inscrição.</p>
-            <p><span class="info-badge">2</span> Abra a mensagem "Agende sua Entrevista".</p>
-            <p><span class="info-badge">3</span> Clique no botão de agendamento automático.</p>
-          </div>
-          <a href="/" class="btn-secondary">Voltar ao Início</a>
-
-          <!-- Hidden elements for JS compatibility -->
-          <input type="hidden" id="access-code" />
-          <span id="auth-error" class="auth-error" style="display: none;"></span>
-        </div>
-      </section>
-
-      <!-- ═════════════════ STEP PANEL — Seleção de Horários ═════════════════ -->
-      <section id="step-panel" class="page-section" style="display: none;">
-        <!-- Header com etapa + título + filtros -->
-        <div class="panel-header">
-          <div class="panel-header-left">
-            <p class="step-label">ETAPA 02 / 03 — AGENDAMENTO</p>
-            <h1 class="panel-title">Escolha um horário <span class="accent">disponível</span></h1>
-            <p class="panel-logged-as">Logado como <strong id="candidate-email-display">candidato@lawd.com</strong></p>
-          </div>
-          <div class="panel-header-right">
-            <div class="filter-tabs" id="filter-tabs">
-              <button class="filter-tab active" data-filter="all">TODOS</button>
-              <button class="filter-tab" data-filter="Presencial">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                PRESENCIAL
-              </button>
-              <button class="filter-tab" data-filter="Remoto">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
-                ONLINE
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card branco com grid de horários -->
-        <div class="slots-container">
-          <div class="slots-top-bar">
-            <div class="slots-info">
-              <p class="slots-info-label">HORÁRIOS DISPONIBILIZADOS</p>
-            </div>
-            <div class="slots-info-right">
-              <p class="slots-info-count" id="slots-count">
-                <span id="open-count">0</span> vagas abertas
-              </p>
-            </div>
-          </div>
-
-          <!-- Grid de horários -->
-          <div class="slots-grid" id="slots-grid"></div>
-
-          <!-- Mensagem sem horários -->
-          <div id="no-slots-message" class="no-slots" style="display: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="m14 14-4 4"/><path d="m10 14 4 4"/></svg>
-            <p>Não há horários disponíveis no momento. Por favor, tente novamente mais tarde.</p>
-          </div>
-
-          <p class="slots-footer-note">
-            As entrevistas têm duração estimada de 30 minutos. Você poderá desmarcar e escolher outro horário até 24h antes da data agendada.
-          </p>
-        </div>
-      </section>
-
-      <!-- ═════════════════ STEP CONFIRM — Revisão antes de confirmar ═════════════════ -->
-      <section id="step-confirm" class="page-section" style="display: none;">
-        <div class="step-card confirm-card">
-          <p class="step-label">ETAPA 03 — REVISÃO</p>
-          <h2 class="confirm-title">Confirmar <span class="accent">agendamento</span></h2>
-          <p class="confirm-subtitle">Revise os detalhes antes de finalizar. Você ainda poderá desmarcar depois.</p>
-
-          <div class="confirm-details-card">
-            <div class="confirm-details-header">
-              <div class="confirm-icon-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/></svg>
-              </div>
-              <div>
-                <p class="confirm-detail-label">DATA E HORÁRIO</p>
-                <p class="confirm-detail-date" id="confirm-date">21 de Janeiro · Sexta</p>
-                <p class="confirm-detail-meta">
-                  <span id="confirm-time">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    14h00
-                  </span>
-                  · 
-                  <span id="confirm-mode-meta">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Presencial
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div class="confirm-details-footer">
-              <div>
-                <p class="confirm-detail-label">CANDIDATO</p>
-                <p class="confirm-detail-value" id="confirm-candidate">candidato@lawd.com</p>
-              </div>
-              <div>
-                <p class="confirm-detail-label">DURAÇÃO</p>
-                <p class="confirm-detail-value">~ 30 minutos</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Seletor de Modalidade para quando o horário for 'Ambos' -->
-          <div id="mode-selector-container" style="display: none;">
-            <p class="mode-selector-title">Escolha a modalidade da entrevista:</p>
-            <div class="mode-options-group">
-              <label class="mode-option">
-                <input type="radio" name="selected-mode" value="Remoto" checked />
-                <div class="mode-details">
-                  <div class="mode-name">Remoto</div>
-                  <div class="mode-desc">Via Discord</div>
-                </div>
-              </label>
-              <label class="mode-option">
-                <input type="radio" name="selected-mode" value="Presencial" />
-                <div class="mode-details">
-                  <div class="mode-name">Presencial</div>
-                  <div class="mode-desc">No Lab LAWD</div>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <div class="confirm-actions">
-            <button id="btn-back-to-panel" class="btn-secondary">Voltar</button>
-            <button id="btn-confirm-booking" class="btn-primary">
-              <span>Confirmar agendamento</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              <div class="btn-spinner" id="booking-spinner" style="display: none;"></div>
+        <div class="panel-header-right">
+          <div class="filter-tabs" id="filter-tabs">
+            <button class="filter-tab active" data-filter="all">TODOS</button>
+            <button class="filter-tab" data-filter="Presencial">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              PRESENCIAL
+            </button>
+            <button class="filter-tab" data-filter="Remoto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="14" x="2" y="3" rx="2" />
+                <line x1="8" x2="16" y1="21" y2="21" />
+                <line x1="12" x2="12" y1="17" y2="21" />
+              </svg>
+              ONLINE
             </button>
           </div>
         </div>
-      </section>
+      </div>
 
-      <!-- ═════════════════ STEP SUCCESS — Agendamento Confirmado ═════════════════ -->
-      <section id="step-success" class="page-section" style="display: none;">
-        <div class="step-card success-card">
-          <div class="success-icon-wrapper">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="m9 16 2 2 4-4"/></svg>
+      <!-- Card branco com grid de horários -->
+      <div class="slots-container">
+        <div class="slots-top-bar">
+          <div class="slots-info">
+            <p class="slots-info-label">HORÁRIOS DISPONIBILIZADOS</p>
           </div>
-          <h2 class="success-title">Entrevista <span class="accent">agendada!</span></h2>
-          <p class="success-subtitle">
-            Você receberá um e-mail de confirmação com os detalhes e o link de acesso, caso a entrevista seja online.
-          </p>
-
-          <div class="success-details-card">
-            <div class="success-details-left">
-              <div class="success-icon-small">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/></svg>
-              </div>
-              <div>
-                <p class="success-detail-label">AGENDAMENTO</p>
-                <p class="success-detail-date" id="success-date">20 de Janeiro · Quinta</p>
-                <p class="success-detail-meta">
-                  <span id="success-time">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    16h00
-                  </span>
-                  · 
-                  <span id="success-mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
-                    Online
-                  </span>
-                </p>
-              </div>
-            </div>
-            <div class="success-confirmed-badge">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              CONFIRMADO
-            </div>
-          </div>
-
-          <div class="success-actions">
-            <button id="btn-change-slot" class="btn-secondary">Trocar horário</button>
-            <button id="btn-cancel-booking" class="btn-danger">Desmarcar entrevista</button>
+          <div class="slots-info-right">
+            <p class="slots-info-count" id="slots-count">
+              <span id="open-count">0</span> vagas abertas
+            </p>
           </div>
         </div>
-      </section>
-    </main>
 
-    <div id="cancel-modal-overlay" class="modal-overlay" style="display: none;">
-      <div class="step-card modal-card">
-        <div class="modal-icon-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <!-- Grid de horários -->
+        <div class="slots-grid" id="slots-grid"></div>
+
+        <!-- Mensagem sem horários -->
+        <div id="no-slots-message" class="no-slots" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <path d="m14 14-4 4" />
+            <path d="m10 14 4 4" />
+          </svg>
+          <p>Não há horários disponíveis no momento. Por favor, tente novamente mais tarde.</p>
         </div>
-        <h2 class="modal-title">Desmarcar Entrevista</h2>
-        <p class="modal-subtitle">Tem certeza que deseja desmarcar sua entrevista? Esta ação não pode ser desfeita e você perderá o seu horário.</p>
-        <div class="modal-actions">
-          <button id="btn-modal-close" class="btn-secondary">Voltar</button>
-          <button id="btn-modal-confirm" class="btn-danger">Sim, desmarcar</button>
+
+        <p class="slots-footer-note">
+          As entrevistas têm duração estimada de 30 minutos. Você poderá desmarcar e escolher outro horário até 24h
+          antes da data agendada.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═════════════════ STEP CONFIRM — Revisão antes de confirmar ═════════════════ -->
+    <section id="step-confirm" class="page-section" style="display: none;">
+      <div class="step-card confirm-card">
+        <p class="step-label">ETAPA 03 — REVISÃO</p>
+        <h2 class="confirm-title">Confirmar <span class="accent">agendamento</span></h2>
+        <p class="confirm-subtitle">Revise os detalhes antes de finalizar. Você ainda poderá desmarcar depois.</p>
+
+        <div class="confirm-details-card">
+          <div class="confirm-details-header">
+            <div class="confirm-icon-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M3 10h18" />
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+              </svg>
+            </div>
+            <div>
+              <p class="confirm-detail-label">DATA E HORÁRIO</p>
+              <p class="confirm-detail-date" id="confirm-date">21 de Janeiro · Sexta</p>
+              <p class="confirm-detail-meta">
+                <span id="confirm-time">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  14h00
+                </span>
+                ·
+                <span id="confirm-mode-meta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  Presencial
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="confirm-details-footer">
+            <div>
+              <p class="confirm-detail-label">CANDIDATO</p>
+              <p class="confirm-detail-value" id="confirm-candidate">candidato@lawd.com</p>
+            </div>
+            <div>
+              <p class="confirm-detail-label">DURAÇÃO</p>
+              <p class="confirm-detail-value">~ 30 minutos</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seletor de Modalidade para quando o horário for 'Ambos' -->
+        <div id="mode-selector-container" style="display: none;">
+          <p class="mode-selector-title">Escolha a modalidade da entrevista:</p>
+          <div class="mode-options-group">
+            <label class="mode-option">
+              <input type="radio" name="selected-mode" value="Remoto" checked />
+              <div class="mode-details">
+                <div class="mode-name">Remoto</div>
+                <div class="mode-desc">Via Discord</div>
+              </div>
+            </label>
+            <label class="mode-option">
+              <input type="radio" name="selected-mode" value="Presencial" />
+              <div class="mode-details">
+                <div class="mode-name">Presencial</div>
+                <div class="mode-desc">No Lab LAWD</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="confirm-actions">
+          <button id="btn-back-to-panel" class="btn-secondary">Voltar</button>
+          <button id="btn-confirm-booking" class="btn-primary">
+            <span>Confirmar agendamento</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+            <div class="btn-spinner" id="booking-spinner" style="display: none;"></div>
+          </button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Wave decorativa no rodapé -->
-    <div class="wave-bottom">
-      <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,70 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.08)"/>
-        <path d="M0,80 C360,40 720,100 1080,60 C1260,40 1380,50 1440,55 L1440,120 L0,120 Z" fill="rgba(255,255,255,0.05)"/>
-      </svg>
+    <!-- ═════════════════ STEP SUCCESS — Agendamento Confirmado ═════════════════ -->
+    <section id="step-success" class="page-section" style="display: none;">
+      <div class="step-card success-card">
+        <div class="success-icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" />
+            <path d="M3 10h18" />
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <path d="m9 16 2 2 4-4" />
+          </svg>
+        </div>
+        <h2 class="success-title">Entrevista <span class="accent">agendada!</span></h2>
+        <p class="success-subtitle">
+          Você receberá um e-mail de confirmação com os detalhes e o link de acesso, caso a entrevista seja online.
+        </p>
+
+        <div class="success-details-card">
+          <div class="success-details-left">
+            <div class="success-icon-small">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" />
+                <path d="M3 10h18" />
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+              </svg>
+            </div>
+            <div>
+              <p class="success-detail-label">AGENDAMENTO</p>
+              <p class="success-detail-date" id="success-date">20 de Janeiro · Quinta</p>
+              <p class="success-detail-meta">
+                <span id="success-time">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  16h00
+                </span>
+                ·
+                <span id="success-mode">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="14" x="2" y="3" rx="2" />
+                    <line x1="8" x2="16" y1="21" y2="21" />
+                    <line x1="12" x2="12" y1="17" y2="21" />
+                  </svg>
+                  Online
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="success-confirmed-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            CONFIRMADO
+          </div>
+        </div>
+
+        <p class="success-subtitle" style="margin-top: 15px; font-weight: bold; font-size: 14px;">
+          Atenção: As entrevistas online e avisos ocorrem no nosso Discord.
+        </p>
+
+        <div class="success-actions" style="margin-top: 20px;">
+          <a href="https://discord.com/invite/8yRDGWXgZ" target="_blank" rel="noopener noreferrer" class="btn-primary"
+            style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; width: 100%; margin-bottom: 15px; background-color: #5865F2;">
+            <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a67.59,67.59,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.33,46,96.22,53,91.08,65.69,84.69,65.69Z" />
+            </svg>
+            Entrar no Discord
+          </a>
+          <button id="btn-change-slot" class="btn-secondary">Trocar horário</button>
+          <button id="btn-cancel-booking" class="btn-danger">Desmarcar entrevista</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="cancel-modal-overlay" class="modal-overlay" style="display: none;">
+    <div class="step-card modal-card">
+      <div class="modal-icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="15" y1="9" x2="9" y2="15" />
+          <line x1="9" y1="9" x2="15" y2="15" />
+        </svg>
+      </div>
+      <h2 class="modal-title">Desmarcar Entrevista</h2>
+      <p class="modal-subtitle">Tem certeza que deseja desmarcar sua entrevista? Esta ação não pode ser desfeita e você
+        perderá o seu horário.</p>
+      <div class="modal-actions">
+        <button id="btn-modal-close" class="btn-secondary">Voltar</button>
+        <button id="btn-modal-confirm" class="btn-danger">Sim, desmarcar</button>
+      </div>
     </div>
-  </body>
+  </div>
+
+  <!-- Wave decorativa no rodapé -->
+  <div class="wave-bottom">
+    <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,70 L1440,120 L0,120 Z"
+        fill="rgba(255,255,255,0.08)" />
+      <path d="M0,80 C360,40 720,100 1080,60 C1260,40 1380,50 1440,55 L1440,120 L0,120 Z"
+        fill="rgba(255,255,255,0.05)" />
+    </svg>
+  </div>
+</body>
+
 </html>

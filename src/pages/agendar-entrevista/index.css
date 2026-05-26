@@ -46,7 +46,10 @@ body {
   cursor: var(--cursor-default);
 }
 
-button, a { cursor: var(--cursor-pointer); }
+button,
+a {
+  cursor: var(--cursor-pointer);
+}
 
 /* ═══════════════════════════ NAVBAR ═══════════════════════════ */
 
@@ -123,7 +126,9 @@ header {
   transition: opacity 0.3s;
 }
 
-.nav-sair:hover { opacity: 0.7; }
+.nav-sair:hover {
+  opacity: 0.7;
+}
 
 .nav-logo-right {
   width: 2rem;
@@ -148,8 +153,15 @@ main {
 }
 
 @keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ═══════════════════════════ STEP CARD (Genérico) ═══════════════════════════ */
@@ -224,7 +236,9 @@ main {
   gap: 1rem;
 }
 
-.info-box p:last-child { margin-bottom: 0; }
+.info-box p:last-child {
+  margin-bottom: 0;
+}
 
 .info-badge {
   background-color: var(--purple-300);
@@ -251,7 +265,9 @@ main {
   flex-wrap: wrap;
 }
 
-.panel-header-left { flex: 1; }
+.panel-header-left {
+  flex: 1;
+}
 
 .step-label {
   color: rgba(255, 255, 255, 0.7);
@@ -316,7 +332,9 @@ main {
   border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.filter-tab:last-child { border-right: none; }
+.filter-tab:last-child {
+  border-right: none;
+}
 
 .filter-tab:hover {
   color: #ffffff;
@@ -388,9 +406,17 @@ main {
   border-radius: 50%;
 }
 
-.legend-dot.available { background-color: var(--gray-light); }
-.legend-dot.selected  { background-color: var(--purple-300); }
-.legend-dot.occupied  { background-color: #e0dce8; }
+.legend-dot.available {
+  background-color: var(--gray-light);
+}
+
+.legend-dot.selected {
+  background-color: var(--purple-300);
+}
+
+.legend-dot.occupied {
+  background-color: #e0dce8;
+}
 
 /* ═══════════════════════ Slots Grid ═══════════════════════ */
 
@@ -933,7 +959,9 @@ main {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ═══════════════════════ WAVE DECORATIVA ═══════════════════════ */
@@ -1003,11 +1031,13 @@ main {
     font-size: 2.2rem;
   }
 
-  .confirm-title, .success-title {
+  .confirm-title,
+  .success-title {
     font-size: 2.2rem;
   }
 
-  .confirm-actions, .success-actions {
+  .confirm-actions,
+  .success-actions {
     flex-direction: column;
   }
 
@@ -1055,7 +1085,10 @@ main {
 /* ═══════════════════════ MODAL ═══════════════════════ */
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -1067,8 +1100,13 @@ main {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-card {
