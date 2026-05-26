@@ -77,6 +77,13 @@ header {
   font-weight: 500;
 }
 
+.done_button.active,
+.scheduling_button.active {
+  background-color: var(--purple-200);
+  border-color: var(--indigo-700);
+  font-weight: 500;
+}
+
 .done_button img,
 .scheduling_button img {
   width: 1em;
@@ -86,6 +93,13 @@ header {
 
 .delete_button {
   border: none;
+  padding: 0.5rem;
+}
+
+.delete_button.active {
+  background-color: var(--purple-200);
+  border: 1.2px solid var(--indigo-700);
+  border-radius: 10px;
 }
 
 .delete_button img {

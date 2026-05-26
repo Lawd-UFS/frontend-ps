@@ -49,6 +49,14 @@ body {
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   font-weight: 350;
+  cursor: var(--cursor-pointer);
+  transition: all 0.2s ease;
+}
+
+.schedules-header button.active {
+  background: var(--purple-200);
+  border-color: var(--indigo-700);
+  font-weight: 500;
 }
 
 .filter-button img {
