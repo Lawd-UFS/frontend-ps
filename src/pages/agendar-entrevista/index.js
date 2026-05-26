@@ -36,6 +36,11 @@ const successMode = document.getElementById('success-mode');
 const btnChangeSlot = document.getElementById('btn-change-slot');
 const btnCancelBooking = document.getElementById('btn-cancel-booking');
 
+// Modal Cancelamento
+const cancelModalOverlay = document.getElementById('cancel-modal-overlay');
+const btnModalClose = document.getElementById('btn-modal-close');
+const btnModalConfirm = document.getElementById('btn-modal-confirm');
+
 // ═══════════════════════════════════════════════════════════════
 // State
 // ═══════════════════════════════════════════════════════════════
@@ -68,7 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
   btnBackToPanel.addEventListener('click', () => showStep('panel'));
   btnConfirmBooking.addEventListener('click', confirmReservation);
   btnChangeSlot.addEventListener('click', () => showStep('panel'));
-  btnCancelBooking.addEventListener('click', cancelBooking);
+  btnCancelBooking.addEventListener('click', () => {
+    if (!currentChatbotId) return;
+    cancelModalOverlay.style.display = 'flex';
+  });
+  
+  btnModalClose.addEventListener('click', () => {
+    cancelModalOverlay.style.display = 'none';
+  });
+  btnModalConfirm.addEventListener('click', cancelBooking);
 
   // Filter tabs
   filterTabs.addEventListener('click', (e) => {
@@ -378,8 +391,8 @@ async function confirmReservation() {
 async function cancelBooking() {
   if (!currentChatbotId) return;
 
-  const confirmed = confirm('Tem certeza que deseja desmarcar sua entrevista?');
-  if (!confirmed) return;
+  btnModalConfirm.disabled = true;
+  btnModalConfirm.innerText = 'Desmarcando...';
 
   try {
     const apiUrl = process.env.API_URL || 'http://localhost:5000/api';
@@ -394,9 +407,13 @@ async function cancelBooking() {
       throw new Error(errorData.message || 'Erro ao desmarcar.');
     }
 
+    cancelModalOverlay.style.display = 'none';
     showStep('panel');
   } catch (error) {
     alert(error.message);
+  } finally {
+    btnModalConfirm.disabled = false;
+    btnModalConfirm.innerText = 'Sim, desmarcar';
   }
 }
 

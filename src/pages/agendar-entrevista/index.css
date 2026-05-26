@@ -1051,3 +1051,63 @@ main {
     font-size: 1.8rem;
   }
 }
+
+/* ═══════════════════════ MODAL ═══════════════════════ */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-card {
+  max-width: 48rem;
+  padding: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-icon-wrapper {
+  width: 5rem;
+  height: 5rem;
+  background-color: #fff0f0;
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+  color: #e74c3c;
+}
+
+.modal-title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--purple-400);
+  margin-bottom: 0.8rem;
+}
+
+.modal-subtitle {
+  font-size: 1.4rem;
+  color: var(--gray);
+  margin-bottom: 2.4rem;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1.2rem;
+  width: 100%;
+}
