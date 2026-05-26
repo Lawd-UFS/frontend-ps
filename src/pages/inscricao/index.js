@@ -72,6 +72,25 @@ const initializeElements = () => {
     dateBirthInput.setAttribute('max', today);
   }
 
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '')
+      if (value.length > 11) value = value.slice(0, 11);
+      
+      let formatted = value;
+      if (value.length > 2) {
+        formatted = `(${value.slice(0, 2)}) `;
+        if (value.length > 7) {
+          formatted += `${value.slice(2, 7)}-${value.slice(7)}`;
+        } else {
+          formatted += value.slice(2);
+        }
+      }
+      e.target.value = formatted;
+    });
+  }
+
   closeEmailDialogButton.addEventListener('click', () =>
     closeModal(emailDialog),
   );
@@ -221,13 +240,18 @@ const handleSubmitForm = async () => {
   formList.forEach((form) => {
     const formFields = new FormData(form);
     for (const [key, value] of formFields.entries()) {
+      let finalValue = value;
+      if (key === 'phone') {
+        finalValue = value.replace(/\D/g, '');
+      }
+      
       if (payload[key]) {
         if (!Array.isArray(payload[key])) {
           payload[key] = [payload[key]];
         }
-        payload[key].push(value);
+        payload[key].push(finalValue);
       } else {
-        payload[key] = value;
+        payload[key] = finalValue;
       }
     }
   });

@@ -101,7 +101,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       profile.classList.add('table_profile');
 
       tr.appendChild(profile);
+      const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
       tr.innerHTML += `
+      <td>${phoneText}</td>
       <td class="score">${candidate.score}</td>
       <td class="ranking">-</td>
     `;

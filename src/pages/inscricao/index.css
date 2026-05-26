@@ -199,7 +199,7 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  padding: 3.2rem 4.8rem 2.4rem;
+  padding: 2.4rem 4.8rem 1.6rem;
   border-bottom: 1px solid rgba(70, 35, 167, 0.08);
   background: linear-gradient(180deg, rgba(247, 244, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
 }
@@ -283,7 +283,7 @@ hr {
    ========================================================================== */
 
 .section-inputs {
-  padding: 4rem 4.8rem;
+  padding: 2.8rem 4.8rem;
 }
 
 #section2,
@@ -308,7 +308,7 @@ form .column {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 2.2rem;
+  gap: 1.5rem;
   width: 100%;
 }
 
@@ -330,11 +330,11 @@ textarea,
 form select {
   background-color: rgba(247, 244, 255, 0.45);
   color: #2c2a38;
-  height: 4.6rem;
+  height: 4.2rem;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
   border-radius: 1.2rem;
   border: 2px solid rgba(70, 35, 167, 0.08);
   padding: 0 1.6rem;

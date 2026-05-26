@@ -50,6 +50,10 @@ export const CandidateInfo = (candidate) => {
         <span class="value">${candidate.pronoun}</span>
       </div>
       <div class="info-item">
+        <span class="label">Telefone:</span>
+        <span class="value">${candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-'}</span>
+      </div>
+      <div class="info-item">
         <span class="label">Gênero:</span>
         <span class="value">${candidate.gender}</span>
       </div>
