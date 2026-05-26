@@ -54,6 +54,10 @@ export const CandidateInfo = (candidate) => {
         <span class="value">${candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-'}</span>
       </div>
       <div class="info-item">
+        <span class="label">Email:</span>
+        <span class="value">${candidate.email || '-'}</span>
+      </div>
+      <div class="info-item">
         <span class="label">Gênero:</span>
         <span class="value">${candidate.gender}</span>
       </div>
