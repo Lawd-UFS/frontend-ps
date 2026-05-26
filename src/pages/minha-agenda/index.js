@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
   const lastDay = new Date(currentYear, currentDate.getMonth() + 1, 0).getDate();
 
-  const startDateStr = `${currentYear}-${currentMonth}-22`;
-  const endDateStr = `${currentYear}-${currentMonth}-30`;
+  const startDateStr = `${currentYear}-${currentMonth}-${String(currentDate.getDate()).padStart(2, '0')}`;
+  const endDateStr = `${currentYear}-${currentMonth}-${String(lastDay).padStart(2, '0')}`;
 
   createCalendar(
     {
-      periodStart: new Date(currentYear, currentDate.getMonth(), 22),
-      periodEnd: new Date(currentYear, currentDate.getMonth(), 30),
+      periodStart: new Date(currentYear, currentDate.getMonth(), currentDate.getDate()),
+      periodEnd: new Date(currentYear, currentDate.getMonth(), lastDay),
     },
     calendarContainer,
   );

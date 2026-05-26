@@ -240,14 +240,24 @@ main {
   }
 }
 
-.calendar input {
+.calendar input,
+.calendar select {
   border: none;
   background: none;
 
   width: fit-content;
 
   outline: none;
-  cursor: var(--cursor-default);
+  cursor: var(--cursor-pointer);
+}
+
+.calendar select {
+  font-family: 'Space Mono';
+  font-size: 1.4rem;
+  padding-right: 0.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .calendar input[type='date']::-webkit-calendar-picker-indicator,

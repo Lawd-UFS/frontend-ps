@@ -169,6 +169,7 @@ const createNewSchedule = async (form, agendaContainer) => {
   const date = formData.get('date');
   const time = formData.get('time');
   const interviewMode = formData.get('interview-mode');
+  const errorMessage = form.querySelector('.error-message');
 
   const [year, month, day] = date.split('-');
   const [hours, minutes] = time.split(':');
