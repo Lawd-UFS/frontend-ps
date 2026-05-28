@@ -56,24 +56,24 @@ a {
 header {
   display: flex;
   justify-content: center;
-  padding: 2.4rem 2.4rem 0;
+  padding: 4rem 2.4rem 0;
   width: 100%;
   z-index: 10;
 }
 
 .navbar {
   border-radius: 5rem;
-  border: 1px solid rgba(255, 255, 255, 0.30);
-  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   display: flex;
   width: 100%;
   max-width: 78rem;
-  padding: 1rem 2.4rem;
+  padding: 1.2rem 2.8rem;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 .nav-left {
@@ -82,16 +82,20 @@ header {
   gap: 0.8rem;
 }
 
+.nav-left .icons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .nav-logo-icon {
-  width: 2rem;
+  width: 2.8rem;
   height: auto;
 }
 
-.nav-brand {
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.3rem;
-  letter-spacing: 3px;
+.nav-brand-img {
+  width: 5.6rem;
+  height: auto;
 }
 
 .nav-center {
@@ -101,12 +105,12 @@ header {
 
 .nav-badge {
   color: #ffffff;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 3rem;
-  padding: 0.5rem 1.6rem;
-  letter-spacing: 0.3px;
+  padding: 0.6rem 1.8rem;
+  letter-spacing: 0.5px;
 }
 
 .nav-right {
@@ -120,7 +124,7 @@ header {
   border: none;
   color: #ffffff;
   font-family: var(--font-main);
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 1.5px;
   transition: opacity 0.3s;
@@ -131,7 +135,7 @@ header {
 }
 
 .nav-logo-right {
-  width: 2rem;
+  width: 2.8rem;
   height: auto;
 }
 
@@ -849,8 +853,51 @@ main {
 
 .success-actions {
   display: flex;
+  flex-direction: column;
   gap: 1.2rem;
   width: 100%;
+}
+
+.success-actions-row {
+  display: flex;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+/* Google Calendar Button */
+.btn-google-calendar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  height: 3.8rem;
+  background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-main);
+  font-size: 1.4rem;
+  font-weight: 700;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: var(--cursor-pointer);
+}
+
+.btn-google-calendar:hover {
+  background: linear-gradient(135deg, #4285f4 0%, #1a73e8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(26, 115, 232, 0.35);
+}
+
+.btn-google-calendar:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-google-calendar svg {
+  flex-shrink: 0;
 }
 
 /* ═══════════════════════ BUTTONS ═══════════════════════ */
@@ -1037,8 +1084,19 @@ main {
   }
 
   .confirm-actions,
-  .success-actions {
+  .success-actions,
+  .success-actions-row {
     flex-direction: column;
+  }
+
+  .success-details-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+  }
+
+  .success-confirmed-badge {
+    align-self: flex-start;
   }
 
   .mode-options-group {
@@ -1051,7 +1109,16 @@ main {
 
   .confirm-details-footer {
     flex-direction: column;
+    align-items: flex-start;
     gap: 1.2rem;
+  }
+
+  .panel-logged-as {
+    word-break: break-all;
+  }
+  
+  .confirm-detail-value {
+    word-break: break-all;
   }
 }
 
@@ -1079,6 +1146,19 @@ main {
 
   .panel-title {
     font-size: 1.8rem;
+  }
+
+  .step-card {
+    padding: 2rem 1.4rem;
+  }
+
+  .slots-container {
+    padding: 1.6rem 1rem;
+  }
+
+  .mode-option {
+    padding: 1.2rem;
+    gap: 1rem;
   }
 }
 

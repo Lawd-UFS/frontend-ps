@@ -110,16 +110,16 @@ form input:not(:placeholder-shown) {
 .icons {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.8rem;
 }
 
 .img-lawd {
-  width: 4.5em;
+  width: 5.6rem;
   height: auto;
 }
 
 .img-icon {
-  width: 2.5em;
+  width: 2.8rem;
   height: auto;
 }
 
@@ -155,7 +155,7 @@ header {
   display: flex;
   justify-content: space-between;
   margin: 0 182px;
-  padding-top: 40px;
+  padding-top: 4rem;
   align-items: center;
 }
 

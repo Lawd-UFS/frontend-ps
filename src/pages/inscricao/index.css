@@ -134,7 +134,7 @@ button:active {
 header {
   display: flex;
   justify-content: center;
-  padding-top: 40px;
+  padding-top: 4rem;
   align-items: center;
   width: 100%;
 }
@@ -157,6 +157,7 @@ header {
 .navbar p {
   color: #ffffff;
   font-weight: 500;
+  font-size: 1.6rem;
   letter-spacing: 0.5px;
 }
 
@@ -167,12 +168,12 @@ header {
 }
 
 .navbar .img-lawd {
-  width: 3.2em;
+  width: 5.6rem;
   height: auto;
 }
 
 .navbar .img-icon {
-  width: 1.8em;
+  width: 2.8rem;
   height: auto;
 }
 

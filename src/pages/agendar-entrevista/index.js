@@ -35,6 +35,7 @@ const successTime = document.getElementById('success-time');
 const successMode = document.getElementById('success-mode');
 const btnChangeSlot = document.getElementById('btn-change-slot');
 const btnCancelBooking = document.getElementById('btn-cancel-booking');
+const btnGoogleCalendar = document.getElementById('btn-google-calendar');
 
 // Modal Cancelamento
 const cancelModalOverlay = document.getElementById('cancel-modal-overlay');
@@ -77,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!currentChatbotId) return;
     cancelModalOverlay.style.display = 'flex';
   });
-  
+
   btnModalClose.addEventListener('click', () => {
     cancelModalOverlay.style.display = 'none';
   });
@@ -439,6 +440,11 @@ function showSuccessFromSchedule(schedule) {
     : `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`;
   successMode.innerHTML = `${modeIcon} ${modeLabel}`;
 
+  // Google Calendar link
+  const calendarUrl = buildGoogleCalendarUrl(date, mode);
+  btnGoogleCalendar.href = calendarUrl;
+  btnGoogleCalendar.style.display = 'flex';
+
   showStep('success');
 }
 
@@ -451,6 +457,50 @@ function logout() {
   candidateData = null;
   localStorage.removeItem('ps_lawd_access_code');
   showStep('auth');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Google Calendar URL Builder
+// ═══════════════════════════════════════════════════════════════
+
+function buildGoogleCalendarUrl(date, mode) {
+  // Format date to Google Calendar format: YYYYMMDDTHHmmss
+  const pad = (n) => String(n).padStart(2, '0');
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+
+  const startStr = `${year}${month}${day}T${hours}${minutes}00`;
+
+  // End time: 30 minutes after start
+  const endDate = new Date(date.getTime() + 30 * 60 * 1000);
+  const endYear = endDate.getFullYear();
+  const endMonth = pad(endDate.getMonth() + 1);
+  const endDay = pad(endDate.getDate());
+  const endHours = pad(endDate.getHours());
+  const endMinutes = pad(endDate.getMinutes());
+
+  const endStr = `${endYear}${endMonth}${endDay}T${endHours}${endMinutes}00`;
+
+  const title = 'Entrevista - Processo Seletivo LAWD 2026';
+
+  const modeLabel = mode === 'Remoto' ? 'Online (Discord)' : mode === 'Presencial' ? 'Presencial (Lab LAWD)' : mode;
+  const description = `Entrevista do Processo Seletivo LAWD 2026.\nModalidade: ${modeLabel}\nDuração estimada: 30 minutos.\n\nAcesse o Discord do LAWD para mais informações: https://discord.com/invite/8yRDGWXgZ`;
+
+  const location = mode === 'Presencial' ? 'Lab LAWD - Didática 7 /UFS' : 'Discord - LAWD';
+
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${startStr}/${endStr}`,
+    details: description,
+    location: location,
+    ctz: 'America/Sao_Paulo',
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
 // ═══════════════════════════════════════════════════════════════
