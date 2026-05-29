@@ -49,6 +49,12 @@ document.querySelectorAll('.support-text').forEach((textWrapper, index) => {
 
 // Fluxo de Solicitação de Link de Agendamento
 document.addEventListener('DOMContentLoaded', () => {
+  const storedCode = localStorage.getItem('ps_lawd_access_code');
+  if (storedCode) {
+    window.location.href = '/agendar-entrevista';
+    return;
+  }
+
   const btnAgendarInicial = document.getElementById('btn-agendar-inicial');
   const emailFormContainer = document.getElementById('email-form-container');
   const schedulingEmailForm = document.getElementById('scheduling-email-form');
