@@ -203,18 +203,10 @@ const createNewSchedule = async (form, agendaContainer) => {
   );
 };
 
-export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
+export const applyCalendarDayEvents = (calendarContainer) => {
   const dateInput = calendarContainer.querySelector('input[type="date"]');
   const interviewPeriodList =
     calendarContainer.querySelectorAll('.interview-period');
-  const days = calendarContainer.querySelector('.days');
-
-  dateInput.addEventListener('change', (event) => {
-    updateCalendarOnDateInputChange(
-      days,
-      new Date(`${event.target.value}T00:00:00`),
-    );
-  });
 
   interviewPeriodList.forEach((element, _, periodList) =>
     element.addEventListener('click', () => {
@@ -225,6 +217,20 @@ export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
       updateDateOnCalendarClick(dateInput, element);
     }),
   );
+};
+
+export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
+  const dateInput = calendarContainer.querySelector('input[type="date"]');
+  const days = calendarContainer.querySelector('.days');
+
+  dateInput.addEventListener('change', (event) => {
+    updateCalendarOnDateInputChange(
+      days,
+      new Date(`${event.target.value}T00:00:00`),
+    );
+  });
+
+  applyCalendarDayEvents(calendarContainer);
 
   calendarContainer
     .querySelector('form')

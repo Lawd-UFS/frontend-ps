@@ -9,7 +9,7 @@ import { Header } from '../../components/Header';
 import { createCalendar, createSchedule, createOverview } from './calendar';
 import calendarIcon from '../../assets/images/calendar-icon.svg';
 import timeIcon from '../../assets/images/time.svg';
-import { applyCalendarEvents } from './scheduleHandler';
+import { applyCalendarEvents, applyCalendarDayEvents } from './scheduleHandler';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const agendaContainer = document.querySelector('.agenda');
@@ -27,17 +27,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.prepend(await Header());
 
   const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
-  const lastDay = new Date(currentYear, currentDate.getMonth() + 1, 0).getDate();
+  const periodStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+  const periodEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, currentDate.getDate());
 
-  const startDateStr = `${currentYear}-${currentMonth}-${String(currentDate.getDate()).padStart(2, '0')}`;
-  const endDateStr = `${currentYear}-${currentMonth}-${String(lastDay).padStart(2, '0')}`;
+  const formatDate = (d) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const startDateStr = formatDate(periodStart);
+  const endDateStr = formatDate(periodEnd);
 
   createCalendar(
     {
-      periodStart: new Date(currentYear, currentDate.getMonth(), currentDate.getDate()),
-      periodEnd: new Date(currentYear, currentDate.getMonth(), lastDay),
+      periodStart: periodStart,
+      periodEnd: periodEnd,
     },
     calendarContainer,
   );
@@ -57,4 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   await createOverview(overviewContainer);
 
   applyCalendarEvents(calendarContainer, agendaContainer);
+
+  calendarContainer.addEventListener('calendar-rendered', () => {
+    applyCalendarDayEvents(calendarContainer);
+  });
 });

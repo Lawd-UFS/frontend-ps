@@ -40,10 +40,9 @@ const getPendingStatsBadge = (stats) => {
  * @property {string} month - O nome do mês atual.
  * @property {Array<Array<number>>} weeks - Um array de semanas, onde cada semana é um array de dias.
  */
-const getCalendarData = (periodMonthStart, periodMonthEnd) => {
-  const date = new Date();
-  const month = date.getMonth();
-  const year = date.getFullYear();
+const getCalendarData = (periodStart, periodEnd, targetDate = new Date()) => {
+  const month = targetDate.getMonth();
+  const year = targetDate.getFullYear();
 
   const firstDayIndex = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -56,9 +55,12 @@ const getCalendarData = (periodMonthStart, periodMonthEnd) => {
   for (let day = 1; day <= daysInMonth; day++) {
     const dateObject = new Date(year, month, day);
     const weekDayIndex = dateObject.getDay();
+    
+    const isWithinPeriod = dateObject >= periodStart && dateObject <= periodEnd;
+
     weeks[weekIndex][weekDayIndex] = {
       day,
-      periodMonth: periodMonthStart <= month && month <= periodMonthEnd,
+      periodMonth: isWithinPeriod,
       date: dateObject,
     };
 
@@ -155,10 +157,6 @@ export const addNewScheduleTime = (
 };
 
 export const createCalendar = ({ periodStart, periodEnd }, container) => {
-  const periodStartMonth = periodStart.getMonth();
-  const periodStartDay = periodStart.getDate();
-  const periodEndMonth = periodEnd.getMonth();
-  const periodEndDay = periodEnd.getDate();
 
   const weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
   const months = [
@@ -177,40 +175,77 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
   ];
   const interviewFormatSvgs = [computerSvg, coffeeSvg, coffeeAndComputerSvg];
 
-  const { weeks, month } = getCalendarData(periodStartMonth, periodEndMonth);
-
+  let currentDisplayedDate = new Date();
   const monthH2 = container.querySelector('.month');
-  monthH2.textContent = months[month];
-
   const days = container.querySelector('.days');
+  const prevMonthBtn = container.querySelector('#prev-month');
+  const nextMonthBtn = container.querySelector('#next-month');
 
-  weekdays.forEach((weekday, index) => {
-    const ul = document.createElement('ul');
-    const li = document.createElement('li');
-    li.textContent = weekday;
-    li.className = 'weekday';
-    ul.appendChild(li);
+  const renderCalendar = () => {
+    const { weeks, month } = getCalendarData(periodStart, periodEnd, currentDisplayedDate);
+    monthH2.textContent = `${months[month]} ${currentDisplayedDate.getFullYear()}`;
+    days.innerHTML = '';
 
-    weeks.forEach((week) => {
-      const { day, periodMonth, date } = week[index];
-      const dayLi = document.createElement('li');
-      dayLi.textContent = day.toString().padStart(2, '0');
+    weekdays.forEach((weekday, index) => {
+      const ul = document.createElement('ul');
+      const li = document.createElement('li');
+      li.textContent = weekday;
+      li.className = 'weekday';
+      ul.appendChild(li);
 
-      if (date) {
-        dayLi.setAttribute('data-date', date);
-      }
+      weeks.forEach((week) => {
+        const { day, periodMonth, date } = week[index];
+        const dayLi = document.createElement('li');
+        dayLi.textContent = day.toString().padStart(2, '0');
 
-      if (periodMonth) {
-        if (day >= periodStartDay && day <= periodEndDay) {
+        if (date) {
+          dayLi.setAttribute('data-date', date);
+        }
+
+        if (periodMonth) {
           dayLi.classList.add('interview-period');
         }
-      }
 
-      ul.appendChild(dayLi);
+        ul.appendChild(dayLi);
+      });
+
+      days.appendChild(ul);
     });
+    
+    if (prevMonthBtn) {
+      const now = new Date();
+      if (
+        currentDisplayedDate.getFullYear() < now.getFullYear() ||
+        (currentDisplayedDate.getFullYear() === now.getFullYear() && currentDisplayedDate.getMonth() <= now.getMonth())
+      ) {
+        prevMonthBtn.style.visibility = 'hidden';
+      } else {
+        prevMonthBtn.style.visibility = 'visible';
+      }
+    }
 
-    days.appendChild(ul);
-  });
+    // Refresh date click listeners (they are bound in index.js, so we need a way to let index.js know or we can just dispatch an event)
+    container.dispatchEvent(new CustomEvent('calendar-rendered'));
+  };
+
+  renderCalendar();
+
+  if (prevMonthBtn && nextMonthBtn) {
+    prevMonthBtn.addEventListener('click', () => {
+      const now = new Date();
+      if (
+        currentDisplayedDate.getFullYear() > now.getFullYear() ||
+        (currentDisplayedDate.getFullYear() === now.getFullYear() && currentDisplayedDate.getMonth() > now.getMonth())
+      ) {
+        currentDisplayedDate.setMonth(currentDisplayedDate.getMonth() - 1);
+        renderCalendar();
+      }
+    });
+    nextMonthBtn.addEventListener('click', () => {
+      currentDisplayedDate.setMonth(currentDisplayedDate.getMonth() + 1);
+      renderCalendar();
+    });
+  }
 
   container
     .querySelectorAll('.toggle-group label')

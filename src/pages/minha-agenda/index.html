@@ -11,7 +11,15 @@
   <main>
     <div id="schedule-container">
       <aside class="calendar">
-        <h2 class="month"></h2>
+        <div class="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <button id="prev-month" type="button" style="background: none; border: none; cursor: pointer; color: var(--purple-400);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <h2 class="month" style="margin: 0;"></h2>
+          <button id="next-month" type="button" style="background: none; border: none; cursor: pointer; color: var(--purple-400);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
         <div class="days"></div>
         <form>
           <label class="form-date">
