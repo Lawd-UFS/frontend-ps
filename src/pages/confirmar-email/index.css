@@ -154,6 +154,8 @@ main {
 
 .instagram-button {
   margin-top: 1.2rem;
+  width: 100%;
+  max-width: 36rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -192,6 +194,8 @@ main {
 
 .discord-button {
   margin-top: 1.2rem;
+  width: 100%;
+  max-width: 36rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;

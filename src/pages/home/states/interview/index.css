@@ -58,13 +58,19 @@ body {
   background-attachment: fixed;
   margin: 0;
   padding: 0;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 section {
   color: white;
-  margin-top: 5%;
+  margin-top: 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
 .container {
@@ -76,7 +82,7 @@ section {
   color: white;
   display: flex;
   align-items: center;
-  margin-top: 5%;
+  padding-top: 4rem;
   width: 100%;
   justify-content: center;
 

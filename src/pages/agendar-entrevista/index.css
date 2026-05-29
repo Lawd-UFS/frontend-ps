@@ -975,21 +975,21 @@ main {
   justify-content: center;
   padding: 1rem 2rem;
   height: 3.8rem;
-  background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
-  border: none;
-  color: #ffffff;
+  background: #fff0f0;
+  border: 2px solid rgba(231, 76, 60, 0.18);
+  color: #e74c3c;
   font-family: var(--font-main);
   font-weight: 700;
   font-size: 1.4rem;
   border-radius: 1.2rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(70, 35, 167, 0.25);
 }
 
 .btn-danger:hover {
-  background: linear-gradient(135deg, #8156fa 0%, #4f2cb8 100%);
+  background-color: #ffe5e5;
+  border-color: #e74c3c;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(112, 70, 233, 0.35);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.15);
 }
 
 .btn-danger:active {
@@ -1044,6 +1044,21 @@ main {
   .panel-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .panel-header-right {
+    width: 100%;
+  }
+
+  .filter-tabs {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .filter-tab {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
   }
 
   .panel-title {
