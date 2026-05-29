@@ -1,111 +1,122 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PS LAWD 2025 - Minha Agenda</title>
-  </head>
-  <body>
-    <main>
-      <div id="schedule-container">
-        <aside class="calendar">
-          <h2 class="month"></h2>
-          <div class="days"></div>
-          <form>
-            <label class="form-date">
-              <span> Data: </span>
-              <div class="input-date">
-                <input
-                  type="date"
-                  min="2025-03-06"
-                  max="2025-03-12"
-                  required
-                  name="date"
-                />
-              </div>
-            </label>
-            <label class="form-time">
-              <span> Horário: </span>
-              <div class="input-time">
-                <input
-                  type="time"
-                  min="07:00"
-                  max="22:00"
-                  required
-                  name="time"
-                  step="1800"
-                />
-              </div>
-            </label>
-            <div class="form-format">
-              <span> Formato: </span>
-              <div class="toggle-group">
-                <input
-                  type="radio"
-                  id="presencial"
-                  name="interview-mode"
-                  value="Presencial"
-                  required
-                />
-                <label for="presencial">
-                  <span>Presencial</span>
-                </label>
-                <input
-                  type="radio"
-                  id="remoto"
-                  name="interview-mode"
-                  value="Remoto"
-                  required
-                />
-                <label for="remoto">
-                  <span>Remoto</span>
-                </label>
-                <input
-                  type="radio"
-                  id="ambos"
-                  name="interview-mode"
-                  value="Ambos"
-                  required
-                />
-                <label for="ambos">
-                  <span> Presencial / Remoto</span>
-                </label>
-              </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PS LAWD 2026 - Minha Agenda</title>
+</head>
+
+<body>
+  <main>
+    <div id="schedule-container">
+      <aside class="calendar">
+        <div class="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <button id="prev-month" type="button" style="background: none; border: none; cursor: pointer; color: var(--purple-400);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <h2 class="month" style="margin: 0;"></h2>
+          <button id="next-month" type="button" style="background: none; border: none; cursor: pointer; color: var(--purple-400);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="days"></div>
+        <form>
+          <label class="form-date">
+            <span> Data: </span>
+            <div class="input-date">
+              <input type="date" min="2026-01-05" max="2026-07-05" required name="date" />
             </div>
-            <button type="submit">
-              <img
-                src="../../assets/images/plus.svg"
-                alt="ícone de adicionar"
-              />
-              <span>Adicionar</span>
-            </button>
-          </form>
-        </aside>
-        <section class="agenda">
-          <div class="schedules">
-            <h2>Agendamentos</h2>
-            <ul></ul>
-          </div>
-          <div class="details">
-            <h2>Detalhes</h2>
-            <div>
-              <div class="content">
-                <span>Selecione um horário para visualização dos detalhes</span>
-              </div>
+          </label>
+          <label class="form-time">
+            <span> Horário: </span>
+            <div class="input-time">
+              <select name="time" required>
+                <option value="" disabled selected>Escolha</option>
+                <option value="07:00">07:00</option>
+                <option value="07:30">07:30</option>
+                <option value="08:00">08:00</option>
+                <option value="08:30">08:30</option>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+              </select>
+            </div>
+          </label>
+          <div class="form-format">
+            <span> Formato: </span>
+            <div class="toggle-group">
+              <input type="radio" id="presencial" name="interview-mode" value="Presencial" required />
+              <label for="presencial">
+                <span>Presencial</span>
+              </label>
+              <input type="radio" id="remoto" name="interview-mode" value="Remoto" required />
+              <label for="remoto">
+                <span>Remoto</span>
+              </label>
+              <input type="radio" id="ambos" name="interview-mode" value="Ambos" required />
+              <label for="ambos">
+                <span> Presencial / Remoto</span>
+              </label>
             </div>
           </div>
-        </section>
-        <aside class="overview">
-          <div class="stats-container">
-            <h2>Visão Geral</h2>
-            <dl></dl>
+          <span class="error-message"></span>
+          <button type="submit">
+            <img src="../../assets/images/plus.svg" alt="ícone de adicionar" />
+            <span>Adicionar</span>
+          </button>
+        </form>
+      </aside>
+      <section class="agenda">
+        <div class="schedules">
+          <h2>Agendamentos</h2>
+          <ul></ul>
+        </div>
+        <div class="details">
+          <h2>Detalhes</h2>
+          <div>
+            <div class="content">
+              <span>Selecione um horário para visualização dos detalhes</span>
+            </div>
           </div>
-          <div class="stats-container">
-            <h2>Meus Horários</h2>
-            <dl></dl>
-          </div>
-        </aside>
-      </div>
-    </main>
-  </body>
+        </div>
+      </section>
+      <aside class="overview">
+        <div class="stats-container">
+          <h2>Visão Geral</h2>
+          <dl></dl>
+        </div>
+        <div class="stats-container">
+          <h2>Meus Horários</h2>
+          <dl></dl>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+
 </html>

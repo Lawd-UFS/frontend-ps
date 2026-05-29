@@ -9,7 +9,7 @@ import { Header } from '../../components/Header';
 import { createCalendar, createSchedule, createOverview } from './calendar';
 import calendarIcon from '../../assets/images/calendar-icon.svg';
 import timeIcon from '../../assets/images/time.svg';
-import { applyCalendarEvents } from './scheduleHandler';
+import { applyCalendarEvents, applyCalendarDayEvents } from './scheduleHandler';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const agendaContainer = document.querySelector('.agenda');
@@ -26,10 +26,33 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.body.prepend(await Header());
 
+  const currentDate = new Date();
+  const periodStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+  const periodEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, currentDate.getDate());
+
+  const formatDate = (d) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const startDateStr = formatDate(periodStart);
+  const endDateStr = formatDate(periodEnd);
+
   createCalendar(
-    { periodStart: new Date('2025-03-06'), periodEnd: new Date('2025-03-12') },
+    {
+      periodStart: periodStart,
+      periodEnd: periodEnd,
+    },
     calendarContainer,
   );
+
+  const dateInput = document.querySelector('input[type="date"]');
+  if (dateInput) {
+    dateInput.min = startDateStr;
+    dateInput.max = endDateStr;
+  }
 
   document.querySelectorAll('label > div > svg').forEach((svg) => {
     const input = svg.nextElementSibling;
@@ -40,4 +63,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   await createOverview(overviewContainer);
 
   applyCalendarEvents(calendarContainer, agendaContainer);
+
+  calendarContainer.addEventListener('calendar-rendered', () => {
+    applyCalendarDayEvents(calendarContainer);
+  });
 });

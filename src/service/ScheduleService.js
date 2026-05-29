@@ -108,6 +108,7 @@ export class ScheduleService {
       return {
         success: false,
         message: error.message,
+        errors: error.errorData?.errors || [],
       };
     }
   }

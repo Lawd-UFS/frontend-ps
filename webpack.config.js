@@ -21,6 +21,7 @@ const generatePages = (root = '', dir = pagesPath) => {
     const fileStat = fs.statSync(fullPath);
 
     if (readDir === dir && !fileStat.isDirectory()) return;
+    if (readDir === dir && file === 'home') return;
 
     if (fileStat.isDirectory()) {
       const { entries: subEntries, htmlPlugins: subHtmlPlugins } =
@@ -56,10 +57,13 @@ const generatePages = (root = '', dir = pagesPath) => {
   return { entries, htmlPlugins };
 };
 
+const processState = process.env.PROCESS_STATE || 'interview';
+const homeStateDir = path.join(pagesPath, 'home', 'states', processState);
+
 const homePage = {
-  entry: path.join(pagesPath, 'index.js'),
+  entry: path.join(homeStateDir, 'index.js'),
   htmlPlugin: new HtmlWebpackPlugin({
-    template: path.join(pagesPath, 'index.html'),
+    template: path.join(homeStateDir, 'index.html'),
     favicon: path.join(__dirname, 'src', 'assets', 'favicon.ico'),
     filename: 'index.html',
     chunks: ['index'],
@@ -82,6 +86,12 @@ const config = {
   devServer: {
     open: true,
     host: 'localhost',
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
+    },
     historyApiFallback: {
       rewrites: [
         {

@@ -101,7 +101,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       profile.classList.add('table_profile');
 
       tr.appendChild(profile);
+      const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
       tr.innerHTML += `
+      <td>${phoneText}</td>
       <td class="score">${candidate.score}</td>
       <td class="ranking">-</td>
     `;
@@ -116,5 +118,54 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   orderedCandidates.forEach((candidate) => {
     tbody.appendChild(candidate);
+  });
+
+  // Filtros
+  const filters = { scheduling: false, done: false, deleted: false };
+  const filterButtons = {
+    scheduling: document.querySelector('.scheduling_button'),
+    done: document.querySelector('.done_button'),
+    deleted: document.querySelector('.delete_button')
+  };
+
+  const applyFilters = () => {
+    orderedCandidates.forEach((tr, index) => {
+      // O objeto original está em `candidates` mas precisamos relacionar com o `tr`.
+      // Como não retornamos o objeto junto, podemos inferir os dados pela linha gerada.
+      const statusText = tr.querySelector('td:nth-child(1)').innerText.toLowerCase();
+      const scoreText = tr.querySelector('.score').innerText;
+      
+      const isEliminado = statusText === 'eliminado';
+      const scoreVal = Number(scoreText) || 0;
+      const isDone = scoreVal > 0;
+      const isScheduling = !isDone;
+
+      const anyFilterActive = filters.scheduling || filters.done || filters.deleted;
+      
+      if (!anyFilterActive) {
+        tr.style.display = '';
+        return;
+      }
+
+      let show = false;
+      if (filters.scheduling && isScheduling && !isEliminado) show = true;
+      if (filters.done && isDone && !isEliminado) show = true;
+      if (filters.deleted && isEliminado) show = true;
+
+      tr.style.display = show ? '' : 'none';
+    });
+  };
+
+  Object.keys(filterButtons).forEach(key => {
+    const btn = filterButtons[key];
+    if (btn) {
+      btn.style.cursor = 'pointer';
+      btn.style.transition = 'all 0.2s ease';
+      btn.addEventListener('click', () => {
+        filters[key] = !filters[key];
+        btn.classList.toggle('active', filters[key]);
+        applyFilters();
+      });
+    }
   });
 });

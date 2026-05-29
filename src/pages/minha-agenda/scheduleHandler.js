@@ -169,6 +169,7 @@ const createNewSchedule = async (form, agendaContainer) => {
   const date = formData.get('date');
   const time = formData.get('time');
   const interviewMode = formData.get('interview-mode');
+  const errorMessage = form.querySelector('.error-message');
 
   const [year, month, day] = date.split('-');
   const [hours, minutes] = time.split(':');
@@ -181,7 +182,17 @@ const createNewSchedule = async (form, agendaContainer) => {
   });
 
   if (!response.success) {
-    alert('Ocorreu um erro ao criar o horário');
+    let errorMsg = response.message || 'Ocorreu um erro ao criar o horário';
+    if (response.errors && response.errors.length > 0) {
+      errorMsg = response.errors.map(err => err.message).join(' | ');
+    }
+
+    if (errorMessage) {
+      errorMessage.textContent = errorMsg;
+      errorMessage.style.display = 'block';
+    } else {
+      alert(errorMsg);
+    }
     return;
   }
 
@@ -192,18 +203,10 @@ const createNewSchedule = async (form, agendaContainer) => {
   );
 };
 
-export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
+export const applyCalendarDayEvents = (calendarContainer) => {
   const dateInput = calendarContainer.querySelector('input[type="date"]');
   const interviewPeriodList =
     calendarContainer.querySelectorAll('.interview-period');
-  const days = calendarContainer.querySelector('.days');
-
-  dateInput.addEventListener('change', (event) => {
-    updateCalendarOnDateInputChange(
-      days,
-      new Date(`${event.target.value}T00:00:00`),
-    );
-  });
 
   interviewPeriodList.forEach((element, _, periodList) =>
     element.addEventListener('click', () => {
@@ -214,6 +217,20 @@ export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
       updateDateOnCalendarClick(dateInput, element);
     }),
   );
+};
+
+export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
+  const dateInput = calendarContainer.querySelector('input[type="date"]');
+  const days = calendarContainer.querySelector('.days');
+
+  dateInput.addEventListener('change', (event) => {
+    updateCalendarOnDateInputChange(
+      days,
+      new Date(`${event.target.value}T00:00:00`),
+    );
+  });
+
+  applyCalendarDayEvents(calendarContainer);
 
   calendarContainer
     .querySelector('form')

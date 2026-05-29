@@ -20,7 +20,6 @@
   --gray: #656565;
   --gray-light: #cdcdcd;
   --background-input: #fbfbfc73;
-
   --background-input-filled: #dde4ff73;
 }
 
@@ -43,7 +42,7 @@ a {
 }
 
 body {
-  /* background: url("../../assets/images/background.svg") no-repeat left fixed; */
+  /* background: url("../../../../assets/images/background.svg") no-repeat left fixed; */
   background-size: cover;
   z-index: -1;
   font-weight: 400;
@@ -51,7 +50,7 @@ body {
 }
 
 body {
-  background-image: url(../assets/images/background.svg);
+  background-image: url(../../../../assets/images/background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -59,6 +58,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  overflow: hidden;
 }
 
 section {
@@ -112,22 +112,22 @@ section {
       display: flex;
       align-items: center;
       padding: 10px;
+      gap: 1rem;
     }
 
     .logo-lawd {
-      width: 30px;
-      height: 25px;
-      padding: 10px;
+      width: 2.8rem;
+      height: auto;
     }
 
     .lawd {
-      width: 70px;
-      height: 15px;
+      width: 5.6rem;
+      height: auto;
     }
 
     p {
-      height: 20px;
-      padding: 10px;
+      margin: 0;
+      padding: 0;
       padding-left: 15px;
     }
   }
@@ -213,10 +213,6 @@ h1 {
   filter: url(#gooey);
 }
 
-.subscribe button {
-  cursor: not-allowed;
-}
-
 svg {
   position: absolute;
 }
@@ -228,8 +224,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  /* margin: 0.625rem; */
-  /* min-width: 19.5625rem; */
   height: 5.9rem;
   padding: 1.625rem 1.875rem;
   border: none;
@@ -252,7 +246,7 @@ button {
   letter-spacing: -0.05rem;
 }
 
-.subscribe-block {
+.subscribe-arrow {
   font-family: 'Space Mono';
   padding: 0 2.8rem;
   font-size: 50px;
@@ -264,7 +258,7 @@ button {
 
 .subscribe:hover,
 svg:hover {
-  #block-subscribe {
+  #arrow-subscribe {
     fill: white;
   }
 
@@ -274,7 +268,7 @@ svg:hover {
     background-color: #9f54db;
   }
 
-  .subscribe-block {
+  .subscribe-arrow {
     color: white;
     animation: moveArrow 2s infinite ease-in-out;
   }
@@ -551,6 +545,10 @@ svg:hover {
     display: none;
   }
 
+  svg {
+    display: none;
+  }
+
   .subscribe-arrow {
     display: none;
   }
@@ -571,7 +569,7 @@ svg:hover {
     font-size: 2.5em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 40vw;
   }
 
@@ -607,7 +605,7 @@ svg:hover {
     margin-left: 10em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 40vw;
   }
 }
@@ -621,7 +619,7 @@ svg:hover {
     margin-left: 9em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 40vw;
   }
 }
@@ -635,7 +633,7 @@ svg:hover {
     margin-left: 8em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 50vw;
   }
 }
@@ -649,7 +647,7 @@ svg:hover {
     margin-left: 7em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 50vw;
   }
 }
@@ -663,7 +661,7 @@ svg:hover {
     margin-left: 6em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 50vw;
   }
 }
@@ -677,7 +675,7 @@ svg:hover {
     margin-left: 5em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 60vw;
   }
 }
@@ -735,6 +733,10 @@ svg:hover {
     }
   }
 
+  svg {
+    display: none;
+  }
+
   .year {
     width: fit-content;
     font-size: 1em;
@@ -745,7 +747,7 @@ svg:hover {
     display: none;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 60vw;
   }
 
@@ -776,7 +778,7 @@ svg:hover {
     font-size: 1.5em;
   }
 
-  .subscribe button:first-child {
+  .subscribe button {
     width: 60vw;
   }
 }
@@ -853,7 +855,7 @@ svg:hover {
     justify-content: center;
   }
 
-  .subscribe-container button:first-child {
+  .subscribe-container button {
     width: 70vw;
     height: 25vw;
   }
@@ -978,7 +980,7 @@ svg:hover {
     align-items: center;
   }
 
-  .subscribe-container button:first-child {
+  .subscribe-container button {
     width: 70vw;
     height: 25vw;
   }

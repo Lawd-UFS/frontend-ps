@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PS LAWD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="top">
+        <div class="container"></div>
+
+        <div class="ps">
+          <p>Venha fazer parte!</p>
+          <div class="ps-right-side">
+            <img
+              src="../../../../assets/images/logo-lawd.png"
+              alt="LAWD-logo"
+              class="logo-lawd"
+            />
+            <img src="../../../../assets/images/lawd.png" alt="lawd" class="lawd" />
+          </div>
+        </div>
+        <div class="container"></div>
+      </div>
+    </header>
+
+    <section class="main-section">
+      <div class="quote">
+        <p class="support-text">
+          "Participar da LAWD é uma experiencia única"
+          <span> - Jessica C. Viana </span>
+        </p>
+      </div>
+
+      <div class="main-title">
+        <h1 class="title">Processo Seletivo</h1>
+      </div>
+
+      <div class="scheduling-banner">
+        <p class="scheduling-text">As inscrições estão encerradas! Se você confirmou seu e-mail, agende ou acesse sua entrevista de forma simples.</p>
+        
+        <!-- Botão Principal -->
+        <button id="btn-agendar-inicial" class="btn-agendar">
+          <span>Acessar Entrevista</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+        </button>
+
+        <!-- Formulário de Entrada do E-mail (Oculto inicialmente) -->
+        <div id="email-form-container" class="email-form-container hidden">
+          <form id="scheduling-email-form">
+            <p class="email-prompt-text">Use o mesmo e-mail utilizado no momento da inscrição.</p>
+            <div id="form-feedback" class="form-feedback hidden"></div>
+            <div class="input-wrapper">
+              <input type="email" id="candidate-email" placeholder="Seu e-mail de inscrição" required class="email-input" />
+              <button type="submit" class="btn-confirm-email">
+                <span>Confirmar e-mail</span>
+                <div class="spinner hidden" id="form-spinner"></div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="label-main-title">
+        <div class="quote-2">
+          <p class="support-text">
+            "Uma oportunidade de aprender e fazer mais"
+            <span> - Vínicius Morais </span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <img src="../../../../assets/images/points.svg" alt="pontilhados" height="70px" />
+
+      <div class="quote-3">
+        <p class="support-text">
+          "Um ambiente acolhedor e cheio de conexões!"
+          <span> - Guilherme Linard </span>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
