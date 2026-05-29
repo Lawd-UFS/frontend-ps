@@ -57,7 +57,7 @@ const generatePages = (root = '', dir = pagesPath) => {
   return { entries, htmlPlugins };
 };
 
-const processState = process.env.PROCESS_STATE || 'closed';
+const processState = process.env.PROCESS_STATE || 'interview';
 const homeStateDir = path.join(pagesPath, 'home', 'states', processState);
 
 const homePage = {
