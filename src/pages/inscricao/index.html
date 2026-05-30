@@ -27,7 +27,12 @@
     <main>
       <div class="registerScreen">
         <div class="enrollment">
-          <h1>Inscrição</h1>
+          <div>
+            <h1>Inscrição</h1>
+            <div class="required-notice">
+              Todos os campos com <b>*</b> são obrigatórios!
+            </div>
+          </div>
           <div class="section-type">
             <p id="section-name">Dados básicos</p>
             <div class="section">
@@ -43,7 +48,7 @@
           <form>
             <div class="column">
               <label for="name"
-                >Nome completo:
+                >Nome completo: *
                 <input
                   type="text"
                   id="name"
@@ -53,7 +58,7 @@
                 />
               </label>
               <label for="gender"
-                >Gênero:
+                >Gênero: *
                 <select id="gender" name="gender" required>
                   <option value="" disabled selected>Selecione</option>
                   <option value="Homem cisgênero">Homem cisgênero</option>
@@ -65,7 +70,7 @@
                 </select>
               </label>
               <label for="course"
-                >Curso:
+                >Curso: *
                 <input
                   type="text"
                   id="course"
@@ -75,7 +80,7 @@
                 />
               </label>
               <label for="phone"
-                >Telefone (WhatsApp):
+                >Telefone (WhatsApp): *
                 <input
                   type="tel"
                   id="phone"
@@ -88,18 +93,18 @@
             </div>
             <div class="column">
               <label for="date-birth"
-                >Data de nascimento:
+                >Data de nascimento: *
                 <input
-                  type="date"
+                  type="text"
                   id="date-birth"
                   name="birthDate"
-                  min="1950-01-01"
-                  max="2010-12-31"
+                  placeholder="DD/MM/AAAA"
+                  maxlength="10"
                   required
                 />
               </label>
               <label for="pronoun"
-                >Pronome:
+                >Pronome: *
                 <select id="pronoun" name="pronoun" required>
                   <option value="" disabled selected>Selecione</option>
                   <option value="Ele/dele">Ele/Dele</option>
@@ -108,7 +113,7 @@
                 </select>
               </label>
               <label for="period"
-                >Período atual:
+                >Período atual: *
                 <input
                   type="number"
                   id="period"
@@ -135,7 +140,7 @@
                 ></textarea>
               </label>
               <label for="skills"
-                >Quais habilidades você possui?
+                >Quais habilidades você possui? *
                 <textarea
                   name="skills"
                   id="skills"
@@ -186,7 +191,7 @@
               </label>
 
               <label for="email">
-                Seu melhor email:
+                <div>Seu melhor email: *</div>
                 <input
                   type="email"
                   id="email"
@@ -202,7 +207,7 @@
           <form>
             <div class="column">
               <label for="motivation"
-                >Qual sua motivação para entrar na LAWD?
+                >Qual sua motivação para entrar na LAWD? *
                 <textarea
                   name="motivation"
                   id="motivation"

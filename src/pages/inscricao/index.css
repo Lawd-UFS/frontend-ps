@@ -687,6 +687,20 @@ span {
   font-size: 1.2rem;
 }
 
+.required-notice {
+  padding: 1.0rem 0rem;
+  font-size: 1.3rem;
+  color: var(--gray);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.required-notice b {
+  color: var(--purple-400);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
 /* ==========================================================================
    Animations
    ========================================================================== */

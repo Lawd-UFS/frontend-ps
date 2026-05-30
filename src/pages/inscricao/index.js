@@ -68,8 +68,21 @@ const initializeElements = () => {
 
   const dateBirthInput = document.getElementById('date-birth');
   if (dateBirthInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateBirthInput.setAttribute('max', today);
+    dateBirthInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 8) value = value.slice(0, 8);
+      
+      let formatted = value;
+      if (value.length > 2) {
+        formatted = `${value.slice(0, 2)}/`;
+        if (value.length > 4) {
+          formatted += `${value.slice(2, 4)}/${value.slice(4)}`;
+        } else {
+          formatted += value.slice(2);
+        }
+      }
+      e.target.value = formatted;
+    });
   }
 
   const phoneInput = document.getElementById('phone');
@@ -243,6 +256,11 @@ const handleSubmitForm = async () => {
       let finalValue = value;
       if (key === 'phone') {
         finalValue = value.replace(/\D/g, '');
+      } else if (key === 'birthDate' && value.includes('/')) {
+        const parts = value.split('/');
+        if (parts.length === 3) {
+          finalValue = `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
       }
       
       if (payload[key]) {

@@ -23,13 +23,13 @@
         <div class="days"></div>
         <form>
           <label class="form-date">
-            <span> Data: </span>
+            <span> Data: * </span>
             <div class="input-date">
-              <input type="date" min="2026-01-05" max="2026-07-05" required name="date" />
+              <input type="text" placeholder="DD/MM/AAAA" maxlength="10" required name="date" />
             </div>
           </label>
           <label class="form-time">
-            <span> Horário: </span>
+            <span> Horário: * </span>
             <div class="input-time">
               <select name="time" required>
                 <option value="" disabled selected>Escolha</option>
@@ -68,7 +68,7 @@
             </div>
           </label>
           <div class="form-format">
-            <span> Formato: </span>
+            <span> Formato: * </span>
             <div class="toggle-group">
               <input type="radio" id="presencial" name="interview-mode" value="Presencial" required />
               <label for="presencial">

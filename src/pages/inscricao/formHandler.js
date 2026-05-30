@@ -80,7 +80,13 @@ export function checkRequiredFields(form) {
       requiredField.id === 'date-birth' ||
       requiredField.name === 'birthDate'
     ) {
-      const dateVal = requiredField.value;
+      let dateVal = requiredField.value;
+      if (dateVal && dateVal.includes('/')) {
+        const parts = dateVal.split('/');
+        if (parts.length === 3) {
+          dateVal = `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+      }
       if (dateVal) {
         const dateObj = new Date(dateVal + 'T00:00:00');
         const year = dateObj.getFullYear();

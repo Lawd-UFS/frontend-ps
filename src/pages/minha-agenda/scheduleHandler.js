@@ -58,7 +58,11 @@ export const fetchOverview = async () => {
 const updateDateOnCalendarClick = (dateInput, day) => {
   const date = new Date(day.getAttribute('data-date'));
 
-  dateInput.value = date.toISOString().split('T')[0];
+  const dayStr = String(date.getDate()).padStart(2, '0');
+  const monthStr = String(date.getMonth() + 1).padStart(2, '0');
+  const yearStr = date.getFullYear();
+
+  dateInput.value = `${dayStr}/${monthStr}/${yearStr}`;
 };
 
 const updateCalendarOnDateInputChange = (calendar, date) => {
@@ -171,7 +175,7 @@ const createNewSchedule = async (form, agendaContainer) => {
   const interviewMode = formData.get('interview-mode');
   const errorMessage = form.querySelector('.error-message');
 
-  const [year, month, day] = date.split('-');
+  const [day, month, year] = date.split('/');
   const [hours, minutes] = time.split(':');
 
   const dateTime = new Date(year, month - 1, day, hours, minutes).toISOString();
@@ -204,7 +208,7 @@ const createNewSchedule = async (form, agendaContainer) => {
 };
 
 export const applyCalendarDayEvents = (calendarContainer) => {
-  const dateInput = calendarContainer.querySelector('input[type="date"]');
+  const dateInput = calendarContainer.querySelector('input[name="date"]');
   const interviewPeriodList =
     calendarContainer.querySelectorAll('.interview-period');
 
@@ -220,14 +224,34 @@ export const applyCalendarDayEvents = (calendarContainer) => {
 };
 
 export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
-  const dateInput = calendarContainer.querySelector('input[type="date"]');
+  const dateInput = calendarContainer.querySelector('input[name="date"]');
   const days = calendarContainer.querySelector('.days');
 
+  dateInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 8) value = value.slice(0, 8);
+    
+    let formatted = value;
+    if (value.length > 2) {
+      formatted = `${value.slice(0, 2)}/`;
+      if (value.length > 4) {
+        formatted += `${value.slice(2, 4)}/${value.slice(4)}`;
+      } else {
+        formatted += value.slice(2);
+      }
+    }
+    e.target.value = formatted;
+  });
+
   dateInput.addEventListener('change', (event) => {
-    updateCalendarOnDateInputChange(
-      days,
-      new Date(`${event.target.value}T00:00:00`),
-    );
+    const val = event.target.value;
+    if (val.length === 10) {
+      const [dayStr, monthStr, yearStr] = val.split('/');
+      updateCalendarOnDateInputChange(
+        days,
+        new Date(`${yearStr}-${monthStr}-${dayStr}T00:00:00`),
+      );
+    }
   });
 
   applyCalendarDayEvents(calendarContainer);
