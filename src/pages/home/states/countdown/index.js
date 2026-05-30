@@ -1,6 +1,6 @@
 import './index.css';
 
-const inicioPS = new Date('2026-05-30T15:02:00');
+const inicioPS = new Date('2026-06-01T00:00:00');
 
 function count() {
   const dataSystem = new Date();
