@@ -69,18 +69,27 @@ Guia foi feito para que qualquer desenvolvedor consiga entender rapidamente como
 ### 1. Como o site muda de fase?
 
 O site muda completamente dependendo de qual etapa o Processo Seletivo se encontra (Inscrições abertas, Agendamento, Encerrado). Nós **não usamos** banco de dados para controlar qual tela o candidato vê na página inicial.
-Tudo é controlado por uma variável de ambiente chamada `PROCESS_STATE` no arquivo `.env` do Frontend.
-**Como atualizar a fase do processo:**
-Se você quiser mudar o site de "Inscrições" para "Entrevistas", você só precisa fazer o seguinte:
-1. Ir na plataforma onde o frontend está hospedado (ex: Vercel).
-2. Mudar o valor da variável `PROCESS_STATE`.
-3. Clicar para fazer um novo *Deploy* (reconstruir o site).
-**Os valores que você pode colocar no `PROCESS_STATE` são:**
+Tudo é controlado por variáveis de ambiente no arquivo `.env` do Frontend.
+
+A variável principal é a `PROCESS_STATE`. Ela define o estado base:
 - `countdown`: Tela de contagem regressiva (antes do PS começar).
 - `form`: Formulário para as pessoas se inscreverem.
 - `interview`: Tela onde os candidatos agendam as entrevistas.
 - `end`: Tela de fim de processo.
-*Dica: Esses nomes correspondem exatamente às pastas que estão dentro de `src/pages/home/states/`.*
+
+**Transição Automática (Countdown -> Form):**
+Para evitar que desenvolvedores precisem mudar a variável manualmente no momento exato em que as inscrições abrem, adicionamos a variável `PROCESS_START_DATE` (ex: `2026-06-01T12:00:00`). 
+- O frontend usa essa data para fazer a contagem regressiva.
+- Se o `PROCESS_STATE` estiver como `countdown`, mas o momento atual (data do build) já tiver ultrapassado a data estipulada em `PROCESS_START_DATE`, o Webpack **forçará automaticamente** a aplicação a renderizar o estado `form`.
+- No lado do cliente, assim que o relógio da contagem zera, a página redireciona o usuário direto para `/inscricao`.
+
+**Como atualizar a fase do processo manualmente (para as demais etapas):**
+Se você quiser mudar o site de "Inscrições" (`form`) para "Entrevistas" (`interview`), você precisa fazer o seguinte:
+1. Ir na plataforma onde o frontend está hospedado (ex: Vercel).
+2. Mudar o valor da variável `PROCESS_STATE`.
+3. Clicar para fazer um novo *Deploy* (reconstruir o site).
+
+*Dica: Os nomes dos estados correspondem exatamente às pastas que estão dentro de `src/pages/home/states/`.*
 ### 2. Como as pessoas fazem Login?
 O sistema tem dois tipos de usuários e eles entram de jeitos bem diferentes:
 **Candidatos (Sem Senha)**

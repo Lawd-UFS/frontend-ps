@@ -57,7 +57,16 @@ const generatePages = (root = '', dir = pagesPath) => {
   return { entries, htmlPlugins };
 };
 
-const processState = process.env.PROCESS_STATE || 'interview';
+let processState = process.env.PROCESS_STATE || 'interview';
+
+// Transição automática para o modo form se a data de início for atingida e o modo for countdown
+if (processState === 'countdown' && process.env.PROCESS_START_DATE) {
+  const startDate = new Date(process.env.PROCESS_START_DATE);
+  if (new Date() >= startDate) {
+    processState = 'form';
+  }
+}
+
 const homeStateDir = path.join(pagesPath, 'home', 'states', processState);
 
 const homePage = {
@@ -111,6 +120,7 @@ const config = {
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.INTERVIEW_START_DATE': JSON.stringify(process.env.INTERVIEW_START_DATE),
       'process.env.INTERVIEW_END_DATE': JSON.stringify(process.env.INTERVIEW_END_DATE),
+      'process.env.PROCESS_START_DATE': JSON.stringify(process.env.PROCESS_START_DATE),
     }),
   ],
   module: {

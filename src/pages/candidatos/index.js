@@ -64,22 +64,6 @@ const setRanking = (candidates) => {
   });
 };
 
-const getAllUsers = async () => {
-  try {
-    const { data: response } = await httpClient.sendRequest({
-      endpoint: '/users',
-      method: HttpMethod.GET,
-      headers: {
-        Authorization: authenticationService.getToken(),
-      },
-    });
-    return response.data || [];
-  } catch (error) {
-    console.error('Erro na busca de usuários:', error);
-    return [];
-  }
-};
-
 document.addEventListener('DOMContentLoaded', async () => {
   const header = await Header();
 
@@ -91,7 +75,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const total = document.createElement('p');
 
   const candidates = await getAllCandidates();
-  const users = await getAllUsers();
 
   total.innerText = `Total: ${candidates.length}`;
   headerInfo.appendChild(total);
@@ -118,13 +101,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       profile.classList.add('table_profile');
 
       tr.appendChild(profile);
-      
-      const user = users.find(u => u._id === candidate.user || u._id === candidate.userId);
-      const emailText = user && user.email ? user.email : '-';
 
       const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
       tr.innerHTML += `
-      <td>${emailText}</td>
       <td>${phoneText}</td>
       <td class="score">${candidate.score}</td>
       <td class="ranking">-</td>
