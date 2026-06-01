@@ -26,9 +26,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.body.prepend(await Header());
 
-  const currentDate = new Date();
-  const periodStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-  const periodEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, currentDate.getDate());
+  const parseDateEnv = (dateStr) => {
+    const [year, month, day] = dateStr.split('-');
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  };
+
+  const periodStart = parseDateEnv(process.env.INTERVIEW_START_DATE);
+  const periodEnd = parseDateEnv(process.env.INTERVIEW_END_DATE);
 
   const formatDate = (d) => {
     const year = d.getFullYear();

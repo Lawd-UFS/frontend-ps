@@ -61,7 +61,8 @@ header {
 }
 
 .done_button,
-.scheduling_button {
+.scheduling_button,
+.delete_button {
   border: 1.2px solid rgba(92, 0, 164, 0.11);
   border-radius: 10px;
   padding-left: 0.5em;
@@ -72,40 +73,26 @@ header {
 }
 
 .done_button:hover,
-.scheduling_button:hover {
+.scheduling_button:hover,
+.delete_button:hover {
   opacity: 0.8;
   font-weight: 500;
 }
 
 .done_button.active,
-.scheduling_button.active {
+.scheduling_button.active,
+.delete_button.active {
   background-color: var(--purple-200);
   border-color: var(--indigo-700);
   font-weight: 500;
 }
 
 .done_button img,
-.scheduling_button img {
-  width: 1em;
-  height: 1em;
-  margin-right: 0.5em;
-}
-
-.delete_button {
-  border: none;
-  padding: 0.5rem;
-}
-
-.delete_button.active {
-  background-color: var(--purple-200);
-  border: 1.2px solid var(--indigo-700);
-  border-radius: 10px;
-}
-
+.scheduling_button img,
 .delete_button img {
   width: 1em;
   height: 1em;
-  border: none;
+  margin-right: 0.5em;
 }
 
 table {

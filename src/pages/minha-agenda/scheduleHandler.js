@@ -178,6 +178,34 @@ const createNewSchedule = async (form, agendaContainer) => {
   const [day, month, year] = date.split('/');
   const [hours, minutes] = time.split(':');
 
+  const inputDate = new Date(year, month - 1, day);
+
+  const parseDateEnv = (dateStr) => {
+    const [y, m, d] = dateStr.split('-');
+    return new Date(Number(y), Number(m) - 1, Number(d));
+  };
+
+  const periodStart = parseDateEnv(process.env.INTERVIEW_START_DATE);
+  const periodEnd = parseDateEnv(process.env.INTERVIEW_END_DATE);
+
+  const formatToBR = (dateObj) => {
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const y = dateObj.getFullYear();
+    return `${d}/${m}/${y}`;
+  };
+
+  if (inputDate < periodStart || inputDate > periodEnd) {
+    const msg = `A data deve estar entre ${formatToBR(periodStart)} e ${formatToBR(periodEnd)}.`;
+    if (errorMessage) {
+      errorMessage.textContent = msg;
+      errorMessage.style.display = 'block';
+    } else {
+      alert(msg);
+    }
+    return;
+  }
+
   const dateTime = new Date(year, month - 1, day, hours, minutes).toISOString();
 
   const response = await scheduleService.createSchedule({
