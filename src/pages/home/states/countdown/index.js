@@ -1,6 +1,10 @@
 import './index.css';
 
-const inicioPS = new Date(process.env.PROCESS_START_DATE);
+let dateStr = process.env.PROCESS_START_DATE;
+if (!/(Z|[+-]\d{2}:\d{2})$/.test(dateStr)) {
+  dateStr += '-03:00';
+}
+const inicioPS = new Date(dateStr);
 
 function count() {
   const dataSystem = new Date();
@@ -36,7 +40,7 @@ function count() {
     if (cdMessage) {
       cdMessage.innerHTML = 'As inscrições já abriram!';
     }
-    
+
     // Transição para o modo de forms (página de inscrição)
     setTimeout(() => {
       window.location.href = '/inscricao';
@@ -45,3 +49,4 @@ function count() {
 }
 
 count();
+

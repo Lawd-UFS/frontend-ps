@@ -61,7 +61,12 @@ let processState = process.env.PROCESS_STATE || 'interview';
 
 // Transição automática para o modo form se a data de início for atingida e o modo for countdown
 if (processState === 'countdown' && process.env.PROCESS_START_DATE) {
-  const startDate = new Date(process.env.PROCESS_START_DATE);
+  let dateStr = process.env.PROCESS_START_DATE;
+  // Se não tiver fuso horário especificado (Z ou offset), assume o horário de Brasília (-03:00)
+  if (!/(Z|[+-]\d{2}:\d{2})$/.test(dateStr)) {
+    dateStr += '-03:00';
+  }
+  const startDate = new Date(dateStr);
   if (new Date() >= startDate) {
     processState = 'form';
   }
