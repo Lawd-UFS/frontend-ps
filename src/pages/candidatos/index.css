@@ -32,21 +32,44 @@ header {
 .table_header {
   display: flex;
   width: 70vw;
-  height: 15vh;
+  min-height: 15vh;
+  height: auto;
   background-color: rgba(239, 242, 255, 1);
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  padding: 1.5em;
   border-radius: 10px 10px 0px 0px;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  box-sizing: border-box;
 }
 
 .table_header_right_side {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1em;
+  flex-grow: 1;
+}
+
+.search_container {
+  display: flex;
+  gap: 0.8em;
+  flex-wrap: wrap;
   align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.status_filters_container {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .table_header_right_side p {
-  padding-right: 1em;
+  padding-right: 0.5em;
 }
 
 .table_header_right_side button {
@@ -63,7 +86,7 @@ header {
 .done_button,
 .scheduling_button,
 .delete_button {
-  border: 1.2px solid rgba(92, 0, 164, 0.11);
+  border: 1.2px solid rgba(92, 0, 164, 0.35);
   border-radius: 10px;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -96,7 +119,7 @@ header {
 }
 
 .filter-select {
-  border: 1.2px solid rgba(92, 0, 164, 0.11);
+  border: 1.2px solid rgba(92, 0, 164, 0.35);
   border-radius: 10px;
   padding: 0.5em 1em;
   font-family: 'Space Grotesk';
@@ -116,6 +139,68 @@ header {
 .filter-select:focus {
   border-color: var(--purple-300, #7046e9);
   background-color: #fcfaff;
+}
+
+.search-input {
+  border: 1.2px solid rgba(92, 0, 164, 0.35);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-family: 'Space Grotesk';
+  font-weight: 350;
+  color: rgba(74, 56, 123, 1);
+  background-color: white;
+  margin-right: 1em;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 200px;
+}
+
+.search-input:hover {
+  border-color: rgba(92, 0, 164, 0.3);
+}
+
+.search-input:focus {
+  border-color: var(--purple-300, #7046e9);
+  background-color: #fcfaff;
+}
+
+.pagination-btn {
+  border: 1.2px solid rgba(92, 0, 164, 0.35);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-family: 'Space Grotesk';
+  font-weight: 350;
+  color: rgba(74, 56, 123, 1);
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  opacity: 0.8;
+  font-weight: 500;
+  background-color: rgba(239, 242, 255, 1);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.search-btn {
+  border: 1.2px solid rgba(92, 0, 164, 0.35);
+  border-radius: 10px;
+  padding: 0.5em 1.2em;
+  font-family: 'Space Grotesk';
+  font-weight: 500;
+  color: white;
+  background-color: rgba(92, 0, 164, 0.8);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+  background-color: rgba(92, 0, 164, 1);
 }
 
 table {
@@ -181,7 +266,7 @@ thead th {
   position: sticky;
   top: 0;
   background-color: rgba(255, 255, 255, 1);
-  border-bottom: 1px solid rgba(92, 0, 164, 0.11);
+  border-bottom: 1px solid rgba(92, 0, 164, 0.25);
 }
 
 .table_body {
@@ -202,14 +287,28 @@ thead th {
   }
   
   .table_header_right_side {
-    flex-wrap: wrap;
-    gap: 0.8rem;
+    align-items: flex-start;
     width: 100%;
+    gap: 1rem;
   }
 
-  .table_header_right_side button,
-  .table_header_right_side select {
-    margin-right: 0;
+  .search_container {
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .search-input,
+  .filter-select,
+  .search-btn {
+    width: 100% !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .status_filters_container {
+    width: 100%;
+    justify-content: flex-start;
   }
   
   .table {
@@ -234,7 +333,7 @@ thead th {
   
   tbody tr {
     background-color: white;
-    border: 1.2px solid rgba(92, 0, 164, 0.11);
+    border: 1.2px solid rgba(92, 0, 164, 0.25);
     border-radius: 16px;
     padding: 1.2em;
     margin-bottom: 1.2em;
@@ -251,7 +350,7 @@ thead th {
   td {
     text-align: right;
     padding: 0.6em 0;
-    border-bottom: 1px solid rgba(92, 0, 164, 0.05);
+    border-bottom: 1px solid rgba(92, 0, 164, 0.15);
     display: flex;
     justify-content: space-between;
     align-items: center;

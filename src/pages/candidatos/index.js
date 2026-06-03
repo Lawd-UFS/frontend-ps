@@ -67,26 +67,36 @@ const normalizeCourseName = (course) => {
     .join(' ');
 };
 
-const getAllCandidates = async () => {
+const getAllCandidates = async (params = {}) => {
   try {
+    const query = new URLSearchParams();
+    if (params.name) query.append('name', params.name);
+    if (params.curso) query.append('curso', params.curso);
+    if (params.periodo) query.append('periodo', params.periodo);
+    if (params.knowledgeLevel) query.append('knowledgeLevel', params.knowledgeLevel);
+    if (params.page) query.append('page', params.page);
+    if (params.limit) query.append('limit', params.limit);
+
+    const queryString = query.toString() ? `?${query.toString()}` : '';
+
     const { data: response } = await httpClient.sendRequest({
-      endpoint: '/candidatos',
+      endpoint: `/candidatos${queryString}`,
       method: HttpMethod.GET,
       headers: {
         Authorization: authenticationService.getToken(),
       },
     });
 
-    return response.data;
+    return response;
   } catch (error) {
     if (error.status === 401) {
       alert('Sessão expirada, faça o login novamente.');
       authenticationService.logout();
-      return;
+      return { data: [], totalPages: 1 };
     }
 
     alert('Ocorreu um erro na busca de candidatos.');
-    return [];
+    return { data: [], totalPages: 1 };
   }
 };
 
@@ -126,91 +136,156 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.prepend(header);
 
   const tbody = document.querySelector('tbody');
-  const headerInfo = document.querySelector('.table_header_right_side');
+  const headerInfo = document.querySelector('.status_filters_container');
 
   const total = document.createElement('p');
+  total.style.fontWeight = 'bold';
+  total.style.marginRight = 'auto';
+  headerInfo.prepend(total);
 
-  const candidates = await getAllCandidates();
+  const state = {
+    name: '',
+    curso: '',
+    periodo: '',
+    knowledgeLevel: '',
+    page: 1,
+    limit: 99999,
+    totalPages: 1
+  };
 
-  total.innerText = `Total: ${candidates.length}`;
-  headerInfo.appendChild(total);
+  const statusFilters = { scheduling: false, done: false, deleted: false };
+  let currentLoadedCandidates = [];
 
-  const loadedCandidates = await Promise.all(
-    candidates.map(async (candidate) => {
-      const tr = document.createElement('tr');
+  const applyStatusFilters = () => {
+    let visibleCount = 0;
 
-      const normalizedCourse = normalizeCourseName(candidate.course);
-      tr.dataset.score = candidate.score || 0;
-      tr.dataset.course = normalizedCourse.toLowerCase();
-      tr.dataset.period = candidate.period ? candidate.period.toString() : '';
+    currentLoadedCandidates.forEach((tr) => {
+      const statusText = tr.querySelector('td:nth-child(1)').innerText.toLowerCase();
+      const isEliminado = statusText === 'eliminado';
+      const scoreVal = Number(tr.dataset.score) || 0;
+      const isDone = scoreVal > 0;
+      const isScheduling = !isDone;
 
-      if (candidate.status === 'eliminado') {
-        tr.style.color = 'red';
+      const anyStatusFilterActive = statusFilters.scheduling || statusFilters.done || statusFilters.deleted;
+      let showByStatus = true;
+      if (anyStatusFilterActive) {
+        showByStatus = false;
+        if (statusFilters.scheduling && isScheduling && !isEliminado) showByStatus = true;
+        if (statusFilters.done && isDone && !isEliminado) showByStatus = true;
+        if (statusFilters.deleted && isEliminado) showByStatus = true;
       }
 
-      tr.innerHTML = `<td data-label="Status">${candidate.status.capitalize()}</td>`;
+      tr.style.display = showByStatus ? '' : 'none';
+      if (showByStatus) visibleCount++;
+    });
+  };
 
-      const profile = await Profile(
-        {
-          name: candidate.name,
-          imgSrc: candidate.profilePhotoUrl,
-        },
-        'td',
-      );
+  const loadCandidates = async () => {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px;">Carregando...</td></tr>';
 
-      profile.classList.remove('profile');
-      profile.classList.add('table_profile');
-      profile.setAttribute('data-label', 'Candidato');
+    const response = await getAllCandidates(state);
+    const candidates = response.data || [];
+    state.totalPages = response.totalPages || 1;
+    state.page = response.currentPage || state.page;
 
-      tr.appendChild(profile);
+    total.innerText = `Total: ${response.totalRecords || candidates.length}`;
 
-      const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
-      tr.innerHTML += `
-      <td data-label="Telefone">${phoneText}</td>
-      <td data-label="Curso">${normalizedCourse || '-'}</td>
-      <td data-label="Período">${candidate.period ? `${candidate.period}º` : '-'}</td>
-      <td data-label="Ranking" class="ranking">-</td>
-      <td data-label="Ações">
-        <button class="view-profile-btn" title="Ver Perfil Completo">
-          <svg viewBox="0 0 24 24" width="18" height="18">
-            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-          </svg>
-        </button>
-      </td>
-    `;
+    tbody.innerHTML = '';
 
-      const viewBtn = tr.querySelector('.view-profile-btn');
-      viewBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        window.location.href = `/candidatos/${candidate._id || candidate.id}`;
-      });
+    const loadedCandidates = await Promise.all(
+      candidates.map(async (candidate) => {
+        const tr = document.createElement('tr');
 
-      return tr;
-    }),
-  );
+        const normalizedCourse = normalizeCourseName(candidate.course);
+        tr.dataset.score = candidate.score || 0;
+        tr.dataset.course = normalizedCourse.toLowerCase();
+        tr.dataset.period = candidate.period ? candidate.period.toString() : '';
 
-  const orderedCandidates = orderCandidates(loadedCandidates);
+        if (candidate.status === 'eliminado') {
+          tr.style.color = 'red';
+        }
 
-  setRanking(orderedCandidates);
+        tr.innerHTML = `<td data-label="Status">${candidate.status.capitalize()}</td>`;
 
-  orderedCandidates.forEach((candidate) => {
-    tbody.appendChild(candidate);
-  });
+        const profile = await Profile(
+          {
+            name: candidate.name,
+            imgSrc: candidate.profilePhotoUrl,
+          },
+          'td',
+        );
 
-  // Populate dynamic filters
+        profile.classList.remove('profile');
+        profile.classList.add('table_profile');
+        profile.setAttribute('data-label', 'Candidato');
+
+        tr.appendChild(profile);
+
+        const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
+        tr.innerHTML += `
+        <td data-label="Telefone">${phoneText}</td>
+        <td data-label="Curso">${normalizedCourse || '-'}</td>
+        <td data-label="Período">${candidate.period ? `${candidate.period}º` : '-'}</td>
+        <td data-label="Ranking" class="ranking">-</td>
+        <td data-label="Ações">
+          <button class="view-profile-btn" title="Ver Perfil Completo">
+            <svg viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+          </button>
+        </td>
+      `;
+
+        const viewBtn = tr.querySelector('.view-profile-btn');
+        viewBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.location.href = `/candidatos/${candidate._id || candidate.id}`;
+        });
+
+        return tr;
+      }),
+    );
+
+    const orderedCandidates = orderCandidates(loadedCandidates);
+    setRanking(orderedCandidates);
+
+    currentLoadedCandidates = orderedCandidates;
+
+    orderedCandidates.forEach((candidate) => {
+      tbody.appendChild(candidate);
+    });
+
+    applyStatusFilters();
+  };
+
+  // Inicializa os filtros dinâmicos chamando a API uma vez com limite alto
+  const initialResponse = await getAllCandidates({ limit: 99999 });
+  const allCandidates = initialResponse.data || [];
+
   const courseFilter = document.querySelector('#filter-course');
   const periodFilter = document.querySelector('#filter-period');
 
-  const uniqueCourses = [...new Set(candidates.map(c => normalizeCourseName(c.course)).filter(Boolean))].sort();
-  const uniquePeriods = [...new Set(candidates.map(c => c.period ? c.period.toString() : '').filter(Boolean))].sort((a, b) => Number(a) - Number(b));
+  // Agrupa nomes de cursos brutos por seus nomes normalizados
+  const courseGroups = {};
+  allCandidates.forEach(c => {
+    if (!c.course) return;
+    const normalized = normalizeCourseName(c.course);
+    if (!courseGroups[normalized]) {
+      courseGroups[normalized] = [];
+    }
+    courseGroups[normalized].push(c.course);
+  });
 
-  uniqueCourses.forEach(course => {
+  Object.keys(courseGroups).forEach(normalized => {
+    const rawValues = [...new Set(courseGroups[normalized])];
     const opt = document.createElement('option');
-    opt.value = course.toLowerCase();
-    opt.innerText = course;
+    opt.value = rawValues.join('|');
+    opt.innerText = normalized;
     courseFilter.appendChild(opt);
   });
 
+  // Popula períodos únicos
+  const uniquePeriods = [...new Set(allCandidates.map(c => c.period ? c.period.toString() : '').filter(Boolean))].sort((a, b) => Number(a) - Number(b));
   uniquePeriods.forEach(period => {
     const opt = document.createElement('option');
     opt.value = period;
@@ -218,63 +293,42 @@ document.addEventListener('DOMContentLoaded', async () => {
     periodFilter.appendChild(opt);
   });
 
-  // Filtros
-  const filters = { scheduling: false, done: false, deleted: false };
+  // Inicializa a listagem
+  await loadCandidates();
+
+  // Controles de Busca
+  const nameInput = document.querySelector('#filter-name');
+  const knowledgeSelect = document.querySelector('#filter-knowledge');
+  const applyFiltersBtn = document.querySelector('#apply-filters-btn');
+
+  const executeSearch = () => {
+    state.name = nameInput.value;
+    state.curso = courseFilter.value;
+    state.periodo = periodFilter.value;
+    state.knowledgeLevel = knowledgeSelect.value;
+    state.page = 1; // Reseta a paginação ao buscar
+    loadCandidates();
+  };
+
+  applyFiltersBtn.addEventListener('click', executeSearch);
+
+  const handleEnter = (e) => {
+    if (e.key === 'Enter') {
+      executeSearch();
+    }
+  };
+
+  nameInput.addEventListener('keypress', handleEnter);
+  courseFilter.addEventListener('change', executeSearch);
+  periodFilter.addEventListener('change', executeSearch);
+  knowledgeSelect.addEventListener('change', executeSearch);
+
+  // Filtros de Status Locais
   const filterButtons = {
     scheduling: document.querySelector('.scheduling_button'),
     done: document.querySelector('.done_button'),
     deleted: document.querySelector('.delete_button')
   };
-
-  const applyFilters = () => {
-    const selectedCourse = courseFilter.value;
-    const selectedPeriod = periodFilter.value;
-
-    let visibleCount = 0;
-
-    orderedCandidates.forEach((tr) => {
-      const statusText = tr.querySelector('td:nth-child(1)').innerText.toLowerCase();
-      
-      const isEliminado = statusText === 'eliminado';
-      const scoreVal = Number(tr.dataset.score) || 0;
-      const isDone = scoreVal > 0;
-      const isScheduling = !isDone;
-
-      // Status check
-      const anyStatusFilterActive = filters.scheduling || filters.done || filters.deleted;
-      let showByStatus = true;
-      if (anyStatusFilterActive) {
-        showByStatus = false;
-        if (filters.scheduling && isScheduling && !isEliminado) showByStatus = true;
-        if (filters.done && isDone && !isEliminado) showByStatus = true;
-        if (filters.deleted && isEliminado) showByStatus = true;
-      }
-
-      // Course check
-      let showByCourse = true;
-      if (selectedCourse) {
-        showByCourse = tr.dataset.course === selectedCourse;
-      }
-
-      // Period check
-      let showByPeriod = true;
-      if (selectedPeriod) {
-        showByPeriod = tr.dataset.period === selectedPeriod;
-      }
-
-      const show = showByStatus && showByCourse && showByPeriod;
-      tr.style.display = show ? '' : 'none';
-
-      if (show) {
-        visibleCount++;
-      }
-    });
-
-    total.innerText = `Total: ${visibleCount}`;
-  };
-
-  courseFilter.addEventListener('change', applyFilters);
-  periodFilter.addEventListener('change', applyFilters);
 
   Object.keys(filterButtons).forEach(key => {
     const btn = filterButtons[key];
@@ -282,10 +336,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       btn.style.cursor = 'pointer';
       btn.style.transition = 'all 0.2s ease';
       btn.addEventListener('click', () => {
-        filters[key] = !filters[key];
-        btn.classList.toggle('active', filters[key]);
-        applyFilters();
+        statusFilters[key] = !statusFilters[key];
+        btn.classList.toggle('active', statusFilters[key]);
+        applyStatusFilters();
       });
     }
   });
 });
+
