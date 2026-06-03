@@ -136,11 +136,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.prepend(header);
 
   const tbody = document.querySelector('tbody');
-  const headerInfo = document.querySelector('.status_filters_container');
+  const headerInfo = document.querySelector('.table_header_right_side');
 
   const total = document.createElement('p');
   total.style.fontWeight = 'bold';
-  total.style.marginRight = 'auto';
+  total.style.marginLeft = 'auto';
   headerInfo.prepend(total);
 
   const state = {
@@ -153,32 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     totalPages: 1
   };
 
-  const statusFilters = { scheduling: false, done: false, deleted: false };
   let currentLoadedCandidates = [];
-
-  const applyStatusFilters = () => {
-    let visibleCount = 0;
-
-    currentLoadedCandidates.forEach((tr) => {
-      const statusText = tr.querySelector('td:nth-child(1)').innerText.toLowerCase();
-      const isEliminado = statusText === 'eliminado';
-      const scoreVal = Number(tr.dataset.score) || 0;
-      const isDone = scoreVal > 0;
-      const isScheduling = !isDone;
-
-      const anyStatusFilterActive = statusFilters.scheduling || statusFilters.done || statusFilters.deleted;
-      let showByStatus = true;
-      if (anyStatusFilterActive) {
-        showByStatus = false;
-        if (statusFilters.scheduling && isScheduling && !isEliminado) showByStatus = true;
-        if (statusFilters.done && isDone && !isEliminado) showByStatus = true;
-        if (statusFilters.deleted && isEliminado) showByStatus = true;
-      }
-
-      tr.style.display = showByStatus ? '' : 'none';
-      if (showByStatus) visibleCount++;
-    });
-  };
 
   const loadCandidates = async () => {
     tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px;">Carregando...</td></tr>';
@@ -254,8 +229,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     orderedCandidates.forEach((candidate) => {
       tbody.appendChild(candidate);
     });
-
-    applyStatusFilters();
   };
 
   // Inicializa os filtros dinâmicos chamando a API uma vez com limite alto
@@ -322,25 +295,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   courseFilter.addEventListener('change', executeSearch);
   periodFilter.addEventListener('change', executeSearch);
   knowledgeSelect.addEventListener('change', executeSearch);
-
-  // Filtros de Status Locais
-  const filterButtons = {
-    scheduling: document.querySelector('.scheduling_button'),
-    done: document.querySelector('.done_button'),
-    deleted: document.querySelector('.delete_button')
-  };
-
-  Object.keys(filterButtons).forEach(key => {
-    const btn = filterButtons[key];
-    if (btn) {
-      btn.style.cursor = 'pointer';
-      btn.style.transition = 'all 0.2s ease';
-      btn.addEventListener('click', () => {
-        statusFilters[key] = !statusFilters[key];
-        btn.classList.toggle('active', statusFilters[key]);
-        applyStatusFilters();
-      });
-    }
-  });
 });
 

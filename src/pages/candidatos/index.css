@@ -187,20 +187,24 @@ header {
   cursor: not-allowed;
 }
 
-.search-btn {
+.table_header_right_side .search-btn {
   border: 1.2px solid rgba(92, 0, 164, 0.35);
   border-radius: 10px;
   padding: 0.5em 1.2em;
   font-family: 'Space Grotesk';
   font-weight: 500;
   color: white;
+  background: rgba(92, 0, 164, 0.8);
   background-color: rgba(92, 0, 164, 0.8);
   cursor: pointer;
   transition: all 0.2s ease;
+  justify-content: center;
 }
 
-.search-btn:hover {
+.table_header_right_side .search-btn:hover {
+  background: rgba(92, 0, 164, 1);
   background-color: rgba(92, 0, 164, 1);
+  color: white;
 }
 
 table {
