@@ -62,17 +62,24 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: clip;
+}
+
 html,
 body {
   min-width: 320px;
+  max-width: 100%;
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
+  overflow-x: clip;
 }
 
 img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
 

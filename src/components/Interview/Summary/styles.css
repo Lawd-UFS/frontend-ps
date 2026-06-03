@@ -1,11 +1,38 @@
 #summary {
   padding: 4rem;
 
-  width: 55rem;
+  width: 100%;
+  max-width: 55rem;
+  box-sizing: border-box;
 
   background-color: var(--gray-background);
 
   border-radius: 2.4rem;
+}
+
+@media (max-width: 768px) {
+  #summary {
+    padding: 2.4rem 1.6rem;
+  }
+
+  #summary #question-scores li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  #summary #question-scores li h4 {
+    width: 100%;
+  }
+
+  #summary #question-scores li .total-score {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  #summary footer span {
+    font-size: 3.6rem;
+  }
 }
 
 #summary header {

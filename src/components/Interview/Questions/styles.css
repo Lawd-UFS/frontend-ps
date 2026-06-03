@@ -24,7 +24,8 @@
 
   background-color: #ffffff;
 
-  width: 60rem;
+  width: 100%;
+  max-width: 60rem;
   height: fit-content;
 
   border: solid var(--purple-200) 1px;
@@ -40,10 +41,13 @@
 
 .question .scores {
   display: flex;
-  justify-content: space-around;
-  align-self: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  align-self: stretch;
 
-  width: 110%;
+  width: 100%;
+  max-width: 100%;
 
   background-color: white;
 
@@ -131,4 +135,32 @@
   left: 50%;
 
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+  .question {
+    padding: 2.4rem 1.6rem;
+    border-radius: 2rem;
+    gap: 2.4rem;
+  }
+
+  .question h2 {
+    margin-top: 1.6rem;
+    font-size: 2rem;
+  }
+
+  .question span.candidate-name {
+    font-size: 2.2rem;
+  }
+
+  .question .scores {
+    padding-inline: 1.6rem;
+    padding-block: 1.6rem;
+    border-radius: 2.4rem;
+  }
+
+  .question .scores li {
+    padding-inline: 1rem;
+    font-size: 1.4rem;
+  }
 }

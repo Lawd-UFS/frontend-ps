@@ -1,27 +1,37 @@
 body {
-  overflow-y: hidden;
-  min-width: 130rem;
+  overflow-x: clip;
+  overflow-y: auto;
+  min-height: 100vh;
 }
 
 #apply {
   display: flex;
-
-  justify-content: space-between;
-
-  gap: 4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  width: 100%;
+  max-width: 140rem;
+  margin: 0 auto;
+  padding: 2rem clamp(1.2rem, 4vw, 4rem) 6rem;
+  box-sizing: border-box;
 }
 
 #apply #interview-instructions {
-  transform: scale(0.9);
+  flex: 0 1 25rem;
+  width: 100%;
+  max-width: 32rem;
+  transform: none;
 }
 
 #apply #questions {
-  height: 100%;
-
-  margin-top: 4rem;
-  padding-bottom: 8rem;
-
-  overflow-y: auto;
+  flex: 1 1 40rem;
+  min-width: 0;
+  width: 100%;
+  max-width: 72rem;
+  margin-top: 0;
+  padding-bottom: 4rem;
+  overflow-y: visible;
 }
 
 #apply #questions::-webkit-scrollbar {
@@ -29,9 +39,27 @@ body {
 }
 
 #apply #questions .question {
-  margin-inline: 6rem;
+  margin-inline: 0;
+  width: 100%;
+  max-width: 100%;
+}
 
-  .scores {
-    width: 130%;
+#apply #questions .question .scores {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  #apply {
+    flex-direction: column;
+    align-items: stretch;
+    padding-inline: 1.6rem;
+  }
+
+  #apply #interview-instructions {
+    max-width: none;
+  }
+
+  #apply #questions {
+    flex-basis: auto;
   }
 }

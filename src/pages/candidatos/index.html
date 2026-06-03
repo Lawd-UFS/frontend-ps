@@ -14,29 +14,39 @@
       <div class="table">
         <div class="table_header">
           <div class="table_header_left_side">
-            <h2>Lista de Candidatos</h2>
+            <div class="table_header_title_row">
+              <h2>Lista de Candidatos</h2>
+              <div class="candidates-total" aria-live="polite">
+                <span class="candidates-total__label">Total</span>
+                <span class="candidates-total__count">0</span>
+              </div>
+            </div>
           </div>
 
           <div class="table_header_right_side">
-            <p>Filtros:</p>
-            <button class="scheduling_button">
-              <img src="../../assets/images/schedule-pic.png" alt="schedule" />
-              Agendado
-            </button>
-            <button class="done_button">
-              <img src="../../assets/images/circle.png" alt="circle" />
-              Concluido
-            </button>
-            <button class="delete_button">
-              <img src="../../assets/images/trash_can.png" alt="trash" />
-              Eliminados
-            </button>
-            <select id="filter-course" class="filter-select">
-              <option value="">Todos os Cursos</option>
-            </select>
-            <select id="filter-period" class="filter-select">
-              <option value="">Todos os Períodos</option>
-            </select>
+            <p class="filters-label">Filtros:</p>
+            <div class="filter-status-group" role="group" aria-label="Status">
+              <button type="button" class="scheduling_button">
+                <img src="../../assets/images/schedule-pic.png" alt="" aria-hidden="true" />
+                <span>Agendado</span>
+              </button>
+              <button type="button" class="done_button">
+                <img src="../../assets/images/circle.png" alt="" aria-hidden="true" />
+                <span>Concluído</span>
+              </button>
+              <button type="button" class="delete_button">
+                <img src="../../assets/images/trash_can.png" alt="" aria-hidden="true" />
+                <span>Eliminados</span>
+              </button>
+            </div>
+            <div class="filter-selects-group">
+              <select id="filter-course" class="filter-select" aria-label="Filtrar por curso">
+                <option value="">Todos os Cursos</option>
+              </select>
+              <select id="filter-period" class="filter-select" aria-label="Filtrar por período">
+                <option value="">Todos os Períodos</option>
+              </select>
+            </div>
           </div>
         </div>
 

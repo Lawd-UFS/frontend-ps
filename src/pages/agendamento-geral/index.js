@@ -21,22 +21,27 @@ const createScheduleItem = async (schedule) => {
 
   const dateTime = new Date(schedule.dateTime);
   const time = document.createElement('td');
+  time.className = 'time';
+  time.setAttribute('data-label', 'Horário');
   time.appendChild(Interview.Time(dateTime));
 
   const status = document.createElement('td');
   status.className = `status ${getStatusClass(schedule.interviewStatus)}`;
+  status.setAttribute('data-label', 'Status');
   status.innerHTML = `
     <span>${schedule.interviewStatus}</span>
   `;
 
   const mode = document.createElement('td');
   mode.className = 'mode';
+  mode.setAttribute('data-label', 'Modalidade');
 
   mode.innerHTML = `
     <span>${schedule.interviewMode}</span>
   `;
 
   const candidate = document.createElement('td');
+  candidate.setAttribute('data-label', 'Candidato');
 
   if (!schedule.candidate.isEmpty()) {
     candidate.className = 'candidate';
@@ -54,6 +59,7 @@ const createScheduleItem = async (schedule) => {
 
   const evaluator = document.createElement('td');
   evaluator.className = 'evaluator';
+  evaluator.setAttribute('data-label', 'Avaliador');
 
   const evaluatorProfile = await Profile({
     name: schedule.evaluator.name,

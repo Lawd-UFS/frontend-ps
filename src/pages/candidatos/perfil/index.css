@@ -13,8 +13,10 @@ header {
   display: flex;
   justify-self: center;
   align-items: center;
-  width: 80vw;
+  width: min(90%, 120rem);
   margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+  box-sizing: border-box;
 }
 
 .profile-container {
@@ -430,6 +432,11 @@ header {
 
 /* Responsive adjustments */
 @media (max-width: 800px) {
+  .profile-container {
+    width: 95%;
+    margin-inline: auto;
+  }
+
   .profile-details-grid {
     grid-template-columns: 1fr;
   }

@@ -126,14 +126,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.body.prepend(header);
 
   const tbody = document.querySelector('tbody');
-  const headerInfo = document.querySelector('.table_header_right_side');
-
-  const total = document.createElement('p');
+  const totalCountEl = document.querySelector('.candidates-total__count');
 
   const candidates = await getAllCandidates();
 
-  total.innerText = `Total: ${candidates.length}`;
-  headerInfo.appendChild(total);
+  const updateTotalCount = (count) => {
+    if (totalCountEl) {
+      totalCountEl.textContent = count;
+    }
+  };
+
+  updateTotalCount(candidates.length);
 
   const loadedCandidates = await Promise.all(
     candidates.map(async (candidate) => {
@@ -170,11 +173,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       <td data-label="Curso">${normalizedCourse || '-'}</td>
       <td data-label="Período">${candidate.period ? `${candidate.period}º` : '-'}</td>
       <td data-label="Ranking" class="ranking">-</td>
-      <td data-label="Ações">
-        <button class="view-profile-btn" title="Ver Perfil Completo">
-          <svg viewBox="0 0 24 24" width="18" height="18">
+      <td data-label="Ver mais" class="actions-cell">
+        <button type="button" class="view-profile-btn" title="Ver perfil completo">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
             <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
           </svg>
+          <span class="view-profile-btn__label">Ver mais</span>
         </button>
       </td>
     `;
@@ -270,7 +274,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     });
 
-    total.innerText = `Total: ${visibleCount}`;
+    updateTotalCount(visibleCount);
   };
 
   courseFilter.addEventListener('change', applyFilters);
@@ -279,8 +283,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   Object.keys(filterButtons).forEach(key => {
     const btn = filterButtons[key];
     if (btn) {
-      btn.style.cursor = 'pointer';
-      btn.style.transition = 'all 0.2s ease';
       btn.addEventListener('click', () => {
         filters[key] = !filters[key];
         btn.classList.toggle('active', filters[key]);

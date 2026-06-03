@@ -1,17 +1,36 @@
 #result {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem clamp(1.2rem, 4vw, 3rem);
+  box-sizing: border-box;
 }
 
 #result #chart {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  width: 50%;
-  height: 90%;
+  flex: 1 1 28rem;
+  width: 100%;
+  max-width: 50rem;
+  min-height: 28rem;
 }
 
 #result #summary {
-  transform: scale(0.8);
+  flex: 1 1 32rem;
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  #result {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #result #chart {
+    max-width: 100%;
+  }
 }

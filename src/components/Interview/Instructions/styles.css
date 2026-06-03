@@ -2,8 +2,10 @@
   border-radius: 1rem;
   padding: 3rem;
 
-  width: 25rem;
+  width: 100%;
+  max-width: 25rem;
   height: fit-content;
+  box-sizing: border-box;
 
   background-color: var(--gray-background);
 

@@ -440,7 +440,7 @@ svg:hover {
   .label-main-title {
     align-items: center;
     justify-content: space-around;
-    width: 100vw;
+    width: 100%;
     margin: 0;
 
     .quote-2 {
@@ -458,7 +458,7 @@ svg:hover {
     padding-bottom: 1em;
 
     .points {
-      width: 100vw;
+      width: 100%;
     }
 
     .quote-3 {
@@ -560,7 +560,7 @@ svg:hover {
       font-size: 10px;
       margin: 0;
       padding: 0;
-      width: 100vw;
+      width: 100%;
     }
 
     .quote-3 {
@@ -591,7 +591,7 @@ svg:hover {
   }
 
   .main-title {
-    width: 100vw;
+    width: 100%;
     text-align: center;
   }
 
@@ -599,7 +599,7 @@ svg:hover {
     display: flex;
     justify-content: center;
     margin: 0;
-    width: 100vw;
+    width: 100%;
   }
 
   .title {
@@ -748,7 +748,7 @@ svg:hover {
   }
 
   .main-title {
-    width: 100vw;
+    width: 100%;
     margin: auto;
     margin-top: 30%;
     text-align: center;
@@ -762,7 +762,7 @@ svg:hover {
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
     margin: 0;
 
     .quote-2 {
@@ -796,7 +796,7 @@ svg:hover {
       font-size: 10px;
       margin: 0;
       padding: 0;
-      width: 100vw;
+      width: 100%;
     }
 
     .quote-3 {
@@ -855,7 +855,7 @@ svg:hover {
   }
 
   .main-title {
-    width: 100vw;
+    width: 100%;
     margin: auto;
     margin-top: 30%;
     text-align: center;
@@ -871,7 +871,7 @@ svg:hover {
 
   .label-main-title {
     flex-direction: column-reverse;
-    width: 100vw;
+    width: 100%;
     margin: 0;
 
     .quote-2 {
@@ -904,7 +904,7 @@ svg:hover {
   }
 
   .subscribe {
-    width: 100vw;
+    width: 100%;
     margin-left: 0;
   }
 
@@ -935,7 +935,7 @@ svg:hover {
 
 @media (min-width: 321px) and (max-width: 370px) {
   .main-title {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     margin-left: 0;
@@ -1034,5 +1034,36 @@ svg:hover {
   footer .support-text {
     font-size: 1em;
     padding: 1em;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: clip;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .top {
+    flex-wrap: wrap;
+    padding-inline: 1rem;
+  }
+
+  .top a {
+    margin-left: 0;
+  }
+
+  .main-title {
+    margin-top: 18%;
+  }
+
+  .year {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer {
+    margin-top: 20%;
   }
 }

@@ -4,14 +4,18 @@ body {
   display: flex;
   flex-direction: column;
 
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: auto;
+  min-height: 100vh;
 }
 
 .header {
   margin-top: 2rem;
   margin-bottom: 2rem;
-
-  margin-inline: 4rem;
+  margin-inline: clamp(1.2rem, 4vw, 4rem);
+  width: calc(100% - 2 * clamp(1.2rem, 4vw, 4rem));
+  max-width: 135rem;
+  align-self: center;
 }
 
 main {
@@ -29,12 +33,16 @@ main {
   border-radius: 2.4rem;
 
   margin-bottom: 3rem;
-  margin-inline: 10rem;
+  margin-inline: clamp(1.2rem, 6vw, 10rem);
 
   background-color: var(--gray-background);
 
-  padding-inline: 4rem;
+  padding-inline: clamp(1.6rem, 4vw, 4rem);
   padding-block: 2rem;
+  width: calc(100% - 2 * clamp(1.2rem, 6vw, 10rem));
+  max-width: 140rem;
+  align-self: center;
+  box-sizing: border-box;
 }
 
 .calendar {
@@ -464,8 +472,13 @@ main {
 }
 
 @media (max-width: 1024px) {
+  body {
+    overflow-y: auto;
+  }
+
   #schedule-container {
     flex-direction: column;
+    width: calc(100% - 4rem);
     margin-inline: 2rem;
     padding-inline: 2rem;
     gap: 3rem;
@@ -487,10 +500,21 @@ main {
 }
 
 @media (max-width: 480px) {
+  .header {
+    margin-inline: 1rem;
+    width: calc(100% - 2rem);
+  }
+
   #schedule-container {
+    width: calc(100% - 2rem);
     margin-inline: 1rem;
     padding-inline: 1rem;
     border-radius: 1.5rem;
+  }
+
+  .agenda .schedules ul li {
+    width: 100%;
+    max-width: 100%;
   }
 
   .calendar .days {

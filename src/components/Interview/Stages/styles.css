@@ -1,5 +1,6 @@
 #stages {
-  width: 20rem;
+  width: 100%;
+  max-width: 20rem;
 }
 
 #stages h2 {

@@ -65,9 +65,11 @@ export const Header = async () => {
   hamburger.className = 'hamburger-btn';
   hamburger.setAttribute('aria-label', 'Menu');
   hamburger.innerHTML = `
-    <span></span>
-    <span></span>
-    <span></span>
+    <span class="hamburger-btn__bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
   `;
   header.appendChild(hamburger);
 
@@ -75,6 +77,14 @@ export const Header = async () => {
     nav.classList.toggle('nav-active');
     hamburger.classList.toggle('hamburger-active');
   });
+
+  const applyFixedHeaderLayout = () => {
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    document.body.classList.toggle('has-fixed-header', isMobile);
+  };
+
+  applyFixedHeaderLayout();
+  window.addEventListener('resize', applyFixedHeaderLayout);
 
   return header;
 };

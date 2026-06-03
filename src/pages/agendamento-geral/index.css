@@ -1,20 +1,23 @@
 body {
   font-family: 'Space Grotesk';
   background-color: var(--background-screens);
-  overflow-y: hidden;
+  overflow-x: clip;
+  min-height: 100vh;
 }
 
 .schedules-page {
-  width: 100%;
+  width: min(70vw, 100%);
+  max-width: 120rem;
   min-height: 100vh;
-
+  margin: 0 auto;
+  padding: 2rem clamp(1.2rem, 4vw, 3rem) 4rem;
+  box-sizing: border-box;
   color: var(--indigo-700);
 }
 
 .schedules-page > div {
-  min-width: 80rem;
-  width: 70vw;
-  height: 100%;
+  width: 100%;
+  min-width: 0;
   margin: 0 auto;
 }
 
@@ -68,10 +71,110 @@ body {
 
 .schedules-content {
   margin: 2rem auto;
-
   background-color: white;
   max-height: 70vh;
   overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 0 0 10px 10px;
+}
+
+@media (max-width: 900px) {
+  .schedules-page {
+    width: 100%;
+    padding-inline: 1.2rem;
+  }
+
+  body {
+    overflow-y: auto;
+  }
+
+  .schedules-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    height: auto;
+    padding: 1.5rem 1rem;
+  }
+
+  .schedules-header .filters {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .schedules-header button {
+    flex: 1 1 auto;
+    min-width: fit-content;
+  }
+
+  .schedules-content {
+    max-height: none;
+    overflow-x: visible;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr {
+    background-color: white;
+    border: 1.2px solid rgba(92, 0, 164, 0.11);
+    border-radius: 16px;
+    padding: 1.2em;
+    margin-bottom: 1.2em;
+    box-shadow: 0 4px 12px rgba(92, 0, 164, 0.02);
+  }
+
+  tbody tr:hover {
+    background-color: white;
+  }
+
+  td {
+    text-align: right;
+    padding: 0.6em 0;
+    border-bottom: 1px solid rgba(92, 0, 164, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: rgba(74, 56, 123, 0.6);
+    font-size: 1.4rem;
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  td.time::before {
+    content: 'Horário';
+  }
+
+  td .time {
+    margin-left: 0;
+  }
+
+  .participants {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
 }
 
 table {

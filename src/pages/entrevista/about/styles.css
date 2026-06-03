@@ -9,12 +9,45 @@
 #about #about-content {
   background-color: #ffffff;
 
-  width: 60rem;
+  width: 100%;
+  max-width: 60rem;
   padding: 4rem;
+  margin-inline: clamp(1.2rem, 4vw, 2rem);
+  box-sizing: border-box;
 
   border-radius: 2.4rem;
 
   max-height: fit-content;
+}
+
+@media (max-width: 640px) {
+  #about {
+    margin-top: 2rem;
+    padding-inline: 1rem;
+  }
+
+  #about #about-content {
+    padding: 2.4rem 1.6rem;
+  }
+
+  #about #about-content header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+    height: auto;
+    padding: 1.6rem;
+  }
+
+  #about #about-content .participant {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  #about #about-content #candidate #presence {
+    flex-wrap: wrap;
+    gap: 1.6rem;
+  }
 }
 
 #about #about-content h3 {

@@ -154,15 +154,17 @@ form input:not(:placeholder-shown) {
 header {
   display: flex;
   justify-content: space-between;
-  margin: 0 182px;
-  padding-top: 4rem;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 4rem clamp(1.6rem, 5vw, 4rem) 0;
   align-items: center;
+  box-sizing: border-box;
 }
 
 header a {
-  position: absolute;
-  left: 10%;
-  top: 9%;
+  position: static;
+  flex-shrink: 0;
 }
 
 .loginScreen {
@@ -170,7 +172,6 @@ header a {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5)); */
   color: var(--purple-400);
   font-weight: 500;
   box-sizing: border-box;
@@ -178,9 +179,34 @@ header a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 51px;
+  width: min(100%, 48rem);
+  padding: clamp(2rem, 6vw, 5.1rem);
 
   gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  main {
+    padding-inline: 1.2rem;
+  }
+
+  main h1 {
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+  form {
+    margin: 1.6rem 0;
+  }
+
+  .loginScreen {
+    background-size: 100% auto;
+  }
 }
 
 .loginButton {
