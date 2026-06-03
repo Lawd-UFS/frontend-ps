@@ -60,5 +60,21 @@ export const Header = async () => {
 
   header.querySelector('.icons').insertAdjacentElement('afterend', nav);
 
+  // Add mobile hamburger button
+  const hamburger = document.createElement('button');
+  hamburger.className = 'hamburger-btn';
+  hamburger.setAttribute('aria-label', 'Menu');
+  hamburger.innerHTML = `
+    <span></span>
+    <span></span>
+    <span></span>
+  `;
+  header.appendChild(hamburger);
+
+  hamburger.addEventListener('click', () => {
+    nav.classList.toggle('nav-active');
+    hamburger.classList.toggle('hamburger-active');
+  });
+
   return header;
 };

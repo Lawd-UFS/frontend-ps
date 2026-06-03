@@ -11,6 +11,62 @@ import { Profile } from '../../components/Profile';
 
 const httpClient = HttpClient.create();
 
+const normalizeCourseName = (course) => {
+  if (!course) return '';
+  const normalized = course
+    .trim()
+    .toLowerCase()
+    .replace(/\./g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  if (normalized === 'cc' || normalized.includes('ciencia da computacao') || normalized.includes('ciencias da computacao') || normalized.includes('ciencia computacao') || normalized.includes('ciencias computacao')) {
+    return 'Ciência da Computação';
+  }
+  if (normalized === 'si' || normalized.includes('sistemas de informacao') || normalized.includes('sistema de informacao') || normalized.includes('sistemas informacao') || normalized.includes('sistema informacao')) {
+    return 'Sistemas de Informação';
+  }
+  if (normalized === 'ec' || normalized.includes('engenharia da computacao') || normalized.includes('engenharia de computacao') || normalized.includes('engenharia computacao')) {
+    return 'Engenharia da Computação';
+  }
+
+  const wordCorrections = {
+    'ciencia': 'Ciência',
+    'ciencias': 'Ciências',
+    'computacao': 'Computação',
+    'sistema': 'Sistema',
+    'sistemas': 'Sistemas',
+    'informacao': 'Informação',
+    'informacoes': 'Informações',
+    'engenharia': 'Engenharia',
+    'estatistica': 'Estatística',
+    'matematica': 'Matemática',
+    'fisica': 'Física',
+    'quimica': 'Química',
+    'administracao': 'Administração',
+    'mecanica': 'Mecânica',
+    'eletrica': 'Elétrica',
+    'producao': 'Produção',
+    'civil': 'Civil',
+    'de': 'de',
+    'da': 'da',
+    'do': 'do',
+    'dos': 'dos',
+    'das': 'das',
+    'e': 'e'
+  };
+
+  const words = normalized.split(/\s+/);
+  return words
+    .map(word => {
+      if (wordCorrections[word]) {
+        return wordCorrections[word];
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+};
+
 const getAllCandidates = async () => {
   try {
     const { data: response } = await httpClient.sendRequest({
@@ -36,8 +92,8 @@ const getAllCandidates = async () => {
 
 const orderCandidates = (candidates) => {
   return candidates.sort((a, b) => {
-    const scoreA = Number(a.querySelector('.score').innerText) || 0;
-    const scoreB = Number(b.querySelector('.score').innerText) || 0;
+    const scoreA = Number(a.dataset.score) || 0;
+    const scoreB = Number(b.dataset.score) || 0;
 
     return scoreB - scoreA;
   });
@@ -50,9 +106,9 @@ const setRanking = (candidates) => {
       return;
     }
 
-    const score = Number(candidate.querySelector('.score').innerText) || 0;
+    const score = Number(candidate.dataset.score) || 0;
     const previousScore =
-      Number(candidates[index - 1].querySelector('.score').innerText) || 0;
+      Number(candidates[index - 1].dataset.score) || 0;
     const previousRanking =
       Number(candidates[index - 1].querySelector('.ranking').innerText) || 0;
 
@@ -83,11 +139,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     candidates.map(async (candidate) => {
       const tr = document.createElement('tr');
 
+      const normalizedCourse = normalizeCourseName(candidate.course);
+      tr.dataset.score = candidate.score || 0;
+      tr.dataset.course = normalizedCourse.toLowerCase();
+      tr.dataset.period = candidate.period ? candidate.period.toString() : '';
+
       if (candidate.status === 'eliminado') {
         tr.style.color = 'red';
       }
 
-      tr.innerHTML = `<td>${candidate.status.capitalize()}</td>`;
+      tr.innerHTML = `<td data-label="Status">${candidate.status.capitalize()}</td>`;
 
       const profile = await Profile(
         {
@@ -99,15 +160,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       profile.classList.remove('profile');
       profile.classList.add('table_profile');
+      profile.setAttribute('data-label', 'Candidato');
 
       tr.appendChild(profile);
 
       const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
       tr.innerHTML += `
-      <td>${phoneText}</td>
-      <td class="score">${candidate.score}</td>
-      <td class="ranking">-</td>
+      <td data-label="Telefone">${phoneText}</td>
+      <td data-label="Curso">${normalizedCourse || '-'}</td>
+      <td data-label="Período">${candidate.period ? `${candidate.period}º` : '-'}</td>
+      <td data-label="Ranking" class="ranking">-</td>
+      <td data-label="Ações">
+        <button class="view-profile-btn" title="Ver Perfil Completo">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+        </button>
+      </td>
     `;
+
+      const viewBtn = tr.querySelector('.view-profile-btn');
+      viewBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        window.location.href = `/candidatos/${candidate._id || candidate.id}`;
+      });
 
       return tr;
     }),
@@ -121,6 +197,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     tbody.appendChild(candidate);
   });
 
+  // Populate dynamic filters
+  const courseFilter = document.querySelector('#filter-course');
+  const periodFilter = document.querySelector('#filter-period');
+
+  const uniqueCourses = [...new Set(candidates.map(c => normalizeCourseName(c.course)).filter(Boolean))].sort();
+  const uniquePeriods = [...new Set(candidates.map(c => c.period ? c.period.toString() : '').filter(Boolean))].sort((a, b) => Number(a) - Number(b));
+
+  uniqueCourses.forEach(course => {
+    const opt = document.createElement('option');
+    opt.value = course.toLowerCase();
+    opt.innerText = course;
+    courseFilter.appendChild(opt);
+  });
+
+  uniquePeriods.forEach(period => {
+    const opt = document.createElement('option');
+    opt.value = period;
+    opt.innerText = `${period}º Período`;
+    periodFilter.appendChild(opt);
+  });
+
   // Filtros
   const filters = { scheduling: false, done: false, deleted: false };
   const filterButtons = {
@@ -130,32 +227,54 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const applyFilters = () => {
-    orderedCandidates.forEach((tr, index) => {
-      // O objeto original está em `candidates` mas precisamos relacionar com o `tr`.
-      // Como não retornamos o objeto junto, podemos inferir os dados pela linha gerada.
+    const selectedCourse = courseFilter.value;
+    const selectedPeriod = periodFilter.value;
+
+    let visibleCount = 0;
+
+    orderedCandidates.forEach((tr) => {
       const statusText = tr.querySelector('td:nth-child(1)').innerText.toLowerCase();
-      const scoreText = tr.querySelector('.score').innerText;
       
       const isEliminado = statusText === 'eliminado';
-      const scoreVal = Number(scoreText) || 0;
+      const scoreVal = Number(tr.dataset.score) || 0;
       const isDone = scoreVal > 0;
       const isScheduling = !isDone;
 
-      const anyFilterActive = filters.scheduling || filters.done || filters.deleted;
-      
-      if (!anyFilterActive) {
-        tr.style.display = '';
-        return;
+      // Status check
+      const anyStatusFilterActive = filters.scheduling || filters.done || filters.deleted;
+      let showByStatus = true;
+      if (anyStatusFilterActive) {
+        showByStatus = false;
+        if (filters.scheduling && isScheduling && !isEliminado) showByStatus = true;
+        if (filters.done && isDone && !isEliminado) showByStatus = true;
+        if (filters.deleted && isEliminado) showByStatus = true;
       }
 
-      let show = false;
-      if (filters.scheduling && isScheduling && !isEliminado) show = true;
-      if (filters.done && isDone && !isEliminado) show = true;
-      if (filters.deleted && isEliminado) show = true;
+      // Course check
+      let showByCourse = true;
+      if (selectedCourse) {
+        showByCourse = tr.dataset.course === selectedCourse;
+      }
 
+      // Period check
+      let showByPeriod = true;
+      if (selectedPeriod) {
+        showByPeriod = tr.dataset.period === selectedPeriod;
+      }
+
+      const show = showByStatus && showByCourse && showByPeriod;
       tr.style.display = show ? '' : 'none';
+
+      if (show) {
+        visibleCount++;
+      }
     });
+
+    total.innerText = `Total: ${visibleCount}`;
   };
+
+  courseFilter.addEventListener('change', applyFilters);
+  periodFilter.addEventListener('change', applyFilters);
 
   Object.keys(filterButtons).forEach(key => {
     const btn = filterButtons[key];

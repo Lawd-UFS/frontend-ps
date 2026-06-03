@@ -99,3 +99,114 @@
   font-size: 1.4rem;
   color: white;
 }
+
+/* Hamburger Button (hidden on desktop) */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 2.4rem;
+  height: 1.8rem;
+  padding: 0;
+  z-index: 1001;
+  outline: none;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Tablet & Mobile Styles */
+@media (max-width: 900px) {
+  .header {
+    border-radius: 2rem;
+    padding-inline: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+    min-width: auto;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    order: 3; /* Position on the right side */
+  }
+
+  .header .profile {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1.5rem;
+    padding-inline: 1rem;
+  }
+
+  .header .profile .name-user {
+    display: none; /* Hide name on mobile header to save space */
+  }
+
+  /* Nav menu behaves as a slide-down drawer on mobile */
+  .header nav {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--indigo-700);
+    border-radius: 0 0 2rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    padding: 1.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header nav.nav-active {
+    display: flex !important;
+    animation: slideDown 0.3s ease-out forwards;
+  }
+
+  .header nav ul {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 1.2rem !important;
+    align-items: stretch !important;
+  }
+
+  .header nav ul li {
+    text-align: center;
+    border-color: rgba(255, 255, 255, 0.15);
+    width: 100%;
+  }
+
+  .header nav ul li a {
+    font-size: 1.5rem;
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  /* Hamburger transformation to X */
+  .hamburger-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger-active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

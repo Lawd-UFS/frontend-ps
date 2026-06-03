@@ -33,7 +33,7 @@ const generatePages = (root = '', dir = pagesPath) => {
     }
 
     if (file == 'index.html') {
-      const pageName = path.dirname(relativePath);
+      const pageName = path.dirname(relativePath).replace(/\\/g, '/');
       htmlPlugins.push(
         new HtmlWebpackPlugin({
           template: fullPath,
@@ -47,7 +47,7 @@ const generatePages = (root = '', dir = pagesPath) => {
     }
 
     if (file == 'index.js') {
-      const pageName = path.dirname(relativePath);
+      const pageName = path.dirname(relativePath).replace(/\\/g, '/');
       entries[pageName] = fullPath;
 
       return;
@@ -111,6 +111,10 @@ const config = {
         {
           from: /^\/entrevista\/.*/,
           to: '/entrevista/index.html',
+        },
+        {
+          from: /^\/candidatos\/[a-fA-F0-9]{24}\/?$/,
+          to: '/candidatos/perfil/index.html',
         },
       ],
     },

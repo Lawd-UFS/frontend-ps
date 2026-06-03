@@ -3,6 +3,10 @@
     {
       "source": "/entrevista/:path",
       "destination": "/entrevista/index.html"
+    },
+    {
+      "source": "/candidatos/:id",
+      "destination": "/candidatos/perfil/index.html"
     }
   ]
 }

@@ -95,6 +95,29 @@ header {
   margin-right: 0.5em;
 }
 
+.filter-select {
+  border: 1.2px solid rgba(92, 0, 164, 0.11);
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  font-family: 'Space Grotesk';
+  font-weight: 350;
+  color: rgba(74, 56, 123, 1);
+  background-color: white;
+  margin-right: 1em;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.filter-select:hover {
+  border-color: rgba(92, 0, 164, 0.3);
+}
+
+.filter-select:focus {
+  border-color: var(--purple-300, #7046e9);
+  background-color: #fcfaff;
+}
+
 table {
   width: 70vw;
   border-radius: 15px;
@@ -123,12 +146,30 @@ td {
 }
 
 td:last-child {
-  background-color: rgba(239, 242, 255, 1);
-  width: 0.3em;
+  border-radius: 0px 55px 55px 0px;
 }
 
 td:nth-child(1) {
   border-radius: 55px 0px 0px 55px;
+}
+
+.view-profile-btn {
+  background: none;
+  border: none;
+  color: rgba(74, 56, 123, 0.7);
+  cursor: pointer;
+  padding: 0.5em;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.view-profile-btn:hover {
+  background-color: rgba(74, 56, 123, 0.1);
+  color: rgba(74, 56, 123, 1);
+  transform: scale(1.1);
 }
 
 tbody tr:hover {
@@ -149,8 +190,92 @@ thead th {
   margin-bottom: 3rem;
 }
 
-@media (max-width: 320px) {
+@media (max-width: 900px) {
   .table_header {
-    display: grid;
+    width: 95vw;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+    border-radius: 10px 10px 10px 10px;
+  }
+  
+  .table_header_right_side {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .table_header_right_side button,
+  .table_header_right_side select {
+    margin-right: 0;
+  }
+  
+  .table {
+    width: 95vw;
+  }
+
+  .table_body {
+    width: 95vw;
+    margin-top: 1.5rem;
+  }
+
+  /* Responsive Table using block layout for columns */
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100% !important;
+    min-width: auto !important;
+  }
+  
+  thead {
+    display: none;
+  }
+  
+  tbody tr {
+    background-color: white;
+    border: 1.2px solid rgba(92, 0, 164, 0.11);
+    border-radius: 16px;
+    padding: 1.2em;
+    margin-bottom: 1.2em;
+    box-shadow: 0 4px 12px rgba(92, 0, 164, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+  }
+
+  tbody tr:hover {
+    background-color: white;
+  }
+
+  td {
+    text-align: right;
+    padding: 0.6em 0;
+    border-bottom: 1px solid rgba(92, 0, 164, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 !important;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: rgba(74, 56, 123, 0.6);
+    font-size: 1.4rem;
+    text-align: left;
+  }
+
+  .table_profile {
+    justify-content: flex-end;
+  }
+  
+  /* Reset left rounded cell style on mobile cards */
+  td:nth-child(1) {
+    border-radius: 0;
   }
 }

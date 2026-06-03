@@ -462,3 +462,70 @@ main {
     opacity: 1;
   }
 }
+
+@media (max-width: 1024px) {
+  #schedule-container {
+    flex-direction: column;
+    margin-inline: 2rem;
+    padding-inline: 2rem;
+    gap: 3rem;
+  }
+  
+  .calendar {
+    width: 100%;
+    align-items: center;
+  }
+
+  .calendar form {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .agenda {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #schedule-container {
+    margin-inline: 1rem;
+    padding-inline: 1rem;
+    border-radius: 1.5rem;
+  }
+
+  .calendar .days {
+    scale: 0.85;
+    transform-origin: left center;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+
+  .calendar form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'date'
+      'time'
+      'toggle'
+      'button';
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .calendar label,
+  .calendar label div,
+  .calendar select,
+  .calendar input {
+    width: 100% !important;
+  }
+
+  .calendar form button {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  
+  .calendar .form-format div {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
