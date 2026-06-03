@@ -46,6 +46,7 @@ export const Header = async () => {
   header.appendChild(await Profile({ name: user.name, imgSrc: user.photo }));
 
   const links = [
+    { name: 'VISÃO GERAL', href: '/visao-geral' },
     { name: 'CANDIDATOS', href: '/candidatos' },
     {
       name: 'MINHA AGENDA',

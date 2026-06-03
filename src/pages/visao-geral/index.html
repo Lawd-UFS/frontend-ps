@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>PS LAWD 2026 - Visão Geral</title>
+  </head>
+  <body>
+    <main class="dashboard-container">
+      <div class="dashboard-header">
+        <h1>Visão Geral do PSEL</h1>
+        <p class="dashboard-subtitle">Acompanhe estatísticas, inscrições e andamento das entrevistas em tempo real</p>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon icon-candidates">👥</div>
+          <div class="kpi-info">
+            <span class="kpi-title">Inscritos</span>
+            <h3 id="kpi-total-candidates">-</h3>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon icon-scheduled">📅</div>
+          <div class="kpi-info">
+            <span class="kpi-title">Entrevistas Agendadas</span>
+            <h3 id="kpi-scheduled-interviews">-</h3>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon icon-completed">✅</div>
+          <div class="kpi-info">
+            <span class="kpi-title">Entrevistas Concluídas</span>
+            <h3 id="kpi-completed-interviews">-</h3>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon icon-slots">⏳</div>
+          <div class="kpi-info">
+            <span class="kpi-title">Horários Livres</span>
+            <h3 id="kpi-free-slots">-</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h4>Distribuição por Curso</h4>
+          <div class="chart-container">
+            <canvas id="chart-courses"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h4>Nível de Conhecimento</h4>
+          <div class="chart-container">
+            <canvas id="chart-knowledge"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h4>Distribuição por Período</h4>
+          <div class="chart-container">
+            <canvas id="chart-periods"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h4>Status do Processo</h4>
+          <div class="chart-container">
+            <canvas id="chart-status"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
