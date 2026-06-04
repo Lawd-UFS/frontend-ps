@@ -4,18 +4,8 @@ body {
   display: flex;
   flex-direction: column;
 
-  overflow-x: clip;
   overflow-y: auto;
   min-height: 100vh;
-}
-
-.header {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  margin-inline: clamp(1.2rem, 4vw, 4rem);
-  width: calc(100% - 2 * clamp(1.2rem, 4vw, 4rem));
-  max-width: 135rem;
-  align-self: center;
 }
 
 main {
@@ -33,14 +23,14 @@ main {
   border-radius: 2.4rem;
 
   margin-bottom: 3rem;
-  margin-inline: clamp(1.2rem, 6vw, 10rem);
+  margin-inline: auto;
 
   background-color: var(--gray-background);
 
   padding-inline: clamp(1.6rem, 4vw, 4rem);
   padding-block: 2rem;
-  width: calc(100% - 2 * clamp(1.2rem, 6vw, 10rem));
-  max-width: 140rem;
+  width: calc(100% - 2 * clamp(1rem, 3vw, 3rem));
+  max-width: 135rem;
   align-self: center;
   box-sizing: border-box;
 }
@@ -68,28 +58,38 @@ main {
 
 .calendar .days {
   display: flex;
-  scale: 0.9;
-
-  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  gap: 0.8rem;
 }
 
 .calendar .days ul {
   display: flex;
   flex-direction: column;
-
-  width: 3.4rem;
-
+  flex: 1;
+  min-width: 0;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
-.calendar .days .weekday,
+.calendar .days .weekday {
+  opacity: 1;
+  font-weight: 700;
+}
+
 .calendar .days .interview-period {
   opacity: 1;
+  cursor: var(--cursor-pointer);
+  background-color: rgba(112, 70, 233, 0.05);
+  border-radius: 50%;
+  font-weight: 600;
+  color: var(--purple-400);
+  transition: all 0.2s ease;
 }
 
-.interview-period {
-  cursor: var(--cursor-pointer);
+.calendar .days .interview-period:hover {
+  background-color: rgba(112, 70, 233, 0.15);
+  transform: translateY(-1px);
 }
 
 .calendar .days ul li {
@@ -97,23 +97,23 @@ main {
   align-items: center;
   justify-content: center;
 
-  font-family: 'Space Mono';
+  font-family: 'Space Mono', monospace;
   opacity: 0.3;
 
   width: 100%;
-  height: 3.4rem;
+  aspect-ratio: 1 / 1;
+  height: auto;
 
   text-align: center;
-}
-
-.calendar .weekday {
-  font-weight: 700;
+  font-size: 1.4rem;
 }
 
 .calendar #selected-day {
-  background-color: #e0d7f2;
-  border-radius: 9999px;
-  color: #000;
+  background-color: var(--purple-300) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 10px rgba(112, 70, 233, 0.3);
 }
 
 .calendar form {
@@ -155,6 +155,7 @@ main {
 
   label {
     all: unset;
+    box-sizing: border-box;
     display: flex;
     justify-content: flex-start;
     width: fit-content;
@@ -313,44 +314,67 @@ main {
 .overview {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 1.5rem;
+  gap: 2.4rem;
+  padding: 2rem;
   background-color: var(--purple-white);
-  border-radius: 0.8rem;
-
+  border-radius: 1.6rem;
+  border: 1px solid rgba(92, 0, 164, 0.08);
+  box-shadow: 0 4px 16px rgba(92, 0, 164, 0.03);
+  width: 26rem;
+  flex-shrink: 0;
   height: fit-content;
 }
 
 .overview dl {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+}
+
+.stats-item {
+  background: #ffffff;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(92, 0, 164, 0.06);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.4rem;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(92, 0, 164, 0.01);
 }
 
 .overview dt {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--indigo-200);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(74, 56, 123, 0.65);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .overview dd {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: var(--indigo-600);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--purple-400);
+  line-height: 1;
 }
 
 .agenda .schedules {
   width: 100%;
 }
 
-.agenda h2,
-.overview h2 {
+.agenda h2 {
   font-weight: 500;
   font-size: 1.8rem;
-
   color: var(--indigo-600);
-
   margin-bottom: 3.6rem;
+}
+
+.overview h2 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--indigo-700);
+  margin-bottom: 1.6rem;
 }
 
 .agenda svg {
@@ -376,6 +400,19 @@ main {
   padding: 2rem;
 
   animation: show-schedule-item 0.5s ease;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.agenda .schedules ul li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(112, 70, 233, 0.08);
+}
+
+.agenda .schedules ul li[selected='true'] {
+  border-color: var(--purple-300) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(112, 70, 233, 0.15) !important;
 }
 
 .agenda .schedules ul li[status='available'],
@@ -402,46 +439,61 @@ main {
 
 .agenda .details > div {
   width: 100%;
-  height: 8rem;
-  padding: 1rem 2rem;
+  min-height: 8rem;
+  height: auto;
+  padding: 1.5rem 2rem;
 
   border-radius: 1.6rem;
 
   background-color: var(--purple-white);
+  border: 1px solid rgba(92, 0, 164, 0.08);
+  box-shadow: 0 4px 12px rgba(92, 0, 164, 0.02);
 
-  transition: background-color 1s;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 
   .content {
-    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    gap: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
     transition: opacity 0.5s;
   }
 
   span {
     color: var(--purple-400);
+    font-weight: 600;
+  }
+
+  .content > span:only-child {
     width: 100%;
-    font-weight: 500;
     text-align: center;
   }
 
   .interview-mode {
-    opacity: 0.5;
+    opacity: 0.7;
+    font-weight: 500;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
   }
 
   .profile a {
-    width: 4rem;
-    height: 4rem;
+    width: 4.4rem;
+    height: 4.4rem;
     border: 2px solid var(--indigo-700);
-
-    margin-right: 1rem;
+    border-radius: 50%;
+    overflow: hidden;
   }
 
   .profile .name-user {
     color: var(--indigo-700);
     font-weight: 700;
+    font-size: 1.6rem;
   }
 }
 
@@ -478,15 +530,19 @@ main {
 
   #schedule-container {
     flex-direction: column;
-    width: calc(100% - 4rem);
-    margin-inline: 2rem;
-    padding-inline: 2rem;
+    width: calc(100% - 2.4rem);
+    margin-inline: 1.2rem;
+    padding-inline: 1.6rem;
     gap: 3rem;
   }
   
   .calendar {
     width: 100%;
     align-items: center;
+  }
+
+  .calendar > *:not(.days) {
+    margin-left: 0;
   }
 
   .calendar form {
@@ -497,32 +553,52 @@ main {
   .agenda {
     gap: 3rem;
   }
+
+  .overview {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .overview .stats-container {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .overview {
+    flex-direction: column;
+  }
+  
+  .agenda .details .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .agenda .details .content .profile {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .agenda .details .content button {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-  .header {
-    margin-inline: 1rem;
-    width: calc(100% - 2rem);
-  }
-
   #schedule-container {
-    width: calc(100% - 2rem);
-    margin-inline: 1rem;
-    padding-inline: 1rem;
-    border-radius: 1.5rem;
+    width: calc(100% - 1.6rem);
+    margin-inline: 0.8rem;
+    padding-inline: 1.2rem;
+    border-radius: 1.6rem;
   }
 
   .agenda .schedules ul li {
     width: 100%;
     max-width: 100%;
-  }
-
-  .calendar .days {
-    scale: 0.85;
-    transform-origin: left center;
-    overflow-x: auto;
-    width: 100%;
-    padding-bottom: 0.5rem;
   }
 
   .calendar form {
@@ -537,10 +613,15 @@ main {
   }
 
   .calendar label,
-  .calendar label div,
+  .calendar label div {
+    width: 100% !important;
+  }
+
   .calendar select,
   .calendar input {
-    width: 100% !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    width: auto !important;
   }
 
   .calendar form button {

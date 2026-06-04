@@ -79,7 +79,7 @@ export const Header = async () => {
   });
 
   const applyFixedHeaderLayout = () => {
-    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    const isMobile = window.matchMedia('(max-width: 1024px)').matches;
     document.body.classList.toggle('has-fixed-header', isMobile);
   };
 

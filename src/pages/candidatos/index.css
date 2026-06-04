@@ -6,7 +6,6 @@
 body {
   font-family: 'Space Grotesk';
   background-color: rgba(249, 248, 255, 1);
-  overflow-x: clip;
 }
 
 section {
@@ -301,7 +300,7 @@ td:nth-child(1) {
   color: #fff;
 }
 
-@media (min-width: 901px) {
+@media (min-width: 1025px) {
   .view-profile-btn__label {
     display: none;
   }
@@ -393,7 +392,7 @@ thead th {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .table_header {
     padding: 1.5rem 1.2rem;
     border-radius: 10px;
@@ -402,6 +401,7 @@ thead th {
   .table_body {
     margin-top: 1.5rem;
     max-height: none;
+    overflow: visible;
   }
 
   table,
@@ -473,16 +473,12 @@ thead th {
     flex-wrap: wrap;
   }
 
+  .table_profile::before {
+    margin-right: auto;
+  }
+
   td:nth-child(1) {
     border-radius: 0;
-  }
-
-  .filter-status-group {
-    grid-template-columns: 1fr;
-  }
-
-  .filter-selects-group {
-    grid-template-columns: 1fr;
   }
 
   .view-profile-btn {
@@ -517,6 +513,16 @@ thead th {
   }
 }
 
+@media (max-width: 576px) {
+  .filter-status-group {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-selects-group {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 380px) {
   .done_button span,
   .scheduling_button span,
@@ -529,5 +535,175 @@ thead th {
   .delete_button {
     padding-inline: 0.6rem;
     gap: 0.4rem;
+  }
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.status-badge--agendado {
+  background-color: rgba(112, 70, 233, 0.1);
+  color: var(--purple-300);
+}
+
+.status-badge--concluido {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.status-badge--eliminado {
+  background-color: rgba(235, 87, 87, 0.1);
+  color: #eb5757;
+}
+
+/* Row states */
+tbody tr.row-eliminado {
+  color: rgba(74, 56, 123, 0.6);
+}
+
+/* Skeleton Loading Styles */
+.skeleton-row td {
+  padding: 1.5rem 1rem;
+}
+
+.skeleton-cell,
+.skeleton-avatar,
+.skeleton-text,
+.skeleton-badge,
+.skeleton-button {
+  background: linear-gradient(90deg, #eff2ff 25%, #e0e4f8 50%, #eff2ff 75%);
+  background-size: 200% 100%;
+  animation: loading-skeleton 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-cell {
+  height: 1.6rem;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.skeleton-badge {
+  height: 2.4rem;
+  width: 7.2rem;
+  border-radius: 9999px;
+}
+
+.skeleton-profile {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.skeleton-avatar {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-text {
+  height: 1.4rem;
+  width: 10rem;
+}
+
+.skeleton-button {
+  height: 3.2rem;
+  width: 8rem;
+  border-radius: 9999px;
+  margin: 0 auto;
+}
+
+@keyframes loading-skeleton {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Empty State Styles */
+.empty-state-cell {
+  padding: 6rem 2rem !important;
+  text-align: center !important;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  color: var(--indigo-600);
+}
+
+.empty-icon {
+  stroke: var(--purple-200);
+  animation: float-icon 3s ease-in-out infinite;
+}
+
+.empty-message {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--indigo-700);
+}
+
+@keyframes float-icon {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Mobile responsive adjustments for skeletons and empty states */
+@media (max-width: 1024px) {
+  .skeleton-row {
+    background-color: white;
+    border: 1.2px solid rgba(92, 0, 164, 0.11);
+    border-radius: 16px;
+    padding: 1.4rem 1.2rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 12px rgba(92, 0, 164, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .skeleton-row td {
+    border-bottom: 1px solid rgba(92, 0, 164, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+  }
+
+  .skeleton-row td:last-child {
+    border-bottom: none;
+    padding-top: 1rem;
+  }
+
+  .skeleton-cell,
+  .skeleton-badge,
+  .skeleton-button {
+    margin: 0;
+  }
+
+  .skeleton-profile {
+    justify-content: flex-end;
   }
 }

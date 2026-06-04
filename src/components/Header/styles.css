@@ -5,10 +5,9 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 3.8rem;
-  width: 100%;
+  width: calc(100% - 2 * clamp(1rem, 3vw, 3rem));
   padding-block: 1.5rem;
   padding-inline: 1.5rem;
-  min-width: fit-content;
   max-width: 135rem;
   margin-top: 2rem;
   margin-bottom: 3.5rem;
@@ -148,7 +147,7 @@
 }
 
 /* Tablet & Mobile Styles */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .header {
     border-radius: 2rem;
     padding: 1rem 1.6rem;

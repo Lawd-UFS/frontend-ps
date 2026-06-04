@@ -128,6 +128,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tbody = document.querySelector('tbody');
   const totalCountEl = document.querySelector('.candidates-total__count');
 
+  // Render loading skeletons
+  tbody.innerHTML = Array.from({ length: 5 }).map(() => `
+    <tr class="skeleton-row">
+      <td data-label="Status"><div class="skeleton-cell skeleton-badge"></div></td>
+      <td data-label="Candidato">
+        <div class="skeleton-profile">
+          <div class="skeleton-avatar"></div>
+          <div class="skeleton-text"></div>
+        </div>
+      </td>
+      <td data-label="Telefone"><div class="skeleton-cell" style="width: 80%"></div></td>
+      <td data-label="Curso"><div class="skeleton-cell" style="width: 90%"></div></td>
+      <td data-label="Período"><div class="skeleton-cell" style="width: 40%"></div></td>
+      <td data-label="Ranking"><div class="skeleton-cell" style="width: 30%"></div></td>
+      <td data-label="Ver mais"><div class="skeleton-cell skeleton-button"></div></td>
+    </tr>
+  `).join('');
+
   const candidates = await getAllCandidates();
 
   const updateTotalCount = (count) => {
@@ -136,6 +154,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
+  if (!candidates || candidates.length === 0) {
+    tbody.innerHTML = `
+      <tr class="empty-state-row">
+        <td colspan="7" class="empty-state-cell">
+          <div class="empty-state-content">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4M12 16h.01" />
+            </svg>
+            <p class="empty-message">Não há candidatos cadastrados no momento.</p>
+          </div>
+        </td>
+      </tr>
+    `;
+    updateTotalCount(0);
+    return;
+  }
+
+  tbody.innerHTML = '';
   updateTotalCount(candidates.length);
 
   const loadedCandidates = await Promise.all(
@@ -148,10 +185,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       tr.dataset.period = candidate.period ? candidate.period.toString() : '';
 
       if (candidate.status === 'eliminado') {
-        tr.style.color = 'red';
+        tr.classList.add('row-eliminado');
       }
 
-      tr.innerHTML = `<td data-label="Status">${candidate.status.capitalize()}</td>`;
+      const status = candidate.status;
+      let badgeClass = '';
+      let statusLabel = status.capitalize();
+      
+      if (status === 'eliminado') {
+        badgeClass = 'status-badge--eliminado';
+      } else if (status === 'concluido' || status === 'concluído') {
+        badgeClass = 'status-badge--concluido';
+      } else {
+        badgeClass = 'status-badge--agendado';
+      }
+
+      tr.innerHTML = `<td data-label="Status"><span class="status-badge ${badgeClass}">${statusLabel}</span></td>`;
 
       const profile = await Profile(
         {
@@ -275,6 +324,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     updateTotalCount(visibleCount);
+
+    // Toggle empty state row
+    let emptyRow = tbody.querySelector('.empty-state-row');
+    if (visibleCount === 0) {
+      if (!emptyRow) {
+        emptyRow = document.createElement('tr');
+        emptyRow.className = 'empty-state-row';
+        emptyRow.innerHTML = `
+          <td colspan="7" class="empty-state-cell">
+            <div class="empty-state-content">
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4M12 16h.01" />
+              </svg>
+              <p class="empty-message">Nenhum candidato corresponde aos filtros selecionados.</p>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(emptyRow);
+      } else {
+        emptyRow.style.display = '';
+      }
+    } else {
+      if (emptyRow) {
+        emptyRow.style.display = 'none';
+      }
+    }
   };
 
   courseFilter.addEventListener('change', applyFilters);
