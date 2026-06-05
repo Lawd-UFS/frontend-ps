@@ -287,15 +287,15 @@ export const createOverview = async (container) => {
 
   totalStatsElements.innerHTML = `
     <div class="stats-item">
-      <dt>Total inscritos:</dt>
+      <dt>Inscritos</dt>
       <dd>${totalTimes}</dd>
     </div>
     <div class="stats-item">
-      <dt>Candidatos agendados:</dt>
+      <dt>Candidatos agendados</dt>
       <dd>${scheduledTimes}</dd>
     </div>
     <div class="stats-item">
-      <dt>Aguardando agendamento:</dt>
+      <dt>Aguardando agendamento</dt>
       <dd>${unscheduledTimes} ${pendingStatsBadge}</dd>
     </div>
   `;
@@ -308,15 +308,15 @@ export const createOverview = async (container) => {
 
   myStatsElements.innerHTML = `
     <div class="stats-item">
-      <dt>Total:</dt>
+      <dt>Total</dt>
       <dd>${myTimes}</dd>
     </div>
     <div class="stats-item">
-      <dt>Agendados:</dt>
+      <dt>Agendados</dt>
       <dd>${myScheduledTimes}</dd>
     </div>
     <div class="stats-item">
-      <dt>Disponíveis:</dt>
+      <dt>Disponíveis</dt>
       <dd>${myUnscheduledTimes}</dd>
     </div>
   `;
