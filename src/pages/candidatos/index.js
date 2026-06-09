@@ -20,45 +20,62 @@ const normalizeCourseName = (course) => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
 
-  if (normalized === 'cc' || normalized.includes('ciencia da computacao') || normalized.includes('ciencias da computacao') || normalized.includes('ciencia computacao') || normalized.includes('ciencias computacao')) {
+  if (
+    normalized === 'cc' ||
+    normalized.includes('ciencia da computacao') ||
+    normalized.includes('ciencias da computacao') ||
+    normalized.includes('ciencia computacao') ||
+    normalized.includes('ciencias computacao')
+  ) {
     return 'Ciência da Computação';
   }
-  if (normalized === 'si' || normalized.includes('sistemas de informacao') || normalized.includes('sistema de informacao') || normalized.includes('sistemas informacao') || normalized.includes('sistema informacao')) {
+  if (
+    normalized === 'si' ||
+    normalized.includes('sistemas de informacao') ||
+    normalized.includes('sistema de informacao') ||
+    normalized.includes('sistemas informacao') ||
+    normalized.includes('sistema informacao')
+  ) {
     return 'Sistemas de Informação';
   }
-  if (normalized === 'ec' || normalized.includes('engenharia da computacao') || normalized.includes('engenharia de computacao') || normalized.includes('engenharia computacao')) {
+  if (
+    normalized === 'ec' ||
+    normalized.includes('engenharia da computacao') ||
+    normalized.includes('engenharia de computacao') ||
+    normalized.includes('engenharia computacao')
+  ) {
     return 'Engenharia da Computação';
   }
 
   const wordCorrections = {
-    'ciencia': 'Ciência',
-    'ciencias': 'Ciências',
-    'computacao': 'Computação',
-    'sistema': 'Sistema',
-    'sistemas': 'Sistemas',
-    'informacao': 'Informação',
-    'informacoes': 'Informações',
-    'engenharia': 'Engenharia',
-    'estatistica': 'Estatística',
-    'matematica': 'Matemática',
-    'fisica': 'Física',
-    'quimica': 'Química',
-    'administracao': 'Administração',
-    'mecanica': 'Mecânica',
-    'eletrica': 'Elétrica',
-    'producao': 'Produção',
-    'civil': 'Civil',
-    'de': 'de',
-    'da': 'da',
-    'do': 'do',
-    'dos': 'dos',
-    'das': 'das',
-    'e': 'e'
+    ciencia: 'Ciência',
+    ciencias: 'Ciências',
+    computacao: 'Computação',
+    sistema: 'Sistema',
+    sistemas: 'Sistemas',
+    informacao: 'Informação',
+    informacoes: 'Informações',
+    engenharia: 'Engenharia',
+    estatistica: 'Estatística',
+    matematica: 'Matemática',
+    fisica: 'Física',
+    quimica: 'Química',
+    administracao: 'Administração',
+    mecanica: 'Mecânica',
+    eletrica: 'Elétrica',
+    producao: 'Produção',
+    civil: 'Civil',
+    de: 'de',
+    da: 'da',
+    do: 'do',
+    dos: 'dos',
+    das: 'das',
+    e: 'e',
   };
 
   const words = normalized.split(/\s+/);
   return words
-    .map(word => {
+    .map((word) => {
       if (wordCorrections[word]) {
         return wordCorrections[word];
       }
@@ -107,8 +124,7 @@ const setRanking = (candidates) => {
     }
 
     const score = Number(candidate.dataset.score) || 0;
-    const previousScore =
-      Number(candidates[index - 1].dataset.score) || 0;
+    const previousScore = Number(candidates[index - 1].dataset.score) || 0;
     const previousRanking =
       Number(candidates[index - 1].querySelector('.ranking').innerText) || 0;
 
@@ -129,7 +145,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   const totalCountEl = document.querySelector('.candidates-total__count');
 
   // Render loading skeletons
-  tbody.innerHTML = Array.from({ length: 5 }).map(() => `
+  tbody.innerHTML = Array.from({ length: 5 })
+    .map(
+      () => `
     <tr class="skeleton-row">
       <td data-label="Status"><div class="skeleton-cell skeleton-badge"></div></td>
       <td data-label="Candidato">
@@ -144,7 +162,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       <td data-label="Ranking"><div class="skeleton-cell" style="width: 30%"></div></td>
       <td data-label="Ver mais"><div class="skeleton-cell skeleton-button"></div></td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join('');
 
   const candidates = await getAllCandidates();
 
@@ -174,15 +194,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   tbody.innerHTML = '';
   updateTotalCount(candidates.length);
-
   const loadedCandidates = await Promise.all(
-    candidates.map(async (candidate) => {
+    candidates.map(async (candidate, index) => {
       const tr = document.createElement('tr');
 
       const normalizedCourse = normalizeCourseName(candidate.course);
       tr.dataset.score = candidate.score || 0;
       tr.dataset.course = normalizedCourse.toLowerCase();
       tr.dataset.period = candidate.period ? candidate.period.toString() : '';
+      tr.dataset.index = index;
+      tr.dataset.name = candidate.name ? candidate.name.toLowerCase() : '';
 
       if (candidate.status === 'eliminado') {
         tr.classList.add('row-eliminado');
@@ -191,7 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const status = candidate.status;
       let badgeClass = '';
       let statusLabel = status.capitalize();
-      
+
       if (status === 'eliminado') {
         badgeClass = 'status-badge--eliminado';
       } else if (status === 'concluido' || status === 'concluído') {
@@ -216,7 +237,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       tr.appendChild(profile);
 
-      const phoneText = candidate.phone ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3') : '-';
+      const phoneText = candidate.phone
+        ? candidate.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+        : '-';
       tr.innerHTML += `
       <td data-label="Telefone">${phoneText}</td>
       <td data-label="Curso">${normalizedCourse || '-'}</td>
@@ -246,25 +269,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   setRanking(orderedCandidates);
 
-  orderedCandidates.forEach((candidate) => {
-    tbody.appendChild(candidate);
-  });
+  const sortOrderSelect = document.querySelector('#sort-order');
+
+  const renderSortedCandidates = () => {
+    const sortOrder = sortOrderSelect ? sortOrderSelect.value : 'last';
+    orderedCandidates.sort((a, b) => {
+      const idxA = Number(a.dataset.index) || 0;
+      const idxB = Number(b.dataset.index) || 0;
+      return sortOrder === 'last' ? idxB - idxA : idxA - idxB;
+    });
+
+    tbody.innerHTML = '';
+    orderedCandidates.forEach((candidate) => {
+      tbody.appendChild(candidate);
+    });
+  };
+
+  // Initial render (defaults to 'last')
+  renderSortedCandidates();
+
+  if (sortOrderSelect) {
+    sortOrderSelect.addEventListener('change', () => {
+      renderSortedCandidates();
+      applyFilters();
+    });
+  }
 
   // Populate dynamic filters
   const courseFilter = document.querySelector('#filter-course');
   const periodFilter = document.querySelector('#filter-period');
+  const searchInput = document.querySelector('#search-candidate');
 
-  const uniqueCourses = [...new Set(candidates.map(c => normalizeCourseName(c.course)).filter(Boolean))].sort();
-  const uniquePeriods = [...new Set(candidates.map(c => c.period ? c.period.toString() : '').filter(Boolean))].sort((a, b) => Number(a) - Number(b));
+  const uniqueCourses = [
+    ...new Set(
+      candidates.map((c) => normalizeCourseName(c.course)).filter(Boolean),
+    ),
+  ].sort();
+  const uniquePeriods = [
+    ...new Set(
+      candidates
+        .map((c) => (c.period ? c.period.toString() : ''))
+        .filter(Boolean),
+    ),
+  ].sort((a, b) => Number(a) - Number(b));
 
-  uniqueCourses.forEach(course => {
+  uniqueCourses.forEach((course) => {
     const opt = document.createElement('option');
     opt.value = course.toLowerCase();
     opt.innerText = course;
     courseFilter.appendChild(opt);
   });
 
-  uniquePeriods.forEach(period => {
+  uniquePeriods.forEach((period) => {
     const opt = document.createElement('option');
     opt.value = period;
     opt.innerText = `${period}º Período`;
@@ -276,29 +332,34 @@ document.addEventListener('DOMContentLoaded', async () => {
   const filterButtons = {
     scheduling: document.querySelector('.scheduling_button'),
     done: document.querySelector('.done_button'),
-    deleted: document.querySelector('.delete_button')
+    deleted: document.querySelector('.delete_button'),
   };
 
   const applyFilters = () => {
     const selectedCourse = courseFilter.value;
     const selectedPeriod = periodFilter.value;
+    const searchValue = searchInput ? searchInput.value.trim().toLowerCase() : '';
 
     let visibleCount = 0;
 
     orderedCandidates.forEach((tr) => {
-      const statusText = tr.querySelector('td:nth-child(1)').innerText.toLowerCase();
-      
+      const statusText = tr
+        .querySelector('td:nth-child(1)')
+        .innerText.toLowerCase();
+
       const isEliminado = statusText === 'eliminado';
       const scoreVal = Number(tr.dataset.score) || 0;
       const isDone = scoreVal > 0;
       const isScheduling = !isDone;
 
       // Status check
-      const anyStatusFilterActive = filters.scheduling || filters.done || filters.deleted;
+      const anyStatusFilterActive =
+        filters.scheduling || filters.done || filters.deleted;
       let showByStatus = true;
       if (anyStatusFilterActive) {
         showByStatus = false;
-        if (filters.scheduling && isScheduling && !isEliminado) showByStatus = true;
+        if (filters.scheduling && isScheduling && !isEliminado)
+          showByStatus = true;
         if (filters.done && isDone && !isEliminado) showByStatus = true;
         if (filters.deleted && isEliminado) showByStatus = true;
       }
@@ -315,7 +376,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         showByPeriod = tr.dataset.period === selectedPeriod;
       }
 
-      const show = showByStatus && showByCourse && showByPeriod;
+      // Name search check
+      let showBySearch = true;
+      if (searchValue) {
+        const candidateName = tr.dataset.name || '';
+        showBySearch = candidateName.includes(searchValue);
+      }
+
+      const show = showByStatus && showByCourse && showByPeriod && showBySearch;
       tr.style.display = show ? '' : 'none';
 
       if (show) {
@@ -355,8 +423,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   courseFilter.addEventListener('change', applyFilters);
   periodFilter.addEventListener('change', applyFilters);
+  if (searchInput) {
+    searchInput.addEventListener('input', applyFilters);
+  }
 
-  Object.keys(filterButtons).forEach(key => {
+  Object.keys(filterButtons).forEach((key) => {
     const btn = filterButtons[key];
     if (btn) {
       btn.addEventListener('click', () => {

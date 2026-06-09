@@ -101,12 +101,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // Filtros
-  const filters = { pending: false, completed: false, presential: false, remote: false };
+  const filters = {
+    pending: false,
+    completed: false,
+    presential: false,
+    remote: false,
+  };
   const filterButtons = {
     pending: document.querySelector('.filter-button.pending'),
     completed: document.querySelector('.filter-button.completed'),
     presential: document.querySelector('.filter-button.presential'),
-    remote: document.querySelector('.filter-button.remote')
+    remote: document.querySelector('.filter-button.remote'),
   };
 
   const applyFilters = () => {
@@ -114,18 +119,24 @@ document.addEventListener('DOMContentLoaded', async () => {
       const isStatusPending = schedule.interviewStatus === 'Pendente';
       const isStatusCompleted = schedule.interviewStatus === 'Concluída';
       // Considera 'Ambos' como válido para presencial ou remoto
-      const isModePresential = schedule.interviewMode === 'Presencial' || schedule.interviewMode === 'Ambos';
-      const isModeRemote = schedule.interviewMode === 'Remoto' || schedule.interviewMode === 'Ambos';
+      const isModePresential =
+        schedule.interviewMode === 'Presencial' ||
+        schedule.interviewMode === 'Ambos';
+      const isModeRemote =
+        schedule.interviewMode === 'Remoto' ||
+        schedule.interviewMode === 'Ambos';
 
       const statusFilterActive = filters.pending || filters.completed;
-      const statusMatch = !statusFilterActive || 
-                          (filters.pending && isStatusPending) || 
-                          (filters.completed && isStatusCompleted);
+      const statusMatch =
+        !statusFilterActive ||
+        (filters.pending && isStatusPending) ||
+        (filters.completed && isStatusCompleted);
 
       const modeFilterActive = filters.presential || filters.remote;
-      const modeMatch = !modeFilterActive || 
-                        (filters.presential && isModePresential) || 
-                        (filters.remote && isModeRemote);
+      const modeMatch =
+        !modeFilterActive ||
+        (filters.presential && isModePresential) ||
+        (filters.remote && isModeRemote);
 
       if (statusMatch && modeMatch) {
         tr.style.display = '';
@@ -135,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   };
 
-  Object.keys(filterButtons).forEach(key => {
+  Object.keys(filterButtons).forEach((key) => {
     const btn = filterButtons[key];
     if (btn) {
       btn.addEventListener('click', () => {

@@ -20,6 +20,9 @@
                 <span class="candidates-total__label">Total</span>
                 <span class="candidates-total__count">0</span>
               </div>
+              <div class="search-wrapper">
+                <input type="text" id="search-candidate" class="search-input" placeholder="Buscar candidato..." aria-label="Buscar candidatos por nome" />
+              </div>
             </div>
           </div>
 
@@ -27,24 +30,52 @@
             <p class="filters-label">Filtros:</p>
             <div class="filter-status-group" role="group" aria-label="Status">
               <button type="button" class="scheduling_button">
-                <img src="../../assets/images/schedule-pic.png" alt="" aria-hidden="true" />
+                <img
+                  src="../../assets/images/schedule-pic.png"
+                  alt=""
+                  aria-hidden="true"
+                />
                 <span>Agendado</span>
               </button>
               <button type="button" class="done_button">
-                <img src="../../assets/images/circle.png" alt="" aria-hidden="true" />
+                <img
+                  src="../../assets/images/circle.png"
+                  alt=""
+                  aria-hidden="true"
+                />
                 <span>Concluído</span>
               </button>
               <button type="button" class="delete_button">
-                <img src="../../assets/images/trash_can.png" alt="" aria-hidden="true" />
+                <img
+                  src="../../assets/images/trash_can.png"
+                  alt=""
+                  aria-hidden="true"
+                />
                 <span>Eliminados</span>
               </button>
             </div>
             <div class="filter-selects-group">
-              <select id="filter-course" class="filter-select" aria-label="Filtrar por curso">
+              <select
+                id="filter-course"
+                class="filter-select"
+                aria-label="Filtrar por curso"
+              >
                 <option value="">Todos os Cursos</option>
               </select>
-              <select id="filter-period" class="filter-select" aria-label="Filtrar por período">
+              <select
+                id="filter-period"
+                class="filter-select"
+                aria-label="Filtrar por período"
+              >
                 <option value="">Todos os Períodos</option>
+              </select>
+              <select
+                id="sort-order"
+                class="filter-select"
+                aria-label="Ordem de inscrição"
+              >
+                <option value="last">Últimos Inscritos</option>
+                <option value="first">Primeiros Inscritos</option>
               </select>
             </div>
           </div>

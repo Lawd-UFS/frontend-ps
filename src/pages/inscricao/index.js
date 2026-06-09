@@ -71,7 +71,7 @@ const initializeElements = () => {
     dateBirthInput.addEventListener('input', (e) => {
       let value = e.target.value.replace(/\D/g, '');
       if (value.length > 8) value = value.slice(0, 8);
-      
+
       let formatted = value;
       if (value.length > 2) {
         formatted = `${value.slice(0, 2)}/`;
@@ -88,9 +88,9 @@ const initializeElements = () => {
   const phoneInput = document.getElementById('phone');
   if (phoneInput) {
     phoneInput.addEventListener('input', (e) => {
-      let value = e.target.value.replace(/\D/g, '')
+      let value = e.target.value.replace(/\D/g, '');
       if (value.length > 11) value = value.slice(0, 11);
-      
+
       let formatted = value;
       if (value.length > 2) {
         formatted = `(${value.slice(0, 2)}) `;
@@ -262,7 +262,7 @@ const handleSubmitForm = async () => {
           finalValue = `${parts[2]}-${parts[1]}-${parts[0]}`;
         }
       }
-      
+
       if (payload[key]) {
         if (!Array.isArray(payload[key])) {
           payload[key] = [payload[key]];

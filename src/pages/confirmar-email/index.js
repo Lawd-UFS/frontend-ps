@@ -19,7 +19,8 @@ const verifyEmail = async (token) => {
     if (response.ok) {
       successState.style.display = 'flex';
     } else {
-      errorMessage.textContent = data.message || 'O link de confirmação é inválido ou expirou.';
+      errorMessage.textContent =
+        data.message || 'O link de confirmação é inválido ou expirou.';
       errorState.style.display = 'flex';
     }
   } catch {
@@ -35,7 +36,8 @@ const init = () => {
 
   if (!token) {
     document.getElementById('loading-state').style.display = 'none';
-    document.getElementById('error-message').textContent = 'Token de verificação não encontrado.';
+    document.getElementById('error-message').textContent =
+      'Token de verificação não encontrado.';
     document.getElementById('error-state').style.display = 'flex';
     return;
   }

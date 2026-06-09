@@ -16,7 +16,8 @@ function count() {
   const secondsT = Math.floor((time % (1000 * 60)) / 1000);
 
   if (time > 0) {
-    document.getElementById('day').textContent = daysT < 10 ? `0${daysT}` : daysT;
+    document.getElementById('day').textContent =
+      daysT < 10 ? `0${daysT}` : daysT;
     document.getElementById('hours').textContent =
       hoursT < 10 ? `0${hoursT}` : hoursT;
     document.getElementById('minutes').textContent =
@@ -49,4 +50,3 @@ function count() {
 }
 
 count();
-

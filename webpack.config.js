@@ -127,9 +127,15 @@ const config = {
     }),
     new DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
-      'process.env.INTERVIEW_START_DATE': JSON.stringify(process.env.INTERVIEW_START_DATE),
-      'process.env.INTERVIEW_END_DATE': JSON.stringify(process.env.INTERVIEW_END_DATE),
-      'process.env.PROCESS_START_DATE': JSON.stringify(process.env.PROCESS_START_DATE),
+      'process.env.INTERVIEW_START_DATE': JSON.stringify(
+        process.env.INTERVIEW_START_DATE,
+      ),
+      'process.env.INTERVIEW_END_DATE': JSON.stringify(
+        process.env.INTERVIEW_END_DATE,
+      ),
+      'process.env.PROCESS_START_DATE': JSON.stringify(
+        process.env.PROCESS_START_DATE,
+      ),
     }),
   ],
   module: {

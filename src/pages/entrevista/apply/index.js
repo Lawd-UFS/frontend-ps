@@ -50,7 +50,9 @@ export const ApplyPage = async () => {
   let questions = [];
 
   if (!scriptIsLoaded) {
-    const errorDialog = ErrorDialog([{ message: 'Erro ao carregar roteiro da entrevista' }]);
+    const errorDialog = ErrorDialog([
+      { message: 'Erro ao carregar roteiro da entrevista' },
+    ]);
     openModal(errorDialog);
   } else {
     questions = await fetchQuestions();
@@ -77,7 +79,8 @@ export const ApplyPage = async () => {
 
       const dialog = ConfirmDialog({
         title: 'Salvar Entrevista',
-        message: 'Tem certeza que deseja salvar esta entrevista? Essa ação não pode ser desfeita.',
+        message:
+          'Tem certeza que deseja salvar esta entrevista? Essa ação não pode ser desfeita.',
         onConfirm: async () => {
           const result = await saveInterview(answers);
 
@@ -99,7 +102,7 @@ export const ApplyPage = async () => {
             const errorDialog = ErrorDialog([{ message: errorMsg }]);
             openModal(errorDialog);
           }
-        }
+        },
       });
       openModal(dialog);
     });

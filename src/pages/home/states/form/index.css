@@ -307,7 +307,9 @@ svg:hover {
   border-bottom: 1px solid var(--purple-light);
   padding-bottom: 2px;
   cursor: var(--cursor-pointer);
-  transition: color 200ms ease, border-color 200ms ease;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease;
 }
 
 .edital-link a:hover {

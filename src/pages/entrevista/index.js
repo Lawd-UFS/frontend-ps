@@ -61,7 +61,7 @@ const changePage = (page) => async (event) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const header = await Header();
-  
+
   const candidate = await fetchInterviewCandidate();
 
   if (!candidate) {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     emptyState.style.justifyContent = 'center';
     emptyState.style.height = '60vh';
     emptyState.style.textAlign = 'center';
-    
+
     emptyState.innerHTML = `
       <h2 style="color: var(--purple-400); font-size: 2.4rem; margin-bottom: 1rem;">Nenhuma Entrevista Selecionada</h2>
       <p style="color: var(--gray); font-size: 1.4rem;">Acesse a <a href="/minha-agenda" style="color: var(--purple-300); text-decoration: underline; font-weight: bold;">sua agenda</a> para selecionar uma entrevista.</p>

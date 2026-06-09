@@ -143,7 +143,14 @@ main {
   justify-content: center;
   gap: 1rem;
   padding: 1.2rem 3.6rem;
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
   color: #fff;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
@@ -183,7 +190,7 @@ main {
   justify-content: center;
   gap: 1rem;
   padding: 1.2rem 3.6rem;
-  background: #5865F2;
+  background: #5865f2;
   color: #fff;
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;

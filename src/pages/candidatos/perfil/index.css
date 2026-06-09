@@ -81,7 +81,9 @@ header {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Error state */
@@ -127,8 +129,14 @@ header {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Header Card */
@@ -440,17 +448,17 @@ header {
   .profile-details-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .profile-avatar-row {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
   }
-  
+
   .name-status-row {
     justify-content: center;
   }
-  
+
   .score-indicator {
     margin-left: auto;
     margin-right: auto;

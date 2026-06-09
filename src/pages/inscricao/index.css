@@ -85,7 +85,11 @@ button:active {
 }
 
 .registerButton {
-  background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--purple-300) 0%,
+    var(--purple-400) 100%
+  );
   color: var(--purple-white);
   padding: 1.2rem 3.6rem;
   font-weight: 700;
@@ -202,7 +206,11 @@ header {
   gap: 2rem;
   padding: 2.4rem 4.8rem 1.6rem;
   border-bottom: 1px solid rgba(70, 35, 167, 0.08);
-  background: linear-gradient(180deg, rgba(247, 244, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 244, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .section-type {
@@ -264,7 +272,11 @@ hr {
 }
 
 .icon-section.active {
-  background: linear-gradient(135deg, var(--purple-300) 0%, var(--purple-400) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--purple-300) 0%,
+    var(--purple-400) 100%
+  );
   color: #fff;
   border-color: var(--purple-400);
   box-shadow: 0 0 0 4px rgba(112, 70, 233, 0.2);
@@ -284,7 +296,7 @@ hr {
    ========================================================================== */
 
 .section-inputs {
-  padding: 1.0rem 4.8rem;
+  padding: 1rem 4.8rem;
 }
 
 #section2,
@@ -420,7 +432,7 @@ form select:focus {
 
 /* Error States */
 label.error {
-  animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -520,7 +532,6 @@ dialog.closing {
   animation: closing 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-
 dialog::backdrop {
   background-color: rgba(19, 9, 43, 0.6);
   backdrop-filter: blur(12px);
@@ -580,7 +591,7 @@ dialog::backdrop {
   align-items: center;
 }
 
-#section4>div {
+#section4 > div {
   display: flex;
   align-items: center;
   gap: 4.8rem;
@@ -688,7 +699,7 @@ span {
 }
 
 .required-notice {
-  padding: 1.0rem 0rem;
+  padding: 1rem 0rem;
   font-size: 1.3rem;
   color: var(--gray);
   font-weight: 500;
@@ -742,7 +753,6 @@ span {
 }
 
 @keyframes shake {
-
   10%,
   90% {
     transform: translate3d(-1px, 0, 0);
@@ -803,7 +813,7 @@ label.show-animation:not(.checkbox-label) {
     gap: 2.4rem;
   }
 
-  #section4>div {
+  #section4 > div {
     flex-direction: column;
     gap: 3.2rem;
     text-align: center;

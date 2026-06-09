@@ -216,7 +216,7 @@ const createNewSchedule = async (form, agendaContainer) => {
   if (!response.success) {
     let errorMsg = response.message || 'Ocorreu um erro ao criar o horário';
     if (response.errors && response.errors.length > 0) {
-      errorMsg = response.errors.map(err => err.message).join(' | ');
+      errorMsg = response.errors.map((err) => err.message).join(' | ');
     }
 
     if (errorMessage) {
@@ -258,7 +258,7 @@ export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
   dateInput.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 8) value = value.slice(0, 8);
-    
+
     let formatted = value;
     if (value.length > 2) {
       formatted = `${value.slice(0, 2)}/`;

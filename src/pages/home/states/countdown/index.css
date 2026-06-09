@@ -132,7 +132,12 @@ main {
   font-size: clamp(2.4rem, 5vw, 3.2rem);
   font-weight: 800;
   line-height: 1.25;
-  background: linear-gradient(135deg, var(--purple-400) 0%, var(--purple-300) 55%, var(--purple-200) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--purple-400) 0%,
+    var(--purple-300) 55%,
+    var(--purple-200) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -150,7 +155,7 @@ main {
   margin-top: 3rem;
 }
 
-.cd-count>h1.cd-faltam {
+.cd-count > h1.cd-faltam {
   font-family: 'Space Mono', monospace;
   font-size: 1.4rem;
   font-weight: 600;
@@ -182,7 +187,8 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  transition:
+    transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     border-color 0.3s ease,
     box-shadow 0.3s ease;
   user-select: none;
@@ -194,7 +200,7 @@ main {
   box-shadow: 0 8px 24px 0 rgba(112, 70, 233, 0.12);
 }
 
-.count-container>h1 {
+.count-container > h1 {
   font-size: clamp(2.8rem, 6vw, 3.4rem);
   font-weight: 800;
   line-height: 1;
@@ -202,8 +208,8 @@ main {
   font-family: 'Space Mono', monospace;
 }
 
-.count-container>p {
-  font-size: 1.0rem;
+.count-container > p {
+  font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -243,7 +249,7 @@ main {
   .state {
     padding: 4rem 2.4rem;
   }
-  
+
   .count {
     gap: 0.8rem;
   }
@@ -253,7 +259,7 @@ main {
     border-radius: 1.2rem;
   }
 
-  .count-container>p {
+  .count-container > p {
     font-size: 0.75rem;
   }
-}
+}

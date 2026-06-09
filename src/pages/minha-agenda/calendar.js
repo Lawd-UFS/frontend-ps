@@ -55,7 +55,7 @@ const getCalendarData = (periodStart, periodEnd, targetDate = new Date()) => {
   for (let day = 1; day <= daysInMonth; day++) {
     const dateObject = new Date(year, month, day);
     const weekDayIndex = dateObject.getDay();
-    
+
     const isWithinPeriod = dateObject >= periodStart && dateObject <= periodEnd;
 
     weeks[weekIndex][weekDayIndex] = {
@@ -157,7 +157,6 @@ export const addNewScheduleTime = (
 };
 
 export const createCalendar = ({ periodStart, periodEnd }, container) => {
-
   const weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
   const months = [
     'janeiro',
@@ -182,7 +181,11 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
   const nextMonthBtn = container.querySelector('#next-month');
 
   const renderCalendar = () => {
-    const { weeks, month } = getCalendarData(periodStart, periodEnd, currentDisplayedDate);
+    const { weeks, month } = getCalendarData(
+      periodStart,
+      periodEnd,
+      currentDisplayedDate,
+    );
     monthH2.textContent = `${months[month]} ${currentDisplayedDate.getFullYear()}`;
     days.innerHTML = '';
 
@@ -211,12 +214,13 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
 
       days.appendChild(ul);
     });
-    
+
     if (prevMonthBtn) {
       const now = new Date();
       if (
         currentDisplayedDate.getFullYear() < now.getFullYear() ||
-        (currentDisplayedDate.getFullYear() === now.getFullYear() && currentDisplayedDate.getMonth() <= now.getMonth())
+        (currentDisplayedDate.getFullYear() === now.getFullYear() &&
+          currentDisplayedDate.getMonth() <= now.getMonth())
       ) {
         prevMonthBtn.style.visibility = 'hidden';
       } else {
@@ -235,7 +239,8 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
       const now = new Date();
       if (
         currentDisplayedDate.getFullYear() > now.getFullYear() ||
-        (currentDisplayedDate.getFullYear() === now.getFullYear() && currentDisplayedDate.getMonth() > now.getMonth())
+        (currentDisplayedDate.getFullYear() === now.getFullYear() &&
+          currentDisplayedDate.getMonth() > now.getMonth())
       ) {
         currentDisplayedDate.setMonth(currentDisplayedDate.getMonth() - 1);
         renderCalendar();

@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!email) return;
 
       // Estado de carregamento
-      const submitButton = schedulingEmailForm.querySelector('button[type="submit"]');
+      const submitButton = schedulingEmailForm.querySelector(
+        'button[type="submit"]',
+      );
       if (submitButton) submitButton.disabled = true;
       if (formSpinner) formSpinner.classList.remove('hidden');
       if (formFeedback) {
@@ -102,14 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
           if (formFeedback) {
-            formFeedback.textContent = data.message || 'Link de agendamento enviado com sucesso! Verifique sua caixa de entrada.';
+            formFeedback.textContent =
+              data.message ||
+              'Link de agendamento enviado com sucesso! Verifique sua caixa de entrada.';
             formFeedback.classList.remove('hidden');
             formFeedback.classList.add('success');
           }
           candidateEmailInput.value = '';
         } else {
           if (formFeedback) {
-            formFeedback.textContent = data.message || 'E-mail não encontrado ou cadastro inativo.';
+            formFeedback.textContent =
+              data.message || 'E-mail não encontrado ou cadastro inativo.';
             formFeedback.classList.remove('hidden');
             formFeedback.classList.add('error');
           }
@@ -117,7 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (error) {
         console.error('Erro na solicitação de agendamento:', error);
         if (formFeedback) {
-          formFeedback.textContent = 'Ocorreu um erro ao processar sua solicitação. Tente novamente mais tarde.';
+          formFeedback.textContent =
+            'Ocorreu um erro ao processar sua solicitação. Tente novamente mais tarde.';
           formFeedback.classList.remove('hidden');
           formFeedback.classList.add('error');
         }
