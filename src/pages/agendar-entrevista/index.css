@@ -428,6 +428,37 @@ main {
 
 /* ═══════════════════════ Slots Grid ═══════════════════════ */
 
+.lead-time-notice {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: rgba(112, 70, 233, 0.05);
+  border: 1px solid rgba(112, 70, 233, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-200);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.notice-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.notice-row svg {
+  color: var(--purple-200);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.lead-time-notice strong {
+  color: var(--text-100);
+}
+
 .slots-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
