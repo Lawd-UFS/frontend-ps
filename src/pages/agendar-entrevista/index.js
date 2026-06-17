@@ -108,6 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Phone input mask
+  const inputPhone = document.getElementById('input-phone');
+  if (inputPhone) {
+    inputPhone.addEventListener('input', (e) => {
+      let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+  }
 });
 
 // ═══════════════════════════════════════════════════════════════
@@ -355,6 +364,30 @@ function getSelectedMode() {
 async function confirmReservation() {
   if (!selectedSlotId || !currentChatbotId) return;
 
+  const preferredNameInput = document.getElementById('input-preferred-name');
+  const pronounsInput = document.getElementById('input-pronouns');
+  const discordInput = document.getElementById('input-discord');
+  const phoneInput = document.getElementById('input-phone');
+
+  if (
+    !preferredNameInput.reportValidity() ||
+    !pronounsInput.reportValidity() ||
+    !discordInput.reportValidity() ||
+    !phoneInput.reportValidity()
+  ) {
+    return;
+  }
+
+  const rawPhone = phoneInput.value.replace(/\D/g, '');
+  if (rawPhone.length !== 11) {
+    alert("Por favor, informe um telefone válido com DDD (11 dígitos).");
+    return;
+  }
+
+  const preferredName = preferredNameInput.value.trim();
+  const pronouns = pronounsInput.value;
+  const discord = discordInput.value.trim();
+
   let chosenMode = selectedSlotData.interviewMode;
   if (chosenMode === 'Ambos') {
     chosenMode = getSelectedMode();
@@ -372,6 +405,10 @@ async function confirmReservation() {
         chatbotId: currentChatbotId,
         scheduleId: selectedSlotId,
         interviewMode: chosenMode,
+        preferredName,
+        interviewPronouns: pronouns,
+        discord,
+        phone: rawPhone,
       }),
     });
 

@@ -674,6 +674,113 @@ main {
   color: var(--purple-300);
 }
 
+/* Formulário de informações da entrevista */
+.interview-info-form {
+  background-color: var(--purple-white);
+  border: 1px solid rgba(112, 70, 233, 0.15);
+  border-radius: 1.4rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--purple-400);
+  margin-bottom: 1.6rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--purple-500);
+}
+
+.form-input {
+  width: 100%;
+  padding: 1.2rem;
+  border: 1px solid rgba(112, 70, 233, 0.2);
+  border-radius: 0.8rem;
+  font-family: var(--font-main);
+  font-size: 1.3rem;
+  color: var(--gray);
+  background-color: #ffffff;
+  transition: all 0.25s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--purple-300);
+  box-shadow: 0 0 0 3px rgba(112, 70, 233, 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--gray-light);
+}
+
+.form-hint {
+  font-size: 1.1rem;
+  color: var(--gray);
+  margin-top: 0.2rem;
+}
+
+.form-hint a {
+  color: var(--purple-300);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-hint a:hover {
+  text-decoration: underline;
+}
+
+/* Aviso sobre contato WhatsApp/Discord */
+.contact-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  background-color: #fff8e1;
+  border-left: 4px solid #ff9800;
+  border-radius: 0.8rem;
+  padding: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.contact-notice-icon {
+  color: #ff9800;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.contact-notice p {
+  font-size: 1.3rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.contact-notice strong {
+  color: #333;
+}
+
 /* Mode selector for "Ambos" */
 #mode-selector-container {
   background-color: var(--purple-white);
