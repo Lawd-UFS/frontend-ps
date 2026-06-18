@@ -661,27 +661,27 @@ main {
 }
 
 .confirm-detail-label {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--gray);
   text-transform: uppercase;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.6rem;
 }
 
 .confirm-detail-date {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--purple-400);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.6rem;
 }
 
 .confirm-detail-meta {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--gray);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .confirm-detail-meta span {
@@ -948,27 +948,27 @@ main {
 }
 
 .success-detail-label {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--gray);
   text-transform: uppercase;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.6rem;
 }
 
 .success-detail-date {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--purple-400);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.6rem;
 }
 
 .success-detail-meta {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: var(--gray);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .success-detail-meta span {

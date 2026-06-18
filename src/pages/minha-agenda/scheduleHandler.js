@@ -173,6 +173,7 @@ const createNewSchedule = async (form, agendaContainer) => {
   const date = formData.get('date');
   const time = formData.get('time');
   const interviewMode = formData.get('interview-mode');
+  const interviewLocation = formData.get('interview-location');
   const errorMessage = form.querySelector('.error-message');
 
   const [day, month, year] = date.split('/');
@@ -211,6 +212,7 @@ const createNewSchedule = async (form, agendaContainer) => {
   const response = await scheduleService.createSchedule({
     dateTime,
     interviewMode,
+    interviewLocation: (interviewMode === 'Presencial' || interviewMode === 'Ambos') ? interviewLocation : undefined,
   });
 
   if (!response.success) {
@@ -283,6 +285,23 @@ export const applyCalendarEvents = (calendarContainer, agendaContainer) => {
   });
 
   applyCalendarDayEvents(calendarContainer);
+
+  const modeRadios = calendarContainer.querySelectorAll('input[name="interview-mode"]');
+  const locationDiv = calendarContainer.querySelector('#form-location');
+  const locationInputs = locationDiv.querySelectorAll('input[type="radio"]');
+  
+  modeRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      const mode = e.target.value;
+      if (mode === 'Presencial' || mode === 'Ambos') {
+        locationDiv.style.display = 'flex';
+        locationInputs.forEach(input => input.setAttribute('required', 'true'));
+      } else {
+        locationDiv.style.display = 'none';
+        locationInputs.forEach(input => input.removeAttribute('required'));
+      }
+    });
+  });
 
   calendarContainer
     .querySelector('form')
