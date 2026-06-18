@@ -560,7 +560,7 @@ function buildGoogleCalendarUrl(date, mode) {
       : mode === 'Presencial'
         ? 'Presencial (Lab LAWD)'
         : mode;
-  const description = `Entrevista do Processo Seletivo LAWD 2026.\nModalidade: ${modeLabel}\nDuração estimada: 30 minutos.\n\nAcesse o Discord do LAWD para mais informações: https://discord.com/invite/8yRDGWXgZ`;
+  const description = `Entrevista do Processo Seletivo LAWD 2026.\nModalidade: ${modeLabel}\nDuração estimada: 30 minutos.\n\nAcesse o Discord do LAWD para mais informações: https://discord.gg/NUPYCvSdz`;
 
   const location =
     mode === 'Presencial' ? 'Lab LAWD - Didática 7 /UFS' : 'Discord - LAWD';
