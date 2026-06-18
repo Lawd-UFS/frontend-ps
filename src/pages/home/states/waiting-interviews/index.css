@@ -1,0 +1,256 @@
+:root {
+  --purple-white: #f7f4ff;
+  --purple-light: #bba6f8;
+  --purple-100: #eff2ff;
+  --purple-200: #bba6f8;
+  --purple-300: #7046e9;
+  --purple-400: #4623a7;
+  --gray: #656565;
+  --gray-light: #cdcdcd;
+  --cursor-pointer: pointer;
+  --cursor-default: auto;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(../../../../assets/images/background.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar {
+  border-radius: 5rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  display: flex;
+  width: 100%;
+  max-width: 78rem;
+  padding: 1.2rem 2.8rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2.4rem 3.2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.navbar p {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar .icons {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.navbar .img-lawd {
+  width: 5.6rem;
+  height: auto;
+}
+
+.navbar .img-icon {
+  width: 2.8rem;
+  height: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 3.6rem;
+  flex: 1;
+}
+
+.confirmation-card {
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 2.4rem;
+  border: 1px solid rgba(70, 35, 167, 0.06);
+  width: 100%;
+  max-width: 52rem;
+  overflow: hidden;
+  box-shadow:
+    0 10px 30px -10px rgba(70, 35, 167, 0.08),
+    0 20px 40px -5px rgba(70, 35, 167, 0.04);
+  animation: opening 450ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.state {
+  padding: 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+.state img {
+  width: 100px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(112, 70, 233, 0.15));
+  animation: opening 350ms ease-in-out backwards;
+}
+
+.state h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--purple-400);
+  margin: 0;
+}
+
+.state p {
+  color: var(--gray);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 38rem;
+}
+
+.instagram-button {
+  margin-top: 1.2rem;
+  width: 100%;
+  max-width: 36rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem 3.6rem;
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-radius: 1.4rem;
+  text-decoration: none;
+  cursor: var(--cursor-pointer);
+  box-shadow: 0 4px 20px rgba(220, 39, 67, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 400ms;
+}
+
+.instagram-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(220, 39, 67, 0.45);
+  filter: brightness(1.05);
+}
+
+.instagram-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(220, 39, 67, 0.25);
+}
+
+.instagram-button svg {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex-shrink: 0;
+}
+
+.discord-button {
+  margin-top: 1.2rem;
+  width: 100%;
+  max-width: 36rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.2rem 3.6rem;
+  background: #5865f2;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-radius: 1.4rem;
+  text-decoration: none;
+  cursor: var(--cursor-pointer);
+  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: divs-section4 350ms ease-in-out backwards;
+  animation-delay: 500ms;
+}
+
+.discord-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(88, 101, 242, 0.45);
+  filter: brightness(1.05);
+}
+
+.discord-button:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(88, 101, 242, 0.25);
+}
+
+.discord-button svg {
+  width: 2.2rem;
+  height: 2.2rem;
+  flex-shrink: 0;
+}
+
+@keyframes opening {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes divs-section4 {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 585px) {
+  main {
+    padding: 1.6rem;
+  }
+
+  .state {
+    padding: 4rem 2.4rem;
+  }
+}
