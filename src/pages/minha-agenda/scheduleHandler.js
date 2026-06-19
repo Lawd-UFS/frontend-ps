@@ -116,7 +116,8 @@ export const updateScheduleDetailsOnScheduleClick = (
         break;
     }
 
-    interviewModeSpan.textContent = ` / ${schedule.interviewMode === 'Ambos' ? 'Presencial ou Remoto' : schedule.interviewMode}`;
+    const locationText = schedule.interviewLocation ? ` no ${schedule.interviewLocation}` : '';
+    interviewModeSpan.textContent = ` / ${schedule.interviewMode === 'Ambos' ? 'Presencial ou Remoto' : schedule.interviewMode}${locationText}`;
 
     div.appendChild(statusSpan);
     div.appendChild(interviewModeSpan);
@@ -179,9 +180,10 @@ export const updateScheduleDetailsOnScheduleClick = (
 
       const deleteButton = Button('Excluir');
       deleteButton.style.flex = '1';
-      deleteButton.style.backgroundColor = 'var(--red-400)';
+      deleteButton.style.backgroundColor = '#ef4444';
+      deleteButton.style.borderColor = '#ef4444';
       deleteButton.addEventListener('click', () => {
-        ConfirmDialog({
+        const dialog = ConfirmDialog({
           title: 'Excluir Horário',
           message: 'Tem certeza que deseja excluir este horário?',
           onConfirm: async () => {
@@ -193,6 +195,7 @@ export const updateScheduleDetailsOnScheduleClick = (
             }
           }
         });
+        openModal(dialog);
       });
 
       actionsDiv.appendChild(editButton);

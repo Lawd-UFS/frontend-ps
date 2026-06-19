@@ -36,8 +36,16 @@ const createScheduleItem = async (schedule) => {
   mode.className = 'mode';
   mode.setAttribute('data-label', 'Modalidade');
 
+  let locationText = '';
+  if (
+    (schedule.interviewMode === 'Presencial' || schedule.interviewMode === 'Ambos') &&
+    schedule.interviewLocation
+  ) {
+    locationText = ` no ${schedule.interviewLocation === 'Didática 7, Sala 506 (5º andar)' ? 'Sala 506' : 'LAWD'}`;
+  }
+
   mode.innerHTML = `
-    <span>${schedule.interviewMode}</span>
+    <span>${schedule.interviewMode}${locationText}</span>
   `;
 
   const candidate = document.createElement('td');
