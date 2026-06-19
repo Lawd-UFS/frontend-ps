@@ -232,6 +232,17 @@ const openEditModal = (schedule) => {
   const minStr = String(dateObj.getMinutes()).padStart(2, '0');
   const timeValue = `${hStr}:${minStr}`;
 
+  const timeSlots = [
+    '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
+    '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+    '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
+    '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00',
+  ];
+
+  const timeOptionsHtml = timeSlots
+    .map((t) => `<option value="${t}"${t === timeValue ? ' selected' : ''}>${t}</option>`)
+    .join('');
+
   form.innerHTML = `
     <label class="form-date" style="display:flex; flex-direction:column; gap:0.5rem; text-align:left;">
       <span>Data: *</span>
@@ -241,8 +252,7 @@ const openEditModal = (schedule) => {
       <span>Horário: *</span>
       <select name="time" required style="padding:0.5rem; border:1px solid #ccc; border-radius:4px;">
         <option value="" disabled>Escolha</option>
-        ${['07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00']
-          .map(t => \`<option value="\${t}" \${t === timeValue ? 'selected' : ''}>\${t}</option>\`).join('')}
+        ${timeOptionsHtml}
       </select>
     </label>
     <div style="display:flex; flex-direction:column; gap:0.5rem; text-align:left;">
@@ -283,9 +293,9 @@ const openEditModal = (schedule) => {
     if (value.length > 8) value = value.slice(0, 8);
     let formatted = value;
     if (value.length > 2) {
-      formatted = \`\${value.slice(0, 2)}/\`;
+      formatted = `${value.slice(0, 2)}/`;
       if (value.length > 4) {
-        formatted += \`\${value.slice(2, 4)}/\${value.slice(4)}\`;
+        formatted += `${value.slice(2, 4)}/${value.slice(4)}`;
       } else {
         formatted += value.slice(2);
       }
