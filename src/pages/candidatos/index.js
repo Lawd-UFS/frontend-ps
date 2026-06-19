@@ -109,6 +109,12 @@ const getAllCandidates = async () => {
 
 const orderCandidates = (candidates) => {
   return candidates.sort((a, b) => {
+    const isReprovadoA = a.classList.contains('row-eliminado');
+    const isReprovadoB = b.classList.contains('row-eliminado');
+
+    if (isReprovadoA && !isReprovadoB) return 1;
+    if (!isReprovadoA && isReprovadoB) return -1;
+
     const scoreA = Number(a.dataset.score) || 0;
     const scoreB = Number(b.dataset.score) || 0;
 
@@ -117,22 +123,31 @@ const orderCandidates = (candidates) => {
 };
 
 const setRanking = (candidates) => {
-  candidates.forEach((candidate, index) => {
-    if (index === 0) {
-      candidate.querySelector('.ranking').innerText = 1;
+  let currentRank = 1;
+  let previousScore = null;
+  let previousRanking = null;
+
+  candidates.forEach((candidate) => {
+    const isReprovado = candidate.classList.contains('row-eliminado');
+    const status = candidate.dataset.status;
+    const hasRanking = status === 'aprovado_entrevista' || status === 'aprovado_ps';
+
+    if (isReprovado || !hasRanking) {
+      candidate.querySelector('.ranking').innerText = '-';
       return;
     }
 
     const score = Number(candidate.dataset.score) || 0;
-    const previousScore = Number(candidates[index - 1].dataset.score) || 0;
-    const previousRanking =
-      Number(candidates[index - 1].querySelector('.ranking').innerText) || 0;
 
     if (score === previousScore) {
       candidate.querySelector('.ranking').innerText = previousRanking;
+      currentRank++;
     } else {
-      candidate.querySelector('.ranking').innerText = index + 1;
+      candidate.querySelector('.ranking').innerText = currentRank;
+      previousRanking = currentRank;
+      currentRank++;
     }
+    previousScore = score;
   });
 };
 
@@ -204,24 +219,59 @@ document.addEventListener('DOMContentLoaded', async () => {
       tr.dataset.period = candidate.period ? candidate.period.toString() : '';
       tr.dataset.index = index;
       tr.dataset.name = candidate.name ? candidate.name.toLowerCase() : '';
+      tr.dataset.isScheduled = candidate.isScheduled === true ? 'true' : 'false';
 
-      if (candidate.status === 'eliminado') {
+      if (
+        candidate.status === 'reprovado_curriculo' ||
+        candidate.status === 'reprovado_entrevista' ||
+        candidate.status === 'reprovado_ps' ||
+        candidate.status === 'eliminado'
+      ) {
         tr.classList.add('row-eliminado');
       }
 
-      const status = candidate.status;
-      let badgeClass = '';
-      let statusLabel = status.capitalize();
+      const status = candidate.status || 'inscrito';
+      tr.dataset.status = status;
+      const statusConfig = {
+        inscrito: { label: 'Inscrito', badgeClass: 'status-badge--inscrito' },
+        aprovado_curriculo: {
+          label: 'Aprov. Currículo',
+          badgeClass: 'status-badge--aprovado',
+        },
+        reprovado_curriculo: {
+          label: 'Reprov. Currículo',
+          badgeClass: 'status-badge--reprovado',
+        },
+        aprovado_entrevista: {
+          label: 'Aprov. Entrevista',
+          badgeClass: 'status-badge--aprovado',
+        },
+        reprovado_entrevista: {
+          label: 'Reprov. Entrevista',
+          badgeClass: 'status-badge--reprovado',
+        },
+        aprovado_ps: {
+          label: 'Aprovado no PS',
+          badgeClass: 'status-badge--aprovado-ps',
+        },
+        reprovado_ps: {
+          label: 'Reprovado no PS',
+          badgeClass: 'status-badge--reprovado',
+        },
+        // Fallback para dados legados
+        ativo: { label: 'Ativo', badgeClass: 'status-badge--agendado' },
+        eliminado: {
+          label: 'Eliminado',
+          badgeClass: 'status-badge--reprovado',
+        },
+      };
 
-      if (status === 'eliminado') {
-        badgeClass = 'status-badge--eliminado';
-      } else if (status === 'concluido' || status === 'concluído') {
-        badgeClass = 'status-badge--concluido';
-      } else {
-        badgeClass = 'status-badge--agendado';
-      }
+      const config = statusConfig[status] || {
+        label: status,
+        badgeClass: 'status-badge--inscrito',
+      };
 
-      tr.innerHTML = `<td data-label="Status"><span class="status-badge ${badgeClass}">${statusLabel}</span></td>`;
+      tr.innerHTML = `<td data-label="Status"><span class="status-badge ${config.badgeClass}">${config.label}</span></td>`;
 
       const profile = await Profile(
         {
@@ -328,9 +378,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // Filtros
-  const filters = { scheduling: false, done: false, deleted: false };
+  const filters = { scheduling: false, scheduled: false, done: false, deleted: false };
   const filterButtons = {
     scheduling: document.querySelector('.scheduling_button'),
+    scheduled: document.querySelector('.scheduled_interviews_button'),
     done: document.querySelector('.done_button'),
     deleted: document.querySelector('.delete_button'),
   };
@@ -347,21 +398,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         .querySelector('td:nth-child(1)')
         .innerText.toLowerCase();
 
-      const isEliminado = statusText === 'eliminado';
-      const scoreVal = Number(tr.dataset.score) || 0;
-      const isDone = scoreVal > 0;
-      const isScheduling = !isDone;
+      const isReprovado =
+        statusText.includes('reprov') || statusText === 'eliminado';
+      const isAprovado =
+        (statusText.includes('aprov') && !statusText.includes('currículo')) ||
+        statusText === 'concluído';
+      const isInscrito =
+        statusText === 'inscrito' ||
+        statusText === 'ativo' ||
+        (statusText.includes('currículo') && !statusText.includes('reprov'));
+      const isScheduled = tr.dataset.isScheduled === 'true';
 
       // Status check
       const anyStatusFilterActive =
-        filters.scheduling || filters.done || filters.deleted;
+        filters.scheduling || filters.scheduled || filters.done || filters.deleted;
       let showByStatus = true;
       if (anyStatusFilterActive) {
         showByStatus = false;
-        if (filters.scheduling && isScheduling && !isEliminado)
-          showByStatus = true;
-        if (filters.done && isDone && !isEliminado) showByStatus = true;
-        if (filters.deleted && isEliminado) showByStatus = true;
+        if (filters.scheduling && isInscrito) showByStatus = true;
+        if (filters.scheduled && isScheduled) showByStatus = true;
+        if (filters.done && isAprovado) showByStatus = true;
+        if (filters.deleted && isReprovado) showByStatus = true;
       }
 
       // Course check
@@ -427,14 +484,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     searchInput.addEventListener('input', applyFilters);
   }
 
-  Object.keys(filterButtons).forEach((key) => {
-    const btn = filterButtons[key];
-    if (btn) {
-      btn.addEventListener('click', () => {
-        filters[key] = !filters[key];
-        btn.classList.toggle('active', filters[key]);
-        applyFilters();
-      });
-    }
+  Object.entries(filterButtons).forEach(([key, btn]) => {
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      filters[key] = !filters[key];
+      if (filters[key]) {
+        btn.classList.add('active');
+        btn.style.backgroundColor = 'var(--purple-300, #7046E9)';
+        btn.querySelector('span').style.color = '#FFFFFF';
+      } else {
+        btn.classList.remove('active');
+        btn.style.backgroundColor = '';
+        btn.querySelector('span').style.color = '';
+      }
+      applyFilters();
+    });
   });
 });

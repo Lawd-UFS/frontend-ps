@@ -207,6 +207,27 @@ header {
   line-height: 1;
 }
 
+.status-inscrito {
+  background-color: rgba(112, 70, 233, 0.1);
+  color: var(--purple-300, #7046e9);
+}
+
+.status-aprovado {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.status-reprovado {
+  background-color: rgba(235, 87, 87, 0.1);
+  color: #eb5757;
+}
+
+.status-aprovado-ps {
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.15), rgba(46, 204, 113, 0.1));
+  color: #1e8449;
+  border: 1px solid rgba(39, 174, 96, 0.25);
+}
+
 .status-active {
   background-color: #d1fae5;
   color: #065f46;
@@ -217,6 +238,74 @@ header {
   background-color: #fee2e2;
   color: #991b1b;
   border: 1px solid #fca5a5;
+}
+
+/* Status Change Container */
+.status-change-container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.status-change-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #7d6b9d;
+}
+
+.status-change-select {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(92, 0, 164, 0.2);
+  background-color: white;
+  color: #2e1a47;
+  font-size: 1.4rem;
+  font-family: inherit;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.status-change-select:focus {
+  border-color: #5c00a4;
+  box-shadow: 0 0 0 3px rgba(92, 0, 164, 0.1);
+}
+
+/* Toast */
+.status-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 16px 24px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.status-toast--success {
+  background-color: #27ae60;
+}
+
+.status-toast--error {
+  background-color: #eb5757;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .subtitle-text {

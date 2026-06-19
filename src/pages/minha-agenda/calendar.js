@@ -253,10 +253,19 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
   }
 
   container
-    .querySelectorAll('.toggle-group label')
+    .querySelectorAll('.form-format .toggle-group label')
     .forEach((button, index, buttons) => {
       button.insertAdjacentHTML('afterbegin', interviewFormatSvgs[index]);
 
+      button.addEventListener('click', () => {
+        buttons.forEach((btn) => btn.setAttribute('data-active', 'false'));
+        button.setAttribute('data-active', 'true');
+      });
+    });
+
+  container
+    .querySelectorAll('.form-location .toggle-group label')
+    .forEach((button, index, buttons) => {
       button.addEventListener('click', () => {
         buttons.forEach((btn) => btn.setAttribute('data-active', 'false'));
         button.setAttribute('data-active', 'true');

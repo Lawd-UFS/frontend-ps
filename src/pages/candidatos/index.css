@@ -162,6 +162,7 @@ section {
 
 .done_button,
 .scheduling_button,
+.scheduled_interviews_button,
 .delete_button {
   display: inline-flex;
   align-items: center;
@@ -192,6 +193,7 @@ section {
 
 .done_button:hover,
 .scheduling_button:hover,
+.scheduled_interviews_button:hover,
 .delete_button:hover {
   border-color: var(--purple-300, #7046e9);
   background-color: var(--purple-100, #eff2ff);
@@ -201,6 +203,7 @@ section {
 
 .done_button:active,
 .scheduling_button:active,
+.scheduled_interviews_button:active,
 .delete_button:active {
   transform: translateY(1px);
   box-shadow: 0 2px 6px rgba(70, 35, 167, 0.1);
@@ -208,6 +211,7 @@ section {
 
 .done_button.active,
 .scheduling_button.active,
+.scheduled_interviews_button.active,
 .delete_button.active {
   background: linear-gradient(
     145deg,
@@ -224,6 +228,7 @@ section {
 
 .done_button.active:hover,
 .scheduling_button.active:hover,
+.scheduled_interviews_button.active:hover,
 .delete_button.active:hover {
   background: linear-gradient(145deg, #8156fa 0%, #4f2cb8 100%);
   color: #fff;
@@ -232,12 +237,14 @@ section {
 
 .done_button.active img,
 .scheduling_button.active img,
+.scheduled_interviews_button.active img,
 .delete_button.active img {
   filter: brightness(0) invert(1);
 }
 
 .done_button img,
 .scheduling_button img,
+.scheduled_interviews_button img,
 .delete_button img {
   width: 1.6rem;
   height: 1.6rem;
@@ -433,13 +440,14 @@ thead th {
 
   .filter-status-group {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.8rem;
     width: 100%;
   }
 
   .done_button,
   .scheduling_button,
+  .scheduled_interviews_button,
   .delete_button {
     width: 100%;
     min-width: 0;
@@ -599,12 +607,14 @@ thead th {
 @media (max-width: 380px) {
   .done_button span,
   .scheduling_button span,
+  .scheduled_interviews_button span,
   .delete_button span {
     font-size: 1.3rem;
   }
 
   .done_button,
   .scheduling_button,
+  .scheduled_interviews_button,
   .delete_button {
     padding-inline: 0.6rem;
     gap: 0.4rem;
@@ -625,9 +635,31 @@ thead th {
   line-height: 1;
 }
 
+.status-badge--inscrito {
+  background-color: rgba(112, 70, 233, 0.1);
+  color: var(--purple-300, #7046e9);
+}
+
+.status-badge--aprovado {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.status-badge--reprovado {
+  background-color: rgba(235, 87, 87, 0.1);
+  color: #eb5757;
+}
+
+.status-badge--aprovado-ps {
+  background: linear-gradient(135deg, rgba(39, 174, 96, 0.15), rgba(46, 204, 113, 0.1));
+  color: #1e8449;
+  border: 1px solid rgba(39, 174, 96, 0.25);
+}
+
+/* Legacy fallbacks */
 .status-badge--agendado {
   background-color: rgba(112, 70, 233, 0.1);
-  color: var(--purple-300);
+  color: var(--purple-300, #7046e9);
 }
 
 .status-badge--concluido {

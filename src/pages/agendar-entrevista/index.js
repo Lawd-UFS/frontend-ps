@@ -108,6 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Phone input mask
+  const inputPhone = document.getElementById('input-phone');
+  if (inputPhone) {
+    inputPhone.addEventListener('input', (e) => {
+      let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+      e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+  }
 });
 
 // ═══════════════════════════════════════════════════════════════
@@ -341,6 +350,16 @@ function updateConfirmCard(slot, mode) {
   }
 
   confirmModeMeta.innerHTML = `${modeIcon} ${displayMode}`;
+
+  let locationContainer = document.getElementById('confirm-location-container');
+  let locationMeta = document.getElementById('confirm-location-meta');
+
+  if (slot.interviewLocation) {
+    locationMeta.textContent = slot.interviewLocation;
+    locationContainer.style.display = 'block';
+  } else {
+    locationContainer.style.display = 'none';
+  }
 }
 
 function getSelectedMode() {
@@ -354,6 +373,30 @@ function getSelectedMode() {
 
 async function confirmReservation() {
   if (!selectedSlotId || !currentChatbotId) return;
+
+  const preferredNameInput = document.getElementById('input-preferred-name');
+  const pronounsInput = document.getElementById('input-pronouns');
+  const discordInput = document.getElementById('input-discord');
+  const phoneInput = document.getElementById('input-phone');
+
+  if (
+    !preferredNameInput.reportValidity() ||
+    !pronounsInput.reportValidity() ||
+    !discordInput.reportValidity() ||
+    !phoneInput.reportValidity()
+  ) {
+    return;
+  }
+
+  const rawPhone = phoneInput.value.replace(/\D/g, '');
+  if (rawPhone.length !== 11) {
+    alert("Por favor, informe um telefone válido com DDD (11 dígitos).");
+    return;
+  }
+
+  const preferredName = preferredNameInput.value.trim();
+  const pronouns = pronounsInput.value;
+  const discord = discordInput.value.trim();
 
   let chosenMode = selectedSlotData.interviewMode;
   if (chosenMode === 'Ambos') {
@@ -372,6 +415,10 @@ async function confirmReservation() {
         chatbotId: currentChatbotId,
         scheduleId: selectedSlotId,
         interviewMode: chosenMode,
+        preferredName,
+        interviewPronouns: pronouns,
+        discord,
+        phone: rawPhone,
       }),
     });
 
@@ -451,6 +498,16 @@ function showSuccessFromSchedule(schedule) {
       : `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`;
   successMode.innerHTML = `${modeIcon} ${modeLabel}`;
 
+  let successLocationContainer = document.getElementById('success-location-container');
+  let successLocationMeta = document.getElementById('success-location-meta');
+
+  if (schedule.interviewLocation) {
+    successLocationMeta.textContent = schedule.interviewLocation;
+    successLocationContainer.style.display = 'block';
+  } else {
+    successLocationContainer.style.display = 'none';
+  }
+
   // Google Calendar link
   const calendarUrl = buildGoogleCalendarUrl(date, mode);
   btnGoogleCalendar.href = calendarUrl;
@@ -503,7 +560,7 @@ function buildGoogleCalendarUrl(date, mode) {
       : mode === 'Presencial'
         ? 'Presencial (Lab LAWD)'
         : mode;
-  const description = `Entrevista do Processo Seletivo LAWD 2026.\nModalidade: ${modeLabel}\nDuração estimada: 30 minutos.\n\nAcesse o Discord do LAWD para mais informações: https://discord.com/invite/8yRDGWXgZ`;
+  const description = `Entrevista do Processo Seletivo LAWD 2026.\nModalidade: ${modeLabel}\nDuração estimada: 30 minutos.\n\nAcesse o Discord do LAWD para mais informações: https://discord.gg/hgj53Fac2Z`;
 
   const location =
     mode === 'Presencial' ? 'Lab LAWD - Didática 7 /UFS' : 'Discord - LAWD';

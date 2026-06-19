@@ -120,13 +120,14 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-    'date toggle'
-    'time toggle'
-    'button toggle';
+    'date time'
+    'toggle toggle'
+    'location location'
+    'button button';
 
   gap: 2rem;
 
-  max-width: 30rem;
+  max-width: 50rem;
 }
 
 .calendar .form-date {
@@ -137,14 +138,19 @@ main {
   grid-area: time;
 }
 
-.calendar .form-format {
-  grid-area: toggle;
+.calendar .form-format,
+.calendar .form-location {
   height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
   div {
     padding: 0;
     background: none;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
 
     height: fit-content;
 
@@ -199,7 +205,16 @@ main {
   }
 }
 
-.calendar .form-format .toggle-group input[type='radio'] {
+.calendar .form-format {
+  grid-area: toggle;
+}
+
+.calendar .form-location {
+  grid-area: location;
+}
+
+.calendar .form-format .toggle-group input[type='radio'],
+.calendar .form-location .toggle-group input[type='radio'] {
   opacity: 0;
   position: absolute;
 }
@@ -610,6 +625,7 @@ main {
       'date'
       'time'
       'toggle'
+      'location'
       'button';
     max-width: 100%;
     width: 100%;

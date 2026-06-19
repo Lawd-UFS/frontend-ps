@@ -65,8 +65,20 @@ export const ApplyPage = async () => {
   div.appendChild(CandidateInfo(candidate));
 
   if (scriptIsLoaded && status === 'new') {
-    const saveInterviewButton = Button('Salvar Entrevista');
-    saveInterviewButton.addEventListener('click', async () => {
+    const actionContainer = document.createElement('div');
+    actionContainer.style.display = 'flex';
+    actionContainer.style.gap = '1rem';
+    actionContainer.style.marginTop = '2rem';
+
+    const saveAndApproveButton = Button('Salvar e Aprovar');
+    saveAndApproveButton.style.backgroundColor = 'var(--green-500, #10b981)';
+    saveAndApproveButton.style.flex = '1';
+
+    const saveAndRejectButton = Button('Salvar e Reprovar');
+    saveAndRejectButton.style.backgroundColor = 'var(--red, #ef4444)';
+    saveAndRejectButton.style.flex = '1';
+
+    const handleSave = async (statusLabel, statusValue) => {
       let answers;
 
       try {
@@ -78,11 +90,10 @@ export const ApplyPage = async () => {
       }
 
       const dialog = ConfirmDialog({
-        title: 'Salvar Entrevista',
-        message:
-          'Tem certeza que deseja salvar esta entrevista? Essa ação não pode ser desfeita.',
+        title: `Entrevista: ${statusLabel}`,
+        message: `Tem certeza que deseja salvar esta entrevista e ${statusLabel.toLowerCase()} o candidato? Essa ação não pode ser desfeita.`,
         onConfirm: async () => {
-          const result = await saveInterview(answers);
+          const result = await saveInterview(answers, statusValue);
 
           if (result.success) {
             window.location.href = '/minha-agenda';
@@ -105,9 +116,15 @@ export const ApplyPage = async () => {
         },
       });
       openModal(dialog);
-    });
+    };
 
-    interviewQuestions.appendChild(saveInterviewButton);
+    saveAndApproveButton.addEventListener('click', () => handleSave('Aprovar', 'aprovado_entrevista'));
+    saveAndRejectButton.addEventListener('click', () => handleSave('Reprovar', 'reprovado_entrevista'));
+
+    actionContainer.appendChild(saveAndApproveButton);
+    actionContainer.appendChild(saveAndRejectButton);
+
+    interviewQuestions.appendChild(actionContainer);
   }
 
   return div;

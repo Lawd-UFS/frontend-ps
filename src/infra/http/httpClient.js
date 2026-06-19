@@ -11,6 +11,7 @@ export const HttpMethod = {
   POST: 'POST',
   PUT: 'PUT',
   DELETE: 'DELETE',
+  PATCH: 'PATCH',
 };
 
 export class HttpClient {

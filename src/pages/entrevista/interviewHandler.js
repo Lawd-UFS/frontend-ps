@@ -121,7 +121,7 @@ export const getInterviewAnswers = (questionsContainer, questions) => {
   return answers;
 };
 
-export const saveInterview = async (answers) => {
+export const saveInterview = async (answers, status) => {
   const [candidate, date] = await Promise.all([
     fetchInterviewCandidate(),
     fetchInterviewDate(),
@@ -131,6 +131,7 @@ export const saveInterview = async (answers) => {
     candidateId: candidate.id,
     questions: answers,
     date,
+    status,
   });
 
   return response;

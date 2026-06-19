@@ -140,6 +140,98 @@ const getInitials = (name) => {
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 };
 
+const STATUS_CONFIG = {
+  inscrito: { label: 'Inscrito', cssClass: 'status-inscrito' },
+  aprovado_curriculo: {
+    label: 'Aprovado na Análise de Currículo',
+    cssClass: 'status-aprovado',
+  },
+  reprovado_curriculo: {
+    label: 'Reprovado na Análise de Currículo',
+    cssClass: 'status-reprovado',
+  },
+  aprovado_entrevista: {
+    label: 'Aprovado na Entrevista',
+    cssClass: 'status-aprovado',
+  },
+  reprovado_entrevista: {
+    label: 'Reprovado na Entrevista',
+    cssClass: 'status-reprovado',
+  },
+  aprovado_ps: {
+    label: 'Aprovado no Processo Seletivo',
+    cssClass: 'status-aprovado-ps',
+  },
+  reprovado_ps: {
+    label: 'Reprovado no Processo Seletivo',
+    cssClass: 'status-reprovado',
+  },
+  // Fallback legado
+  ativo: { label: 'Ativo', cssClass: 'status-active' },
+  eliminado: { label: 'Eliminado', cssClass: 'status-eliminated' },
+};
+
+const ALLOWED_TRANSITIONS = {
+  inscrito: ['aprovado_curriculo', 'reprovado_curriculo'],
+  aprovado_curriculo: ['inscrito', 'aprovado_entrevista', 'reprovado_entrevista'],
+  reprovado_curriculo: ['inscrito'],
+  aprovado_entrevista: ['aprovado_curriculo', 'aprovado_ps', 'reprovado_ps'],
+  reprovado_entrevista: ['aprovado_curriculo'],
+  aprovado_ps: ['aprovado_entrevista'],
+  reprovado_ps: ['aprovado_entrevista'],
+  // Legado
+  ativo: ['aprovado_curriculo', 'reprovado_curriculo'],
+  eliminado: ['inscrito'],
+};
+
+const handleStatusChange = async (candidateId, newStatus, selectEl) => {
+  const config = STATUS_CONFIG[newStatus];
+  const confirmMsg = `Tem certeza que deseja alterar o status para "${config?.label || newStatus}"?`;
+
+  if (!confirm(confirmMsg)) {
+    // Restaurar valor anterior
+    selectEl.value = selectEl.dataset.currentStatus;
+    return;
+  }
+
+  try {
+    await httpClient.sendRequest({
+      endpoint: `/candidatos/${candidateId}/status`,
+      method: HttpMethod.PATCH,
+      headers: {
+        Authorization: authenticationService.getToken(),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
+
+    selectEl.dataset.currentStatus = newStatus;
+
+    // Atualizar pill visual
+    const pill = document.querySelector('.status-pill');
+    if (pill) {
+      pill.className = 'status-pill ' + (config?.cssClass || 'status-active');
+      pill.textContent = config?.label || newStatus.toUpperCase();
+    }
+
+    // Feedback visual
+    const toast = document.createElement('div');
+    toast.className = 'status-toast status-toast--success';
+    toast.textContent = 'Status atualizado com sucesso!';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  } catch (error) {
+    selectEl.value = selectEl.dataset.currentStatus;
+    const errorMsg =
+      error?.data?.message || 'Erro ao atualizar status. Tente novamente.';
+    const toast = document.createElement('div');
+    toast.className = 'status-toast status-toast--error';
+    toast.textContent = errorMsg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+};
+
 const renderProfile = (candidate) => {
   const container = document.getElementById('profile-content');
   container.className = 'profile-content-loaded';
@@ -157,13 +249,37 @@ const renderProfile = (candidate) => {
         .filter(Boolean)
     : [];
 
-  const statusClass =
-    candidate.status === 'eliminado' ? 'status-eliminated' : 'status-active';
-  const statusLabel = candidate.status
-    ? candidate.status.toUpperCase()
-    : 'ATIVO';
+  const currentStatus = candidate.status || 'inscrito';
+  const statusInfo = STATUS_CONFIG[currentStatus] || {
+    label: currentStatus.toUpperCase(),
+    cssClass: 'status-active',
+  };
+
+  const allowedTransitions = ALLOWED_TRANSITIONS[currentStatus] || [];
+  const hasTransitions = allowedTransitions.length > 0;
 
   const normalizedCourse = normalizeCourseName(candidate.course);
+
+  // Build status dropdown options
+  let statusSelectHtml = '';
+  if (hasTransitions) {
+    const options = allowedTransitions
+      .map((s) => {
+        const cfg = STATUS_CONFIG[s];
+        return `<option value="${s}">${cfg?.label || s}</option>`;
+      })
+      .join('');
+
+    statusSelectHtml = `
+      <div class="status-change-container">
+        <label class="status-change-label">Alterar status:</label>
+        <select id="status-select" class="status-change-select" data-current-status="${currentStatus}">
+          <option value="" disabled selected>Selecionar novo status...</option>
+          ${options}
+        </select>
+      </div>
+    `;
+  }
 
   // Build profile structure
   container.innerHTML = `
@@ -175,13 +291,14 @@ const renderProfile = (candidate) => {
         <div class="profile-title-info">
           <div class="name-status-row">
             <h1>${candidate.name}</h1>
-            <span class="status-pill ${statusClass}">${statusLabel}</span>
+            <span class="status-pill ${statusInfo.cssClass}">${statusInfo.label}</span>
           </div>
           <p class="subtitle-text">${normalizedCourse || '-'} • ${candidate.period ? `${candidate.period}º Período` : '-'}</p>
           <div class="score-indicator">
             <span class="score-label">Pontuação do Processo Seletivo:</span>
             <span class="score-value">${candidate.score || 0}</span>
           </div>
+          ${statusSelectHtml}
         </div>
       </div>
     </div>
@@ -285,6 +402,14 @@ const renderProfile = (candidate) => {
       </div>
     </div>
   `;
+
+  // Attach status change handler
+  const statusSelect = document.getElementById('status-select');
+  if (statusSelect) {
+    statusSelect.addEventListener('change', (e) => {
+      handleStatusChange(candidate.id || candidate._id, e.target.value, statusSelect);
+    });
+  }
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
