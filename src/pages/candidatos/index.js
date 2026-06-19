@@ -109,6 +109,12 @@ const getAllCandidates = async () => {
 
 const orderCandidates = (candidates) => {
   return candidates.sort((a, b) => {
+    const isReprovadoA = a.classList.contains('row-eliminado');
+    const isReprovadoB = b.classList.contains('row-eliminado');
+
+    if (isReprovadoA && !isReprovadoB) return 1;
+    if (!isReprovadoA && isReprovadoB) return -1;
+
     const scoreA = Number(a.dataset.score) || 0;
     const scoreB = Number(b.dataset.score) || 0;
 
@@ -117,22 +123,31 @@ const orderCandidates = (candidates) => {
 };
 
 const setRanking = (candidates) => {
-  candidates.forEach((candidate, index) => {
-    if (index === 0) {
-      candidate.querySelector('.ranking').innerText = 1;
+  let currentRank = 1;
+  let previousScore = null;
+  let previousRanking = null;
+
+  candidates.forEach((candidate) => {
+    const isReprovado = candidate.classList.contains('row-eliminado');
+    const status = candidate.dataset.status;
+    const hasRanking = status === 'aprovado_entrevista' || status === 'aprovado_ps';
+
+    if (isReprovado || !hasRanking) {
+      candidate.querySelector('.ranking').innerText = '-';
       return;
     }
 
     const score = Number(candidate.dataset.score) || 0;
-    const previousScore = Number(candidates[index - 1].dataset.score) || 0;
-    const previousRanking =
-      Number(candidates[index - 1].querySelector('.ranking').innerText) || 0;
 
     if (score === previousScore) {
       candidate.querySelector('.ranking').innerText = previousRanking;
+      currentRank++;
     } else {
-      candidate.querySelector('.ranking').innerText = index + 1;
+      candidate.querySelector('.ranking').innerText = currentRank;
+      previousRanking = currentRank;
+      currentRank++;
     }
+    previousScore = score;
   });
 };
 
@@ -216,6 +231,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       const status = candidate.status || 'inscrito';
+      tr.dataset.status = status;
       const statusConfig = {
         inscrito: { label: 'Inscrito', badgeClass: 'status-badge--inscrito' },
         aprovado_curriculo: {
@@ -384,8 +400,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const isReprovado =
         statusText.includes('reprov') || statusText === 'eliminado';
-      const isAprovado = statusText.includes('aprov') || statusText === 'concluído';
-      const isInscrito = statusText === 'inscrito' || statusText === 'ativo';
+      const isAprovado =
+        (statusText.includes('aprov') && !statusText.includes('currículo')) ||
+        statusText === 'concluído';
+      const isInscrito =
+        statusText === 'inscrito' ||
+        statusText === 'ativo' ||
+        (statusText.includes('currículo') && !statusText.includes('reprov'));
       const isScheduled = tr.dataset.isScheduled === 'true';
 
       // Status check

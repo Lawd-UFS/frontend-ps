@@ -112,4 +112,57 @@ export class ScheduleService {
       };
     }
   }
+
+  async deleteSchedule(id) {
+    try {
+      const { data: response } = await this._httpClient.sendRequest({
+        endpoint: `/horarios/${id}`,
+        method: HttpMethod.DELETE,
+        headers: {
+          Authorization: this._token,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      if (error.status === 401) {
+        alert('Sessão expirada, faça login novamente');
+        authenticationService.logout();
+        return;
+      }
+
+      return {
+        success: false,
+        message: error.message,
+        errors: error.errorData?.errors || [],
+      };
+    }
+  }
+
+  async updateSchedule(id, updatedSchedule) {
+    try {
+      const { data: response } = await this._httpClient.sendRequest({
+        endpoint: `/horarios/${id}`,
+        method: HttpMethod.PUT,
+        body: updatedSchedule,
+        headers: {
+          Authorization: this._token,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      if (error.status === 401) {
+        alert('Sessão expirada, faça login novamente');
+        authenticationService.logout();
+        return;
+      }
+
+      return {
+        success: false,
+        message: error.message,
+        errors: error.errorData?.errors || [],
+      };
+    }
+  }
 }

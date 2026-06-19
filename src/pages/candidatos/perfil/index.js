@@ -173,15 +173,15 @@ const STATUS_CONFIG = {
 
 const ALLOWED_TRANSITIONS = {
   inscrito: ['aprovado_curriculo', 'reprovado_curriculo'],
-  aprovado_curriculo: ['aprovado_entrevista', 'reprovado_entrevista'],
-  reprovado_curriculo: [],
-  aprovado_entrevista: ['aprovado_ps', 'reprovado_ps'],
-  reprovado_entrevista: [],
-  aprovado_ps: [],
-  reprovado_ps: [],
+  aprovado_curriculo: ['inscrito', 'aprovado_entrevista', 'reprovado_entrevista'],
+  reprovado_curriculo: ['inscrito'],
+  aprovado_entrevista: ['aprovado_curriculo', 'aprovado_ps', 'reprovado_ps'],
+  reprovado_entrevista: ['aprovado_curriculo'],
+  aprovado_ps: ['aprovado_entrevista'],
+  reprovado_ps: ['aprovado_entrevista'],
   // Legado
   ativo: ['aprovado_curriculo', 'reprovado_curriculo'],
-  eliminado: [],
+  eliminado: ['inscrito'],
 };
 
 const handleStatusChange = async (candidateId, newStatus, selectEl) => {
