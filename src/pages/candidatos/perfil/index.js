@@ -110,6 +110,22 @@ const getCandidateDetails = async (id) => {
   }
 };
 
+const getInterviewDetails = async (candidateId) => {
+  try {
+    const { data: response } = await httpClient.sendRequest({
+      endpoint: `/entrevistas/candidato/${candidateId}`,
+      method: HttpMethod.GET,
+      headers: {
+        Authorization: authenticationService.getToken(),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (error.status === 404) return null;
+    console.error('Erro ao buscar detalhes da entrevista:', error);
+    return null;
+  }
+};
 const getAge = (birthDateString) => {
   if (!birthDateString) return null;
   const birth = new Date(birthDateString);
@@ -232,7 +248,7 @@ const handleStatusChange = async (candidateId, newStatus, selectEl) => {
   }
 };
 
-const renderProfile = (candidate) => {
+const renderProfile = (candidate, interview) => {
   const container = document.getElementById('profile-content');
   container.className = 'profile-content-loaded';
 
@@ -401,6 +417,68 @@ const renderProfile = (candidate) => {
         </div>
       </div>
     </div>
+    ${
+      interview
+        ? (() => {
+            const { questions, result } = interview;
+            let resultHtml = '';
+            if (result) {
+              resultHtml = `
+                <div class="interview-result-grid">
+                  <div class="result-box">
+                    <span class="result-label">Média Hardskills</span>
+                    <span class="result-val">${result.hardskills?.toFixed(2) || '-'}</span>
+                  </div>
+                  <div class="result-box">
+                    <span class="result-label">Média Softskills</span>
+                    <span class="result-val">${result.softskills?.toFixed(2) || '-'}</span>
+                  </div>
+                  <div class="result-box highlight-box">
+                    <span class="result-label">Média Geral</span>
+                    <span class="result-val highlight">${result.media?.toFixed(2) || '-'}</span>
+                  </div>
+                </div>
+              `;
+            }
+
+            const formatScore = (score) => {
+              if (!score) return '';
+              const scoreMap = {
+                'Excelente': 'score-badge-excelente',
+                'Bom': 'score-badge-bom',
+                'Razoável': 'score-badge-razoavel',
+                'Insuficiente': 'score-badge-insuficiente'
+              };
+              const badgeClass = scoreMap[score] || '';
+              return `<span class="score-badge ${badgeClass}">${score}</span>`;
+            };
+
+            const questionsHtml = questions && questions.length > 0 
+              ? questions.map((q, index) => `
+                <div class="question-item">
+                  <div class="question-header">
+                    <span class="question-area">${q.area || 'Geral'}</span>
+                    ${formatScore(q.score)}
+                  </div>
+                  <p class="question-text"><strong>Q${index + 1}:</strong> ${q.text}</p>
+                  ${q.notes ? `<div class="question-notes"><label>Observações:</label><p>${q.notes}</p></div>` : ''}
+                </div>
+              `).join('')
+              : '<p class="no-skills">Nenhuma resposta registrada.</p>';
+
+            return `
+              <div class="details-panel-card interview-panel-card">
+                <h2>Avaliação Técnica e Comportamental</h2>
+                ${resultHtml}
+                <div class="questions-list">
+                  <h3>Respostas e Feedback</h3>
+                  ${questionsHtml}
+                </div>
+              </div>
+            `;
+          })()
+        : ''
+    }
   `;
 
   // Attach status change handler
@@ -427,7 +505,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const candidate = await getCandidateDetails(candidateId);
+  const [candidate, interview] = await Promise.all([
+    getCandidateDetails(candidateId),
+    getInterviewDetails(candidateId)
+  ]);
+
   if (!candidate) {
     document.getElementById('profile-content').innerHTML = `
       <div class="error-state">
@@ -438,5 +520,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  renderProfile(candidate);
+  renderProfile(candidate, interview);
 });

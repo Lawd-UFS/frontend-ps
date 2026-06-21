@@ -20,6 +20,7 @@ const slotsGrid = document.getElementById('slots-grid');
 const noSlotsMessage = document.getElementById('no-slots-message');
 const openCountEl = document.getElementById('open-count');
 const filterTabs = document.getElementById('filter-tabs');
+const btnBackToSuccess = document.getElementById('btn-back-to-success');
 
 // Confirm
 const confirmDate = document.getElementById('confirm-date');
@@ -57,6 +58,7 @@ let allSlots = []; // includes occupied for display
 let selectedSlotId = null;
 let selectedSlotData = null;
 let currentFilter = 'all';
+let currentSchedule = null;
 
 // ═══════════════════════════════════════════════════════════════
 // Init
@@ -78,6 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
   btnBackToPanel.addEventListener('click', () => showStep('panel'));
   btnConfirmBooking.addEventListener('click', confirmReservation);
   btnChangeSlot.addEventListener('click', () => showStep('panel'));
+  btnBackToSuccess.addEventListener('click', () => {
+    if (currentSchedule) showSuccessFromSchedule(currentSchedule);
+  });
   btnCancelBooking.addEventListener('click', () => {
     if (!currentChatbotId) return;
     cancelModalOverlay.style.display = 'flex';
@@ -136,6 +141,11 @@ function showStep(step) {
     case 'panel':
       stepPanel.style.display = 'block';
       btnLogout.style.display = 'inline-block';
+      if (currentSchedule) {
+        btnBackToSuccess.style.display = 'inline-block';
+      } else {
+        btnBackToSuccess.style.display = 'none';
+      }
       loadAvailableSlots();
       break;
     case 'confirm':
@@ -179,6 +189,7 @@ async function verifyAccessCode(chatbotId) {
 
     // If candidate already has a booking, go to success
     if (data.schedule) {
+      currentSchedule = data.schedule;
       showSuccessFromSchedule(data.schedule);
     } else {
       showStep('panel');
@@ -308,13 +319,13 @@ function goToConfirm(slot) {
   const date = new Date(slot.dateTime);
   const modeVal = slot.interviewMode;
 
-  updateConfirmCard(slot, modeVal);
-
   // Show mode selector if "Ambos"
   if (modeVal === 'Ambos') {
     modeSelectorContainer.style.display = 'block';
+    updateConfirmCard(slot, getSelectedMode());
   } else {
     modeSelectorContainer.style.display = 'none';
+    updateConfirmCard(slot, modeVal);
   }
 
   // Candidate info
@@ -339,7 +350,7 @@ function updateConfirmCard(slot, mode) {
   let modeIcon = '';
 
   if (mode === 'Presencial') {
-    displayMode = 'Presencial';
+    displayMode = `Presencial - ${slot.interviewLocation || 'A definir'}`;
     modeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
   } else if (mode === 'Ambos') {
     displayMode = 'Flexível';
@@ -352,13 +363,13 @@ function updateConfirmCard(slot, mode) {
   confirmModeMeta.innerHTML = `${modeIcon} ${displayMode}`;
 
   let locationContainer = document.getElementById('confirm-location-container');
-  let locationMeta = document.getElementById('confirm-location-meta');
-
-  if (slot.interviewLocation) {
-    locationMeta.textContent = slot.interviewLocation;
-    locationContainer.style.display = 'block';
-  } else {
+  if (locationContainer) {
     locationContainer.style.display = 'none';
+  }
+
+  const noticeText = document.getElementById('confirm-contact-notice-text');
+  if (noticeText) {
+    noticeText.innerHTML = `No dia da entrevista, a equipe poderá entrar em contato com você por <strong>WhatsApp</strong> ou <strong>Discord</strong> para confirmação da reunião. Fique atento(a) às suas notificações!`;
   }
 }
 
@@ -430,10 +441,13 @@ async function confirmReservation() {
     const resBody = await response.json();
     const reserved = resBody.data;
 
-    showSuccessFromSchedule({
+    currentSchedule = {
       dateTime: reserved.dateTime,
       interviewMode: reserved.interviewMode || chosenMode,
-    });
+      interviewLocation: reserved.interviewLocation || selectedSlotData.interviewLocation,
+    };
+
+    showSuccessFromSchedule(currentSchedule);
   } catch (error) {
     alert(error.message);
   } finally {
@@ -466,6 +480,7 @@ async function cancelBooking() {
     }
 
     cancelModalOverlay.style.display = 'none';
+    currentSchedule = null;
     showStep('panel');
   } catch (error) {
     alert(error.message);
@@ -491,7 +506,11 @@ function showSuccessFromSchedule(schedule) {
   `;
   successTime.innerHTML = timeHtml;
 
-  const modeLabel = mode === 'Remoto' ? 'Online' : mode;
+  let modeLabel = mode === 'Remoto' ? 'Online' : mode;
+  if (mode === 'Presencial') {
+    modeLabel = `Presencial - ${schedule.interviewLocation || 'A definir'}`;
+  }
+  
   const modeIcon =
     mode === 'Presencial'
       ? `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`
@@ -499,17 +518,17 @@ function showSuccessFromSchedule(schedule) {
   successMode.innerHTML = `${modeIcon} ${modeLabel}`;
 
   let successLocationContainer = document.getElementById('success-location-container');
-  let successLocationMeta = document.getElementById('success-location-meta');
-
-  if (schedule.interviewLocation) {
-    successLocationMeta.textContent = schedule.interviewLocation;
-    successLocationContainer.style.display = 'block';
-  } else {
+  if (successLocationContainer) {
     successLocationContainer.style.display = 'none';
   }
 
+  const successNotice = document.getElementById('success-notice');
+  if (successNotice) {
+    successNotice.innerHTML = `Atenção: As entrevistas online e avisos ocorrem no nosso Discord.`;
+  }
+
   // Google Calendar link
-  const calendarUrl = buildGoogleCalendarUrl(date, mode);
+  const calendarUrl = buildGoogleCalendarUrl(date, mode, schedule.interviewLocation);
   btnGoogleCalendar.href = calendarUrl;
   btnGoogleCalendar.style.display = 'flex';
 
@@ -531,7 +550,7 @@ function logout() {
 // Google Calendar URL Builder
 // ═══════════════════════════════════════════════════════════════
 
-function buildGoogleCalendarUrl(date, mode) {
+function buildGoogleCalendarUrl(date, mode, interviewLocation) {
   // Format date to Google Calendar format: YYYYMMDDTHHmmss
   const pad = (n) => String(n).padStart(2, '0');
   const year = date.getFullYear();
@@ -558,12 +577,12 @@ function buildGoogleCalendarUrl(date, mode) {
     mode === 'Remoto'
       ? 'Online (Discord)'
       : mode === 'Presencial'
-        ? 'Presencial (Lab LAWD)'
+        ? `Presencial (${interviewLocation || 'A definir'})`
         : mode;
   const description = `Entrevista do Processo Seletivo LAWD 2026.\nModalidade: ${modeLabel}\nDuração estimada: 30 minutos.\n\nAcesse o Discord do LAWD para mais informações: https://discord.gg/hgj53Fac2Z`;
 
   const location =
-    mode === 'Presencial' ? 'Lab LAWD - Didática 7 /UFS' : 'Discord - LAWD';
+    mode === 'Presencial' ? (interviewLocation) : 'Discord - LAWD';
 
   const params = new URLSearchParams({
     action: 'TEMPLATE',
