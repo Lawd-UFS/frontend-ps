@@ -70,8 +70,7 @@
               Entrevista".
             </p>
             <p>
-              <span class="info-badge">3</span> Clique no botão de agendamento
-              automático.
+              <span class="info-badge">3</span> Clique no botão de agendamento.
             </p>
           </div>
           <a href="/" class="btn-secondary">Voltar ao Início</a>
@@ -95,6 +94,7 @@
               Logado como
               <strong id="candidate-email-display">candidato@lawd.com</strong>
             </p>
+            <button id="btn-back-to-success" class="btn-secondary" style="display: none; margin-top: 1.5rem; width: fit-content; font-size: 1.3rem; padding: 0.8rem 1.6rem;">Voltar para meu agendamento atual</button>
           </div>
           <div class="panel-header-right">
             <div class="filter-tabs" id="filter-tabs">
@@ -372,7 +372,7 @@
                 <line x1="12" y1="8" x2="12.01" y2="8"/>
               </svg>
             </div>
-            <p>No dia da entrevista, a equipe poderá entrar em contato com você por <strong>WhatsApp</strong> ou <strong>Discord</strong> para confirmação da reunião. Fique atento(a) às suas notificações!</p>
+            <p id="confirm-contact-notice-text">No dia da entrevista, a equipe poderá entrar em contato com você por <strong>WhatsApp</strong> ou <strong>Discord</strong> para confirmação da reunião. Fique atento(a) às suas notificações!</p>
           </div>
 
           <!-- Seletor de Modalidade para quando o horário for 'Ambos' -->
@@ -555,6 +555,7 @@
 
           <p
             class="success-subtitle"
+            id="success-notice"
             style="margin-top: 15px; font-weight: bold; font-size: 14px"
           >
             Atenção: As entrevistas online e avisos ocorrem no nosso Discord.
