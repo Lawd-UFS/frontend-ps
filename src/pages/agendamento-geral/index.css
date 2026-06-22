@@ -6,8 +6,8 @@ body {
 }
 
 .schedules-page {
-  width: min(70vw, 100%);
-  max-width: 120rem;
+  width: min(95vw, 100%);
+  max-width: 140rem;
   min-height: 100vh;
   margin: 0 auto;
   padding: 2rem clamp(1.2rem, 4vw, 3rem) 4rem;
@@ -167,6 +167,36 @@ body {
     content: 'Horário';
   }
 
+  td:last-child,
+  td.actions-cell {
+    border-bottom: none;
+    padding-top: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+
+  td.actions-cell::before {
+    align-self: flex-start;
+  }
+
+  .view-profile-btn {
+    width: 100%;
+    min-height: 4.8rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 1.4rem;
+    font-size: 1.6rem;
+  }
+
+  .view-profile-btn__label {
+    display: inline;
+  }
+
+  .view-profile-btn svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
   td .time {
     margin-left: 0;
   }
@@ -259,6 +289,86 @@ td .profile a {
   height: 3rem;
 }
 
-td .profile .name-user {
+td.candidate .profile {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+td.candidate .profile .name-user {
   font-size: 1.6rem;
+  max-width: none;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+td.candidate {
+  min-width: 18rem;
+}
+
+.view-profile-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: none;
+  background: linear-gradient(
+    145deg,
+    var(--purple-300, #7046e9) 0%,
+    var(--purple-400, #4623a7) 100%
+  );
+  color: #fff;
+  cursor: pointer;
+  padding: 0.75rem 1.4rem;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(70, 35, 167, 0.3);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.view-profile-btn__label {
+  line-height: 1;
+  color: #fff;
+}
+
+@media (min-width: 1025px) {
+  .view-profile-btn__label {
+    display: none;
+  }
+
+  .view-profile-btn {
+    padding: 0.75rem 1rem;
+    min-width: 4.4rem;
+    min-height: 4.4rem;
+  }
+}
+
+.view-profile-btn svg {
+  flex-shrink: 0;
+}
+
+.view-profile-btn svg path {
+  fill: #fff;
+}
+
+.view-profile-btn:hover {
+  background: linear-gradient(145deg, #8156fa 0%, #4f2cb8 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(70, 35, 167, 0.38);
+  transform: translateY(-2px);
+}
+
+td.actions-cell {
+  text-align: center;
+}
+
+td.actions-cell span {
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
 }

@@ -5,7 +5,7 @@
   justify-content: center;
   gap: 2rem;
   width: 100%;
-  padding: 2rem clamp(1.2rem, 4vw, 3rem);
+  padding: 2rem 0;
   box-sizing: border-box;
 }
 

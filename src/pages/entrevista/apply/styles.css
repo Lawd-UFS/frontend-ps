@@ -5,29 +5,28 @@ body {
 }
 
 #apply {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 72rem 1fr;
   gap: 3rem;
+  align-items: start;
   width: 100%;
-  max-width: 140rem;
-  margin: 0 auto;
-  padding: 2rem clamp(1.2rem, 4vw, 4rem) 6rem;
+  margin: 0;
+  padding: 2rem 0 6rem;
   box-sizing: border-box;
 }
 
 #apply #interview-instructions {
-  flex: 0 1 25rem;
+  grid-column: 1;
+  justify-self: end;
   width: 100%;
   max-width: 32rem;
   transform: none;
 }
 
 #apply #questions {
-  flex: 1 1 40rem;
-  min-width: 0;
-  width: 100%;
+  grid-column: 2;
+  width: 72rem;
+  min-width: 72rem;
   max-width: 72rem;
   margin-top: 0;
   padding-bottom: 4rem;
@@ -39,20 +38,45 @@ body {
 }
 
 #apply #questions .question {
-  margin-inline: 0;
+  margin-inline: auto;
   width: 100%;
-  max-width: 100%;
+  max-width: 72rem;
 }
 
 #apply #questions .question .scores {
   width: 100%;
+  flex-wrap: nowrap;
+}
+
+#apply #questions .question .scores li {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+#apply #candidate-details {
+  grid-column: 3;
+  justify-self: stretch;
+  width: 100%;
+  min-width: 30rem;
+  max-width: none;
+  align-self: start;
+  position: sticky;
+  top: 1.6rem;
+  margin-bottom: 0;
 }
 
 @media (max-width: 900px) {
   #apply {
-    flex-direction: column;
-    align-items: stretch;
-    padding-inline: 1.6rem;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+    padding-inline: 0;
+  }
+
+  #apply #interview-instructions,
+  #apply #questions,
+  #apply #candidate-details {
+    grid-column: 1;
+    justify-self: stretch;
   }
 
   #apply #interview-instructions {
@@ -60,6 +84,21 @@ body {
   }
 
   #apply #questions {
-    flex-basis: auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  #apply #questions .question {
+    max-width: 100%;
+  }
+
+  #apply #questions .question .scores {
+    flex-wrap: wrap;
+  }
+
+  #apply #candidate-details {
+    min-width: 0;
+    position: static;
   }
 }

@@ -8,6 +8,7 @@ body {
 nav.interview {
   margin-inline: auto;
   width: fit-content;
+  max-width: calc(100% - 2 * clamp(1rem, 3vw, 3rem));
 
   padding-inline: 2rem;
   border-bottom: 0.2rem solid var(--purple-200);
@@ -43,13 +44,24 @@ nav.interview li[active] a {
 }
 
 #page-content {
-  margin-inline: clamp(1.2rem, 4vw, 4rem);
+  width: calc(100% - 2 * clamp(1rem, 3vw, 3rem));
+  max-width: 140rem;
+  margin-inline: auto;
   padding-bottom: 3rem;
   position: relative;
   min-height: calc(100vh - 12rem);
-  width: 100%;
-  max-width: 100%;
   box-sizing: border-box;
+}
+
+#page-content:has(#apply) {
+  max-width: none;
+}
+
+#page-content > div:has(#apply) {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 0;
 }
 
 #page-content > div {
@@ -117,7 +129,7 @@ nav.interview li[active] a {
   }
 
   #page-content {
-    margin-inline: 1.2rem;
+    width: calc(100% - 2.4rem);
     min-height: auto;
   }
 

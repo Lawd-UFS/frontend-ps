@@ -1,8 +1,7 @@
 #about {
   display: flex;
-
   justify-content: center;
-
+  width: 100%;
   margin-top: 6rem;
 }
 
@@ -12,7 +11,6 @@
   width: 100%;
   max-width: 60rem;
   padding: 4rem;
-  margin-inline: clamp(1.2rem, 4vw, 2rem);
   box-sizing: border-box;
 
   border-radius: 2.4rem;
