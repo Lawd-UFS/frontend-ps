@@ -91,6 +91,24 @@ export const AboutPage = async () => {
     .querySelector('#interviewer .participant')
     .appendChild(interviewerProfile);
 
+  const formatPhone = (p) => {
+    if (!p) return '';
+    return p.length === 11 ? `(${p.slice(0,2)}) ${p.slice(2,7)}-${p.slice(7)}` : p;
+  };
+
+  const candidateExtraDetails = document.createElement('div');
+  candidateExtraDetails.className = 'candidate-extra-details';
+  candidateExtraDetails.innerHTML = `
+    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; font-size: 1.4rem; color: #4b5563;">
+      ${candidate.preferredName ? `<div><strong>Como gostaria de ser chamado(a):</strong> ${candidate.preferredName}</div>` : ''}
+      ${candidate.interviewPronouns ? `<div><strong>Pronomes:</strong> ${candidate.interviewPronouns}</div>` : ''}
+      ${candidate.discord ? `<div><strong>Discord:</strong> ${candidate.discord}</div>` : ''}
+      ${candidate.phone ? `<div><strong>Telefone:</strong> ${formatPhone(candidate.phone)}</div>` : ''}
+    </div>
+  `;
+
+  scheduleParticipants.querySelector('#candidate').appendChild(candidateExtraDetails);
+
   const presenceOptions = Array.from(
     scheduleParticipants.querySelectorAll('#presence label span'),
   );
