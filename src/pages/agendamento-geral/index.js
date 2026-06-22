@@ -1,4 +1,6 @@
 import { authenticationService } from '../../service/AuthenticationService';
+import { ScheduleService } from '../../service/ScheduleService';
+import { HttpClient } from '../../infra/http/httpClient';
 
 if (!authenticationService.isAuthenticated()) {
   window.location.href = '/login';
@@ -9,6 +11,11 @@ import { Header } from '../../components/Header';
 import { fetchAllSchedules } from '../minha-agenda/scheduleHandler';
 import Interview from '../../components/Interview';
 import { Profile } from '../../components/Profile';
+
+const scheduleService = new ScheduleService(
+  HttpClient.create(),
+  authenticationService.getToken()
+);
 
 const getStatusClass = (status) => {
   if (status === 'Pendente') return 'pending';
@@ -77,16 +84,37 @@ const createScheduleItem = async (schedule) => {
 
   const actions = document.createElement('td');
   actions.className = 'actions-cell';
-  actions.setAttribute('data-label', 'Ver mais');
+  actions.setAttribute('data-label', 'Ações');
 
   if (!schedule.candidate.isEmpty() && schedule.candidate.id) {
-    actions.innerHTML = `
-      <button type="button" class="view-profile-btn" title="Ver perfil completo">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+    const currentUser = authenticationService.getUserData();
+    const isOwner = currentUser && (currentUser.id === schedule.evaluator.id || currentUser.name === schedule.evaluator.name);
+    const isPending = schedule.interviewStatus === 'Pendente';
+    const isFuture = new Date(schedule.dateTime) >= new Date();
+
+    const isTakeoverValid = isPending && !isOwner && isFuture;
+
+    const takeoverBtnHtml = `
+      <button type="button" class="takeover-btn" title="Assumir Entrevista" style="${isTakeoverValid ? '' : 'visibility: hidden;'}">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <polyline points="16 11 18 13 22 9"></polyline>
         </svg>
-        <span class="view-profile-btn__label">Ver mais</span>
+        <span class="takeover-btn__label">Assumir</span>
       </button>
+    `;
+
+    actions.innerHTML = `
+      <div class="actions-container">
+        <button type="button" class="view-profile-btn" title="Ver perfil completo">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+          <span class="view-profile-btn__label">Ver mais</span>
+        </button>
+        ${takeoverBtnHtml}
+      </div>
     `;
 
     const viewBtn = actions.querySelector('.view-profile-btn');
@@ -94,6 +122,33 @@ const createScheduleItem = async (schedule) => {
       e.stopPropagation();
       window.location.href = `/candidatos/${schedule.candidate.id}`;
     });
+
+    const takeoverBtn = actions.querySelector('.takeover-btn');
+    if (takeoverBtn && isTakeoverValid) {
+      takeoverBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (!confirm(`Deseja realmente assumir a entrevista de ${schedule.candidate.name}?`)) {
+          return;
+        }
+
+        takeoverBtn.disabled = true;
+        
+        const response = await scheduleService.takeoverSchedule(schedule.id);
+        if (response.success) {
+          const toast = document.createElement('div');
+          toast.className = 'status-toast status-toast--success';
+          toast.textContent = 'Você assumiu a entrevista com sucesso!';
+          document.body.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+            window.location.reload();
+          }, 1500);
+        } else {
+          takeoverBtn.disabled = false;
+          alert(response.message || 'Erro ao assumir entrevista');
+        }
+      });
+    }
   } else {
     actions.innerHTML = '<span>-</span>';
   }

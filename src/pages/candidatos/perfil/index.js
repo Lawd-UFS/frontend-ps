@@ -1,4 +1,5 @@
 import { authenticationService } from '../../../service/AuthenticationService';
+import { ScheduleService } from '../../../service/ScheduleService';
 
 if (!authenticationService.isAuthenticated()) {
   window.location.href = '/login';
@@ -9,6 +10,10 @@ import { Header } from '../../../components/Header';
 import { HttpClient, HttpMethod } from '../../../infra/http/httpClient';
 
 const httpClient = HttpClient.create();
+const scheduleService = new ScheduleService(
+  HttpClient.create(),
+  authenticationService.getToken()
+);
 
 const normalizeCourseName = (course) => {
   if (!course) return '';
@@ -308,6 +313,55 @@ const renderProfile = (candidate, interview) => {
     : '';
 
   // Build profile structure
+  let scheduleHtml = '';
+  if (candidate.schedule) {
+    const currentUser = authenticationService.getUserData();
+    const isOwner = currentUser && (currentUser.id === candidate.schedule.evaluator.id || currentUser.name === candidate.schedule.evaluator.name);
+    const formattedDate = new Date(candidate.schedule.dateTime).toLocaleString('pt-BR');
+    const mode = candidate.schedule.interviewMode;
+    const location = candidate.schedule.interviewLocation ? ` (${candidate.schedule.interviewLocation})` : '';
+    const status = candidate.schedule.interviewStatus;
+    const evaluatorName = candidate.schedule.evaluator.name;
+
+    let takeoverBtn = '';
+    // Allow takeover if it's pending, not owned by logged-in user, and not in the past:
+    if (status === 'Pendente' && !isOwner && new Date(candidate.schedule.dateTime) >= new Date()) {
+      takeoverBtn = `
+        <button id="takeover-interview-btn" data-schedule-id="${candidate.schedule.id}" class="btn-primary takeover-btn" style="margin-top: 1.5rem; width: 100%; border: none; cursor: pointer; text-align: center;">
+          Assumir Entrevista
+        </button>
+      `;
+    }
+
+    scheduleHtml = `
+      <div class="details-panel-card" style="margin-top: 1.8rem;">
+        <h2>Agendamento da Entrevista</h2>
+        
+        <div class="info-group">
+          <label>Data e Horário</label>
+          <span class="info-val">${formattedDate}</span>
+        </div>
+
+        <div class="info-group">
+          <label>Avaliador Responsável</label>
+          <span class="info-val">${evaluatorName} ${isOwner ? '(Você)' : ''}</span>
+        </div>
+
+        <div class="info-group">
+          <label>Modalidade</label>
+          <span class="info-val">${mode}${location}</span>
+        </div>
+
+        <div class="info-group">
+          <label>Status</label>
+          <span class="info-val highlight-badge">${status}</span>
+        </div>
+
+        ${takeoverBtn}
+      </div>
+    `;
+  }
+
   container.innerHTML = `
     <div class="profile-header-card">
       <div class="profile-avatar-row">
@@ -328,39 +382,42 @@ const renderProfile = (candidate, interview) => {
 
     <div class="profile-details-grid">
       <!-- Left side: Personal & contact info -->
-      <div class="details-panel-card">
-        <h2>Dados do Candidato</h2>
-        
-        <div class="info-group">
-          <label>Email</label>
-          <span class="info-val">${candidate.email || '-'}</span>
-        </div>
-
-        <div class="info-group">
-          <label>Telefone</label>
-          <span class="info-val">${formattedPhone}</span>
-        </div>
-
-        <div class="info-group-row">
+      <div>
+        <div class="details-panel-card">
+          <h2>Dados do Candidato</h2>
+          
           <div class="info-group">
-            <label>Pronomes</label>
-            <span class="info-val">${candidate.pronoun || '-'}</span>
+            <label>Email</label>
+            <span class="info-val">${candidate.email || '-'}</span>
           </div>
+
           <div class="info-group">
-            <label>Gênero</label>
-            <span class="info-val">${candidate.gender || '-'}</span>
+            <label>Telefone</label>
+            <span class="info-val">${formattedPhone}</span>
+          </div>
+
+          <div class="info-group-row">
+            <div class="info-group">
+              <label>Pronomes</label>
+              <span class="info-val">${candidate.pronoun || '-'}</span>
+            </div>
+            <div class="info-group">
+              <label>Gênero</label>
+              <span class="info-val">${candidate.gender || '-'}</span>
+            </div>
+          </div>
+
+          <div class="info-group">
+            <label>Data de Nascimento</label>
+            <span class="info-val">${formattedBirthDate} ${age ? `(${age} anos)` : ''}</span>
+          </div>
+
+          <div class="info-group">
+            <label>Nível de Conhecimento</label>
+            <span class="info-val highlight-badge">${candidate.knowledgeLevel || 'Iniciante'}</span>
           </div>
         </div>
-
-        <div class="info-group">
-          <label>Data de Nascimento</label>
-          <span class="info-val">${formattedBirthDate} ${age ? `(${age} anos)` : ''}</span>
-        </div>
-
-        <div class="info-group">
-          <label>Nível de Conhecimento</label>
-          <span class="info-val highlight-badge">${candidate.knowledgeLevel || 'Iniciante'}</span>
-        </div>
+        ${scheduleHtml}
       </div>
 
       <!-- Right side: Motivations, interests, skills -->
@@ -493,6 +550,36 @@ const renderProfile = (candidate, interview) => {
   if (statusSelect) {
     statusSelect.addEventListener('change', (e) => {
       handleStatusChange(candidate.id || candidate._id, e.target.value, statusSelect);
+    });
+  }
+
+  // Attach takeover interview handler
+  const takeoverBtn = document.getElementById('takeover-interview-btn');
+  if (takeoverBtn) {
+    takeoverBtn.addEventListener('click', async () => {
+      const scheduleId = takeoverBtn.dataset.scheduleId;
+      if (!confirm('Deseja realmente assumir a entrevista deste candidato para você?')) {
+        return;
+      }
+      
+      takeoverBtn.disabled = true;
+      takeoverBtn.textContent = 'Processando...';
+      
+      const response = await scheduleService.takeoverSchedule(scheduleId);
+      if (response.success) {
+        const toast = document.createElement('div');
+        toast.className = 'status-toast status-toast--success';
+        toast.textContent = 'Você assumiu a entrevista com sucesso!';
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.remove();
+          window.location.reload();
+        }, 1500);
+      } else {
+        takeoverBtn.disabled = false;
+        takeoverBtn.textContent = 'Assumir Entrevista';
+        alert(response.message || 'Erro ao assumir entrevista');
+      }
     });
   }
 };
