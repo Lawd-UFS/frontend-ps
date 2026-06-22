@@ -497,6 +497,10 @@ const renderProfile = (candidate, interview) => {
                     <span class="result-label">Média Softskills</span>
                     <span class="result-val">${result.softskills?.toFixed(2) || '-'}</span>
                   </div>
+                  <div class="result-box">
+                    <span class="result-label">Média Disponibilidade</span>
+                    <span class="result-val">${result.disponibilidade?.toFixed(2) || '-'}</span>
+                  </div>
                   <div class="result-box highlight-box">
                     <span class="result-label">Média Geral</span>
                     <span class="result-val highlight">${result.media?.toFixed(2) || '-'}</span>
