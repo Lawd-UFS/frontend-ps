@@ -324,6 +324,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   const renderSortedCandidates = () => {
     const sortOrder = sortOrderSelect ? sortOrderSelect.value : 'last';
     orderedCandidates.sort((a, b) => {
+      if (sortOrder === 'ranking') {
+        const rankAStr = a.querySelector('.ranking').innerText.trim();
+        const rankBStr = b.querySelector('.ranking').innerText.trim();
+
+        const isNumA = rankAStr !== '-';
+        const isNumB = rankBStr !== '-';
+
+        if (isNumA && !isNumB) return -1;
+        if (!isNumA && isNumB) return 1;
+        if (isNumA && isNumB) {
+          return Number(rankAStr) - Number(rankBStr);
+        }
+
+        const scoreA = Number(a.dataset.score) || 0;
+        const scoreB = Number(b.dataset.score) || 0;
+        if (scoreB !== scoreA) {
+          return scoreB - scoreA;
+        }
+
+        const idxA = Number(a.dataset.index) || 0;
+        const idxB = Number(b.dataset.index) || 0;
+        return idxA - idxB;
+      }
+
       const idxA = Number(a.dataset.index) || 0;
       const idxB = Number(b.dataset.index) || 0;
       return sortOrder === 'last' ? idxB - idxA : idxA - idxB;
