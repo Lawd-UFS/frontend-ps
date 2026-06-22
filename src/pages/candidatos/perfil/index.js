@@ -297,6 +297,16 @@ const renderProfile = (candidate, interview) => {
     `;
   }
 
+  const hasInterviewResult = interview && interview.result && typeof interview.result.media === 'number';
+  const scoreIndicatorHtml = hasInterviewResult
+    ? `
+      <div class="score-indicator">
+        <span class="score-label">Pontuação do Processo Seletivo:</span>
+        <span class="score-value">${interview.result.media.toFixed(2)}</span>
+      </div>
+    `
+    : '';
+
   // Build profile structure
   container.innerHTML = `
     <div class="profile-header-card">
@@ -310,10 +320,7 @@ const renderProfile = (candidate, interview) => {
             <span class="status-pill ${statusInfo.cssClass}">${statusInfo.label}</span>
           </div>
           <p class="subtitle-text">${normalizedCourse || '-'} • ${candidate.period ? `${candidate.period}º Período` : '-'}</p>
-          <div class="score-indicator">
-            <span class="score-label">Pontuação do Processo Seletivo:</span>
-            <span class="score-value">${candidate.score || 0}</span>
-          </div>
+          ${scoreIndicatorHtml}
           ${statusSelectHtml}
         </div>
       </div>
