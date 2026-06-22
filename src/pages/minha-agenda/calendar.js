@@ -136,12 +136,15 @@ export const addNewScheduleTime = (
   let elementWasInserted = false;
 
   for (const element of timeElements) {
+    const timeNode = element.querySelector('time');
+    if (!timeNode) continue; // Pula cabeçalhos de dia
+
     const newElementDateTime = new Date(
       time.querySelector('time').getAttribute('datetime'),
     );
 
     const oldElementDateTime = new Date(
-      element.querySelector('time').getAttribute('datetime'),
+      timeNode.getAttribute('datetime'),
     );
 
     if (newElementDateTime < oldElementDateTime) {
@@ -275,13 +278,55 @@ export const createCalendar = ({ periodStart, periodEnd }, container) => {
 
 export const createSchedule = async (container) => {
   const schedules = await fetchEvaluatorSchedules();
+  const timeList = container.querySelector('.schedules ul');
 
-  schedules.forEach((schedule) => {
-    addNewScheduleTime(
-      schedule,
-      container,
-      updateScheduleDetailsOnScheduleClick,
-    );
+  timeList.innerHTML = ''; // limpa a lista
+
+  // Agrupar por dia
+  const grouped = schedules.reduce((acc, schedule) => {
+    const dateObj = new Date(schedule.dateTime);
+    // Garantir o timezone correto
+    const dateStr = dateObj.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+    if (!acc[dateStr]) acc[dateStr] = [];
+    acc[dateStr].push(schedule);
+    return acc;
+  }, {});
+
+  const sortedDates = Object.keys(grouped).sort((a, b) => {
+    const [dayA, monthA, yearA] = a.split('/');
+    const [dayB, monthB, yearB] = b.split('/');
+    return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+  });
+
+  sortedDates.forEach(dateStr => {
+    const headerLi = document.createElement('li');
+    headerLi.className = 'day-header';
+    headerLi.style.width = '100%';
+    headerLi.style.height = 'auto';
+    headerLi.style.padding = '0.5rem 0';
+    headerLi.style.border = 'none';
+    headerLi.style.borderBottom = '1px solid var(--purple-100)';
+    headerLi.style.borderRadius = '0';
+    headerLi.style.backgroundColor = 'transparent';
+    headerLi.style.pointerEvents = 'none';
+    headerLi.style.marginBottom = '-0.5rem';
+    
+    const headerText = document.createElement('h3');
+    headerText.style.fontSize = '1.2rem';
+    headerText.style.fontWeight = '700';
+    headerText.style.color = 'var(--indigo-700)';
+    headerText.textContent = dateStr;
+    
+    headerLi.appendChild(headerText);
+    timeList.appendChild(headerLi);
+
+    grouped[dateStr].sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime)).forEach((schedule) => {
+      addNewScheduleTime(
+        schedule,
+        container,
+        updateScheduleDetailsOnScheduleClick,
+      );
+    });
   });
 };
 
