@@ -165,4 +165,29 @@ export class ScheduleService {
       };
     }
   }
+
+  async takeoverSchedule(id) {
+    try {
+      const { data: response } = await this._httpClient.sendRequest({
+        endpoint: `/horarios/${id}/assumir`,
+        method: HttpMethod.PATCH,
+        headers: {
+          Authorization: this._token,
+        },
+      });
+
+      return response;
+    } catch (error) {
+      if (error.status === 401) {
+        alert('Sessão expirada, faça login novamente');
+        authenticationService.logout();
+        return;
+      }
+
+      return {
+        success: false,
+        message: error.message || 'Erro ao assumir horário',
+      };
+    }
+  }
 }
