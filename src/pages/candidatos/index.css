@@ -9,8 +9,8 @@ body {
 }
 
 section {
-  width: 100%;
-  max-width: 140rem;
+  width: calc(100% - 2 * clamp(1rem, 3vw, 3rem));
+  max-width: none;
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 3rem) 3rem;
   box-sizing: border-box;
@@ -288,11 +288,13 @@ section {
 }
 
 table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 1);
   border-collapse: collapse;
   position: sticky;
+  table-layout: auto;
 }
 
 td img {
@@ -308,6 +310,25 @@ td img {
   display: flex;
   gap: 2rem;
   align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  min-width: 26rem;
+  white-space: nowrap;
+}
+
+.table_profile .name-user {
+  max-width: none;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: nowrap;
+}
+
+thead th:nth-child(2) {
+  text-align: left;
+}
+
+thead th:nth-child(4) {
+  min-width: 14rem;
 }
 
 td {
@@ -390,6 +411,42 @@ tbody tr:hover {
   background-color: rgba(239, 242, 255, 1);
 }
 
+td.nota {
+  font-weight: 600;
+  color: var(--indigo-700);
+  text-align: center;
+}
+
+thead th.ranking-col,
+td.ranking {
+  font-weight: 700;
+  color: var(--indigo-700);
+  text-align: center;
+  background-color: rgba(221, 208, 252, 0.45);
+  box-shadow:
+    inset 1px 0 0 rgba(112, 70, 233, 0.18),
+    inset -1px 0 0 rgba(112, 70, 233, 0.18);
+}
+
+thead th.ranking-col {
+  background-color: var(--purple-200, #ddd0fc);
+  color: var(--indigo-700);
+  font-size: 1.05em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow:
+    inset 1px 0 0 rgba(112, 70, 233, 0.22),
+    inset -1px 0 0 rgba(112, 70, 233, 0.22);
+}
+
+tbody tr:hover td.ranking {
+  background-color: rgba(187, 166, 248, 0.55);
+}
+
+td.ranking {
+  font-size: 1.15em;
+}
+
 thead th {
   padding: 2em;
   position: sticky;
@@ -399,6 +456,7 @@ thead th {
 }
 
 .table_body {
+  overflow-x: auto;
   overflow-y: scroll;
   max-height: 70vh;
   margin-bottom: 3rem;
@@ -490,6 +548,22 @@ thead th {
     min-width: 0 !important;
   }
 
+  table {
+    width: 100% !important;
+  }
+
+  .table_profile {
+    min-width: 0;
+    white-space: normal;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .table_profile .name-user {
+    white-space: normal;
+    word-break: break-word;
+  }
+
   thead {
     display: none;
   }
@@ -532,6 +606,20 @@ thead th {
 
   td.actions-cell::before {
     align-self: flex-start;
+  }
+
+  td.ranking {
+    background-color: rgba(221, 208, 252, 0.55);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin: 0.4rem 0;
+    border-left: 3px solid var(--purple-300, #7046e9);
+    box-shadow: none;
+    font-size: 1.2em;
+  }
+
+  thead th.ranking-col {
+    box-shadow: none;
   }
 
   td::before {

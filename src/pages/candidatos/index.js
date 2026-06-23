@@ -107,47 +107,78 @@ const getAllCandidates = async () => {
   }
 };
 
-const orderCandidates = (candidates) => {
-  return candidates.sort((a, b) => {
-    const isReprovadoA = a.classList.contains('row-eliminado');
-    const isReprovadoB = b.classList.contains('row-eliminado');
+const INTERVIEWED_STATUSES = new Set([
+  'reprovado_entrevista',
+  'aprovado_entrevista',
+  'aprovado_ps',
+  'reprovado_ps',
+]);
 
-    if (isReprovadoA && !isReprovadoB) return 1;
-    if (!isReprovadoA && isReprovadoB) return -1;
+const isInterviewed = (candidateRow) =>
+  INTERVIEWED_STATUSES.has(candidateRow.dataset.status) ||
+  Number(candidateRow.dataset.score) > 0;
 
-    const scoreA = Number(a.dataset.score) || 0;
-    const scoreB = Number(b.dataset.score) || 0;
+const formatNota = (score) => {
+  const num = Number(score);
+  if (!num || num <= 0) return '-';
+  return Number.isInteger(num) ? String(num) : num.toFixed(2);
+};
 
-    return scoreB - scoreA;
-  });
+const getNotaDisplay = (candidate) => {
+  const status = candidate.status || 'inscrito';
+  const score = candidate.score || 0;
+
+  if (!INTERVIEWED_STATUSES.has(status) && Number(score) <= 0) {
+    return '-';
+  }
+
+  return formatNota(score);
+};
+
+const sortByScore = (a, b) => {
+  const interviewedA = isInterviewed(a);
+  const interviewedB = isInterviewed(b);
+
+  if (interviewedA && !interviewedB) return -1;
+  if (!interviewedA && interviewedB) return 1;
+
+  const scoreA = Number(a.dataset.score) || 0;
+  const scoreB = Number(b.dataset.score) || 0;
+  if (scoreB !== scoreA) return scoreB - scoreA;
+
+  const idxA = Number(a.dataset.index) || 0;
+  const idxB = Number(b.dataset.index) || 0;
+  return idxB - idxA;
 };
 
 const setRanking = (candidates) => {
+  candidates.forEach((candidate) => {
+    candidate.querySelector('.ranking').innerText = '-';
+  });
+
+  const rankedCandidates = candidates
+    .filter((candidate) => {
+      const status = candidate.dataset.status;
+      return status === 'aprovado_entrevista' || status === 'aprovado_ps';
+    })
+    .sort((a, b) => Number(b.dataset.score) - Number(a.dataset.score));
+
   let currentRank = 1;
   let previousScore = null;
   let previousRanking = null;
 
-  candidates.forEach((candidate) => {
-    const isReprovado = candidate.classList.contains('row-eliminado');
-    const status = candidate.dataset.status;
-    const hasRanking = status === 'aprovado_entrevista' || status === 'aprovado_ps';
-
-    if (isReprovado || !hasRanking) {
-      candidate.querySelector('.ranking').innerText = '-';
-      return;
-    }
-
+  rankedCandidates.forEach((candidate) => {
     const score = Number(candidate.dataset.score) || 0;
 
-    if (score === previousScore) {
+    if (previousScore !== null && score === previousScore) {
       candidate.querySelector('.ranking').innerText = previousRanking;
-      currentRank++;
     } else {
       candidate.querySelector('.ranking').innerText = currentRank;
       previousRanking = currentRank;
-      currentRank++;
     }
+
     previousScore = score;
+    currentRank++;
   });
 };
 
@@ -174,7 +205,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       <td data-label="Telefone"><div class="skeleton-cell" style="width: 80%"></div></td>
       <td data-label="Curso"><div class="skeleton-cell" style="width: 90%"></div></td>
       <td data-label="Período"><div class="skeleton-cell" style="width: 40%"></div></td>
-      <td data-label="Ranking"><div class="skeleton-cell" style="width: 30%"></div></td>
+      <td data-label="Nota"><div class="skeleton-cell" style="width: 30%"></div></td>
+      <td data-label="Ranking" class="ranking"><div class="skeleton-cell" style="width: 30%"></div></td>
       <td data-label="Ver mais"><div class="skeleton-cell skeleton-button"></div></td>
     </tr>
   `,
@@ -192,7 +224,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!candidates || candidates.length === 0) {
     tbody.innerHTML = `
       <tr class="empty-state-row">
-        <td colspan="7" class="empty-state-cell">
+        <td colspan="8" class="empty-state-cell">
           <div class="empty-state-content">
             <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
               <circle cx="12" cy="12" r="10" />
@@ -294,6 +326,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <td data-label="Telefone">${phoneText}</td>
       <td data-label="Curso">${normalizedCourse || '-'}</td>
       <td data-label="Período">${candidate.period ? `${candidate.period}º` : '-'}</td>
+      <td data-label="Nota" class="nota">${getNotaDisplay(candidate)}</td>
       <td data-label="Ranking" class="ranking">-</td>
       <td data-label="Ver mais" class="actions-cell">
         <button type="button" class="view-profile-btn" title="Ver perfil completo">
@@ -315,37 +348,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }),
   );
 
-  const orderedCandidates = orderCandidates(loadedCandidates);
-
+  const orderedCandidates = [...loadedCandidates];
   setRanking(orderedCandidates);
-
   const sortOrderSelect = document.querySelector('#sort-order');
 
   const renderSortedCandidates = () => {
-    const sortOrder = sortOrderSelect ? sortOrderSelect.value : 'last';
+    const sortOrder = sortOrderSelect ? sortOrderSelect.value : 'score';
+
     orderedCandidates.sort((a, b) => {
-      if (sortOrder === 'ranking') {
-        const rankAStr = a.querySelector('.ranking').innerText.trim();
-        const rankBStr = b.querySelector('.ranking').innerText.trim();
-
-        const isNumA = rankAStr !== '-';
-        const isNumB = rankBStr !== '-';
-
-        if (isNumA && !isNumB) return -1;
-        if (!isNumA && isNumB) return 1;
-        if (isNumA && isNumB) {
-          return Number(rankAStr) - Number(rankBStr);
-        }
-
-        const scoreA = Number(a.dataset.score) || 0;
-        const scoreB = Number(b.dataset.score) || 0;
-        if (scoreB !== scoreA) {
-          return scoreB - scoreA;
-        }
-
-        const idxA = Number(a.dataset.index) || 0;
-        const idxB = Number(b.dataset.index) || 0;
-        return idxA - idxB;
+      if (sortOrder === 'score') {
+        return sortByScore(a, b);
       }
 
       const idxA = Number(a.dataset.index) || 0;
@@ -359,7 +371,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   };
 
-  // Initial render (defaults to 'last')
   renderSortedCandidates();
 
   if (sortOrderSelect) {
@@ -481,7 +492,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         emptyRow = document.createElement('tr');
         emptyRow.className = 'empty-state-row';
         emptyRow.innerHTML = `
-          <td colspan="7" class="empty-state-cell">
+          <td colspan="8" class="empty-state-cell">
             <div class="empty-state-content">
               <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon">
                 <circle cx="12" cy="12" r="10" />
