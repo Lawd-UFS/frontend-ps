@@ -94,10 +94,14 @@ export class InterviewService {
 
       delete response.data.result._id;
 
+      const newStatus = cachedData && cachedData.status === 'edit' ? 'edit' : 'old';
+
       this._stateService.saveState('interview', {
         ...response.data,
-        status: 'old',
+        status: newStatus,
       });
+      
+      response.data.status = newStatus;
 
       return response;
     } catch (error) {
@@ -135,6 +139,35 @@ export class InterviewService {
         success: false,
         message: error.message,
         errors: error.errorData.errors,
+      };
+    }
+  }
+
+  async updateInterview({ candidateId, questions, status }) {
+    try {
+      const { data: response } = await this._httpClient.sendRequest({
+        endpoint: `/entrevistas/candidato/${candidateId}`,
+        method: HttpMethod.PUT,
+        headers: {
+          Authorization: this._token,
+        },
+        body: {
+          questions,
+          status,
+        },
+      });
+
+      this._stateService.saveState('interview', {
+        ...response.data,
+        status: 'old',
+      });
+
+      return response;
+    } catch (error) {
+      return {
+        success: false,
+        message: error.message,
+        errors: error.errorData?.errors,
       };
     }
   }

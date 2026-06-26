@@ -7,11 +7,18 @@ if (!authenticationService.isAuthenticated()) {
 import { Nav } from '../../components/Nav';
 import { Header } from '../../components/Header';
 import { fetchInterviewCandidate } from './interviewHandler';
+import { stateService } from '../../service/StateService';
+
+window.addEventListener('beforeunload', (e) => {
+  const state = stateService.getState('interview');
+  if (!window.isSaving && window.isDirty && state && (state.status === 'new' || state.status === 'edit')) {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
 
 const loadApplyPage = () =>
   import('./apply').then((module) => module.ApplyPage);
-const loadAboutPage = () =>
-  import('./about').then((module) => module.AboutPage);
 const loadResultPage = () =>
   import('./result').then((module) => module.ResultPage);
 import './index.css';
@@ -28,6 +35,13 @@ const changePage = (page) => async (event) => {
 
   if (activePageLink === nextPageListItem) {
     return;
+  }
+
+  const state = stateService.getState('interview');
+  if (state && (state.status === 'new' || state.status === 'edit') && window.isDirty) {
+    if (!confirm('Você tem alterações não salvas. Deseja realmente sair desta aba? Você perderá tudo que preencheu.')) {
+      return;
+    }
   }
 
   const pageLinksList = Array.from(
@@ -90,10 +104,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         id: 'apply-link',
       },
       {
-        name: 'Sobre',
-        id: 'about-link',
-      },
-      {
         name: 'Resultado',
         id: 'result-link',
       },
@@ -104,10 +114,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   nav.querySelector('#apply-link').addEventListener('click', async (event) => {
     const ApplyPage = await loadApplyPage();
     await changePage(ApplyPage)(event);
-  });
-  nav.querySelector('#about-link').addEventListener('click', async (event) => {
-    const AboutPage = await loadAboutPage();
-    await changePage(AboutPage)(event);
   });
   nav.querySelector('#result-link').addEventListener('click', async (event) => {
     const ResultPage = await loadResultPage();
