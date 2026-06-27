@@ -180,7 +180,7 @@ body {
     align-self: flex-start;
   }
 
-  .view-profile-btn {
+  .view-profile-btn, .takeover-btn, .edit-btn {
     width: 100%;
     min-height: 4.8rem;
     padding: 1.2rem 1.6rem;
@@ -188,11 +188,11 @@ body {
     font-size: 1.6rem;
   }
 
-  .view-profile-btn__label {
+  .view-profile-btn__label, .takeover-btn__label, .edit-btn__label {
     display: inline;
   }
 
-  .view-profile-btn svg {
+  .view-profile-btn svg, .takeover-btn svg, .edit-btn svg {
     width: 2rem;
     height: 2rem;
   }
@@ -448,3 +448,61 @@ td.actions-cell span {
   }
 }
 
+.edit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: none;
+  background: linear-gradient(
+    145deg,
+    #3b82f6 0%,
+    #2563eb 100%
+  );
+  color: #fff;
+  cursor: pointer;
+  padding: 0.75rem 1.4rem;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.edit-btn svg {
+  flex-shrink: 0;
+}
+
+.edit-btn svg path,
+.edit-btn svg polyline,
+.edit-btn svg circle {
+  stroke: #fff;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(145deg, #60a5fa 0%, #1d4ed8 100%);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38);
+  transform: translateY(-2px);
+}
+
+.edit-btn__label {
+  line-height: 1;
+  color: #fff;
+}
+
+@media (min-width: 1025px) {
+  .edit-btn__label {
+    display: none;
+  }
+
+  .edit-btn {
+    padding: 0.75rem 1rem;
+    min-width: 4.4rem;
+    min-height: 4.4rem;
+  }
+}

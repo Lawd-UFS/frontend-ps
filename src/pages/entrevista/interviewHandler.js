@@ -128,9 +128,22 @@ export const saveInterview = async (answers, status) => {
   ]);
 
   const response = await interviewService.saveInterview({
-    candidateId: candidate.id,
+    candidateId: candidate.id || candidate._id,
     questions: answers,
     date,
+    status,
+  });
+
+  return response;
+};
+
+export const editInterview = async (answers, status) => {
+  const candidate = await fetchInterviewCandidate();
+
+  const response = await interviewService.updateInterview({
+    candidateId: candidate.id || candidate._id,
+    questions: answers,
+
     status,
   });
 

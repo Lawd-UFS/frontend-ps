@@ -10,6 +10,7 @@ import {
   getInterviewAnswers,
   fetchInterviewStatus,
   saveInterview,
+  editInterview,
   loadInterviewScript,
 } from '../interviewHandler';
 import './styles.css';
@@ -60,25 +61,90 @@ export const ApplyPage = async () => {
 
   const interviewQuestions = Interview.Questions(questions, candidate.name);
 
+  interviewQuestions.addEventListener('input', () => {
+    window.isDirty = true;
+  });
+
+  interviewQuestions.addEventListener('click', (e) => {
+    if (e.target.closest('.scores') && e.target.tagName !== 'DIV') {
+      window.isDirty = true;
+    }
+  });
+
   div.appendChild(interviewQuestions);
 
   div.appendChild(CandidateInfo(candidate));
 
-  if (scriptIsLoaded && status === 'new') {
+  if (scriptIsLoaded && (status === 'new' || status === 'edit')) {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .modern-action-container {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 3rem;
+        margin-bottom: 8rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .modern-save-btn {
+        padding: 1.2rem 3.2rem;
+        min-width: 24rem;
+        border: none;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        letter-spacing: 0.025em;
+      }
+      .modern-save-btn.edit {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        box-shadow: 0 4px 15px -3px rgba(99, 102, 241, 0.4);
+      }
+      .modern-save-btn.edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.6);
+      }
+      .modern-save-btn.approve {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        box-shadow: 0 4px 15px -3px rgba(16, 185, 129, 0.4);
+      }
+      .modern-save-btn.approve:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.6);
+      }
+      .modern-save-btn.reject {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        box-shadow: 0 4px 15px -3px rgba(239, 68, 68, 0.4);
+      }
+      .modern-save-btn.reject:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -4px rgba(239, 68, 68, 0.6);
+      }
+      .modern-save-btn.cancel {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        box-shadow: 0 4px 15px -3px rgba(107, 114, 128, 0.4);
+      }
+      .modern-save-btn.cancel:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -4px rgba(107, 114, 128, 0.6);
+      }
+      .modern-save-btn:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.3);
+      }
+    `;
+    document.head.appendChild(style);
+
     const actionContainer = document.createElement('div');
-    actionContainer.style.display = 'flex';
-    actionContainer.style.gap = '1rem';
-    actionContainer.style.marginTop = '2rem';
+    actionContainer.className = 'modern-action-container';
 
-    const saveAndApproveButton = Button('Salvar e Aprovar');
-    saveAndApproveButton.style.backgroundColor = 'var(--green-500, #10b981)';
-    saveAndApproveButton.style.flex = '1';
-
-    const saveAndRejectButton = Button('Salvar e Reprovar');
-    saveAndRejectButton.style.backgroundColor = 'var(--red, #ef4444)';
-    saveAndRejectButton.style.flex = '1';
-
-    const handleSave = async (statusLabel, statusValue) => {
+    const handleSave = async (statusLabel, statusValue, isEdit = false) => {
       let answers;
 
       try {
@@ -90,13 +156,21 @@ export const ApplyPage = async () => {
       }
 
       const dialog = ConfirmDialog({
-        title: `Entrevista: ${statusLabel}`,
-        message: `Tem certeza que deseja salvar esta entrevista e ${statusLabel.toLowerCase()} o candidato? Essa ação não pode ser desfeita.`,
+        title: isEdit ? `Salvar Alterações` : `Entrevista: ${statusLabel}`,
+        message: isEdit 
+          ? `Tem certeza que deseja salvar as alterações desta avaliação?` 
+          : `Tem certeza que deseja salvar esta entrevista e ${statusLabel.toLowerCase()} o candidato? Essa ação não pode ser desfeita.`,
         onConfirm: async () => {
-          const result = await saveInterview(answers, statusValue);
+          let result;
+          if (isEdit) {
+             result = await editInterview(answers, statusValue);
+          } else {
+             result = await saveInterview(answers, statusValue);
+          }
 
           if (result.success) {
-            window.location.href = '/minha-agenda';
+            window.isSaving = true;
+            window.location.href = '/agendamento-geral';
           } else {
             const errorList = result.errors
               ? result.errors
@@ -118,11 +192,46 @@ export const ApplyPage = async () => {
       openModal(dialog);
     };
 
-    saveAndApproveButton.addEventListener('click', () => handleSave('Aprovar', 'aprovado_entrevista'));
-    saveAndRejectButton.addEventListener('click', () => handleSave('Reprovar', 'reprovado_entrevista'));
+    if (status === 'edit') {
+      const cancelButton = document.createElement('button');
+      cancelButton.className = 'modern-save-btn cancel';
+      cancelButton.textContent = 'Cancelar';
 
-    actionContainer.appendChild(saveAndApproveButton);
-    actionContainer.appendChild(saveAndRejectButton);
+      cancelButton.addEventListener('click', () => {
+        if (window.isDirty) {
+          if (confirm('Você tem alterações não salvas. Deseja realmente cancelar a edição?')) {
+            window.isSaving = true;
+            window.location.href = '/agendamento-geral';
+          }
+        } else {
+          window.isSaving = true;
+          window.location.href = '/agendamento-geral';
+        }
+      });
+
+      const saveButton = document.createElement('button');
+      saveButton.className = 'modern-save-btn edit';
+      saveButton.textContent = 'Salvar Alterações';
+
+      saveButton.addEventListener('click', () => handleSave('Alterar', undefined, true));
+      
+      actionContainer.appendChild(cancelButton);
+      actionContainer.appendChild(saveButton);
+    } else {
+      const saveAndApproveButton = document.createElement('button');
+      saveAndApproveButton.className = 'modern-save-btn approve';
+      saveAndApproveButton.textContent = 'Salvar e Aprovar';
+
+      const saveAndRejectButton = document.createElement('button');
+      saveAndRejectButton.className = 'modern-save-btn reject';
+      saveAndRejectButton.textContent = 'Salvar e Reprovar';
+
+      saveAndApproveButton.addEventListener('click', () => handleSave('Aprovar', 'aprovado_entrevista', false));
+      saveAndRejectButton.addEventListener('click', () => handleSave('Reprovar', 'reprovado_entrevista', false));
+
+      actionContainer.appendChild(saveAndApproveButton);
+      actionContainer.appendChild(saveAndRejectButton);
+    }
 
     interviewQuestions.appendChild(actionContainer);
   }

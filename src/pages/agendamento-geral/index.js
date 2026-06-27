@@ -1,6 +1,7 @@
 import { authenticationService } from '../../service/AuthenticationService';
 import { ScheduleService } from '../../service/ScheduleService';
 import { HttpClient } from '../../infra/http/httpClient';
+import { stateService } from '../../service/StateService';
 
 if (!authenticationService.isAuthenticated()) {
   window.location.href = '/login';
@@ -91,17 +92,29 @@ const createScheduleItem = async (schedule) => {
     const isOwner = currentUser && (currentUser.id === schedule.evaluator.id || currentUser.name === schedule.evaluator.name);
     const isPending = schedule.interviewStatus === 'Pendente';
     const isFuture = new Date(schedule.dateTime) >= new Date();
+    const isCompleted = schedule.interviewStatus === 'Concluída';
 
     const isTakeoverValid = isPending && !isOwner && isFuture;
+    const isEditValid = isCompleted && isOwner;
 
     const takeoverBtnHtml = `
-      <button type="button" class="takeover-btn" title="Assumir Entrevista" style="${isTakeoverValid ? '' : 'visibility: hidden;'}">
+      <button type="button" class="takeover-btn" title="Assumir Entrevista" style="${isTakeoverValid ? '' : 'display: none;'}">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
           <circle cx="9" cy="7" r="4"></circle>
           <polyline points="16 11 18 13 22 9"></polyline>
         </svg>
         <span class="takeover-btn__label">Assumir</span>
+      </button>
+    `;
+
+    const editBtnHtml = `
+      <button type="button" class="edit-btn" title="Editar Avaliação" style="${isEditValid ? '' : 'display: none;'}">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+        <span class="edit-btn__label">Editar</span>
       </button>
     `;
 
@@ -113,6 +126,7 @@ const createScheduleItem = async (schedule) => {
           </svg>
           <span class="view-profile-btn__label">Ver mais</span>
         </button>
+        ${editBtnHtml}
         ${takeoverBtnHtml}
       </div>
     `;
@@ -147,6 +161,21 @@ const createScheduleItem = async (schedule) => {
           takeoverBtn.disabled = false;
           alert(response.message || 'Erro ao assumir entrevista');
         }
+      });
+    }
+
+    const editBtn = actions.querySelector('.edit-btn');
+    if (editBtn && isEditValid) {
+      editBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        stateService.saveState('interview', {
+          status: 'edit',
+          candidate: schedule.candidate,
+          evaluator: schedule.evaluator ?? authenticationService.getUserData(),
+          date: schedule.dateTime,
+        });
+        window.history.pushState({}, '', `/entrevista/${schedule.candidate.id}`);
+        window.location.reload();
       });
     }
   } else {
