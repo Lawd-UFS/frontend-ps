@@ -8,6 +8,7 @@ import './index.css';
 import { Header } from '../../components/Header';
 import { HttpClient, HttpMethod } from '../../infra/http/httpClient';
 import { Profile } from '../../components/Profile';
+import { getApprovedDynamicOrder } from '../../constants/approvedDynamicNames';
 
 const httpClient = HttpClient.create();
 
@@ -135,6 +136,20 @@ const getNotaDisplay = (candidate) => {
   return formatNota(score);
 };
 
+const isDynamicApprovedRow = (row) => row.dataset.dynamicOrder !== undefined;
+
+const compareDynamicOrder = (a, b) => {
+  const inA = isDynamicApprovedRow(a);
+  const inB = isDynamicApprovedRow(b);
+
+  if (inA && inB) {
+    return Number(a.dataset.dynamicOrder) - Number(b.dataset.dynamicOrder);
+  }
+  if (inA && !inB) return -1;
+  if (!inA && inB) return 1;
+  return 0;
+};
+
 const sortByScore = (a, b) => {
   const interviewedA = isInterviewed(a);
   const interviewedB = isInterviewed(b);
@@ -253,17 +268,27 @@ document.addEventListener('DOMContentLoaded', async () => {
       tr.dataset.name = candidate.name ? candidate.name.toLowerCase() : '';
       tr.dataset.isScheduled = candidate.isScheduled === true ? 'true' : 'false';
 
+      const dynamicOrder = getApprovedDynamicOrder(candidate.name);
+      const isDynamicApproved = dynamicOrder !== -1;
+
       if (
-        candidate.status === 'reprovado_curriculo' ||
-        candidate.status === 'reprovado_entrevista' ||
-        candidate.status === 'reprovado_ps' ||
-        candidate.status === 'eliminado'
+        !isDynamicApproved &&
+        (candidate.status === 'reprovado_curriculo' ||
+          candidate.status === 'reprovado_entrevista' ||
+          candidate.status === 'reprovado_ps' ||
+          candidate.status === 'eliminado')
       ) {
         tr.classList.add('row-eliminado');
       }
 
       const status = candidate.status || 'inscrito';
       tr.dataset.status = status;
+
+      if (isDynamicApproved) {
+        tr.dataset.dynamicOrder = dynamicOrder;
+        tr.classList.add('row-aprovado-dinamica');
+      }
+
       const statusConfig = {
         inscrito: { label: 'Inscrito', badgeClass: 'status-badge--inscrito' },
         aprovado_curriculo: {
@@ -298,12 +323,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
       };
 
-      const config = statusConfig[status] || {
-        label: status,
-        badgeClass: 'status-badge--inscrito',
-      };
+      const config = isDynamicApproved
+          ? {
+              label: 'Aprov./Dinâmica',
+              badgeClass: 'status-badge--aprovado-dinamica',
+            }
+          : statusConfig[status] || {
+              label: status,
+              badgeClass: 'status-badge--inscrito',
+            };
 
-      tr.innerHTML = `<td data-label="Status"><span class="status-badge ${config.badgeClass}">${config.label}</span></td>`;
+      const statusMarkup = isDynamicApproved
+        ? `<span class="status-badge ${config.badgeClass}">Aprov./Dinâmica<span class="dinamica-star" aria-hidden="true">★</span></span>`
+        : `<span class="status-badge ${config.badgeClass}">${config.label}</span>`;
+
+      tr.innerHTML = `<td data-label="Status">${statusMarkup}</td>`;
 
       const profile = await Profile(
         {
@@ -356,6 +390,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sortOrder = sortOrderSelect ? sortOrderSelect.value : 'score';
 
     orderedCandidates.sort((a, b) => {
+      const dynamicCmp = compareDynamicOrder(a, b);
+      if (dynamicCmp !== 0) return dynamicCmp;
+
       if (sortOrder === 'score') {
         return sortByScore(a, b);
       }

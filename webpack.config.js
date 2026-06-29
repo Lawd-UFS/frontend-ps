@@ -86,6 +86,17 @@ const homePage = {
 
 const pages = generatePages();
 
+const escapePathForRegex = (pagePath) =>
+  pagePath.replace(/\\/g, '/').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const pageRewrites = Object.keys(pages.entries)
+  .map((pageName) => pageName.replace(/\\/g, '/'))
+  .sort((a, b) => b.split('/').length - a.split('/').length)
+  .map((pageName) => ({
+    from: new RegExp(`^/${escapePathForRegex(pageName)}/?$`),
+    to: `/${pageName}/index.html`,
+  }));
+
 const config = {
   entry: {
     index: homePage.entry,
@@ -109,12 +120,13 @@ const config = {
     historyApiFallback: {
       rewrites: [
         {
-          from: /^\/entrevista\/.*/,
-          to: '/entrevista/index.html',
-        },
-        {
           from: /^\/candidatos\/[a-fA-F0-9]{24}\/?$/,
           to: '/candidatos/perfil/index.html',
+        },
+        ...pageRewrites,
+        {
+          from: /^\/entrevista\/.+/,
+          to: '/entrevista/index.html',
         },
       ],
     },
